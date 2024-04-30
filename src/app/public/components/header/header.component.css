@@ -1,0 +1,19 @@
+mat-toolbar{
+  background: #91644D;
+  display: flex;
+  justify-content: center;
+}
+
+img{
+  width: 50px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+label{
+  color: white;
+  font-size: 32px;
+}
+span{
+  color: black;
+}
