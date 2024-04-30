@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {MyFarmViewComponent} from "./breeder/components/my-farm-view/my-farm-view.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MyFarmViewComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
