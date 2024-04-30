@@ -1,0 +1,25 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "name": "El Padrino 5000",
+      "photo": "https://es.web.img3.acsta.net/pictures/18/06/12/12/12/0117051.jpg?coixp=49&coiyp=27",
+      "duration": "175 minutos",
+      "genero": "Drama, Crimen"
+    },
+    {
+      "id": 2,
+      "name": "El Señor de los Anillos: La Comunidad del Anillo",
+      "photo": "https://wmagazin.com/wp-content/uploads/2021/08/CI-ppal-Literatura-cine-Elsenordelosanillos-cartel-1.jpg",
+      "duration": "178 minutos",
+      "genero": "Fantasía, Aventura"
+    },
+    {
+      "id": 3,
+      "name": "Interstellar",
+      "photo": "https://m.media-amazon.com/images/S/pv-target-images/79194981293eabf6620ece96eb5a9c1fffa04d3374ae12986e0748800b37b9cf.jpg",
+      "duration": "169 minutos",
+      "genero": "Ciencia ficción, Drama"
+    }
+  ]
+}
