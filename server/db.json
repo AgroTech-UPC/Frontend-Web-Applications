@@ -113,6 +113,7 @@
   ],
 
 
+
   "resources": [
     {
       "id": 1,
@@ -130,6 +131,7 @@
       "type": "Alimento"
     }
   ],
+
 
 
   "resource_breeder": [
@@ -307,6 +309,35 @@
   ],
 
 
+
+  "expenses": [
+    {
+      "id": 1,
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "type": "Alimento",
+      "amount": 198.00,
+      "date": "2024-04-30T08:00:00Z",
+      "description": "Compra de alfalfa para cuyes"
+    }
+  ],
+
+
+
   "notifications": [
     {
       "id": 1,
@@ -323,6 +354,10 @@
       "user_id": 1
     }
   ],
+
+
+
+
   "publications": [
     {
       "id": 1,

@@ -23,4 +23,8 @@ export class MyFarmViewComponent {
   redirectToManagementResource() {
     this.router.navigate(['myFarm/resource']);
   }
+
+  redirectToExpensesResource() {
+    this.router.navigate(['myFarm/expenses']);
+  }
 }
