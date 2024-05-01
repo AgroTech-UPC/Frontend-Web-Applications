@@ -143,5 +143,38 @@
       "size": "9",
       "observations": "None"
     }
+  ],
+  "cuyes": [
+    {
+      "id": "1",
+      "specie": "Cuy",
+      "weight": "1.2",
+      "name": "Cuyito",
+      "breed": "Peruano",
+      "birth": "2024-04-30",
+      "gender": "Macho",
+      "observations": "Esta sano",
+      "cage_id": "1"
+    },
+    {
+      "id": "2",
+      "specie": "Cuy",
+      "weight": "2",
+      "name": "Cuytio",
+      "breed": "Inti",
+      "birth": "21/04/2024",
+      "gender": "Hembra",
+      "observations": "Come muy poco",
+      "cage_id": "1"
+    }
+  ],
+  "expenses": [
+    {
+      "amount": "100",
+      "kind": "Alimento",
+      "details": "Compra de alfalfa",
+      "cuy_id": "1",
+      "date": "2024-04-30"
+    }
   ]
 }

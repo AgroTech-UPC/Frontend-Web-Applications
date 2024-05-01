@@ -1,3 +1,57 @@
-<p>register-cuy works!</p>
-<button style="background-color: #DD763D; color: white;" mat-button routerLink="">Descartar</button>
+<div class="container">
+  <div class="subtitle">
+    <h2>Registrar nuevo cuy</h2>
+  </div>
+  <div class="group-inputs">
+    <mat-form-field class="example-full-width">
+      <mat-label>ID</mat-label>
+      <input matInput placeholder="#C126" [(ngModel)]="id">
+    </mat-form-field>
 
+    <mat-form-field class="example-full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Cuy 6" [(ngModel)]="name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Especie</mat-label>
+      <input matInput placeholder="Especie" [(ngModel)]="specie">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Peso</mat-label>
+      <input matInput placeholder="Peso" [(ngModel)]="weight">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Raza</mat-label>
+      <input matInput placeholder="Raza" [(ngModel)]="breed">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput placeholder="Fecha de nacimiento" [(ngModel)]="birth">
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="gender">
+      <h2 style="font-weight: 400">Género</h2>
+      <mat-radio-button value="Macho">Macho</mat-radio-button>
+      <mat-radio-button value="Hembra">Hembra</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput placeholder="Observaciones" [(ngModel)]="observations"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>ID de la jaula</mat-label>
+      <input matInput placeholder="#J126" [(ngModel)]="cage_id">
+    </mat-form-field>
+  </div>
+  <div class="group-btns">
+    <button style="background-color: #DD763D; color: white;" mat-button routerLink="">Descartar</button>
+    <button style="color: white;" mat-raised-button (click)="handleClick()">Registrar</button>
+  </div>
+
+</div>
