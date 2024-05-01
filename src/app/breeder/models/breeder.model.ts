@@ -1,4 +1,4 @@
 export interface Breeder {
-  id: number;
-  user_id: number;
+  id: any;
+  user_id: any;
 }

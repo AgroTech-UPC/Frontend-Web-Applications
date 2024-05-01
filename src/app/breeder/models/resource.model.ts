@@ -1,5 +1,5 @@
 export interface Resource {
-  id: number;
+  id: any;
   "name": any;
   "type": any;
 }
