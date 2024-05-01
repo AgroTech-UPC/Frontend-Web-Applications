@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import {Component, Input, ViewChild} from '@angular/core';
+import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
 import { trigger, transition, style, animate } from '@angular/animations';
 import {RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-sidenav',
@@ -12,7 +13,8 @@ import {MatIcon} from "@angular/material/icon";
     MatSidenavModule,
     RouterLink,
     NgForOf,
-    MatIcon
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css',
@@ -29,6 +31,17 @@ import {MatIcon} from "@angular/material/icon";
   ]
 })
 export class SidenavComponent {
+  isOpen = false;
+  @ViewChild('drawer') drawer!: MatDrawer;
+
+  onToggleSidenav(isOpen: boolean) {
+    isOpen ? this.drawer.open() : this.drawer.close();
+  }
+
+  closeDrawer() {
+    this.isOpen = false;
+  }
+
   @Input() isBreeder: boolean;
 
   constructor() {

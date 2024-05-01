@@ -2,6 +2,8 @@ mat-toolbar{
   background: #91644D;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 img{
@@ -16,4 +18,18 @@ label{
 }
 span{
   color: black;
+}
+
+.display-sidebar {
+  position: absolute;
+  left: 0;
+}
+
+@media (max-width: 320px) {
+  img {
+    width: 30px;
+  }
+  label {
+    font-size: 24px;
+  }
 }
