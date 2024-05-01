@@ -1,6 +1,7 @@
+import { Breeder } from './breeder.model';
 export interface Expense {
   id: any;
-  user_id: any;
+  breeders: Breeder;
   type: any;
   amount: any;
   date: any;

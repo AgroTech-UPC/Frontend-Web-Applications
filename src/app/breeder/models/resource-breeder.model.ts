@@ -1,6 +1,9 @@
+import { Resource } from './resource.model';
+import { Breeder } from './breeder.model';
+
 export interface ResourceBreeder {
-  breeder_id: any;
-  resource_id: any;
+  breeders: Breeder;
+  resources: Resource;
   quantity: any;
   date: any;
   observations: any;

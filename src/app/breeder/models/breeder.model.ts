@@ -1,4 +1,5 @@
+import { User } from './user.model';
 export interface Breeder {
   id: any;
-  breeder_id: any;
+  users: User;
 }

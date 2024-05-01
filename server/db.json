@@ -37,9 +37,6 @@
       "description": "Futura experta en criadora de cuyes!!"
     }
   ],
-
-
-
   "advisors": [
     {
       "id": 1,
@@ -78,9 +75,6 @@
       ]
     }
   ],
-
-
-
   "breeders": [
     {
       "id": 1,
@@ -111,9 +105,6 @@
       ]
     }
   ],
-
-
-
   "resources": [
     {
       "id": 1,
@@ -131,9 +122,6 @@
       "type": "Alimento"
     }
   ],
-
-
-
   "resource_breeder": [
     {
       "breeders": [
@@ -220,9 +208,6 @@
       "observations": "Stock de perejil para cuyes"
     }
   ],
-
-
-
   "appointments": [
     {
       "id": 1,
@@ -307,9 +292,6 @@
       "status": "Pendiente"
     }
   ],
-
-
-
   "expenses": [
     {
       "id": 1,
@@ -330,34 +312,47 @@
         }
       ],
       "type": "Alimento",
-      "amount": 198.00,
+      "amount": 198,
       "date": "2024-04-30T08:00:00Z",
       "description": "Compra de alfalfa para cuyes"
     }
   ],
-
-
-
   "notifications": [
     {
       "id": 1,
       "type": "Cita",
-      "text": "Tienes una cita programada para el 8 de mayo a las 8:00 am",
-      "date": "2024-05-03T08:00:00Z",
-      "user_id": 1
+      "text": "Tienes un asesoramiento programado con Marcus Smith",
+      "date": "2024-05-03T17:00:00Z",
+      "users": [
+        {
+          "id": 3,
+          "email": "luchito911@gmail.com",
+          "password": "almaCuyamor94",
+          "fullname": "Luis Lopez",
+          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+          "birthdate": "1998-02-17",
+          "description": "Principiante en la crianza de cuyes."
+        }
+      ]
     },
     {
       "id": 2,
       "type": "Cita",
-      "text": "Tienes una cita programada para el 29 de mayo a las 10:30 am",
-      "date": "2024-05-03T10:30:00Z",
-      "user_id": 1
+      "text": "Tienes un asesoramiento programado con Marcus Smith",
+      "date": "2024-05-06T19:00:00Z",
+      "users": [
+        {
+          "id": 3,
+          "email": "luchito911@gmail.com",
+          "password": "almaCuyamor94",
+          "fullname": "Luis Lopez",
+          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+          "birthdate": "1998-02-17",
+          "description": "Principiante en la crianza de cuyes."
+        }
+      ]
     }
   ],
-
-
-
-
   "publications": [
     {
       "id": 1,
