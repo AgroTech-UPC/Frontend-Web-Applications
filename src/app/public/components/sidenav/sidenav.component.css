@@ -7,7 +7,7 @@
   width: 12rem;
   height: 100vh;
   box-shadow: 0.063rem 0 1.25rem 0 gray;
-  margin-top: 3.5rem;
+  padding-top: 3.5rem;
 
   .logo-container{
     display: flex;
