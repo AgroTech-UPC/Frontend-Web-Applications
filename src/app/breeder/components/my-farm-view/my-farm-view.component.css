@@ -1,3 +1,11 @@
+.view-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #F5EEDC;
+  width: 100%;
+
+}
+
 .card-container {
   display: flex;
   flex-direction: column;

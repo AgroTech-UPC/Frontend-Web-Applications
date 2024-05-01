@@ -12,6 +12,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import { FormsModule } from "@angular/forms";
 import { ResourceBreederApiService } from "../../services/resource-breeder-api.service";
 import {EmptyViewComponent} from "../empty-view/empty-view.component";
+import {HeaderComponent} from "../../../public/components/header/header.component";
+import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -23,7 +25,9 @@ import {EmptyViewComponent} from "../empty-view/empty-view.component";
     FormsModule,
     CommonModule,
     HttpClientModule,
-    EmptyViewComponent
+    EmptyViewComponent,
+    HeaderComponent,
+    SidenavComponent
   ],
   templateUrl: './my-farm-resource-management.component.html',
   styleUrl: './my-farm-resource-management.component.css'

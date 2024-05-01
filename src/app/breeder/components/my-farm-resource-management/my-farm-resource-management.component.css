@@ -1,10 +1,18 @@
+.resource-view{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #F5EEDC;
+}
+
 .resource-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  background-color: #F5EEDC;
+  margin-top: 9%;
+  background: #F5EEDC;
 }
 
 .resource-container h1{
@@ -40,6 +48,7 @@ button{
   flex-direction: column;
   align-items: center;
   width: 70%;
+  height: 100%;
   background-color: #F0DA8B;
   border-radius: 10px;
   padding-left: 5%;
