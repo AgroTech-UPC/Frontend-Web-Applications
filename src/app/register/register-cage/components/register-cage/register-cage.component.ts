@@ -10,6 +10,7 @@ import { DialogComponent } from '../../../dialog/dialog.component';
 import { Cage } from '../../model/cage.model';
 import { CageService } from '../../services/cage-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -39,10 +40,7 @@ export class RegisterCageComponent {
     observations: ''
   };
 
-
-
-  constructor(public dialog: MatDialog, private cageService: CageService, private snackBar: MatSnackBar) {}
-
+  constructor(public dialog: MatDialog, private cageService: CageService, private snackBar: MatSnackBar, private router: Router) {}
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
@@ -53,7 +51,9 @@ export class RegisterCageComponent {
     } else {
       this.registerCage();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 2000,
+        duration: 3000,
+      }).afterDismissed().subscribe(() => {
+        this.router.navigate(['/register']);
       });
     }
   }

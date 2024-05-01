@@ -6,7 +6,7 @@ import { RegisterCuyComponent } from "./register/register-cuy/components/registe
 import { RegisterResourcesComponent} from "./register/register-resources/register-resources.component";
 
 export const routes: Routes = [
-  { path: '', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'register-cage', component: RegisterCageComponent },
   { path: 'register-expenses', component: RegisterExpensesComponent },
   { path: 'register-cuy', component: RegisterCuyComponent },
