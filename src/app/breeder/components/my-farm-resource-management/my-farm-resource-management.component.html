@@ -1,0 +1,26 @@
+<div class="resource-container">
+  <h1>FILTRAR RECURSOS</h1>
+  <div class="selector-resource">
+    <p>Seleccione un tipo de recurso</p>
+    <mat-radio-group aria-label="Select an option" class="selector-resource-option">
+      <mat-radio-button value="1">Alimento</mat-radio-button>
+      <mat-radio-button value="2">Medicina</mat-radio-button>
+      <mat-radio-button value="2">Cultivo</mat-radio-button>
+      <mat-radio-button value="2">Otro</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <button mat-button style="color: #ffffff" class="card-button" (click)="filterResource()">Filtrar</button>
+
+  <mat-card class="mat-card">
+    <div class="mat-card-content">
+      <mat-card-title class="card-title">EXIBAL</mat-card-title>
+      <div class="math-card-content-column">
+        <mat-card-subtitle class="card-subtitle">Tipo: Alimento</mat-card-subtitle>
+        <mat-card-subtitle class="card-subtitle">Fecha: 13/04/24</mat-card-subtitle>
+      </div>
+    </div>
+    <mat-card-actions class="card-actions">
+      <button mat-button style="color: #ffffff" class="card-button-1">Ver más</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
