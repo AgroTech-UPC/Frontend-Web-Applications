@@ -1,0 +1,47 @@
+h2 {
+  font-size: 48px;
+  font-weight: bold;
+}
+button {
+  margin: 30px;
+  font-size: 36px;
+  background-color: #DD763D;
+  padding: 50px 10px;
+}
+
+.container-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.container-grid-btns {
+  margin-top: 75px;
+  display: grid;
+  grid-template-areas:
+    "button1 button2 button3"
+    "button4 button4 button4";
+  gap: 10px;
+}
+
+.container-grid-btns button:nth-child(1) {
+  grid-area: button1;
+}
+
+.container-grid-btns button:nth-child(2) {
+  grid-area: button2;
+}
+
+.container-grid-btns button:nth-child(3) {
+  grid-area: button3;
+}
+
+.container-grid-btns button:nth-child(4) {
+  grid-area: button4;
+}
+
+
+
