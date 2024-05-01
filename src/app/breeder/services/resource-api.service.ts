@@ -25,17 +25,17 @@ export class ResourceApiService {
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
-      // Manejo de errores del lado del cliente o problemas de red.
+      // Client-side errors or network issues.
       console.log(
         `An error occurred ${error.status}, body was: ${error.error}`
       );
     } else {
-      // Manejo de errores devueltos por el backend.
+      // Errors returned by the backend.
       console.log(
         `Backend returned code ${error.status}, body was: ${error.error}`
       );
     }
-    // Devuelve un Observable que emite un mensaje de error.
+    // Return an Observable that emits an error message.
     return throwError(
       'Something happened with request, please try again later.'
     );
