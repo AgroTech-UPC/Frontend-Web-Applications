@@ -4,10 +4,12 @@ import {RouterLink} from "@angular/router";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
+import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
-import { Cage } from './model/cage.model';
-import { CageService } from './services/cage-service.service';
+import { DialogComponent } from '../../../dialog/dialog.component';
+import { Cage } from '../../model/cage.model';
+import { CageService } from '../../services/cage-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -18,7 +20,8 @@ import { CageService } from './services/cage-service.service';
     RouterLink,
     MatInputModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
 
   templateUrl: './register-cage.component.html',
@@ -36,7 +39,9 @@ export class RegisterCageComponent {
     observations: ''
   };
 
-  constructor(public dialog: MatDialog, private cageService: CageService) {}
+
+
+  constructor(public dialog: MatDialog, private cageService: CageService, private snackBar: MatSnackBar) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -47,6 +52,9 @@ export class RegisterCageComponent {
       this.openDialog();
     } else {
       this.registerCage();
+      this.snackBar.open('Registrado con éxito', 'Cerrar', {
+        duration: 2000,
+      });
     }
   }
 
@@ -58,6 +66,6 @@ export class RegisterCageComponent {
         observations: this.observations
       };
       this.cageService.addCage(this.cage).subscribe();
-
   }
+
 }
