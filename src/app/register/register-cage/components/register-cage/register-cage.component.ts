@@ -53,7 +53,7 @@ export class RegisterCageComponent {
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
         duration: 3000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/register']);
+        this.router.navigate(['/']);
       });
     }
   }

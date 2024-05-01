@@ -142,6 +142,12 @@
       "name": "Jaula 35",
       "size": "9",
       "observations": "None"
+    },
+    {
+      "id": "63",
+      "name": "Jaula 4",
+      "size": "8.7",
+      "observations": "Falta limpiar"
     }
   ],
   "cuyes": [
@@ -170,11 +176,28 @@
   ],
   "expenses": [
     {
+      "id": "1",
       "amount": "100",
       "kind": "Alimento",
       "details": "Compra de alfalfa",
       "cuy_id": "1",
       "date": "2024-04-30"
+    },
+    {
+      "id": "2",
+      "amount": "230",
+      "kind": "Salud",
+      "details": "",
+      "cuy_id": "1",
+      "date": "28/08/2024"
+    },
+    {
+      "id": "3",
+      "amount": "580",
+      "kind": "Mantenimiento de criadero",
+      "details": "",
+      "cuy_id": "1",
+      "date": "27/02/2024"
     }
   ]
 }
