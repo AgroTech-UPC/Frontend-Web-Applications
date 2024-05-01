@@ -135,5 +135,13 @@
       "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
       "is_active": true
     }
+  ],
+  "cages": [
+    {
+      "id": "#IASDI2",
+      "name": "Jaula 35",
+      "size": "9",
+      "observations": "None"
+    }
   ]
 }
