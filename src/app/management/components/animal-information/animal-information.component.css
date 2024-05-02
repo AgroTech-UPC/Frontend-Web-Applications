@@ -1,0 +1,136 @@
+h1{
+  margin: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+}
+
+h2{
+  margin: 30px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  color: #DD763D;
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.return{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img{
+  width: 360px;
+  height: 360px;
+}
+
+.form{
+  width: 80%;
+  margin: 0 auto;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.buttons button{
+  width: 120px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.edit-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.edit-buttons button{
+  width: 200px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+.back-button{
+  padding: 25px 40px;
+  font-size: 24px;
+}
+
+@media screen and (max-width: 1200px){
+  .form{
+    width: 90%;
+  }
+
+  img{
+    width: 300px;
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .edit-buttons button{
+    font-size: 15px;
+    width: 130px;
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 750px){
+  .container{
+    grid-template-columns: 1fr;
+  }
+
+  .container .return{
+    order: 2;
+  }
+
+  .container .form{
+    order: 1;
+  }
+
+  .form{
+    width: 90%;
+  }
+
+  img{
+    width: 240px;
+    height: 240px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .buttons button{
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .edit-buttons button{
+    font-size: 15px;
+    width: 100px;
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .edit-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
