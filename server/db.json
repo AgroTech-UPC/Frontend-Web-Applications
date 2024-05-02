@@ -37,10 +37,6 @@
       "description": "Futura experta en criadora de cuyes!!"
     }
   ],
-  
-  
-  
-  
   "advisors": [
     {
       "id": 1,
@@ -79,10 +75,6 @@
       ]
     }
   ],
-  
-  
-  
-  
   "breeders": [
     {
       "id": 1,
@@ -113,121 +105,26 @@
       ]
     }
   ],
-  
-  
-  
-  
   "resources": [
     {
       "id": 1,
-      "name": "Alfalfa",
-      "type": "Alimento"
+      "name": "Alfafas V2 Mejorada (Elio)",
+      "type": "Alimento",
+      "breeder_id": 1,
+      "quantity": 2,
+      "date": "2021-05-20",
+      "observations": "Suplemento vitaminico"
     },
     {
       "id": 2,
-      "name": "Desparasitante",
-      "type": "Medicina"
-    },
-    {
-      "id": 3,
-      "name": "Perejil",
-      "type": "Alimento"
+      "name": "¡Hola!",
+      "type": "Produccion",
+      "breeder_id": 1,
+      "quantity": 1,
+      "date": "2024-05-02",
+      "observations": "Hola"
     }
   ],
-  
-  
-  
-  
-  "resource_breeder": [
-    {
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 1,
-          "name": "Alfalfa",
-          "type": "Alimento"
-        }
-      ],
-      "quantity": 25,
-      "date": "2024-04-30T08:00:00Z",
-      "observations": "Stock de alfalfa para cuyes"
-    },
-    {
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 2,
-          "name": "Desparasitante",
-          "type": "Medicina"
-        }
-      ],
-      "quantity": 30,
-      "date": "2024-04-29T10:30:00Z",
-      "observations": "Stock de desparasitante para cuyes"
-    },
-    {
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 3,
-          "name": "Perejil",
-          "type": "Alimento"
-        }
-      ],
-      "quantity": 14,
-      "date": "2024-02-30T08:00:00Z",
-      "observations": "Stock de perejil para cuyes"
-    }
-  ],
-  
-  
-  
-  
   "appointments": [
     {
       "id": 1,
@@ -289,39 +186,16 @@
       "observations": "Stock de perejil para cuyes"
     }
   ],
-
-  
-  
-  
   "expenses": [
     {
       "id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
+      "breeder_id": 1,
       "type": "Alimento",
-      "amount": 198,
-      "date": "2024-04-30T08:00:00Z",
-      "description": "Compra de alfalfa para cuyes"
+      "amount": 500,
+      "date": "2024-05-02",
+      "details": "No seleccione"
     }
   ],
-
-  
-  
-  
   "notifications": [
     {
       "id": 1,
@@ -358,13 +232,9 @@
       ]
     }
   ],
-  
-  
-  
-  
   "publications": [
     {
-      "id": 1,
+      "id": "1",
       "advisor_id": 1,
       "title": "Cuidados básicos para cuyes",
       "description": "Ofreciendo consejos esenciales para la crianza de cuyes. Desde la alimentación hasta la higiene, todo lo que necesitas saber para tener cuyes saludables. Verás que siguiendo mis consejos, lograrás maximizar la producción y rentabilidad de tu granja.",
@@ -373,50 +243,81 @@
       "is_active": true
     }
   ],
-  
-  
-  
-  
-  "cages": [
+  "animals": [
     {
       "id": "1",
-      "name": "Jaula 35",
-      "size": "9",
-      "observations": "None"
-    },
-    {
-      "id": "63",
-      "name": "Jaula 4",
-      "size": "8.7",
-      "observations": "Falta limpiar"
-    }
-  ],
-  
-  
-  
-  
-  "cuyes": [
-    {
-      "id": "1",
-      "specie": "Cuy",
-      "weight": "1.2",
-      "name": "Cuyito",
-      "breed": "Peruano",
-      "birth": "2024-04-30",
-      "gender": "Macho",
-      "observations": "Esta sano",
-      "cage_id": "1"
+      "name": "Cuyino",
+      "breed": "Kuri",
+      "gender": true,
+      "birthdate": "2023-12-10",
+      "cage_id": 1,
+      "weight": 0.75,
+      "status": "Saludable",
+      "observations": "Cuy macho de color marrón claro"
     },
     {
       "id": "2",
-      "specie": "Cuy",
-      "weight": "2",
-      "name": "Cuytio",
+      "name": "Chispa",
+      "breed": "Andina",
+      "gender": false,
+      "birthdate": "2022-10-02",
+      "cage_id": 1,
+      "weight": 0.85,
+      "status": "Fallecido",
+      "observations": "Cuy hembra de color blanco con manchas negras"
+    },
+    {
+      "id": "3",
+      "name": "Pelusa",
+      "breed": "Perú",
+      "gender": true,
+      "birthdate": "2023-11-04",
+      "cage_id": 1,
+      "weight": 0.75,
+      "status": "Saludable",
+      "observations": "Cuy macho de color marrón claro"
+    },
+    {
+      "id": "4",
+      "name": "Canela",
+      "breed": "Andina",
+      "gender": false,
+      "birthdate": "2024-01-11",
+      "cage_id": 1,
+      "weight": 0.85,
+      "status": "Enfermo",
+      "observations": "Cuy hembra de color blanco con manchas negras"
+    },
+    {
+      "id": 5,
+      "name": "Chispa",
       "breed": "Inti",
-      "birth": "21/04/2024",
-      "gender": "Hembra",
-      "observations": "Come muy poco",
-      "cage_id": "1"
+      "gender": "false",
+      "birthdate": "2023-04-11",
+      "cage_id": 1,
+      "weight": 100,
+      "status": "Saludable",
+      "observations": "Ninguna"
+    }
+  ],
+  "cages": [
+    {
+      "id": "1",
+      "name": "Jaula 1",
+      "size": 6,
+      "observations": "Sin observaciones"
+    },
+    {
+      "id": "2",
+      "name": "Jaula 3",
+      "size": 3.6,
+      "observations": "La jaula esta un poco oxidada"
+    },
+    {
+      "id": 3,
+      "name": "Jaula 2",
+      "size": "4",
+      "observations": "Una observación"
     }
   ]
 }

@@ -6,12 +6,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../dialog/dialog.component';
-import { Cuy } from '../../models/cuy.model';
-import { CuyServiceService as CuyService } from '../../services/cuy-service/cuy-service.service';
+import { DialogComponent } from '../../../public/components/dialog/dialog.component';
+import { Animal } from '../../models/animal.model';
+import { AnimalService } from '../../services/animal-service/animal.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {MatOption} from "@angular/material/autocomplete";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-register-cuy',
@@ -24,65 +26,55 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
     FormsModule,
     CommonModule,
     MatRadioGroup,
-    MatRadioButton
+    MatRadioButton,
+    MatOption,
+    MatSelect
   ],
   templateUrl: './register-cuy.component.html',
   styleUrl: './register-cuy.component.css'
 })
 export class RegisterCuyComponent {
-  id: string = '';
-  specie: string = '';
-  weight:string = '';
-  name: string = '';
-  breed: string = '';
-  birth: string = '';
-  gender: string = '';
-  observations: string = '';
-  cage_id: string = '';
-  cuy: Cuy = {
-    id: '',
-    specie: '',
-    weight: '',
-    name: '',
-    breed: '',
-    birth: '',
-    gender: '',
-    observations: '',
-    cage_id: ''
+  animal: Animal = {
+    id: 0,
+    name: "",
+    breed: "",
+    gender: false,
+    birthdate: new Date(),
+    cage_id: 0,
+    weight: 0,
+    status: "",
+    observations: ""
   };
 
-  constructor(public dialog: MatDialog, private cuyService: CuyService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private animalService: AnimalService, private snackBar: MatSnackBar, private router: Router) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
 
   handleClick(): void {
-    if (!this.name || !this.specie || !this.id) {
+    if (!this.animal.name || !this.animal.breed  || !this.animal.cage_id ||
+      !this.animal.weight || !this.animal.birthdate || !this.animal.status) {
       this.openDialog();
     } else {
       this.registerCuy();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
         duration: 3000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/criador/registro']);
       });
     }
   }
 
   registerCuy(): void {
-    this.cuy = {
-      id: this.id,
-      specie: this.specie,
-      weight: this.weight,
-      name: this.name,
-      breed: this.breed,
-      birth: this.birth,
-      gender: this.gender,
-      observations: this.observations,
-      cage_id: this.cage_id
-    };
-    this.cuyService.addCuy(this.cuy).subscribe();
+    this.animalService.getHighestAnimalId().subscribe(highestId => {
+      this.animal.id = highestId + 1;
+      this.animalService.addAnimal(this.animal).subscribe();
+    });
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }

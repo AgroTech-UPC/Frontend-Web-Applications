@@ -4,7 +4,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
-import {AnimalService} from "../../services/animal.service";
+import {AnimalService} from "../../services/animal-service/animal.service";
 import {Cage} from "../../models/cage.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
@@ -57,13 +57,13 @@ export class CageEditorComponent implements OnInit {
     if(this.cageForm.form.valid){
       this.animalService.updateCage(this.cage)
         .subscribe(() => {
-        this.router.navigate(['/animales']);
+        this.router.navigate(['/criador/mis-animales']);
         this.snackBar.open('Jaula actualizada 🎉', '', { duration: 5000 });
       });
     }
   }
 
   onCancel(){
-    this.router.navigate(['/animales']);
+    this.router.navigate(['/criador/mis-animales']);
   }
 }

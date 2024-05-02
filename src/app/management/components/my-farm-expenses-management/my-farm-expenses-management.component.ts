@@ -74,7 +74,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
 
       response.forEach((resourceData: any) => {
         // Verify if the breeder id is 1
-        if (resourceData.breeders[0].id === 1) {
+        if (resourceData.breeder_id === 1) {
           this.expenses.push({
             id: resourceData.id,
             type: resourceData.type,
@@ -89,6 +89,6 @@ export class MyFarmExpensesManagementComponent implements OnInit {
 
   redirectToMyFarmView() {
     // Redirect to MyFarm view
-    this.router.navigate(['myFarm']);
+    this.router.navigate(['criador/mi-granja']);
   }
 }

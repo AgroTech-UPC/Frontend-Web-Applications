@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {AnimalService} from "../../services/animal.service";
+import {AnimalService} from "../../services/animal-service/animal.service";
 import {Animal} from "../../models/animal.model";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";

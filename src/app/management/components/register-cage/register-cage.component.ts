@@ -6,11 +6,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../dialog/dialog.component';
+import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Cage } from '../../models/cage.model';
-import { CageService } from '../../services/cage-service/cage-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import {Animal} from "../../models/animal.model";
+import {AnimalService} from "../../services/animal-service/animal.service";
 
 
 @Component({
@@ -29,43 +30,40 @@ import { Router } from '@angular/router';
   styleUrl: './register-cage.component.css'
 })
 export class RegisterCageComponent {
-  id: string = '';
-  name: string = '';
-  size: string = '';
-  observations: string = '';
   cage: Cage = {
-    id: '',
+    id: 0,
     name: '',
-    size: '',
+    size: 0,
     observations: ''
   };
 
-  constructor(public dialog: MatDialog, private cageService: CageService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private animalService: AnimalService, private snackBar: MatSnackBar, private router: Router) {}
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
 
   handleClick(): void {
-    if (!this.name || !this.size || !this.id) {
+    if (!this.cage.name || !this.cage.size) {
       this.openDialog();
     } else {
       this.registerCage();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
         duration: 3000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/criador/registro']);
       });
     }
   }
 
   registerCage(): void {
-      this.cage = {
-        id: this.id,
-        name: this.name,
-        size: this.size,
-        observations: this.observations
-      };
-      this.cageService.addCage(this.cage).subscribe();
+    this.animalService.getHighestCageId().subscribe(highestId => {
+      this.cage.id = highestId + 1;
+      this.animalService.addCage(this.cage).subscribe();
+    });
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }

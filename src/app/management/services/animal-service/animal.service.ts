@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
+import {Animal} from "../../models/animal.model";
+import {map} from "rxjs/operators";
+import {Expense} from "../../models/expense.model";
+import {Cage} from "../../models/cage.model";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +29,12 @@ export class AnimalService {
     }
     return throwError(
       'Something bad happened; please try again later.');
+  }
+
+  addCage(item: any): Observable<any>{
+    return this.http
+      .post<any>(`${this.baseURL}/cages`, JSON.stringify(item), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
   }
 
   getCages(){
@@ -72,6 +82,25 @@ export class AnimalService {
   deleteAnimal(id: number){
     return this.http
       .delete<any>(`${this.baseURL}/animals/${id}`, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  getHighestAnimalId(): Observable<number> {
+    return this.http.get<Animal[]>(`${this.baseURL}/animals`).pipe(
+      map(animals => Math.max(...animals.map((animal) => Number(animal.id)))),
+      catchError((err, caught) => this.handleError(err))
+    );
+  }
+  getHighestCageId(): Observable<number> {
+    return this.http.get<Cage[]>(`${this.baseURL}/cages`).pipe(
+      map(cages => Math.max(...cages.map((cage) => Number(cage.id)))),
+      catchError((err, caught) => this.handleError(err))
+    );
+  }
+
+  addAnimal(item: any): Observable<any>{
+    return this.http
+      .post<any>(`${this.baseURL}/animals`, JSON.stringify(item), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 }

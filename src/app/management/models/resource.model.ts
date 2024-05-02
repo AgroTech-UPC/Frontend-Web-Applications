@@ -1,5 +1,9 @@
 export interface Resource {
-  id: any;
-  name: any;
-  type: any;
+  id: number;
+  name: string;
+  type: string;
+  breeder_id: number;
+  quantity: number;
+  date: Date;
+  observations: string;
 }

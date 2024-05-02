@@ -82,7 +82,7 @@ export class NewPublicationComponent implements OnInit {
   }
 
   goToPublications() {
-    this.router.navigate(['/mis-publicaciones']);
+    this.router.navigate(['/asesor/mis-publicaciones']);
   }
 
 }

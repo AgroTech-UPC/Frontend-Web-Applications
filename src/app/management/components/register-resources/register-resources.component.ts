@@ -6,9 +6,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../dialog/dialog.component';
+import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Resource } from '../../models/resource.model';
-import { ResourceService } from '../../services/resource-service/resource-service.service';
+import { ResourceService } from '../../services/resource-service/resource.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -32,21 +32,14 @@ import { MatSelect } from '@angular/material/select';
   styleUrls: ['./register-resources.component.css']
 })
 export class RegisterResourcesComponent {
-  id: string = '';
-  name: string = '';
-  type: string = '';
-  breeder_id: string = '';
-  quantity: string = '';
-  date: string = '';
-  observations: string = '';
   resource: Resource = {
-    id: '',
-    name: '',
-    type: '',
-    breeder_id: '',
-    quantity: '',
-    date: '',
-    observations: ''
+    id: -1,
+    name: "",
+    type: "",
+    breeder_id: 1,
+    quantity: 0,
+    date: new Date(),
+    observations: ""
   };
 
   constructor(public dialog: MatDialog, private resourceService: ResourceService, private snackBar: MatSnackBar, private router: Router) {}
@@ -56,30 +49,26 @@ export class RegisterResourcesComponent {
   }
 
   handleClick(): void {
-    if (!this.name || !this.type || !this.breeder_id || !this.quantity || !this.date) {
+    if (!this.resource.name || !this.resource.type || !this.resource.breeder_id || !this.resource.quantity || !this.resource.date) {
       this.openDialog();
     } else {
       this.registerResource();
       this.snackBar.open('Recurso registrado con éxito', 'Cerrar', {
         duration: 3000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/criador/registro']);
       });
     }
   }
 
   registerResource(): void {
     this.resourceService.getHighestId().subscribe(highestId => {
-      this.resource = {
-        id: (highestId + 1).toString(), // Convert the new ID to a string
-        name: this.name,
-        type: this.type,
-        breeder_id: this.breeder_id,
-        quantity: this.quantity,
-        date: this.date,
-        observations: this.observations
-      };
+      this.resource.id = highestId + 1;
       this.resourceService.addResource(this.resource).subscribe();
     });
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

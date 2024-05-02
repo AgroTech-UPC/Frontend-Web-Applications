@@ -46,11 +46,11 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   getPublication(id: any) {
-    this.router.navigateByUrl(`/mis-publicaciones/${id}`);
+    this.router.navigateByUrl(`asesor/mis-publicaciones/${id}`);
   }
 
   goToCreatePublication() {
-    this.router.navigateByUrl('/nueva-publicacion');
+    this.router.navigateByUrl('asesor/nueva-publicacion');
   }
 
 }

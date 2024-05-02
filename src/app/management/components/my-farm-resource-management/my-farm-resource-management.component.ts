@@ -16,6 +16,7 @@ import {HeaderComponent} from "../../../public/components/header/header.componen
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 import {MatIcon} from "@angular/material/icon";
 import {Router} from "@angular/router";
+import {ResourceApiService} from "../../services/resource-api.service";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -48,7 +49,7 @@ export class MyFarmResourceManagementComponent implements OnInit {
     '4': 'Cultivo'
   };
 
-  constructor(private resourceBreederApiService: ResourceBreederApiService, private router: Router) {
+  constructor(private resourceApiService: ResourceApiService, private router: Router) {
     this.selectedResourceType = '1';
   }
 
@@ -69,31 +70,14 @@ export class MyFarmResourceManagementComponent implements OnInit {
   }
 
   private loadResources() {
-    this.resourceBreederApiService.getList().subscribe((response: any) => {
-      console.log(response);
-
-      response.forEach((resourceData: any) => {
-        // Verify if the breeder id is 1
-        if (resourceData.breeders[0].id === 1) {
-          // Create a new date object
-          const date = new Date(resourceData.date);
-          // Apply the format to the date
-          const formattedDate = date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' });
-
-          this.resources.push({
-            name: resourceData.resources[0].name,
-            type: resourceData.resources[0].type,
-            date: formattedDate
-          });
-        }
-      });
-    }, (error) => {
-      console.error(error);
+    this.resourceApiService.getList().subscribe((resources: any) => {
+      this.resources = resources;
+      this.filteredResources = cloneDeep(this.resources);
     });
   }
 
   redirectToMyFarmView() {
     // Redirect to MyFarm view
-    this.router.navigate(['myFarm']);
+    this.router.navigate(['/criador/mi-granja']);
   }
 }

@@ -6,9 +6,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../../../dialog/dialog.component';
+import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Expense } from '../../models/expense.model';
-import { ExpenseService } from '../../services/expense-service/expense-service.service';
+import { ExpenseService } from '../../services/expense-service/expense.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -30,19 +30,13 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
   styleUrl: './register-expenses.component.css'
 })
 export class RegisterExpensesComponent {
-  id: string = '';
-  amount: string = '';
-  kind: string = '';
-  details: string = '';
-  cuy_id: string = '';
-  date: string = '';
   expense: Expense = {
-    id: '',
-    amount: '',
-    kind: '',
-    details: '',
-    cuy_id: '',
-    date: ''
+    id: 0,
+    breeder_id: 1,
+    type: "",
+    amount: 0,
+    date: new Date(),
+    details: ""
   };
 
   constructor(public dialog: MatDialog, private expenseService: ExpenseService, private snackBar: MatSnackBar, private router: Router) {}
@@ -52,29 +46,26 @@ export class RegisterExpensesComponent {
   }
 
   handleClick(): void {
-    if (!this.amount || !this.kind || !this.cuy_id || !this.date) {
+    if (!this.expense.amount || !this.expense.type || !this.expense.date) {
       this.openDialog();
     } else {
       this.registerExpense();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
         duration: 3000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/criador/registro']);
       });
     }
   }
 
   registerExpense(): void {
     this.expenseService.getHighestId().subscribe(highestId => {
-      this.expense = {
-        id: (highestId + 1).toString(),
-        amount: this.amount,
-        kind: this.kind,
-        details: this.details,
-        cuy_id: this.cuy_id,
-        date: this.date
-      };
+      this.expense.id = highestId + 1;
       this.expenseService.addExpense(this.expense).subscribe();
     });
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

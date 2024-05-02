@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule, MatTableDataSource} from "@angular/material/table";
-import {AnimalService} from "../../services/animal.service";
+import {AnimalService} from "../../services/animal-service/animal.service";
 import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {MatDialog } from "@angular/material/dialog";
@@ -41,7 +41,7 @@ export class CageListComponent implements OnInit {
   }
 
   editCage(id: number){
-    this.router.navigate([`animales/edit/${id}`]);
+    this.router.navigate([`/criador/mis-animales/editar/${id}`]);
   }
 
   deleteCage(id: number){
@@ -77,6 +77,6 @@ export class CageListComponent implements OnInit {
   }
 
   goToCage(id: number){
-    this.router.navigate([`animales/${id}`]);
+    this.router.navigate([`criador/mis-animales/${id}`]);
   }
 }

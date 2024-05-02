@@ -4,7 +4,7 @@
 </div>
 <div class="animals">
     <div class="animal" [ngClass]="{'deceased': animal.status === 'Fallecido'}" *ngFor="let animal of animals" (click)="getInformation(animal.id)">
-      <img src="../../../../assets/images/cuy.png" alt="cuy {{animal.id}}">
+      <img src="../assets/images/cuy.png" alt="cuy {{animal.id}}">
       <div class="animal-info">
         <h2>ID: {{animal.id}}</h2>
         <p>Nombre: {{animal.name}}</p>

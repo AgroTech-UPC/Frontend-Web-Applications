@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 import {Animal} from "../../models/animal.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AnimalService} from "../../services/animal.service";
+import {AnimalService} from "../../services/animal-service/animal.service";
 import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 
