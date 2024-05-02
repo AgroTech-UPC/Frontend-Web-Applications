@@ -67,30 +67,22 @@
   ],
   "resources": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Alfalfa",
-      "type": "Alimento"
-    },
-    {
-      "id": 2,
-      "name": "Desparasitante",
-      "type": "Medicina"
-    }
-  ],
-  "resource_breeder": [
-    {
-      "breeder_id": 1,
-      "resource_id": 1,
+      "type": "Alimento",
+      "breeder_id": "1",
       "quantity": 25,
       "date": "2024-04-30T08:00:00Z",
       "observations": "Stock de alfalfa para cuyes"
     },
     {
-      "breeder_id": 2,
-      "resource_id": 2,
-      "quantity": 30,
-      "date": "2024-04-29T10:30:00Z",
-      "observations": "Stock de desparasitante para cuyes"
+      "id": "2",
+      "name": "Excalibea",
+      "type": "Alimento",
+      "breeder_id": "1",
+      "quantity": "2",
+      "date": "12/02/2024",
+      "observations": "Ninguna"
     }
   ],
   "appointments": [

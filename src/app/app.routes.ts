@@ -3,7 +3,7 @@ import { RegisterComponent} from "./register/register.component";
 import { RegisterCageComponent } from "./register/register-cage/components/register-cage/register-cage.component";
 import { RegisterExpensesComponent } from "./register/register-expenses/components/register-expenses.component";
 import { RegisterCuyComponent } from "./register/register-cuy/components/register-cuy.component";
-import { RegisterResourcesComponent} from "./register/register-resources/register-resources.component";
+import { RegisterResourcesComponent} from "./register/register-resources/components/register-resources.component";
 
 export const routes: Routes = [
   { path: '', component: RegisterComponent },

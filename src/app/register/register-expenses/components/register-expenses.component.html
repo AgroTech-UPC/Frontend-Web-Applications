@@ -8,13 +8,12 @@
       <input matInput [(ngModel)]="amount" name="amount" required>
     </mat-form-field>
 
-    <mat-radio-group aria-label="Select an option" [(ngModel)]="kind">
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="kind" required>
       <h2 style="font-weight: 400">Tipo de gasto</h2>
       <mat-radio-button value="Salud">Salud</mat-radio-button>
       <mat-radio-button value="Alimento">Alimento</mat-radio-button>
       <mat-radio-button value="Mantenimiento de criadero">Mantenimiento de criadero</mat-radio-button>
       <mat-radio-button value="Otro">Otro</mat-radio-button>
-
     </mat-radio-group>
 
     <mat-form-field class="form-field">
