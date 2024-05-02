@@ -59,7 +59,6 @@ export class NewPublicationComponent implements OnInit {
     formattedDate = formattedDate.slice(0, -5) + 'Z';
     this.publicationData.date = formattedDate;
 
-    this.publicationData.is_active = true;
 
     console.log(this.publicationData);
 
@@ -82,7 +81,7 @@ export class NewPublicationComponent implements OnInit {
   }
 
   goToPublications() {
-    this.router.navigate(['/mis-publicaciones']);
+    this.router.navigate(['/asesor/mis-publicaciones']);
   }
 
 }

@@ -59,19 +59,19 @@ export class SidenavComponent {
   getButtonRoute(button: string): string {
     switch (button) {
       case "Mi granja":
-        return "/mi-granja";
+        return "criador/mi-granja";
       case "Asesores":
-        return "/asesores";
+        return "criador/asesores";
       case "Mis animales":
-        return "/mis-animales";
+        return "criador/mis-animales";
       case "Registro":
-        return "/registro";
+        return "criador/registro";
       case "Notificaciones":
-        return "/notificaciones";
+        return "notificaciones";
       case "Clientes":
-        return "/clientes";
+        return "asesor/clientes";
       case "Mis publicaciones":
-        return "/mis-publicaciones";
+        return "asesor/mis-publicaciones";
       default:
         return "/";
     }

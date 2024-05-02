@@ -33,24 +33,23 @@ export class MyPublicationsComponent implements OnInit {
   getPublications() {
     this.publicationsService.getPublications().subscribe((res) => {
       res.forEach((publication) => {
-        let publicationData = new Publication();
+        let publicationData = {} as Publication;
         publicationData.id = publication.id;
         publicationData.title = publication.title;
         publicationData.description = publication.description;
         publicationData.date = publication.date;
         publicationData.image = publication.image;
-        publicationData.is_active = publication.is_active;
         this.publications.push(publicationData);
       });
     });
   }
 
   getPublication(id: any) {
-    this.router.navigateByUrl(`/mis-publicaciones/${id}`);
+    this.router.navigateByUrl(`asesor/mis-publicaciones/${id}`);
   }
 
   goToCreatePublication() {
-    this.router.navigateByUrl('/nueva-publicacion');
+    this.router.navigateByUrl('asesor/nueva-publicacion');
   }
 
 }

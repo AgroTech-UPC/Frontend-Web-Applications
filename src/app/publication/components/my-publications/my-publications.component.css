@@ -32,6 +32,10 @@ h1 {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+main{
+  margin-top: 100px;
+}
+
 @media (max-width: 1000px) {
   #cards{
     grid-template-columns: 1fr;
