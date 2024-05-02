@@ -12,7 +12,7 @@ export class ResourceApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'resources/';
+  extraUrl: string = '/resources/';
 
   constructor(private http:HttpClient) { }
 

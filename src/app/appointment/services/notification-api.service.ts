@@ -13,7 +13,7 @@ export class NotificationApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'notifications/';
+  extraUrl: string = '/notifications/';
 
   constructor(private http:HttpClient) { }
 

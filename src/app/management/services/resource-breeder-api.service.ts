@@ -13,7 +13,7 @@ export class ResourceBreederApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'resource_breeder/';
+  extraUrl: string = '/resource_breeder/';
 
   constructor(private http:HttpClient) { }
 
