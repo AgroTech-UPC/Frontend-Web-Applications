@@ -18,7 +18,7 @@ import {DatePipe} from "@angular/common";
   styleUrl: './publication-detail.component.css'
 })
 export class PublicationDetailComponent {
-  publication = new Publication();
+  publication = {} as Publication;
 
   constructor(private publicationsService: PublicationsApiService, private activatedRouter: ActivatedRoute) {
     this.activatedRouter.params.subscribe(
@@ -35,7 +35,6 @@ export class PublicationDetailComponent {
       this.publication.description = res.description;
       this.publication.date = res.date;
       this.publication.image = res.image;
-      this.publication.is_active = res.is_active;
     });
   }
 

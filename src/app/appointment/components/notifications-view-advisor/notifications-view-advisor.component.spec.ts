@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NotificationsComponent } from './notifications.component';
+import { NotificationsViewAdvisorComponent } from './notifications-view-advisor.component';
 
 describe('NotificationsComponent', () => {
-  let component: NotificationsComponent;
-  let fixture: ComponentFixture<NotificationsComponent>;
+  let component: NotificationsViewAdvisorComponent;
+  let fixture: ComponentFixture<NotificationsViewAdvisorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NotificationsComponent]
+      imports: [NotificationsViewAdvisorComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(NotificationsComponent);
+
+    fixture = TestBed.createComponent(NotificationsViewAdvisorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -164,6 +164,6 @@ export class AnimalInformationComponent implements OnInit{
   }
 
   goBack() {
-    this.router.navigate(['../../'], {relativeTo: this.route});
+    window.history.back();
   }
 }

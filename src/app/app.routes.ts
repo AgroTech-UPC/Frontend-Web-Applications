@@ -19,7 +19,7 @@ import {AnimalInformationComponent} from "./management/components/animal-informa
 import {ClientsComponent} from "./appointment/components/clients/clients.component";
 import {MyPublicationsComponent} from "./publication/components/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/components/new-publication/new-publication.component";
-import {NotificationsComponent} from "./appointment/components/notifications/notifications.component";
+import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/components/publication-detail/publication-detail.component";
 
 
@@ -43,6 +43,6 @@ export const routes: Routes = [
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsComponent}
+  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent}
 
 ];

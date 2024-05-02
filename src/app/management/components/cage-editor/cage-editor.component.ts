@@ -64,6 +64,6 @@ export class CageEditorComponent implements OnInit {
   }
 
   onCancel(){
-    this.router.navigate(['/criador/mis-animales']);
+    window.history.back();
   }
 }

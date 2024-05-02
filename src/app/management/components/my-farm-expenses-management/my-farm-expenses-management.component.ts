@@ -87,8 +87,8 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     });
   }
 
-  redirectToMyFarmView() {
-    // Redirect to MyFarm view
-    this.router.navigate(['criador/mi-granja']);
+  goBack() {
+    window.history.back();
   }
+
 }

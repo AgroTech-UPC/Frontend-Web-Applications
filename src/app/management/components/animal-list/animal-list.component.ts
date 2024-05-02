@@ -44,7 +44,7 @@ export class AnimalListComponent implements OnInit{
     this.router.navigate(['informacion', id], {relativeTo: this.route});
   }
 
-  goBack(){
-    this.router.navigate(['../'], {relativeTo: this.route});
+  goBack() {
+    window.history.back();
   }
 }
