@@ -2,8 +2,13 @@ mat-toolbar{
   background: #91644D;
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   position: fixed;
   z-index: 10;
+=======
+  position: relative;
+  z-index: 2;
+>>>>>>> f0ec4dab14312489405355360f9715f5da743317
 }
 
 img{
