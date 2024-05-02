@@ -1,6 +1,6 @@
 export interface Cage {
-  id: string;
+  id: number;
   name: string;
-  size: string;
+  size: number;
   observations: string;
 }
