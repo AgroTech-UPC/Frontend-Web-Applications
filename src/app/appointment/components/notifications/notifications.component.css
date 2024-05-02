@@ -1,0 +1,10 @@
+mat-card {
+  background-color: #dd763d;
+  color: white;
+  margin: 5%;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+}

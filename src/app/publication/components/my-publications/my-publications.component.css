@@ -1,0 +1,39 @@
+mat-card {
+  background-color: #dd763d;
+  color: white;
+  margin: 5%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 5px;
+  padding: 10px;
+  display: block;
+  margin: 0 auto;
+  z-index: 0;
+}
+
+img {
+  width: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin: 2%;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+#cards{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media (max-width: 1000px) {
+  #cards{
+    grid-template-columns: 1fr;
+  }
+}

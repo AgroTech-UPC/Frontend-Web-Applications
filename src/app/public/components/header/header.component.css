@@ -2,7 +2,7 @@ mat-toolbar{
   background: #91644D;
   display: flex;
   justify-content: center;
-  position: fixed;
+  position: relative;
   z-index: 2;
 }
 

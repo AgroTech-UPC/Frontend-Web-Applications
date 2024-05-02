@@ -1,0 +1,16 @@
+<main>
+  <div class="card">
+    <mat-card class="example-card" aria-label="Información de publicación de asesor">
+      <div class="example-header-image" role="article">
+        <img mat-card-image src="{{publication.image}}" alt="Photo of a Shiba Inu">
+      </div>
+      <mat-card-content class="container">
+        <h2>{{publication.title}}</h2>
+        <p>{{publication.description}}</p>
+        <p>Publicado el {{publication.date | date: 'MMM d, y'}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <button mat-raised-button class="boton" (click)="goBack()">Volver</button>
+</main>
+
