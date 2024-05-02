@@ -120,7 +120,8 @@ export class ViewReserveAppointmentComponent {
   }
 
   goHome(): void {
-    this.router.navigate(['criador/1/buscar-asesor']);
+    const id_criador = this.route.snapshot.paramMap.get('id_criador');
+    this.router.navigate(['criador/' + id_criador + '/buscar-asesor']);
   }
   cancelar(): void{
     const id_criador = this.route.snapshot.paramMap.get('id_criador');
