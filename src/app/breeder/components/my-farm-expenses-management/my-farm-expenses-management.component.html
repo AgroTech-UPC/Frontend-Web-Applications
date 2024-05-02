@@ -1,5 +1,5 @@
 <div class="resource-view">
-  <!-- header and sidenav-->
+  <<!-- header and sidenav-->
   <app-header (toggleSidenav)="sidenav.onToggleSidenav($event)" aria-label="Navigation header "></app-header>
   <app-sidenav #sidenav aria-label="Sidenav"></app-sidenav>
 
@@ -8,27 +8,27 @@
       <button mat-mini-fab class="arrow_back-icon" aria-label="button back to MyFarmView" (click)="redirectToMyFarmView()">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <h1>FILTRAR RECURSOS</h1>
+      <h1>FILTRAR GASTOS REALIZADOS</h1>
     </div>
     <div class="selector-resource">
       <p>Seleccione un tipo de recurso</p>
       <mat-radio-group [(ngModel)]="selectedResourceType" aria-label="Select an option" class="selector-resource-option">
         <mat-radio-button value="1">Todos</mat-radio-button>
-        <mat-radio-button value="2">Alimento</mat-radio-button>
-        <mat-radio-button value="3">Medicina</mat-radio-button>
-        <mat-radio-button value="4">Cultivo</mat-radio-button>
+        <mat-radio-button value="2">Salud</mat-radio-button>
+        <mat-radio-button value="3">Alimento</mat-radio-button>
+        <mat-radio-button value="4">Mantenimiento de criadero</mat-radio-button>
       </mat-radio-group>
     </div>
     <button mat-button style="color: #ffffff" class="card-button" (click)="filterResource()">Filtrar</button>
 
     <!-- Iteration for -->
-    <div class="card-container" *ngFor="let result of filteredResources">
+    <div class="card-container" *ngFor="let result of filteredExpenses">
       <mat-card class="mat-card">
         <div class="mat-card-content">
-          <mat-card-title class="card-title">{{ result.name }}</mat-card-title>
+          <mat-card-title class="card-title">GASTO {{ result.id }}</mat-card-title>
           <div class="math-card-content-column">
-            <mat-card-subtitle class="card-subtitle">Tipo: {{ result.type }}</mat-card-subtitle>
-            <mat-card-subtitle class="card-subtitle">Fecha: {{ result.date }}</mat-card-subtitle>
+            <mat-card-subtitle class="card-subtitle">Monto Gastado: S/.{{ result.amount }}</mat-card-subtitle>
+            <mat-card-subtitle class="card-subtitle">Tipo de Gasto: {{ result.type }}</mat-card-subtitle>
           </div>
         </div>
         <mat-card-actions class="card-actions">
@@ -37,6 +37,7 @@
       </mat-card>
     </div>
 
-    <app-empty-view *ngIf="filteredResources.length === 0" [title]="'No hay ningún registro con esas características'"></app-empty-view>
+    <app-empty-view *ngIf="filteredExpenses.length === 0" [title]="'No hay ningún registro con esas características'"></app-empty-view>
   </div>
 </div>
+

@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
+
 import {environment} from "../../../environments/environment";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 
-//Import the resource model
-import {ResourceBreeder} from "../models/resource-breeder.model";
-
+//Import the expense model
+import {Expense} from "../models/expense.model";
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceBreederApiService {
+export class ExpenseApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'resource_breeder/';
+  extraUrl: string = 'expenses/';
 
   constructor(private http:HttpClient) { }
 
@@ -42,16 +42,15 @@ export class ResourceBreederApiService {
     );
   }
 
-  //Get all breeders
-  getList(): Observable<ResourceBreeder> {
+  //Get all expenses
+  getList(): Observable<Expense> {
     return this.http
-      .get<ResourceBreeder>(this.baseUrl + this.extraUrl)
+      .get<Expense>(this.baseUrl + this.extraUrl)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  //Get resource by index
-  getResourceBreeder(index:any){
-    return this.http.get<ResourceBreeder>(this.baseUrl + this.extraUrl + index)
+  //Get expense by index
+  getExpense(index:any){
+    return this.http.get<Expense>(this.baseUrl + this.extraUrl + index)
   }
-
 }

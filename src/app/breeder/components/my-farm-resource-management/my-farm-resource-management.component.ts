@@ -14,6 +14,8 @@ import { ResourceBreederApiService } from "../../services/resource-breeder-api.s
 import {EmptyViewComponent} from "../empty-view/empty-view.component";
 import {HeaderComponent} from "../../../public/components/header/header.component";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
+import {MatIcon} from "@angular/material/icon";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -27,7 +29,8 @@ import {SidenavComponent} from "../../../public/components/sidenav/sidenav.compo
     HttpClientModule,
     EmptyViewComponent,
     HeaderComponent,
-    SidenavComponent
+    SidenavComponent,
+    MatIcon
   ],
   templateUrl: './my-farm-resource-management.component.html',
   styleUrl: './my-farm-resource-management.component.css'
@@ -45,7 +48,7 @@ export class MyFarmResourceManagementComponent implements OnInit {
     '4': 'Cultivo'
   };
 
-  constructor(private resourceBreederApiService: ResourceBreederApiService) {
+  constructor(private resourceBreederApiService: ResourceBreederApiService, private router: Router) {
     this.selectedResourceType = '1';
   }
 
@@ -89,4 +92,8 @@ export class MyFarmResourceManagementComponent implements OnInit {
     });
   }
 
+  redirectToMyFarmView() {
+    // Redirect to MyFarm view
+    this.router.navigate(['myFarm']);
+  }
 }
