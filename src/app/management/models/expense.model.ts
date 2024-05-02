@@ -1,8 +1,10 @@
+import { Breeder } from '../../user/models/breeder.model';
+
 export interface Expense {
-  id: string,
-  amount: string,
-  kind:string,
-  details: string,
-  cuy_id: string,
-  date: string
+  id: any;
+  breeders: Breeder;
+  type: any;
+  amount: any;
+  date: any;
+  description: any;
 }

@@ -37,9 +37,10 @@
       "description": "Futura experta en criadora de cuyes!!"
     }
   ],
-
-
-
+  
+  
+  
+  
   "advisors": [
     {
       "id": 1,
@@ -78,6 +79,10 @@
       ]
     }
   ],
+  
+  
+  
+  
   "breeders": [
     {
       "id": 1,
@@ -108,26 +113,121 @@
       ]
     }
   ],
+  
+  
+  
+  
   "resources": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Alfalfa",
-      "type": "Alimento",
-      "breeder_id": "1",
+      "type": "Alimento"
+    },
+    {
+      "id": 2,
+      "name": "Desparasitante",
+      "type": "Medicina"
+    },
+    {
+      "id": 3,
+      "name": "Perejil",
+      "type": "Alimento"
+    }
+  ],
+  
+  
+  
+  
+  "resource_breeder": [
+    {
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "id": 1,
+          "name": "Alfalfa",
+          "type": "Alimento"
+        }
+      ],
       "quantity": 25,
       "date": "2024-04-30T08:00:00Z",
       "observations": "Stock de alfalfa para cuyes"
     },
     {
-      "id": "2",
-      "name": "Excalibea",
-      "type": "Alimento",
-      "breeder_id": "1",
-      "quantity": "2",
-      "date": "12/02/2024",
-      "observations": "Ninguna"
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "id": 2,
+          "name": "Desparasitante",
+          "type": "Medicina"
+        }
+      ],
+      "quantity": 30,
+      "date": "2024-04-29T10:30:00Z",
+      "observations": "Stock de desparasitante para cuyes"
+    },
+    {
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "resources": [
+        {
+          "id": 3,
+          "name": "Perejil",
+          "type": "Alimento"
+        }
+      ],
+      "quantity": 14,
+      "date": "2024-02-30T08:00:00Z",
+      "observations": "Stock de perejil para cuyes"
     }
   ],
+  
+  
+  
+  
   "appointments": [
     {
       "id": 1,
@@ -190,40 +290,78 @@
     }
   ],
 
-
-
-  "appointments": [
+  
+  
+  
+  "expenses": [
     {
       "id": 1,
-      "breeder_id": 2,
-      "advisor_id": 2
-      "date": "2024-05-08T08:00:00Z",
-      "status": "Pendiente"
-    },
-    {
-      "id": 2,
-      "breeder_id": 2,
-      "advisor_id": 1,
-      "date": "2024-05-29T10:30:00Z",
-      "status": "Pendiente"
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "type": "Alimento",
+      "amount": 198,
+      "date": "2024-04-30T08:00:00Z",
+      "description": "Compra de alfalfa para cuyes"
     }
   ],
+
+  
+  
+  
   "notifications": [
     {
       "id": 1,
       "type": "Cita",
-      "text": "Tienes una cita programada para el 8 de mayo a las 8:00 am",
-      "date": "2024-05-03T08:00:00Z",
-      "user_id": 1
+      "text": "Tienes un asesoramiento programado con Marcus Smith",
+      "date": "2024-05-03T17:00:00Z",
+      "users": [
+        {
+          "id": 3,
+          "email": "luchito911@gmail.com",
+          "password": "almaCuyamor94",
+          "fullname": "Luis Lopez",
+          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+          "birthdate": "1998-02-17",
+          "description": "Principiante en la crianza de cuyes."
+        }
+      ]
     },
     {
       "id": 2,
       "type": "Cita",
-      "text": "Tienes una cita programada para el 29 de mayo a las 10:30 am",
-      "date": "2024-05-03T10:30:00Z",
-      "user_id": 1
+      "text": "Tienes un asesoramiento programado con Marcus Smith",
+      "date": "2024-05-06T19:00:00Z",
+      "users": [
+        {
+          "id": 3,
+          "email": "luchito911@gmail.com",
+          "password": "almaCuyamor94",
+          "fullname": "Luis Lopez",
+          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+          "birthdate": "1998-02-17",
+          "description": "Principiante en la crianza de cuyes."
+        }
+      ]
     }
   ],
+  
+  
+  
+  
   "publications": [
     {
       "id": 1,
@@ -235,6 +373,10 @@
       "is_active": true
     }
   ],
+  
+  
+  
+  
   "cages": [
     {
       "id": "1",
@@ -249,6 +391,10 @@
       "observations": "Falta limpiar"
     }
   ],
+  
+  
+  
+  
   "cuyes": [
     {
       "id": "1",
@@ -271,32 +417,6 @@
       "gender": "Hembra",
       "observations": "Come muy poco",
       "cage_id": "1"
-    }
-  ],
-  "expenses": [
-    {
-      "id": "1",
-      "amount": "100",
-      "kind": "Alimento",
-      "details": "Compra de alfalfa",
-      "cuy_id": "1",
-      "date": "2024-04-30"
-    },
-    {
-      "id": "2",
-      "amount": "230",
-      "kind": "Salud",
-      "details": "",
-      "cuy_id": "1",
-      "date": "28/08/2024"
-    },
-    {
-      "id": "3",
-      "amount": "580",
-      "kind": "Mantenimiento de criadero",
-      "details": "",
-      "cuy_id": "1",
-      "date": "27/02/2024"
     }
   ]
 }

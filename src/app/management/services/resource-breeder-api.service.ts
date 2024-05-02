@@ -4,15 +4,16 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 
 //Import the resource model
-import {Resource} from "../models/resource.model";
+import {ResourceBreeder} from "../models/resource-breeder.model";
+
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceApiService {
+export class ResourceBreederApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'resources/';
+  extraUrl: string = '/resource_breeder/';
 
   constructor(private http:HttpClient) { }
 
@@ -42,15 +43,15 @@ export class ResourceApiService {
   }
 
   //Get all breeders
-  getList(): Observable<Resource> {
+  getList(): Observable<ResourceBreeder> {
     return this.http
-      .get<Resource>(this.baseUrl + this.extraUrl)
+      .get<ResourceBreeder>(this.baseUrl + this.extraUrl)
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  //Get breeder by index
-  getResource(index:any){
-    return this.http.get<Resource>(this.baseUrl + this.extraUrl + index)
+  //Get resource by index
+  getResourceBreeder(index:any){
+    return this.http.get<ResourceBreeder>(this.baseUrl + this.extraUrl + index)
   }
 
 }

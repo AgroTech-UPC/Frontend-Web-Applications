@@ -13,7 +13,7 @@ export class ExpenseApiService {
 
   baseUrl: string = environment.baseURL;
 
-  extraUrl: string = 'expenses/';
+  extraUrl: string = '/expenses/';
 
   constructor(private http:HttpClient) { }
 
