@@ -1,0 +1,123 @@
+.resource-view{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #F5EEDC;
+}
+
+.resource-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  background: #F5EEDC;
+}
+
+.resource-container h1{
+  font-size: 2rem;
+  color: #DD763D;
+  font-weight: bold;
+}
+
+.selector-resource{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0px;
+  width: 70%;
+}
+
+.selector-resource p{
+  margin: 0 20px 0 0;
+}
+
+
+.filter-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+button{
+  background-color: #DD763D;
+  border-radius: 35px;
+  padding: 20px 30px;
+  margin: 0 0 20px 0;
+}
+
+.arrow_back-icon {
+  display: flex;
+  color: #ffffff;
+  border: none;
+  align-items: center;
+  height: 50%;
+  margin-right: 10px;
+}
+
+.arrow_back-icon:hover {
+  background-color: #e19669;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mat-card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  height: 100%;
+  background-color: #F0DA8B;
+  border-radius: 10px;
+  padding-left: 5%;
+}
+
+.card-title{
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: bold;
+  margin-right: 2%;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.card-subtitle{
+  font-size: 1.5rem;
+  color: #000000;
+  font-weight: normal;
+  margin: 20px 0;
+}
+
+.card-button-1{
+  background: #91654E;
+  border-radius: 35px;
+  padding: 20px;
+  width: 200px;
+  margin: 0 20px 0 0;
+}
+
+.math-card-content-column{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
