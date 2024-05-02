@@ -15,7 +15,10 @@ button {
   padding: 10px;
   display: block;
   margin: 0 auto;
-  z-index: 0;
+}
+
+.botones {
+  display: flex;
 }
 
 img {

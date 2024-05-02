@@ -11,5 +11,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <button mat-raised-button class="boton" (click)="goBack()">Volver</button>
+  <div class="botones">
+    <button mat-raised-button class="boton" (click)="goBack()">Volver</button>
+    <button mat-raised-button color="warn" class="boton" (click)="deletePublication(publication.id)">Eliminar</button>
+  </div>
 </main>
