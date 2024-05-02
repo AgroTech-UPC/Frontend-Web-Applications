@@ -5,6 +5,7 @@ import {NgForOf} from "@angular/common";
 import {Publication} from "../../models/publication.model";
 import {PublicationsApiService} from "../../services/publications-api.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-my-publications',
@@ -24,7 +25,7 @@ import {Router} from "@angular/router";
 export class MyPublicationsComponent implements OnInit {
   publications: Publication[] = [];
 
-  constructor(private publicationsService: PublicationsApiService, private router: Router) { }
+  constructor(private publicationsService: PublicationsApiService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getPublications();
@@ -50,6 +51,20 @@ export class MyPublicationsComponent implements OnInit {
 
   goToCreatePublication() {
     this.router.navigateByUrl('asesor/nueva-publicacion');
+  }
+
+  deletePublication(id: any) {
+    this.publicationsService.deletePublication(id).subscribe(() => {
+      this.publications = this.publications.filter((publication) => publication.id !== id);
+      this.snackBar.open('Publicación eliminada con éxito😎', 'Cerrar', {
+        duration: 2000,
+      });
+    }, error => {
+      this.snackBar.open('Error al eliminar la publicación', 'Cerrar', {
+        duration: 2000,
+      });
+      }
+    );
   }
 
 }

@@ -13,8 +13,9 @@
           <p>{{publication.description}}</p>
           <img src="{{publication.image}}" alt="{{publication.title}}">
         </mat-card-content>
-        <mat-card-footer>
+        <mat-card-footer class="row">
           <button mat-raised-button (click)="getPublication(publication.id)">Ver publicación</button>
+          <button mat-raised-button color="warn" (click)="deletePublication(publication.id)">Eliminar</button>
         </mat-card-footer>
       </mat-card>
     </div>

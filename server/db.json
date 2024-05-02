@@ -275,6 +275,14 @@
       "date": "2024-04-30T11:10:52Z",
       "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
       "is_active": true
+    },
+    {
+      "title": "Cuida la salud de tu cuy",
+      "description": "Estoy brindando consejos para identificar síntomas en los cuyes, así como consejos para tratarlos correctamente. Recuerda que la salud de cada cuy es esencial para tener buen control sobre la granja de cuyes.",
+      "image": "https://t2.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_orig.jpg",
+      "id": "2",
+      "advisor_id": "1",
+      "date": "2024-05-02T17:00:04Z"
     }
   ],
   "animals": [
