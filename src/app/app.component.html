@@ -1,1 +1,4 @@
-<app-my-farm-view></app-my-farm-view>
+<app-header (toggleSidenav)="sidenav.onToggleSidenav($event)"></app-header>
+<app-sidenav #sidenav></app-sidenav>
+
+<router-outlet></router-outlet>
