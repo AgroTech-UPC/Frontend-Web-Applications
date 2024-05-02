@@ -9,8 +9,19 @@ import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service"
 import {Breeder} from "../../models/breeder.model";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AdvisorHistory} from "../../models/advisor_history";
+import {of} from 'rxjs';
 
 import { forkJoin } from 'rxjs';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
+} from "@angular/material/card";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -19,13 +30,22 @@ import { forkJoin } from 'rxjs';
     MatButton,
     MatFormField,
     MatInput,
-    MatLabel
+    MatLabel,
+    MatCard,
+    MatCardActions,
+    MatCardContent,
+    MatCardHeader,
+    MatCardSubtitle,
+    MatCardTitle,
+    NgForOf
   ],
   templateUrl: './view-my-advisors.component.html',
   styleUrl: './view-my-advisors.component.css'
 })
 export class ViewMyAdvisorsComponent {
   advisors: Advisor[] = [];
+  advisorHistories: AdvisorHistory[] = [];
+
   constructor(
     private advisorApiService: AdvisorApiService,
     private router: Router,
@@ -33,7 +53,28 @@ export class ViewMyAdvisorsComponent {
   ) { }
 
   ngOnInit(): void {
-    //this.getMyAdvisors();
+    this.getMyAdvisors();
+  }
+
+  getMyAdvisors(): void {
+    const breederId = this.route.snapshot.paramMap.get('id_criador');
+    if (breederId === null) {
+      console.error('Breeder ID is null');
+      return;
+    }
+    this.advisorApiService.getBreederAppointments(breederId).subscribe(appointments => {
+      const breederAppointments = appointments.filter(appointment => appointment.breeder_id === +breederId);
+      const advisorIds = breederAppointments.map(appointment => appointment.advisor_id);
+      const advisorHistoryObservables = advisorIds.map(id =>
+        forkJoin({
+          advisor: this.advisorApiService.getAdvisor(id),
+          appointments: of(breederAppointments.filter(appointment => appointment.advisor_id === id))
+        })
+      );
+      forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
+        this.advisorHistories = advisorHistories;
+      });
+    });
   }
 
   // BOTONES REDIRECCIONAR:
