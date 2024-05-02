@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
-import { Resource } from '../models/resource.model';
-import {Expense} from "../../register-expenses/models/expense.model";
+import { Resource } from '../../models/resource.model';
+import {Expense} from "../../models/expense.model";
 import {catchError, map} from "rxjs/operators";
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cage } from '../model/cage.model';
+import { Cage } from '../../models/cage.model';
 
 @Injectable({
   providedIn: 'root'

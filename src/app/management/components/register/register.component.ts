@@ -7,13 +7,13 @@ import {MatInput} from "@angular/material/input";
 @Component({
   selector: 'app-register',
   standalone: true,
-    imports: [
-        MatButton,
-        RouterLink,
-        RouterOutlet,
-        MatFormField,
-        MatInput
-    ],
+  imports: [
+    MatButton,
+    RouterLink,
+    RouterOutlet,
+    MatFormField,
+    MatInput
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

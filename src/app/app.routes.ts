@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent} from "./register/register.component";
-import { RegisterCageComponent } from "./register/register-cage/components/register-cage/register-cage.component";
-import { RegisterExpensesComponent } from "./register/register-expenses/components/register-expenses.component";
-import { RegisterCuyComponent } from "./register/register-cuy/components/register-cuy.component";
-import { RegisterResourcesComponent} from "./register/register-resources/components/register-resources.component";
+import { RegisterComponent} from "./management/components/register/register.component";
+import { RegisterCageComponent } from "./management/components/register-cage/register-cage.component";
+import { RegisterExpensesComponent } from "./management/components/register-expenses/register-expenses.component";
+import { RegisterCuyComponent } from "./management/components/register-cuy/register-cuy.component";
+import { RegisterResourcesComponent} from "./management/components/register-resources/register-resources.component";
 
 export const routes: Routes = [
   { path: '', component: RegisterComponent },

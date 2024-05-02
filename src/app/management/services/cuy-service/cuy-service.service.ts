@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Cuy } from '../models/cuy.model';
+import { Cuy } from '../../models/cuy.model';
 import { Observable } from 'rxjs';
 
 @Injectable({

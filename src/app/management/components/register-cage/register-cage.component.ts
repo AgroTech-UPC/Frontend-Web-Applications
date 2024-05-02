@@ -7,8 +7,8 @@ import {FormsModule} from '@angular/forms';
 import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../dialog/dialog.component';
-import { Cage } from '../../model/cage.model';
-import { CageService } from '../../services/cage-service.service';
+import { Cage } from '../../models/cage.model';
+import { CageService } from '../../services/cage-service/cage-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
