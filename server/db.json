@@ -155,9 +155,13 @@
       ],
       "quantity": 30,
       "date": "2024-04-29T10:30:00Z",
-      "observations": "Stock de desparasitante para cuyes"
+      "observations": "Stock de desparasitante para cuyes",
+      "status": "Terminado"
     },
     {
+      "id": 2,
+      "breeder_id": 1,
+      "advisor_id": 2,
       "breeders": [
         {
           "id": 1,
@@ -183,7 +187,8 @@
       ],
       "quantity": 14,
       "date": "2024-02-30T08:00:00Z",
-      "observations": "Stock de perejil para cuyes"
+      "observations": "Stock de perejil para cuyes",
+      "status": "Terminado"
     }
   ],
   "expenses": [
@@ -371,6 +376,70 @@
       "name": "Jaula 2",
       "size": "4",
       "observations": "Una observación"
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "appointment_id": 1,
+      "rating": 4,
+      "comment": "Excelente atención, muy recomendado."
+    },
+    {
+      "id": 2,
+      "appointment_id": 2,
+      "rating": 5,
+      "comment": "Muy buena atención, recomendado."
+    }
+  ],
+  "available_dates": [
+    {
+      "id": 1,
+      "advisor_id": 1,
+      "day": "30/04/2024",
+      "start_time": "10:30",
+      "end_time": "12:30",
+      "status": 0
+    },
+    {
+      "id": 2,
+      "advisor_id": 2,
+      "day": "30/02/2024",
+      "start_time": "08:00",
+      "end_time": "10:00",
+      "status": 0
+    },
+    {
+      "id": 3,
+      "advisor_id": 1,
+      "day": "30/04/2024",
+      "start_time": "10:30",
+      "end_time": "12:30",
+      "status": 1
+    },
+    {
+      "id": 4,
+      "advisor_id": 2,
+      "day": "31/02/2024",
+      "start_time": "08:00",
+      "end_time": "10:00",
+      "status": 1
+    },
+    {
+      "id": 5,
+      "advisor_id": 1,
+      "day": "01/05/2024",
+      "start_time": "10:30",
+      "end_time": "12:30",
+      "status": 1
+    },
+    {
+      "id": 6,
+      "advisor_id": 2,
+      "day": "01/03/2024",
+      "start_time": "08:00",
+      "end_time": "10:00",
+      "status": 1
     }
   ]
 }

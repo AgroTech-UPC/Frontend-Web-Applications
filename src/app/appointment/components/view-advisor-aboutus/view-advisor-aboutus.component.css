@@ -1,0 +1,43 @@
+.advisor-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: auto;
+  margin-top: 110px; /* Ajusta este valor según tus necesidades */
+  width: 70%; /* Ajusta este valor según tus necesidades */
+}
+
+.advisor-photo, .advisor-info {
+  max-width: 50%;
+  overflow: auto;
+}
+.photo{
+  width: 250px;  /* Ajusta el ancho de la imagen */
+  height: 250px;
+  object-fit: cover;
+}
+.advisor-photo {
+  margin-right: 20px; /* Ajusta este valor según tus necesidades */
+}
+
+button {
+  margin-left: 10px; /* Ajusta este valor según tus necesidades */
+}
+.rating span {
+  font-size: 50px;  /* Ajusta el tamaño de la fuente */
+  color: #DD763D;  /* Cambia el color de las estrellas */
+}
+
+.title_review {
+  text-align: center; /* Centra el título */
+  margin-top: 20px;
+  font-size: 30px;
+  color: #DD763D;
+}
+
+.review-card {
+  width: 60%; /* Ajusta el ancho de la tarjeta */
+  margin: 20px auto; /* Centra la tarjeta */
+  text-align: left; /* Alinea el texto de las tarjetas a la izquierda */
+  font-size: 20px;
+}
