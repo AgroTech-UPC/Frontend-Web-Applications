@@ -1,9 +1,18 @@
+.view-container{
+  display: flex;
+  flex-direction: column;
+  background-color: #F5EEDC;
+  width: 100%;
+
+}
+
 .card-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: #F5EEDC;
 }
 
 .mat-card {
