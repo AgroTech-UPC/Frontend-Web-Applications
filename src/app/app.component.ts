@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { RegisterComponent } from './management/components/register/register.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 import {HeaderComponent} from "./public/components/header/header.component";

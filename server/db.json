@@ -78,9 +78,6 @@
       ]
     }
   ],
-
-
-
   "breeders": [
     {
       "id": 1,
@@ -111,59 +108,31 @@
       ]
     }
   ],
-
-
-
   "resources": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Alfalfa",
-      "type": "Alimento"
-    },
-    {
-      "id": 2,
-      "name": "Desparasitante",
-      "type": "Medicina"
-    },
-    {
-      "id": 3,
-      "name": "Perejil",
-      "type": "Alimento"
-    }
-  ],
-
-
-
-  "resource_breeder": [
-    {
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 1,
-          "name": "Alfalfa",
-          "type": "Alimento"
-        }
-      ],
+      "type": "Alimento",
+      "breeder_id": "1",
       "quantity": 25,
       "date": "2024-04-30T08:00:00Z",
       "observations": "Stock de alfalfa para cuyes"
     },
     {
+      "id": "2",
+      "name": "Excalibea",
+      "type": "Alimento",
+      "breeder_id": "1",
+      "quantity": "2",
+      "date": "12/02/2024",
+      "observations": "Ninguna"
+    }
+  ],
+  "appointments": [
+    {
+      "id": 1,
+      "breeder_id": 1,
+      "advisor_id": 1,
       "breeders": [
         {
           "id": 1,
@@ -226,118 +195,19 @@
   "appointments": [
     {
       "id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "advisors": [
-        {
-          "id": 1,
-          "occupation": "Veterinarian",
-          "experience": 5,
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRG1WxVcFjBUn9nB1zgLfr-tYL29QFd7F7tjlb38Uyg&s",
-          "rating": 4,
-          "users": [
-            {
-              "id": 1,
-              "email": "doctorVet@gmail.com",
-              "password": "miCasa123#",
-              "fullname": "Murcus Smith",
-              "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
-              "birthdate": "1990-05-15",
-              "description": "Veterinario especializado en roedores."
-            }
-          ]
-        }
-      ],
+      "breeder_id": 2,
+      "advisor_id": 2
       "date": "2024-05-08T08:00:00Z",
       "status": "Pendiente"
     },
     {
       "id": 2,
-      "breeders": [
-        {
-          "id": 2,
-          "users": [
-            {
-              "id": 4,
-              "email": "mariajose1@yahoo.es",
-              "password": "cuyitos123#",
-              "fullname": "Maria Jose Perez",
-              "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
-              "birthdate": "1997-11-30",
-              "description": "Futura experta en criadora de cuyes!!"
-            }
-          ]
-        }
-      ],
-      "advisors": [
-        {
-          "id": 1,
-          "occupation": "Veterinarian",
-          "experience": 5,
-          "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRG1WxVcFjBUn9nB1zgLfr-tYL29QFd7F7tjlb38Uyg&s",
-          "rating": 4,
-          "users": [
-            {
-              "id": 1,
-              "email": "doctorVet@gmail.com",
-              "password": "miCasa123#",
-              "fullname": "Murcus Smith",
-              "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
-              "birthdate": "1990-05-15",
-              "description": "Veterinario especializado en roedores."
-            }
-          ]
-        }
-      ],
+      "breeder_id": 2,
+      "advisor_id": 1,
       "date": "2024-05-29T10:30:00Z",
       "status": "Pendiente"
     }
   ],
-
-
-
-  "expenses": [
-    {
-      "id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "type": "Alimento",
-      "amount": 198.00,
-      "date": "2024-04-30T08:00:00Z",
-      "description": "Compra de alfalfa para cuyes"
-    }
-  ],
-
-
-
   "notifications": [
     {
       "id": 1,
@@ -354,10 +224,6 @@
       "user_id": 1
     }
   ],
-
-
-
-
   "publications": [
     {
       "id": 1,
@@ -367,6 +233,70 @@
       "date": "2024-04-30T11:10:52Z",
       "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
       "is_active": true
+    }
+  ],
+  "cages": [
+    {
+      "id": "1",
+      "name": "Jaula 35",
+      "size": "9",
+      "observations": "None"
+    },
+    {
+      "id": "63",
+      "name": "Jaula 4",
+      "size": "8.7",
+      "observations": "Falta limpiar"
+    }
+  ],
+  "cuyes": [
+    {
+      "id": "1",
+      "specie": "Cuy",
+      "weight": "1.2",
+      "name": "Cuyito",
+      "breed": "Peruano",
+      "birth": "2024-04-30",
+      "gender": "Macho",
+      "observations": "Esta sano",
+      "cage_id": "1"
+    },
+    {
+      "id": "2",
+      "specie": "Cuy",
+      "weight": "2",
+      "name": "Cuytio",
+      "breed": "Inti",
+      "birth": "21/04/2024",
+      "gender": "Hembra",
+      "observations": "Come muy poco",
+      "cage_id": "1"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "1",
+      "amount": "100",
+      "kind": "Alimento",
+      "details": "Compra de alfalfa",
+      "cuy_id": "1",
+      "date": "2024-04-30"
+    },
+    {
+      "id": "2",
+      "amount": "230",
+      "kind": "Salud",
+      "details": "",
+      "cuy_id": "1",
+      "date": "28/08/2024"
+    },
+    {
+      "id": "3",
+      "amount": "580",
+      "kind": "Mantenimiento de criadero",
+      "details": "",
+      "cuy_id": "1",
+      "date": "27/02/2024"
     }
   ]
 }

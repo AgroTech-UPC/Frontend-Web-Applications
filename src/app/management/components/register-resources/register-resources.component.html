@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="subtitle">
+    <h2>Registrar Recurso</h2>
+  </div>
+  <div class="group-inputs">
+    <mat-form-field class="form-field">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="name" name="name" required>
+    </mat-form-field>
+
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="type">
+      <h2 style="font-weight: 400">Tipo de recurso</h2>
+      <mat-radio-button value="Alimento">Alimento</mat-radio-button>
+      <mat-radio-button value="Medicina">Medicina</mat-radio-button>
+      <mat-radio-button value="Produccion">Produccion</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-form-field class="form-field">
+      <mat-label>ID del criador</mat-label>
+      <input matInput [(ngModel)]="breeder_id" name="breeder_id" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Cantidad</mat-label>
+      <input matInput [(ngModel)]="quantity" name="quantity" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Fecha</mat-label>
+      <input matInput [(ngModel)]="date" name="date" required>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Observaciones</mat-label>
+      <textarea matInput [(ngModel)]="observations" name="observations"></textarea>
+    </mat-form-field>
+  </div>
+  <div class="group-btns">
+    <button style="background-color: #DD763D; color: white;" mat-button routerLink="">Descartar</button>
+    <button style="color: white;" mat-raised-button (click)="handleClick()">Registrar</button>
+  </div>
+</div>
