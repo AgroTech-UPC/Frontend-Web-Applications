@@ -20,5 +20,10 @@ export class PublicationsApiService {
   getPublication(id: any) {
     return this.http.get<Publication>(`${this.baseUrl}/publications/${id}`);
   }
+  
+  createPublication(publication: Publication) : Observable<Publication> {
+    const url = `${this.baseUrl}/publications`;
+    return this.http.post<Publication>(url, publication);
+  }
 
 }
