@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 
-import {MyFarmViewComponent} from "./breeder/components/my-farm-view/my-farm-view.component";
-import {MyFarmResourceManagementComponent} from "./breeder/components/my-farm-resource-management/my-farm-resource-management.component"
-import {MyFarmExpensesManagementComponent} from "./breeder/components/my-farm-expenses-management/my-farm-expenses-management.component";
+import {MyFarmViewComponent} from "./management/components/my-farm-view/my-farm-view.component";
+import {MyFarmResourceManagementComponent} from "./management/components/my-farm-resource-management/my-farm-resource-management.component"
+import {MyFarmExpensesManagementComponent} from "./management/components/my-farm-expenses-management/my-farm-expenses-management.component";
 
-import {NotificationsViewComponent} from "./breeder/components/notifications-view/notifications-view.component";
+import {NotificationsViewComponent} from "./appointment/components/notifications-view/notifications-view.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'myFarm', pathMatch: 'full'},
+
   {path: 'myFarm', redirectTo: 'myFarm'},
   {path: 'myFarm', component: MyFarmViewComponent},
 

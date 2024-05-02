@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 
 import {HeaderComponent} from "../../../public/components/header/header.component";
-import {EmptyViewComponent} from "../empty-view/empty-view.component";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {FormsModule} from "@angular/forms";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 

@@ -1,4 +1,4 @@
-import { Breeder } from './breeder.model';
+import { Breeder } from '../../user/models/breeder.model';
 export interface Expense {
   id: any;
   breeders: Breeder;

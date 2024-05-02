@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {MyFarmViewComponent} from "./breeder/components/my-farm-view/my-farm-view.component";
+import {MyFarmViewComponent} from "./management/components/my-farm-view/my-farm-view.component";
 
 @Component({
   selector: 'app-root',

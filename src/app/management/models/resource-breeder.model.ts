@@ -1,5 +1,5 @@
 import { Resource } from './resource.model';
-import { Breeder } from './breeder.model';
+import { Breeder } from '../../user/models/breeder.model';
 
 export interface ResourceBreeder {
   breeders: Breeder;

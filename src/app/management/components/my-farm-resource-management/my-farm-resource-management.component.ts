@@ -11,7 +11,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 import { FormsModule } from "@angular/forms";
 import { ResourceBreederApiService } from "../../services/resource-breeder-api.service";
-import {EmptyViewComponent} from "../empty-view/empty-view.component";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {HeaderComponent} from "../../../public/components/header/header.component";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 import {MatIcon} from "@angular/material/icon";
