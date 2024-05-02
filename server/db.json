@@ -1,25 +1,68 @@
 {
-  "movies": [
+  "users": [
     {
       "id": 1,
-      "name": "El Padrino 5000",
-      "photo": "https://es.web.img3.acsta.net/pictures/18/06/12/12/12/0117051.jpg?coixp=49&coiyp=27",
-      "duration": "175 minutos",
-      "genero": "Drama, Crimen"
+      "email": "doctorVet@gmail.com",
+      "password": "miCasa123#",
+      "fullname": "Murcus Smith",
+      "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
+      "birthdate": "1990-05-15",
+      "description": "Veterinario especializado en roedores."
     },
     {
       "id": 2,
-      "name": "El Señor de los Anillos: La Comunidad del Anillo",
-      "photo": "https://wmagazin.com/wp-content/uploads/2021/08/CI-ppal-Literatura-cine-Elsenordelosanillos-cartel-1.jpg",
-      "duration": "178 minutos",
-      "genero": "Fantasía, Aventura"
+      "email": "emily22garcia@gmail.com",
+      "password": "tuRinconcito123#",
+      "fullname": "Emily Garcia",
+      "location": "012, La Molina",
+      "birthdate": "1995-08-20",
+      "description": "Zootecnista egresada de la UNALM apasiada amante de los cuyes."
+    }
+  ],
+  "advisors": [
+    {
+      "id": 1,
+      "occupation": "Veterinarian",
+      "experience": 5,
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRG1WxVcFjBUn9nB1zgLfr-tYL29QFd7F7tjlb38Uyg&s",
+      "rating": 4,
+      "user_id": 1
     },
     {
-      "id": 3,
-      "name": "Interstellar",
-      "photo": "https://m.media-amazon.com/images/S/pv-target-images/79194981293eabf6620ece96eb5a9c1fffa04d3374ae12986e0748800b37b9cf.jpg",
-      "duration": "169 minutos",
-      "genero": "Ciencia ficción, Drama"
+      "id": 2,
+      "occupation": "Zootechnician",
+      "experience": 4,
+      "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
+      "rating": 5,
+      "user_id": 2
+    }
+  ],
+  "resources": [
+    {
+      "id": 1,
+      "name": "Alfalfa",
+      "type": "Alimento"
+    },
+    {
+      "id": 2,
+      "name": "Desparasitante",
+      "type": "Medicina"
+    }
+  ],
+  "resource_breeder": [
+    {
+      "breeder_id": 1,
+      "resource_id": 1,
+      "quantity": 25,
+      "date": "2024-04-30T08:00:00Z",
+      "observations": "Stock de alfalfa para cuyes"
+    },
+    {
+      "breeder_id": 2,
+      "resource_id": 2,
+      "quantity": 30,
+      "date": "2024-04-29T10:30:00Z",
+      "observations": "Stock de desparasitante para cuyes"
     }
   ]
 }
