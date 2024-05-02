@@ -1,26 +1,29 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Notification} from "../../models/notification.model";
 import {NotificationApiService} from "../../services/notification-api.service";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 
 
 @Component({
-  selector: 'app-notifications',
+  selector: 'app-notifications-view-advisor',
   standalone: true,
   imports: [
     MatButton,
     MatCardModule,
     NgForOf,
-    DatePipe
+    DatePipe,
+    EmptyViewComponent,
+    NgIf
   ],
-  templateUrl: './notifications.component.html',
-  styleUrl: './notifications.component.css'
+  templateUrl: './notifications-view-advisor.component.html',
+  styleUrl: './notifications-view-advisor.component.css'
 })
-export class NotificationsComponent implements OnInit {
+export class NotificationsViewAdvisorComponent implements OnInit {
   results: any[] = [];
 
   constructor(private notificationsApiService: NotificationApiService, private router: Router) { }
@@ -35,7 +38,7 @@ export class NotificationsComponent implements OnInit {
 
       response.forEach((resourceData: any) => {
         // Verify if the breeder id is 1
-        if (resourceData.users[0].id === 3) {
+        if (resourceData.users[0].id === 1) {
           // Create a new date object
           const date = new Date(resourceData.date);
           // Apply the format to the date
@@ -51,6 +54,15 @@ export class NotificationsComponent implements OnInit {
       });
     }, (error) => {
       console.error(error);
+    });
+  }
+
+  deleteNotification(id: string) {
+    this.notificationsApiService.deleteItem(id).subscribe(() => {
+      console.log("Notificación eliminada con éxito.");
+      this.results = this.results.filter((notification: any) => notification.id !== id);
+    }, (error) => {
+      console.error("Error al eliminar la notificación:", error);
     });
   }
 

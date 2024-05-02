@@ -17,7 +17,7 @@ import {NotificationApiService} from "../../services/notification-api.service";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-notifications-view',
+  selector: 'app-notifications-view-advisor-view',
   standalone: true,
   imports: [
     MatRadioModule,

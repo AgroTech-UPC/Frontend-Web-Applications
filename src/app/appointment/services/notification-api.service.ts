@@ -42,7 +42,7 @@ export class NotificationApiService {
     );
   }
 
-  //Get all notifications
+  //Get all notifications-view-advisor
   getList(): Observable<Notification> {
     return this.http
       .get<Notification>(this.baseUrl + this.extraUrl)

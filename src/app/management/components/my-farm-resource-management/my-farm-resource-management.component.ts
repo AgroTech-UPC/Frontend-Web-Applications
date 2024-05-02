@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { FormsModule } from "@angular/forms";
-import { ResourceBreederApiService } from "../../services/resource-breeder-api.service";
+//import { ResourceBreederApiService } from "../../services/resource-breeder-api.service";
 import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {HeaderComponent} from "../../../public/components/header/header.component";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
@@ -76,8 +76,8 @@ export class MyFarmResourceManagementComponent implements OnInit {
     });
   }
 
-  redirectToMyFarmView() {
-    // Redirect to MyFarm view
-    this.router.navigate(['/criador/mi-granja']);
+
+  goBack() {
+    window.history.back();
   }
 }
