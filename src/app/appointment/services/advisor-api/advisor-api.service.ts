@@ -5,6 +5,9 @@ import {HttpClient} from "@angular/common/http";
 import {Advisor} from "../../models/advisor.model";
 import {AvailabeDateApiService} from "../available_date-api/availabe-date-api.service";
 
+import {Observable} from "rxjs";
+import {Appointment} from "../../models/appointment.model";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,5 +27,9 @@ export class AdvisorApiService {
 
   getAdvisorAvailableDates(advisorId: any){
     return this.availableDateApiService.getAvailableDatesByAdvisorId(advisorId);
+  }
+
+  getBreederAppointments(breederId: any): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${this.baseUrl}/breeders/${breederId}/appointments`);
   }
 }
