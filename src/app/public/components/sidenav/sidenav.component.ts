@@ -61,7 +61,7 @@ export class SidenavComponent {
       case "Mi granja":
         return "criador/mi-granja";
       case "Asesores":
-        return "criador/asesores";
+        return "criador/buscar-asesor";
       case "Mis animales":
         return "criador/mis-animales";
       case "Registro":

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
+import {environment} from "../../../../environments/environment";
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 
 //Import the notification model
-import {Notification} from "../models/notification.model";
+import {Notification} from "../../models/notification.model";
 
 @Injectable({
   providedIn: 'root'

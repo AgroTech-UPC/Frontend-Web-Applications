@@ -3,10 +3,10 @@ import {MatButton} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {NgForOf, NgIf} from "@angular/common";
 import {Notification} from "../../models/notification.model";
-import {NotificationApiService} from "../../services/notification-api.service";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
+import {NotificationApiService} from "../../services/notificaction-api/notification-api.service";
 
 
 @Component({

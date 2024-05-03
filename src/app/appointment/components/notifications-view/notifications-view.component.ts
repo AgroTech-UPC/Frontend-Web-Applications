@@ -13,8 +13,9 @@ import {SidenavComponent} from "../../../public/components/sidenav/sidenav.compo
 
 
 //Import the NotificationApiService
-import {NotificationApiService} from "../../services/notification-api.service";
+
 import { Router } from "@angular/router";
+import {NotificationApiService} from "../../services/notificaction-api/notification-api.service";
 
 @Component({
   selector: 'app-notifications-view-advisor-view',
