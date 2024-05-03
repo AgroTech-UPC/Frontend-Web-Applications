@@ -14,7 +14,7 @@ export class UserApiService {
 
   extraUrl: string = 'users/';
 
-  isBreeder: boolean = false;
+  isBreeder: boolean = true;
 
   constructor(private http:HttpClient) {
   }

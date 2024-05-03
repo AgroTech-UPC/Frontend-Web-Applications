@@ -30,6 +30,6 @@ export class AdvisorApiService {
   }
 
   getBreederAppointments(breederId: any): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/appointments?breeder_id=${breederId}`);
+    return this.http.get<Appointment[]>(`${environment.baseURL2}/appointments?breeder_id=${breederId}`);
   }
 }

@@ -9,7 +9,7 @@ import {Notification} from "../../appointment/models/notification.model";
   providedIn: 'root'
 })
 export class PublicationsApiService {
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL2;
 
   extraUrl: string = '/publications/';
 

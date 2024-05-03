@@ -55,7 +55,6 @@ export class ViewMyAdvisorsComponent implements OnInit{
     this.getMyAdvisors();
   }
 
-
   getMyAdvisors(): void {
     this.advisorApiService.getBreederAppointments(this.breederId).subscribe(appointments => {
       console.log(appointments);
@@ -68,6 +67,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
         })
       );
       forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
+        console.log(advisorHistories);
         this.advisorHistories = advisorHistories;
         this.filteredAdvisorHistories = [...advisorHistories];
       });

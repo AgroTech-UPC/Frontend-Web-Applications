@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Expense } from '../../models/expense.model';
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpenseService {
-  private expensesUrl = 'http://localhost:3000/expenses';  // URL to web api
+  private expensesUrl = `${environment.baseURL2}/expenses`;  // URL to web api
 
   constructor(private http: HttpClient) { }
 

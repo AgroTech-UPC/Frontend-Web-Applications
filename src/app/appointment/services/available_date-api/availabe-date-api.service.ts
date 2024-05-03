@@ -8,7 +8,7 @@ import {AvailableDate} from "../../models/available_date";
   providedIn: 'root'
 })
 export class AvailabeDateApiService {
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL3;
   constructor(private http: HttpClient) { }
 
   getAvailableDates(){

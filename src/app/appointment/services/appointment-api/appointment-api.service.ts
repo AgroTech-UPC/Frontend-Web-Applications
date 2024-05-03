@@ -9,7 +9,7 @@ import {map, Observable} from "rxjs";
   providedIn: 'root'
 })
 export class AppointmentApiService {
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL2;
   constructor(private http: HttpClient) { }
 
   getAppointments(){

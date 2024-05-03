@@ -11,7 +11,7 @@ import {Expense} from "../models/expense.model";
 })
 export class ExpenseApiService {
 
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL2;
 
   extraUrl: string = '/expenses/';
 

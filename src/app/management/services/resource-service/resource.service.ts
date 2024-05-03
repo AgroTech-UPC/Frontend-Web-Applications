@@ -4,12 +4,13 @@ import {Observable, of} from 'rxjs';
 import { Resource } from '../../models/resource.model';
 import {Expense} from "../../models/expense.model";
 import {catchError, map} from "rxjs/operators";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceService {
-  private resourceUrl = 'http://localhost:3000/resources';  // Asegúrate de que este puerto coincide con el que estás utilizando para json-server
+  private resourceUrl = `${environment.baseURL}/resources`;  // Asegúrate de que este puerto coincide con el que estás utilizando para json-server
 
   constructor(private http: HttpClient) { }
 

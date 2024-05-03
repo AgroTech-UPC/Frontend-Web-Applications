@@ -7,7 +7,7 @@ import { Client } from "../../models/client.model";
   providedIn: 'root'
 })
 export class ClientsApiService {
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL2;
 
   constructor(private http: HttpClient) { }
 

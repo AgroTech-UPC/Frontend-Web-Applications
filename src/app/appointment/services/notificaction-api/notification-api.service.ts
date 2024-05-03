@@ -11,7 +11,7 @@ import {Notification} from "../../models/notification.model";
 })
 export class NotificationApiService {
 
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL2;
 
   extraUrl: string = '/notifications/';
 

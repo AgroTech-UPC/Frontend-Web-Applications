@@ -11,7 +11,7 @@ import {map, switchMap} from "rxjs";
   providedIn: 'root'
 })
 export class ReviewApiService {
-  baseUrl: string = environment.baseURL;
+  baseUrl: string = environment.baseURL3;
   constructor(private http: HttpClient) { }
 
   getReviews(){
@@ -25,7 +25,7 @@ export class ReviewApiService {
     let advisorIdNumber = Number(advisorId);
     return this.http.get<Review[]>(`${this.baseUrl}/reviews`).pipe(
       switchMap(reviews => {
-        return this.http.get<Appointment[]>(`${this.baseUrl}/appointments`).pipe(
+        return this.http.get<Appointment[]>(`${environment.baseURL2}/appointments`).pipe(
           map(appointments => {
             let advisorAppointments = appointments.filter(appointment => appointment.advisor_id === advisorIdNumber);
             if (!advisorAppointments.length) {

@@ -11,7 +11,7 @@ import {Cage} from "../../models/cage.model";
   providedIn: 'root'
 })
 export class AnimalService {
-  baseURL = environment.baseURL;
+  baseURL = environment.baseURL3;
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: {
