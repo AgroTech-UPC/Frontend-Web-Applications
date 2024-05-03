@@ -62,28 +62,18 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   filterResource(): void {
     const selectedType = this.selectedResourceType;
     if (selectedType === '1') {
+      // Si el tipo seleccionado es 'Todos', mostrar todos los recursos
       this.filteredExpenses = [...this.expenses];
     } else {
+      // De lo contrario, filtra los recursos por el tipo seleccionado
       this.filteredExpenses = this.expenses.filter(resource => resource.type === this.resourceTypes[selectedType]);
     }
   }
 
   private loadExpenses() {
-    this.expenseApiService.getList().subscribe((response: any) => {
-      console.log(response);
-
-      response.forEach((resourceData: any) => {
-        // Verify if the breeder id is 1
-        if (resourceData.breeder_id === 1) {
-          this.expenses.push({
-            id: resourceData.id,
-            type: resourceData.type,
-            amount: resourceData.amount,
-          });
-        }
-      });
-    }, (error) => {
-      console.error(error);
+    this.expenseApiService.getList().subscribe((resources: any) => {
+      this.expenses = resources;
+      this.filteredExpenses = cloneDeep(this.expenses);
     });
   }
 
