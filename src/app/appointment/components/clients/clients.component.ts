@@ -41,6 +41,6 @@ export class ClientsComponent implements OnInit {
   }
 
   getAppointment(id: any) {
-    this.router.navigateByUrl(`/clientes/${id}`);
+    this.router.navigateByUrl(`/asesor/clientes/${id}`);
   }
 }

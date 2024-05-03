@@ -5,6 +5,7 @@ import {RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
+import {UserApiService} from "../../../user/services/user-api.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -44,15 +45,17 @@ export class SidenavComponent {
 
   @Input() isBreeder: boolean;
 
-  constructor() {
-    this.isBreeder = true;
+
+  constructor(private userApiService: UserApiService) {
+    this.isBreeder = this.userApiService.getIsBreeder();
   }
 
   getSidebarButtons(): string[] {
+    this.isBreeder = this.userApiService.getIsBreeder();
     if (this.isBreeder) {
       return ["Mi granja", "Asesores", "Mis animales", "Registro", "Notificaciones"];
     } else {
-      return ["Clientes", "Notificaciones", "Mis publicaciones"];
+      return ["Clientes", "Mis notificaciones", "Mis publicaciones"];
     }
   }
 
@@ -72,6 +75,8 @@ export class SidenavComponent {
         return "asesor/clientes";
       case "Mis publicaciones":
         return "asesor/mis-publicaciones";
+      case "Mis notificaciones":
+        return "asesor/notificaciones";
       default:
         return "/";
     }

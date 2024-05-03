@@ -14,7 +14,10 @@ export class UserApiService {
 
   extraUrl: string = 'users/';
 
-  constructor(private http:HttpClient) { }
+  isBreeder: boolean = false;
+
+  constructor(private http:HttpClient) {
+  }
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -50,6 +53,14 @@ export class UserApiService {
   //Get user by index
   getUser(index:any){
     return this.http.get<User>(this.baseUrl + this.extraUrl + index)
+  }
+
+  setIsBreeder(isBreeder: boolean) {
+    this.isBreeder = isBreeder;
+  }
+
+  getIsBreeder(): boolean {
+    return this.isBreeder;
   }
 
 }

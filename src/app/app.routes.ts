@@ -27,9 +27,12 @@ import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
 import {ReviewComponent} from "./appointment/components/review/review.component";
+import {LoginComponent} from "./user/components/login/login.component";
+import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'criador/mi-granja', pathMatch: 'full'},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: LoginComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
@@ -52,6 +55,7 @@ export const routes: Routes = [
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'notificaciones', component: NotificationsViewComponent},
   {path: 'asesor/clientes', component: ClientsComponent },
+  {path: 'asesor/clientes/:id', component: ClientDetailComponent},
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},

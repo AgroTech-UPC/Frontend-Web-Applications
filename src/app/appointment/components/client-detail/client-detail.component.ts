@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ClientsApiService } from "../../services/clients-api.service";
+import { ClientsApiService } from "../../services/clients-api/clients-api.service";
 import {ActivatedRoute} from "@angular/router";
 import {Client} from "../../models/client.model";
 import {MatButton} from "@angular/material/button";

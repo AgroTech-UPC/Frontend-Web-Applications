@@ -108,7 +108,7 @@
   "resources": [
     {
       "id": 1,
-      "name": "Alfafas V2 Mejorada",
+      "name": "Alfalfa",
       "type": "Alimento",
       "breeder_id": 1,
       "quantity": 2,
@@ -122,7 +122,7 @@
       "breeder_id": 1,
       "quantity": 1,
       "date": "2024-05-02",
-      "observations": "Hola"
+      "observations": "Trigo para la producción de cuyes"
     }
   ],
   "appointments": [
@@ -211,6 +211,29 @@
         }
       ],
       "date": "2024-04-30T15:30:00.000Z",
+      "status": "Pendiente"
+    },
+    {
+      "id": 4,
+      "advisor_id": 1,
+      "breeder_id": 1,
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "date": "2024-05-01T15:30:00.000Z",
       "status": "Pendiente"
     }
   ],
@@ -303,14 +326,6 @@
       "date": "2024-04-30T11:10:52Z",
       "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
       "is_active": true
-    },
-    {
-      "title": "Cuida la salud de tu cuy",
-      "description": "Estoy brindando consejos para identificar síntomas en los cuyes, así como consejos para tratarlos correctamente. Recuerda que la salud de cada cuy es esencial para tener buen control sobre la granja de cuyes.",
-      "image": "https://t2.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_orig.jpg",
-      "id": "2",
-      "advisor_id": "1",
-      "date": "2024-05-02T17:00:04Z"
     }
   ],
   "animals": [
@@ -413,6 +428,18 @@
       "appointment_id": 2,
       "rating": 5,
       "comment": "Muy buena atención, recomendado."
+    },
+    {
+      "id": 3,
+      "appointment_id": 1,
+      "comment": "muy bueno",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "appointment_id": 1,
+      "comment": "muy bueno",
+      "rating": 5
     }
   ],
   "available_dates": [
@@ -454,7 +481,7 @@
       "day": "01/05/2024",
       "start_time": "10:30",
       "end_time": "12:30",
-      "status": 1
+      "status": 0
     },
     {
       "id": 6,
