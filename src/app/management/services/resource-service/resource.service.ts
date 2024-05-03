@@ -16,9 +16,10 @@ export class ResourceService {
   addResource(resource: Resource): Observable<Resource> {
     return this.http.post<Resource>(this.resourceUrl, resource);
   }
+
   getHighestId(): Observable<number> {
     return this.http.get<Resource[]>(this.resourceUrl).pipe(
-      map(resources => Math.max(...resources.map(resource => Number(resource.breeder_id)))),
+      map(resources => Math.max(...resources.map(resource => Number(resource.id)))),
       catchError(this.handleError<number>('getHighestId', 0))
     );
   }

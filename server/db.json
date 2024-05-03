@@ -123,6 +123,15 @@
       "quantity": 1,
       "date": "2024-05-02",
       "observations": "Trigo para la producción de cuyes"
+    },
+    {
+      "id": 3,
+      "name": "hierba medicinal",
+      "type": "Medicina",
+      "breeder_id": 1,
+      "quantity": 5,
+      "date": "2024-05-01",
+      "observations": "hierba medicinal para los cuyes"
     }
   ],
   "appointments": [
@@ -233,7 +242,30 @@
           ]
         }
       ],
-      "date": "2024-05-01T15:30:00.000Z",
+      "date": "2024-04-30T15:30:00.000Z",
+      "status": "Pendiente"
+    },
+    {
+      "id": 5,
+      "advisor_id": 1,
+      "breeder_id": 1,
+      "breeders": [
+        {
+          "id": 1,
+          "users": [
+            {
+              "id": 3,
+              "email": "luchito911@gmail.com",
+              "password": "almaCuyamor94",
+              "fullname": "Luis Lopez",
+              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
+              "birthdate": "1998-02-17",
+              "description": "Principiante en la crianza de cuyes."
+            }
+          ]
+        }
+      ],
+      "date": "2024-04-30T15:30:00.000Z",
       "status": "Pendiente"
     }
   ],
@@ -245,6 +277,14 @@
       "amount": 500,
       "date": "2024-05-02",
       "details": "No seleccione"
+    },
+    {
+      "id": 2,
+      "breeder_id": 1,
+      "type": "Alimento",
+      "amount": 10,
+      "date": "2024-05-01",
+      "details": "se gastó en el almuerzo"
     }
   ],
   "notifications": [
@@ -326,6 +366,14 @@
       "date": "2024-04-30T11:10:52Z",
       "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
       "is_active": true
+    },
+    {
+      "title": "Cuida la salud de tu cuy",
+      "description": "Estoy ofreciendo consejos útiles para identificar síntomas y tratar enfermedades de cuyes. Programa tu cita conmigo para poder apoyarte",
+      "image": "https://t1.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_600.jpg",
+      "id": "2",
+      "advisor_id": "1",
+      "date": "2024-05-03T07:13:24Z"
     }
   ],
   "animals": [
@@ -336,7 +384,7 @@
       "gender": true,
       "birthdate": "2023-12-10",
       "cage_id": 1,
-      "weight": 0.75,
+      "weight": 0.8,
       "status": "Saludable",
       "observations": "Cuy macho de color marrón claro"
     },
@@ -394,6 +442,17 @@
       "weight": 2,
       "status": "Saludable",
       "observations": ""
+    },
+    {
+      "id": 7,
+      "name": "pepito",
+      "breed": "Inti",
+      "gender": "true",
+      "birthdate": "2024-05-01",
+      "cage_id": 4,
+      "weight": 0.6,
+      "status": "Saludable",
+      "observations": "Pepito es juguetón"
     }
   ],
   "cages": [
@@ -414,6 +473,12 @@
       "name": "Jaula 2",
       "size": "4",
       "observations": "Una observación"
+    },
+    {
+      "id": 4,
+      "name": "jaula M",
+      "size": "3",
+      "observations": "esta jaula tiene un hueco en la pared"
     }
   ],
   "reviews": [
@@ -432,13 +497,7 @@
     {
       "id": 3,
       "appointment_id": 1,
-      "comment": "muy bueno",
-      "rating": 5
-    },
-    {
-      "id": 4,
-      "appointment_id": 1,
-      "comment": "muy bueno",
+      "comment": "Muy bueno",
       "rating": 5
     }
   ],
@@ -465,7 +524,7 @@
       "day": "30/04/2024",
       "start_time": "10:30",
       "end_time": "12:30",
-      "status": 1
+      "status": 0
     },
     {
       "id": 4,
@@ -481,7 +540,7 @@
       "day": "01/05/2024",
       "start_time": "10:30",
       "end_time": "12:30",
-      "status": 0
+      "status": 1
     },
     {
       "id": 6,
