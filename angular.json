@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Frontend-Web-Applications": {
+    "frontend-web-applications": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -95,6 +95,23 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "frontend-web-applications:build:production",
+              "serveTarget": "frontend-web-applications:serve:production"
+            },
+            "development": {
+              "buildTarget": "frontend-web-applications:build:development",
+              "serveTarget": "frontend-web-applications:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
