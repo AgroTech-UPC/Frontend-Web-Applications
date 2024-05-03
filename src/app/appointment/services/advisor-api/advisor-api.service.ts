@@ -16,7 +16,7 @@ export class AdvisorApiService {
   constructor(
     private http: HttpClient,
     private availableDateApiService: AvailabeDateApiService
-    ) { }
+  ) { }
 
   getAdvisors(){
     return this.http.get<Advisor[]>(`${this.baseUrl}/advisors`);
@@ -30,6 +30,6 @@ export class AdvisorApiService {
   }
 
   getBreederAppointments(breederId: any): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/breeders/${breederId}/appointments`);
+    return this.http.get<Appointment[]>(`${this.baseUrl}/appointments?breeder_id=${breederId}`);
   }
 }

@@ -58,6 +58,6 @@ export class ViewAdvisorAboutusComponent {
   NavigateToReserveAppointment(): void {
     const id_criador = this.route.snapshot.paramMap.get('id_criador');
     const id_asesor = this.advisor.id;
-    this.router.navigate([`/criador/${id_criador}/asesor-info/${id_asesor}/reservar-cita`]);
+    this.router.navigate([`/criador/asesor-info/${id_asesor}/reservar-cita`]);
   }
 }

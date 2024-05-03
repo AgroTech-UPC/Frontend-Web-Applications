@@ -26,6 +26,7 @@ import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisor
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
+import {ReviewComponent} from "./appointment/components/review/review.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'criador/mi-granja', pathMatch: 'full'},
@@ -34,10 +35,11 @@ export const routes: Routes = [
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
 
 
-  {path: 'criador/:id_criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
-  {path: 'criador/:id_criador/mis-asesores', component: ViewMyAdvisorsComponent},
-  {path: 'criador/:id_criador/asesor-info/:id_asesor', component: ViewAdvisorAboutusComponent},
-  {path: 'criador/:id_criador/asesor-info/:id_asesor/reservar-cita', component: ViewReserveAppointmentComponent},
+  {path: 'criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
+  {path: 'criador/mis-asesores', component: ViewMyAdvisorsComponent},
+  {path: 'criador/asesor-info/:id_asesor', component: ViewAdvisorAboutusComponent},
+  {path: 'criador/asesor-info/:id_asesor/reservar-cita', component: ViewReserveAppointmentComponent},
+  {path: 'criador/mis-asesores/:id', component: ReviewComponent},
 
   {path: 'criador/mis-animales', component: CageListComponent},
   {path: 'criador/mis-animales/:id', component: AnimalListComponent},

@@ -42,7 +42,8 @@ import {NgForOf} from "@angular/common";
   templateUrl: './view-my-advisors.component.html',
   styleUrl: './view-my-advisors.component.css'
 })
-export class ViewMyAdvisorsComponent {
+export class ViewMyAdvisorsComponent implements OnInit{
+  breederId = 1;
   advisors: Advisor[] = [];
   advisorHistories: AdvisorHistory[] = [];
 
@@ -57,18 +58,14 @@ export class ViewMyAdvisorsComponent {
   }
 
   getMyAdvisors(): void {
-    const breederId = this.route.snapshot.paramMap.get('id_criador');
-    if (breederId === null) {
-      console.error('Breeder ID is null');
-      return;
-    }
-    this.advisorApiService.getBreederAppointments(breederId).subscribe(appointments => {
-      const breederAppointments = appointments.filter(appointment => appointment.breeder_id === +breederId);
-      const advisorIds = breederAppointments.map(appointment => appointment.advisor_id);
+    this.advisorApiService.getBreederAppointments(this.breederId).subscribe(appointments => {
+      console.log(appointments);
+      const advisorIds = appointments.map(appointment => appointment.advisor_id);
+      console.log(advisorIds);
       const advisorHistoryObservables = advisorIds.map(id =>
         forkJoin({
           advisor: this.advisorApiService.getAdvisor(id),
-          appointments: of(breederAppointments.filter(appointment => appointment.advisor_id === id))
+          appointments: of(appointments.filter(appointment => appointment.advisor_id === id))
         })
       );
       forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
@@ -79,11 +76,13 @@ export class ViewMyAdvisorsComponent {
 
   // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate([`criador/${id_criador}/buscar-asesor`]);
+    this.router.navigate([`/criador/buscar-asesor`]);
   }
   navigateToMyAdvisors() {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate([`criador/${id_criador}/mis-asesores`]);
+    this.router.navigate([`/criador/mis-asesores`]);
+  }
+
+  giveReview(id: number){
+    this.router.navigate([`/criador/mis-asesores/${id}`]);
   }
 }

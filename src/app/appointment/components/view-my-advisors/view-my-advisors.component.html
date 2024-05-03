@@ -34,7 +34,8 @@
       </mat-card-content>
 
         <mat-card-actions class="card-actions">
-          <button mat-button style="color: #ffffff" class="card-button" [disabled]="appointment.status === 'Pendiente'">Dejar Reseña</button>
+          <button mat-button style="color: #ffffff" class="card-button" (click)="giveReview(appointment.id)">Dejar Reseña</button>
+          <!--[disabled]="appointment.status === 'Pendiente'"-->
         </mat-card-actions>
       </div>
     </mat-card>

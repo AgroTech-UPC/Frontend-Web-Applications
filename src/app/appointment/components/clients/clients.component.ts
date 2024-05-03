@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { ClientsApiService } from "../../services/clients-api.service";
+
 import { Router } from "@angular/router";
 import {Client} from "../../models/client.model";
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
+import {ClientsApiService} from "../../services/clients-api/clients-api.service";
 
 @Component({
   selector: 'app-clients',

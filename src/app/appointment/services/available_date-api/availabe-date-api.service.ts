@@ -22,7 +22,8 @@ export class AvailabeDateApiService {
     return this.http.get<AvailableDate[]>(`${this.baseUrl}/available_dates?advisor_id=${advisorId}`);
   }
 
-  setStatusDate(id: any, status: any){
-    return this.http.patch<AvailableDate>(`${this.baseUrl}/available_dates/${id}`, {status: status});
+  changeAvailableDateStatus(availableDate: AvailableDate){
+    console.log(availableDate);
+    return this.http.put<AvailableDate>(`${this.baseUrl}/available_dates/${availableDate.id}`, availableDate);
   }
 }

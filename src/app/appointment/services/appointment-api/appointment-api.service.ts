@@ -3,7 +3,7 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
 import {Appointment} from "../../models/appointment.model";
-import {map} from "rxjs";
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +19,14 @@ export class AppointmentApiService {
     return this.http.get<Appointment>(`${this.baseUrl}/appointments/${id}`);
   }
 
-  getHighestId(){
+  getHighestId(): Observable<number>{
     return this.http.get<Appointment[]>(`${this.baseUrl}/appointments`).pipe(
       map(appointments => {
         let highestId = 0;
         for (let appointment of appointments) {
-          if (appointment.id > highestId) {
-            highestId = appointment.id;
+          let appointmentId = Number(appointment.id);
+          if (appointmentId > highestId) {
+            highestId = appointmentId;
           }
         }
         return highestId;

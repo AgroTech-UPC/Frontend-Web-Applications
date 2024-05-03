@@ -19,6 +19,8 @@ import {BreederApiService} from "../../services/breeder-api/breeder-api.service"
 import {Appointment} from "../../models/appointment.model";
 import {AppointmentApiService} from "../../services/appointment-api/appointment-api.service";
 
+import {AvailabeDateApiService} from "../../services/available_date-api/availabe-date-api.service";
+
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
 
 @Component({
@@ -38,20 +40,21 @@ import {NgForOf, DatePipe, NgIf} from "@angular/common";
   templateUrl: './view-reserve-appointment.component.html',
   styleUrl: './view-reserve-appointment.component.css'
 })
-export class ViewReserveAppointmentComponent {
+export class ViewReserveAppointmentComponent implements OnInit {
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
   breeder!: Breeder;
+  breeder_id = 1;
   showConfirmation: boolean = false;
   selectedDateIndex!: number;
-
+  appointmentId = 0;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private advisorApiService: AdvisorApiService,
     private breederApiService: BreederApiService,
     private appointmentApiService: AppointmentApiService,
-    private datePipe: DatePipe
+    private availableDateApiService: AvailabeDateApiService
   ){}
 
   ngOnInit(): void {
@@ -71,8 +74,7 @@ export class ViewReserveAppointmentComponent {
     });
   }
   getBreeder(): void {
-    const id = this.route.snapshot.paramMap.get('id_criador');
-    this.breederApiService.getBreeder(id).subscribe(breeder => this.breeder = breeder);
+    this.breederApiService.getBreeder(this.breeder_id).subscribe(breeder => this.breeder = breeder);
   }
 
   setSelectedDateIndex(index: number): void {
@@ -88,27 +90,23 @@ export class ViewReserveAppointmentComponent {
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
     let appointmentDate = new Date(selectedDate.day.split("/").reverse().join("-") + 'T' + selectedDate.start_time + ':00');
 
-    let advisorId = this.advisor.id;
-    let breederId = this.breeder.id;
-    let breederObj = this.breeder;
-
     this.appointmentApiService.getHighestId().subscribe(highestId => {
-      let newAppointmentId = highestId + 1;
-      let appointmentId = newAppointmentId;
-      let appointmentStatus = "Pendiente";
-
+      this.appointmentId = Number(highestId) + 1;
       let newAppointment: Appointment = {
-        id: appointmentId,
-        advisor_id: advisorId,
-        breeder_id: breederId,
-        breeders: [breederObj],
+        id: this.appointmentId,
+        advisor_id: this.advisor.id,
+        breeder_id: this.breeder.id,
+        breeders: [this.breeder],
         date: appointmentDate,
-        status: appointmentStatus
+        status: "Pendiente"
       };
 
       this.appointmentApiService.addAppointment(newAppointment).subscribe(() => {
-        console.log('Cita creada con éxito');
         this.showConfirmation = true;
+        selectedDate.status = 0;
+        this.availableDateApiService.changeAvailableDateStatus(selectedDate).subscribe(() => {
+          this.getAdvisorAvailableDates();
+        });
       });
     });
   }
@@ -120,11 +118,9 @@ export class ViewReserveAppointmentComponent {
   }
 
   goHome(): void {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate(['criador/' + id_criador + '/buscar-asesor']);
+    this.router.navigate(['criador/buscar-asesor']);
   }
   cancelar(): void{
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate(['criador/' + id_criador + '/buscar-asesor']);
+    this.router.navigate(['criador/buscar-asesor']);
   }
 }

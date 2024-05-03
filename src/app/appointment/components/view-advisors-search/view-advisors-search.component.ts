@@ -63,15 +63,12 @@ export class ViewAdvisorsSearchComponent {
 
   // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate([`criador/${id_criador}/buscar-asesor`]);
+    this.router.navigate([`criador/buscar-asesor`]);
   }
   navigateToMyAdvisors() {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate([`criador/${id_criador}/mis-asesores`]);
+    this.router.navigate([`criador/mis-asesores`]);
   }
   navigateToAdvisorInfo(id_asesor: number) {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    this.router.navigate([`criador/${id_criador}/asesor-info/${id_asesor}`]);
+    this.router.navigate([`criador/asesor-info/${id_asesor}`]);
   }
 }
