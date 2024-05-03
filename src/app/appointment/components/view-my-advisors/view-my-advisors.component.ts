@@ -45,7 +45,9 @@ import {NgForOf} from "@angular/common";
 export class ViewMyAdvisorsComponent implements OnInit{
   breederId = 1;
   advisors: Advisor[] = [];
+  searchValue = '';
   advisorHistories: AdvisorHistory[] = [];
+  filteredAdvisorHistories: AdvisorHistory[] = [];
 
   constructor(
     private advisorApiService: AdvisorApiService,
@@ -56,6 +58,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
   ngOnInit(): void {
     this.getMyAdvisors();
   }
+
 
   getMyAdvisors(): void {
     this.advisorApiService.getBreederAppointments(this.breederId).subscribe(appointments => {
@@ -70,8 +73,22 @@ export class ViewMyAdvisorsComponent implements OnInit{
       );
       forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
         this.advisorHistories = advisorHistories;
+        this.filteredAdvisorHistories = [...advisorHistories];
       });
     });
+  }
+
+  filter(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchValue = inputElement.value.replace(/[^a-zA-Z ]/g, '');
+
+    if (this.searchValue === '') {
+      this.filteredAdvisorHistories = this.advisorHistories;
+    } else {
+      this.filteredAdvisorHistories = this.advisorHistories.filter(advisorHistory =>
+        advisorHistory.advisor.users[0].fullname.toLowerCase().includes(this.searchValue.toLowerCase())
+      );
+    }
   }
 
   // BOTONES REDIRECCIONAR:
