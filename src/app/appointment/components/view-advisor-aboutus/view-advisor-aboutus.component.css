@@ -1,0 +1,44 @@
+.advisor-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: auto;
+  margin-top: 110px;
+  width: 70%;
+}
+
+.advisor-photo, .advisor-info {
+  max-width: 50%;
+  overflow: auto;
+}
+.photo{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+.advisor-photo {
+  margin-right: 20px;
+}
+
+button {
+  margin-left: 10px;
+}
+.rating span {
+  font-size: 50px;
+  color: #DD763D;
+}
+
+.title_review {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 30px;
+  color: #DD763D;
+}
+
+.review-card {
+  width: 60%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 20px;
+}
+
