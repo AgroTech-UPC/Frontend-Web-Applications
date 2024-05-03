@@ -1,18 +1,40 @@
-<h1>RESEÑA</h1>
+<div class="container" *ngIf="!isConfirmed">
+<h1><strong>RESEÑA</strong></h1>
 <div class="form">
-
   <form (submit)="onSubmit()" #cageForm = "ngForm" aria-label="formulario para reseñar a un asesor">
-    <mat-form-field>
-      <mat-label>Comentario</mat-label>
-      <input matInput placeholder="Comentario" name="reviewComment" [(ngModel)]="review.comment">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Estrellas</mat-label>
-      <input matInput type="number" placeholder="estrellas" name="reviewRating" [(ngModel)]="review.rating" required>
-    </mat-form-field>
+    <div class="form-content">
+      <div class="photo-section">
+        <img [src]="advisor.photo" alt="Foto del asesor">
+      </div>
+      <div class="info-input-section">
+        <h2>{{ advisor.users[0].fullname }}</h2>
+        <p>{{ advisor.users[0].description }}</p>
+        <mat-form-field>
+          <mat-label>Comentario</mat-label>
+          <input matInput placeholder="Comentario" name="reviewComment" [(ngModel)]="review.comment">
+        </mat-form-field>
+
+        <div>
+          <label>Estrellas</label>
+          <div class="star-rating">
+            <button *ngFor="let star of stars; index as i" (click)="onStarClick(i)">
+              <mat-icon [class.selected]="star">{{ star ? 'star' : 'star_border' }}</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="buttons">
       <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">Descartar</button>
       <button mat-raised-button color="primary" aria-label="guardar cambios" type="submit">Guardar</button>
     </div>
   </form>
+</div>
+</div>
+
+<div class="container center-content" *ngIf="isConfirmed">
+  <h1 class="title_confirmation"><strong>LA RESEÑA SE SUBIO CORRECTAMENTE</strong></h1>
+  <img src="assets/images/cuy_confirmacion_appointment.png" alt="success" class="success-image">
+  <button mat-raised-button color="primary" class="custom-button" (click)="goHome()">Volver al Inicio</button>
 </div>

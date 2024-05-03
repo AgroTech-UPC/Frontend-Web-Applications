@@ -39,4 +39,13 @@ export class ReviewApiService {
       })
     );
   }
+
+  addReview(review: Review){
+    return this.http.post<Review>(`${this.baseUrl}/reviews`, review);
+  }
+  getHighestReviewId() {
+    return this.http.get<Review[]>(`${this.baseUrl}/reviews`).pipe(
+      map(reviews => Math.max(...reviews.map(review => review.id)))
+    );
+  }
 }

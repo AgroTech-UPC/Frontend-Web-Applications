@@ -26,16 +26,12 @@
       <mat-card-content>
         <h3><strong>Ubicación:</strong> {{ myadvisor.advisor.users[0].location }}</h3>
         <h3><strong>Experiencia:</strong> {{myadvisor.advisor.experience}} años</h3>
-          <h3><strong>Fecha de la cita:</strong> {{ appointment.date }}</h3>
+          <h3><strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}</h3>
           <h3><strong>Estado de la cita:</strong> {{ appointment.status }}</h3>
-        <div class="rating">
-          <span *ngFor="let i of [].constructor(myadvisor.advisor.rating)">&#9733;</span>
-        </div>
       </mat-card-content>
 
         <mat-card-actions class="card-actions">
-          <button mat-button style="color: #ffffff" class="card-button" (click)="giveReview(appointment.id)">Dejar Reseña</button>
-          <!--[disabled]="appointment.status === 'Pendiente'"-->
+          <button mat-button style="color: #ffffff" class="card-button" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
         </mat-card-actions>
       </div>
     </mat-card>
