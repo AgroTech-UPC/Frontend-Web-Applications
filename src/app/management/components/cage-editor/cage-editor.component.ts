@@ -4,9 +4,9 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {FormsModule, NgForm} from "@angular/forms";
-import {AnimalService} from "../../services/animal-service/animal.service";
 import {Cage} from "../../models/cage.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import {CageApiService} from "../../services/cage-api.service";
 
 @Component({
   selector: 'app-cage-editor',
@@ -34,7 +34,7 @@ export class CageEditorComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private animalService: AnimalService,
+              private cageService: CageApiService,
               private snackBar: MatSnackBar) {  }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class CageEditorComponent implements OnInit {
   }
 
   getCage(id: number){
-    this.animalService.getCage(id).subscribe((data) => {
+    this.cageService.getOne(id).subscribe((data) => {
       this.cage = {
         id: data.id,
         name: data.name,
@@ -55,7 +55,7 @@ export class CageEditorComponent implements OnInit {
 
   onSubmit(){
     if(this.cageForm.form.valid){
-      this.animalService.updateCage(this.cage)
+      this.cageService.update(this.cage.id, this.cage)
         .subscribe(() => {
         this.router.navigate(['/criador/mis-animales']);
         this.snackBar.open('Jaula actualizada 🎉', '', { duration: 5000 });

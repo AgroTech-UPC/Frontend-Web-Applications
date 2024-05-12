@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormsModule, NgForm, ReactiveFormsModule} from "@angular/forms";
 import {Animal} from "../../models/animal.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AnimalService} from "../../services/animal-service/animal.service";
+import {AnimalApiService} from "../../services/animal-api.service";
 import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 
@@ -59,7 +59,7 @@ export class AnimalInformationComponent implements OnInit{
 
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private animalService: AnimalService,
+              private animalService: AnimalApiService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) { }
 
@@ -69,7 +69,7 @@ export class AnimalInformationComponent implements OnInit{
   }
 
   getAnimal() {
-    this.animalService.getAnimal(this.animalID)
+    this.animalService.getOne(this.animalID)
       .subscribe(
         (data) => {
           this.animal = data;
@@ -85,7 +85,7 @@ export class AnimalInformationComponent implements OnInit{
   onSubmit() {
     if (this.animalForm.valid) {
       this.animal.gender = this.gender === 'true';
-      this.animalService.updateAnimal(this.animal)
+      this.animalService.update(this.animalID, this.animal)
         .subscribe(
           (data) => {
             this.animal = data;
@@ -113,7 +113,7 @@ export class AnimalInformationComponent implements OnInit{
       .subscribe(result => {
       if(result) {
         this.animal.status = 'Fallecido';
-        this.animalService.updateAnimal(this.animal)
+        this.animalService.update(this.animalID, this.animal)
           .subscribe(
             (data) => {
               this.animal = data;
@@ -141,7 +141,7 @@ export class AnimalInformationComponent implements OnInit{
   deleteAnimal() {
     this.confirmMessage(this.animalID, `¿Estas seguro de querer eliminar la información del cuy ${this.animalID}?`).subscribe(result => {
       if(result) {
-        this.animalService.deleteAnimal(this.animalID).subscribe(() => {
+        this.animalService.delete(this.animalID).subscribe(() => {
           this.router.navigate([`/animales/${this.animal.cage_id}`]);
           this.snackBar.open('Información eliminada con éxito 🎉', '', {
             duration: 5000

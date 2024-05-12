@@ -11,7 +11,7 @@ import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {Animal} from "../../models/animal.model";
-import {AnimalService} from "../../services/animal-service/animal.service";
+import {CageApiService} from "../../services/cage-api.service";
 
 
 @Component({
@@ -37,7 +37,7 @@ export class RegisterCageComponent {
     observations: ''
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private cageService: CageApiService, private snackBar: MatSnackBar, private router: Router) {}
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
@@ -56,12 +56,8 @@ export class RegisterCageComponent {
   }
 
   registerCage(): void {
-    this.animalService.getHighestCageId().subscribe(highestId => {
-      this.cage.id = highestId + 1;
-      this.animalService.addCage(this.cage).subscribe();
-    });
+    this.cageService.create(this.cage).subscribe();
   }
-
   goBack() {
     window.history.back();
   }
