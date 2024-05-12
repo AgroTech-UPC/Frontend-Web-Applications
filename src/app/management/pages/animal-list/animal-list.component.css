@@ -22,33 +22,6 @@ h2{
   grid-gap: 20px;
 }
 
-.animal{
-  display: grid;
-  font-family: Inter, sans-serif;
-  grid-template-columns: 30% 70%;
-  background-color: #DD763D;
-  padding: 5px;
-  border-radius: 5px;
-  text-align: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.animal h2{
-  color: white;
-  font-size: 24px;
-}
-
-.animal p{
-  color: white;
-  font-size: 18px;
-}
-
-.animal img{
-  width: 100px;
-  margin: 0 auto;
-}
-
 .back-button {
   margin-top: 20px;
   padding: 25px 40px;
@@ -62,6 +35,3 @@ h2{
   transform: translateX(50%);
 }
 
-.deceased {
-  background-color: gray;
-}

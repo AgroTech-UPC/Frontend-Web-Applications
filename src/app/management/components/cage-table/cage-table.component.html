@@ -1,9 +1,5 @@
-<h1>JAULAS</h1>
-<div class="no-cages" *ngIf="length === 0">
-  <h2>No se han encontrado jaulas</h2>
-</div>
-<div class="tabla" *ngIf="length > 0" aria-label="tabla de jaulas">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="tabla" aria-label="tabla de jaulas">
+  <table mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
@@ -31,15 +27,14 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> Acciones </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-flat-button color="primary" aria-label="Ver animales" (click)="goToCage(element.id)" style="margin: 5px;">Ver</button>
-        <button mat-flat-button color="accent"  aria-label="Editar jaula" (click)="editCage(element.id)" style="margin: 5px;">Editar</button>
-        <button mat-flat-button color="warn" aria-label="Borrar jaula" (click)="deleteCage(element.id)" style="margin: 5px;">Borrar</button>
+        <button mat-flat-button color="primary" aria-label="Ver animales" (click)="goToCage.emit(element.id)" style="margin: 5px;">Ver</button>
+        <button mat-flat-button color="accent"  aria-label="Editar jaula" (click)="editCage.emit(element.id)" style="margin: 5px;">Editar</button>
+        <button mat-flat-button color="warn" aria-label="Borrar jaula" (click)="deleteCage.emit(element.id)" style="margin: 5px;">Borrar</button>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
-
-

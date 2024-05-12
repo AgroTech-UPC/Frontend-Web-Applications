@@ -12,10 +12,10 @@ import {MyFarmResourceManagementComponent} from "./management/components/my-farm
 import {MyFarmExpensesManagementComponent} from "./management/components/my-farm-expenses-management/my-farm-expenses-management.component";
 
 import {NotificationsViewComponent} from "./appointment/components/notifications-view/notifications-view.component";
-import {CageListComponent} from "./management/components/cage-list/cage-list.component";
-import {CageEditorComponent} from "./management/components/cage-editor/cage-editor.component";
-import {AnimalListComponent} from "./management/components/animal-list/animal-list.component";
-import {AnimalInformationComponent} from "./management/components/animal-information/animal-information.component";
+import {CageListComponent} from "./management/pages/cage-list/cage-list.component";
+import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
+import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
+import {AnimalInformationComponent} from "./management/pages/animal-information/animal-information.component";
 import {ClientsComponent} from "./appointment/components/clients/clients.component";
 import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";

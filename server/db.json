@@ -279,13 +279,13 @@
     },
     {
       "id": "2",
-      "name": "Jaula 3",
+      "name": "Jaula 2",
       "size": 3.6,
       "observations": "La jaula esta un poco oxidada"
     },
     {
       "id": 3,
-      "name": "Jaula 2",
+      "name": "Jaula 3",
       "size": "4",
       "observations": "Una observación"
     },

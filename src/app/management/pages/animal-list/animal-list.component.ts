@@ -2,10 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AnimalApiService} from "../../services/animal-api.service";
 import {Animal} from "../../models/animal.model";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {forEach} from "lodash";
+import {AnimalCardComponent} from "../../components/animal-card/animal-card.component";
 
 @Component({
   selector: 'app-animal-list',
@@ -15,7 +16,7 @@ import {forEach} from "lodash";
     NgIf,
     MatButton,
     MatIcon,
-    NgClass
+    AnimalCardComponent
   ],
   templateUrl: './animal-list.component.html',
   styleUrl: './animal-list.component.css'
@@ -38,10 +39,6 @@ export class AnimalListComponent implements OnInit{
     this.animalService.getAll().subscribe((data: any) => {
       this.animals = data.filter((animal: Animal) => animal.cage_id === this.cageID);
     });
-  }
-
-  getInformation(id: number){
-    this.router.navigate(['informacion', id], {relativeTo: this.route});
   }
 
   goBack() {

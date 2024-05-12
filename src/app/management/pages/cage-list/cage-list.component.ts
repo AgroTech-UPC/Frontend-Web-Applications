@@ -9,6 +9,7 @@ import {MatDialog } from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
+import {CageTableComponent} from "../../components/cage-table/cage-table.component";
 
 
 @Component({
@@ -18,6 +19,7 @@ import {NgIf} from "@angular/common";
     MatTableModule,
     MatButton,
     NgIf,
+    CageTableComponent,
   ],
   templateUrl: './cage-list.component.html',
   styleUrl: './cage-list.component.css'
