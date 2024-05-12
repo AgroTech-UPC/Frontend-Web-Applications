@@ -17,17 +17,17 @@ import {CageEditorComponent} from "./management/components/cage-editor/cage-edit
 import {AnimalListComponent} from "./management/components/animal-list/animal-list.component";
 import {AnimalInformationComponent} from "./management/components/animal-information/animal-information.component";
 import {ClientsComponent} from "./appointment/components/clients/clients.component";
-import {MyPublicationsComponent} from "./publication/components/my-publications/my-publications.component";
-import {NewPublicationComponent} from "./publication/components/new-publication/new-publication.component";
+import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
+import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
-import {PublicationDetailComponent} from "./publication/components/publication-detail/publication-detail.component";
+import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
 import {ReviewComponent} from "./appointment/components/review/review.component";
-import {LoginComponent} from "./user/components/login/login.component";
+import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
 export const routes: Routes = [
