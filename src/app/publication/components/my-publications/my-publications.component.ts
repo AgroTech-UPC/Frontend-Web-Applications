@@ -32,7 +32,7 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   getPublications() {
-    this.publicationsService.getPublications().subscribe((res) => {
+    this.publicationsService.getAll().subscribe((res) => {
       res.forEach((publication) => {
         let publicationData = {} as Publication;
         publicationData.id = publication.id;
@@ -54,7 +54,7 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   deletePublication(id: any) {
-    this.publicationsService.deletePublication(id).subscribe(() => {
+    this.publicationsService.delete(id).subscribe(() => {
       this.publications = this.publications.filter((publication) => publication.id !== id);
       this.snackBar.open('Publicación eliminada con éxito😎', 'Cerrar', {
         duration: 2000,

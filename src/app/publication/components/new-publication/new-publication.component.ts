@@ -40,7 +40,7 @@ export class NewPublicationComponent implements OnInit {
   }
 
   getPublications(){
-    this.publicationsService.getPublications().subscribe((response: any) => {
+    this.publicationsService.getAll().subscribe((response: any) => {
       this.dataSource = response;
     });
   }
@@ -62,7 +62,7 @@ export class NewPublicationComponent implements OnInit {
 
     console.log(this.publicationData);
 
-    this.publicationsService.createPublication(this.publicationData).subscribe(() => {
+    this.publicationsService.create(this.publicationData).subscribe(() => {
       this.snackBar.open('Publicación creada con éxito🤩', 'Cerrar', {
         duration: 5000,
       });

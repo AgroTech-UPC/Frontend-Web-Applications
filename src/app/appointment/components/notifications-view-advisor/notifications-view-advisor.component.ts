@@ -33,7 +33,7 @@ export class NotificationsViewAdvisorComponent implements OnInit {
   }
 
   getNotifications() {
-    this.notificationsApiService.getList().subscribe((response: any) => {
+    this.notificationsApiService.getAll().subscribe((response: any) => {
       console.log(response);
 
       response.forEach((resourceData: any) => {
@@ -58,7 +58,7 @@ export class NotificationsViewAdvisorComponent implements OnInit {
   }
 
   deleteNotification(id: string) {
-    this.notificationsApiService.deleteItem(id).subscribe(() => {
+    this.notificationsApiService.delete(id).subscribe(() => {
       console.log("Notificación eliminada con éxito.");
       this.results = this.results.filter((notification: any) => notification.id !== id);
     }, (error) => {

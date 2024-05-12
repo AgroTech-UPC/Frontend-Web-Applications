@@ -32,7 +32,7 @@ export class PublicationDetailComponent {
   }
 
   getAppointment(id: any) {
-    this.publicationsService.getPublication(id).subscribe((res: any) => {
+    this.publicationsService.getOne(id).subscribe((res: any) => {
       this.publication.id = res.id;
       this.publication.title = res.title;
       this.publication.description = res.description;
@@ -42,7 +42,7 @@ export class PublicationDetailComponent {
   }
 
   deletePublication(id: any) {
-    this.publicationsService.deletePublication(id).subscribe(() => {
+    this.publicationsService.delete(id).subscribe(() => {
         this.snackBar.open('Publicación eliminada con éxito😎', 'Cerrar', {
           duration: 2000,
         }).afterDismissed().subscribe(() => { this.goBack() });
