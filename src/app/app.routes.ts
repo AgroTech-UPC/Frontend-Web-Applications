@@ -36,14 +36,11 @@ export const routes: Routes = [
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
-
-
   {path: 'criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
   {path: 'criador/mis-asesores', component: ViewMyAdvisorsComponent},
-  {path: 'criador/asesor-info/:id_asesor', component: ViewAdvisorAboutusComponent},
-  {path: 'criador/asesor-info/:id_asesor/reservar-cita', component: ViewReserveAppointmentComponent},
+  {path: 'criador/asesor-info/:id', component: ViewAdvisorAboutusComponent},
+  {path: 'criador/asesor-info/:id/reservar-cita', component: ViewReserveAppointmentComponent},
   {path: 'criador/mis-asesores/:id', component: ReviewComponent},
-
   {path: 'criador/mis-animales', component: CageListComponent},
   {path: 'criador/mis-animales/:id', component: AnimalListComponent},
   {path: 'criador/mis-animales/:cageid/informacion/:id', component: AnimalInformationComponent},

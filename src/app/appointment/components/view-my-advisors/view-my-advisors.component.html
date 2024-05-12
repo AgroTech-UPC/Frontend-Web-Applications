@@ -10,30 +10,28 @@
   </mat-form-field>
 
   <div class="advisors-container">
-    <mat-card *ngFor="let myadvisor of filteredAdvisorHistories" class="mat-card">
+    <mat-card *ngFor="let advisor of filteredAdvisors" class="mat-card">
       <mat-card-header>
         <mat-card-title style="color: #DD763D">
           <h1>
-            <strong>{{ myadvisor.advisor.users[0].fullname }}</strong>
+            <strong>{{ advisorDetails[advisor.user_id]?.fullname }}</strong>
           </h1>
         </mat-card-title>
         <mat-card-subtitle>
-          <img [src]="myadvisor.advisor.photo" alt="Foto del asesor" class="photo">
+          <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
         </mat-card-subtitle>
       </mat-card-header>
-
-      <div *ngFor="let appointment of myadvisor.appointments">
       <mat-card-content>
-        <h3><strong>Ubicación:</strong> {{ myadvisor.advisor.users[0].location }}</h3>
-        <h3><strong>Experiencia:</strong> {{myadvisor.advisor.experience}} años</h3>
+        <h3><strong>Ubicación:</strong> {{ advisorDetails[advisor.user_id]?.location }}</h3>
+        <h3><strong>Experiencia:</strong> {{ advisor.experience }} años</h3>
+        <div *ngFor="let appointment of getAppointmentsByAdvisor(advisor.id)">
           <h3><strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}</h3>
           <h3><strong>Estado de la cita:</strong> {{ appointment.status }}</h3>
+          <mat-card-actions class="card-actions">
+            <button mat-button style="color: #ffffff" class="card-button" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
+          </mat-card-actions>
+        </div>
       </mat-card-content>
-
-        <mat-card-actions class="card-actions">
-          <button mat-button style="color: #ffffff" class="card-button" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
-        </mat-card-actions>
-      </div>
     </mat-card>
   </div>
 

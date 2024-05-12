@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
-
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
-//Import the expense model
-import {Expense} from "../models/expense.model";
-
-//Import the BaseService
+//Import the breeder model
+import {Advisor} from "../models/advisor.model";
 import {BaseService} from "../../shared/services/base.service";
+
 @Injectable({
   providedIn: 'root'
 })
-export class ExpenseApiService extends BaseService<Expense>{
+
+export class AdvisorApiService extends  BaseService<Advisor>{
   constructor(http: HttpClient) {
     super(http);
-    this.extraUrl = environment.expenseURL;
+    this.extraUrl = environment.advisorURL;
   }
 }

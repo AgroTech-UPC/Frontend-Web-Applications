@@ -32,12 +32,8 @@ export class PublicationDetailComponent {
   }
 
   getAppointment(id: any) {
-    this.publicationsService.getOne(id).subscribe((res: any) => {
-      this.publication.id = res.id;
-      this.publication.title = res.title;
-      this.publication.description = res.description;
-      this.publication.date = res.date;
-      this.publication.image = res.image;
+    this.publicationsService.getOne(id).subscribe((publication: Publication) => {
+      this.publication = publication;
     });
   }
 

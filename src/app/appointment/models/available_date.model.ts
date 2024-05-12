@@ -1,4 +1,4 @@
-import {Advisor} from "./advisor.model";
+import {Advisor} from "../../user/models/advisor.model";
 
 export interface AvailableDate {
   "id": number;
@@ -7,6 +7,5 @@ export interface AvailableDate {
   "end_time": any;
   "advisor_id": number;
   "status": any;
-
   "advisor": Advisor;
 }

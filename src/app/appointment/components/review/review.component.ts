@@ -8,11 +8,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 
-import {Advisor} from "../../models/advisor.model";
+import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
-import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service";
-import {AppointmentApiService} from "../../services/appointment-api/appointment-api.service";
-import {ReviewApiService} from "../../services/review-api/review-api.service";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {AppointmentApiService} from "../../services/appointment-api.service";
+import {ReviewApiService} from "../../services/review-api.service";
+import {UserApiService} from "../../../user/services/user-api.service";
 
 @Component({
   selector: 'app-review',
@@ -25,9 +26,12 @@ import {ReviewApiService} from "../../services/review-api/review-api.service";
   styleUrl: './review.component.css'
 })
 export class ReviewComponent implements OnInit {
-  breederId = 1;
   isConfirmed: boolean = false;
   advisor!: Advisor;
+  advisorDetails: any = {
+    fullname: "",
+    location: ""
+  };
   appointment!: Appointment;
 
   rating: number = 0;
@@ -43,6 +47,7 @@ export class ReviewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private advisorService: AdvisorApiService,
+    private userApiService: UserApiService,
     private appointmentService: AppointmentApiService,
     private reviewService: ReviewApiService,
     private router: Router
@@ -58,7 +63,7 @@ export class ReviewComponent implements OnInit {
   }
 
   getAppointment(appointmentId: string): void {
-    this.appointmentService.getAppointment(appointmentId).subscribe(appointment => {
+    this.appointmentService.getOne(appointmentId).subscribe(appointment => {
       this.appointment = appointment;
       this.getAdvisor();
     });
@@ -66,22 +71,24 @@ export class ReviewComponent implements OnInit {
 
   getAdvisor(): void {
     const advisorId = this.appointment.advisor_id;
-    this.advisorService.getAdvisor(advisorId).subscribe(advisor => {
+    this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
-      console.log(this.advisor)
+      this.userApiService.getOne(advisor.user_id).subscribe(user => {
+        this.advisorDetails = {
+          fullname: user.fullname,
+          location: user.location
+        };
+      });
     });
+
   }
   onSubmit() {
     this.review.rating = this.rating;
     this.review.appointment_id = this.appointment.id;
-
-    this.reviewService.getHighestReviewId().subscribe(highestId => {
-      this.review.id = highestId + 1;
-      this.reviewService.addReview(this.review).subscribe();
-      this.isConfirmed = true;
-    });
-
+    this.reviewService.create(this.review).subscribe();
+    this.isConfirmed = true;
   }
+
   goHome(){
     this.isConfirmed = false;
     this.router.navigate(['/criador/mis-asesores']);

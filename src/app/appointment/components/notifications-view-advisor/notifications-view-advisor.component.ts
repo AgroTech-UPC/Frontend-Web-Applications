@@ -6,7 +6,7 @@ import {Notification} from "../../models/notification.model";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
-import {NotificationApiService} from "../../services/notificaction-api/notification-api.service";
+import {NotificationApiService} from "../../services/notification-api.service";
 
 
 @Component({
@@ -33,21 +33,19 @@ export class NotificationsViewAdvisorComponent implements OnInit {
   }
 
   getNotifications() {
-    this.notificationsApiService.getAll().subscribe((response: any) => {
-      console.log(response);
-
-      response.forEach((resourceData: any) => {
-        // Verify if the breeder id is 1
-        if (resourceData.users[0].id === 1) {
+    this.notificationsApiService.getAll().subscribe((notifications: Notification[]) => {
+      notifications.forEach((notification: Notification) => {
+        // Verify if the user id is 1 (Hard coded)
+        if (notification.user_id === 1) {
           // Create a new date object
-          const date = new Date(resourceData.date);
+          const date = new Date(notification.date);
           // Apply the format to the date
           const formattedDate = date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
 
           this.results.push({
-            id: resourceData.id,
-            type: resourceData.type,
-            text: resourceData.text,
+            id: notification.id,
+            type: notification.type,
+            text: notification.text,
             date: formattedDate
           });
         }

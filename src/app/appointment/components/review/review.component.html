@@ -7,8 +7,8 @@
         <img [src]="advisor.photo" alt="Foto del asesor">
       </div>
       <div class="info-input-section">
-        <h2>{{ advisor.users[0].fullname }}</h2>
-        <p>{{ advisor.users[0].description }}</p>
+        <h2>{{ advisorDetails.fullname }}</h2>
+        <p>{{ advisorDetails.location }}</p>
         <mat-form-field>
           <mat-label>Comentario</mat-label>
           <input matInput placeholder="Comentario" name="reviewComment" [(ngModel)]="review.comment">
