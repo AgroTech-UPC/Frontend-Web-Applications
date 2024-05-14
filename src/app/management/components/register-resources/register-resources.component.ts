@@ -8,7 +8,7 @@ import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Resource } from '../../models/resource.model';
-import { ResourceService } from '../../services/resource-service/resource.service';
+import { ResourceApiService} from "../../services/resource-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -33,7 +33,7 @@ import { MatSelect } from '@angular/material/select';
 })
 export class RegisterResourcesComponent {
   resource: Resource = {
-    id: -1,
+    id: 0,
     name: "",
     type: "",
     breeder_id: 1,
@@ -42,7 +42,7 @@ export class RegisterResourcesComponent {
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private resourceService: ResourceService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private resourceService: ResourceApiService, private snackBar: MatSnackBar, private router: Router) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -62,10 +62,7 @@ export class RegisterResourcesComponent {
   }
 
   registerResource(): void {
-    this.resourceService.getHighestId().subscribe(highestId => {
-      this.resource.id = highestId + 1;
-      this.resourceService.addResource(this.resource).subscribe();
-    });
+    this.resourceService.create(this.resource).subscribe();
   }
 
   goBack() {

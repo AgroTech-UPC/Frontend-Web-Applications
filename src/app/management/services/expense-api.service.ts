@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, retry, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 //Import the expense model
 import {Expense} from "../models/expense.model";
+
+//Import the BaseService
+import {BaseService} from "../../shared/services/base.service";
 @Injectable({
   providedIn: 'root'
 })
+<<<<<<< HEAD
 export class ExpenseApiService {
 
   baseUrl: string = environment.baseURL2;
@@ -52,5 +55,11 @@ export class ExpenseApiService {
   //Get expense by index
   getExpense(index:any){
     return this.http.get<Expense>(this.baseUrl + this.extraUrl + index)
+=======
+export class ExpenseApiService extends BaseService<Expense>{
+  constructor(http: HttpClient) {
+    super(http);
+    this.extraUrl = environment.expenseURL;
+>>>>>>> feature/publication-view
   }
 }

@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
 import { Router } from "@angular/router";
-import {Client} from "../../models/client.model";
+
 import {NgForOf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
-import {ClientsApiService} from "../../services/clients-api/clients-api.service";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {AppointmentApiService} from "../../services/appointment-api.service";
+import {Appointment} from "../../models/appointment.model";
+import {UserApiService} from "../../../user/services/user-api.service";
+import {Client} from "../../models/client.model";
 
 @Component({
   selector: 'app-clients',
@@ -19,28 +24,47 @@ import {ClientsApiService} from "../../services/clients-api/clients-api.service"
   styleUrl: './clients.component.css'
 })
 export class ClientsComponent implements OnInit {
-  clients : Client[] = [];
+  advisor_id = 1; //hard coded
+  appointments: Appointment[] = [];
+  clients: Client[] = [];
 
-  constructor(private clientsService: ClientsApiService, private router: Router) { }
+  constructor( private userService: UserApiService,
+              private breederService: BreederApiService,
+              private appointmentService: AppointmentApiService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getAppointments();
   }
 
   getAppointments() {
-    this.clientsService.getAppointments().subscribe((res: any) => {
-      res.forEach((appointment: any) => {
-        let appointmentData = new Client();
-        appointmentData.id = appointment.id;
-        appointmentData.date = appointment.date;
-        appointmentData.status = appointment.status;
-        appointmentData.breeder_name = appointment.breeders[0].users[0].fullname;
-        this.clients.push(appointmentData);
+    this.appointmentService.getAll().subscribe(appointments => {
+      appointments.filter(appointment => appointment.advisor_id === this.advisor_id).forEach(appointment => {
+        this.appointments.push(appointment);
+      });
+      this.getClients();
+    });
+  }
+
+  getClients(){
+    this.appointments.forEach(appointment => {
+      this.breederService.getOne(appointment.breeder_id).subscribe(breeder => {
+        this.userService.getOne(breeder.user_id).subscribe(user => {
+          let client = {
+            id: breeder.id,
+            appointment_id: appointment.id,
+            fullname: user.fullname,
+            appointment_status: appointment.status,
+            location: user.location
+          }
+          this.clients.push(client);
+        });
+
       });
     });
   }
 
-  getAppointment(id: any) {
+  goToAppointment(id: any) {
     this.router.navigateByUrl(`/asesor/clientes/${id}`);
   }
 }

@@ -71,7 +71,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   }
 
   private loadExpenses() {
-    this.expenseApiService.getList().subscribe((resources: any) => {
+    this.expenseApiService.getAll().subscribe((resources: any) => {
       this.expenses = resources;
       this.filteredExpenses = cloneDeep(this.expenses);
     });

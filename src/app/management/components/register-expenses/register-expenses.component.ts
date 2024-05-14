@@ -8,7 +8,7 @@ import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Expense } from '../../models/expense.model';
-import { ExpenseService } from '../../services/expense-service/expense.service';
+import { ExpenseApiService } from "../../services/expense-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -32,14 +32,14 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 export class RegisterExpensesComponent {
   expense: Expense = {
     id: 0,
-    breeder_id: 1,
+    breeder_id: 1, // hardcoded for now
     type: "",
     amount: 0,
     date: new Date(),
     details: ""
   };
 
-  constructor(public dialog: MatDialog, private expenseService: ExpenseService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private expenseService: ExpenseApiService, private snackBar: MatSnackBar, private router: Router) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -59,10 +59,7 @@ export class RegisterExpensesComponent {
   }
 
   registerExpense(): void {
-    this.expenseService.getHighestId().subscribe(highestId => {
-      this.expense.id = highestId + 1;
-      this.expenseService.addExpense(this.expense).subscribe();
-    });
+    this.expenseService.create(this.expense).subscribe();
   }
 
   goBack() {

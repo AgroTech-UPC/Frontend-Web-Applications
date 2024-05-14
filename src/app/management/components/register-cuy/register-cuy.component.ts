@@ -8,7 +8,7 @@ import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Animal } from '../../models/animal.model';
-import { AnimalService } from '../../services/animal-service/animal.service';
+import {AnimalApiService} from "../../services/animal-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
@@ -46,7 +46,7 @@ export class RegisterCuyComponent {
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private animalService: AnimalApiService, private snackBar: MatSnackBar, private router: Router) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -57,6 +57,7 @@ export class RegisterCuyComponent {
       !this.animal.weight || !this.animal.birthdate || !this.animal.status) {
       this.openDialog();
     } else {
+      this.animal.gender = this.animal.gender === true; // required to convert the value to a boolean instead of a string
       this.registerCuy();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
         duration: 3000,
@@ -67,10 +68,7 @@ export class RegisterCuyComponent {
   }
 
   registerCuy(): void {
-    this.animalService.getHighestAnimalId().subscribe(highestId => {
-      this.animal.id = highestId + 1;
-      this.animalService.addAnimal(this.animal).subscribe();
-    });
+    this.animalService.create(this.animal).subscribe();
   }
 
   goBack() {

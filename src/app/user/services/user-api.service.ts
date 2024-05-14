@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, retry, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 //Import the user model
 import {User} from "../models/user.model";
+import {BaseService} from "../../shared/services/base.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserApiService {
-  baseUrl: string = environment.baseURL;
+export class UserApiService extends  BaseService<User>{
 
-  extraUrl: string = 'users/';
-
+<<<<<<< HEAD
   isBreeder: boolean = true;
 
   constructor(private http:HttpClient) {
@@ -53,6 +51,12 @@ export class UserApiService {
   //Get user by index
   getUser(index:any){
     return this.http.get<User>(this.baseUrl + this.extraUrl + index)
+=======
+  isBreeder: boolean = false;
+  constructor(http: HttpClient) {
+    super(http);
+    this.extraUrl = environment.userURL;
+>>>>>>> feature/publication-view
   }
 
   setIsBreeder(isBreeder: boolean) {
@@ -62,5 +66,4 @@ export class UserApiService {
   getIsBreeder(): boolean {
     return this.isBreeder;
   }
-
 }
