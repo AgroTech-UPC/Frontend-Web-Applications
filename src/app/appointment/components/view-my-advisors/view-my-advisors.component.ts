@@ -60,23 +60,6 @@ export class ViewMyAdvisorsComponent implements OnInit{
     this.getMyAdvisors();
   }
 
-<<<<<<< HEAD
-  getMyAdvisors(): void {
-    this.advisorApiService.getBreederAppointments(this.breederId).subscribe(appointments => {
-      console.log(appointments);
-      const advisorIds = appointments.map(appointment => appointment.advisor_id);
-      console.log(advisorIds);
-      const advisorHistoryObservables = advisorIds.map(id =>
-        forkJoin({
-          advisor: this.advisorApiService.getAdvisor(id),
-          appointments: of(appointments.filter(appointment => appointment.advisor_id === id))
-        })
-      );
-      forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
-        console.log(advisorHistories);
-        this.advisorHistories = advisorHistories;
-        this.filteredAdvisorHistories = [...advisorHistories];
-=======
   getAppointmentsByAdvisor(advisor_id: number): Appointment[] {
     return this.appointmentsPerAdvisor[advisor_id] || [];
   }
@@ -86,7 +69,6 @@ export class ViewMyAdvisorsComponent implements OnInit{
       this.advisors = advisors.filter(advisor => {
         let advisorAppointments = this.getAppointmentsByAdvisor(advisor.id);
         return advisorAppointments.filter(appointment => appointment.breeder_id === this.breederId);
->>>>>>> feature/publication-view
       });
       this.filteredAdvisors = [...this.advisors];
 
