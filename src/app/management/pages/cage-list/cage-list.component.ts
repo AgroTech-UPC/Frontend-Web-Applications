@@ -4,7 +4,7 @@ import {MatTableModule, MatTableDataSource} from "@angular/material/table";
 import {CageApiService} from "../../services/cage-api.service";
 import {AnimalApiService} from "../../services/animal-api.service";
 import {MatButton} from "@angular/material/button";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {MatDialog } from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import {Observable} from "rxjs";
@@ -20,6 +20,7 @@ import {CageTableComponent} from "../../components/cage-table/cage-table.compone
     MatButton,
     NgIf,
     CageTableComponent,
+    RouterLink,
   ],
   templateUrl: './cage-list.component.html',
   styleUrl: './cage-list.component.css'
