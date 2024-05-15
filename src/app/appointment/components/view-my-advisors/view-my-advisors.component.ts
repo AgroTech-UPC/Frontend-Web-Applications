@@ -3,10 +3,8 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 
-import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service";
-
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AdvisorHistory} from "../../models/advisor_history";
 import {of} from 'rxjs';
 
 import { forkJoin } from 'rxjs';
@@ -19,6 +17,10 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {NgForOf} from "@angular/common";
+import {AppointmentApiService} from "../../services/appointment-api.service";
+import {UserApiService} from "../../../user/services/user-api.service";
+import {Advisor} from "../../../user/models/advisor.model";
+import {Appointment} from "../../models/appointment.model";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -42,35 +44,50 @@ import {NgForOf} from "@angular/common";
 export class ViewMyAdvisorsComponent implements OnInit{
   breederId = 1;
   searchValue = '';
-  advisorHistories: AdvisorHistory[] = [];
-  filteredAdvisorHistories: AdvisorHistory[] = [];
+  advisors: Advisor[] = [];
+  filteredAdvisors: Advisor[] = [];
+  appointmentsPerAdvisor: Appointment[][] = []; //contains all the appointments of each advisor
+  advisorDetails: any = {};
 
   constructor(
     private advisorApiService: AdvisorApiService,
-    private router: Router,
-    private route: ActivatedRoute
+    private appointmentApiService: AppointmentApiService,
+    private userApiService: UserApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getMyAdvisors();
   }
 
+  getAppointmentsByAdvisor(advisor_id: number): Appointment[] {
+    return this.appointmentsPerAdvisor[advisor_id] || [];
+  }
+
   getMyAdvisors(): void {
-    this.advisorApiService.getBreederAppointments(this.breederId).subscribe(appointments => {
-      console.log(appointments);
-      const advisorIds = appointments.map(appointment => appointment.advisor_id);
-      console.log(advisorIds);
-      const advisorHistoryObservables = advisorIds.map(id =>
-        forkJoin({
-          advisor: this.advisorApiService.getAdvisor(id),
-          appointments: of(appointments.filter(appointment => appointment.advisor_id === id))
-        })
-      );
-      forkJoin(advisorHistoryObservables).subscribe(advisorHistories => {
-        console.log(advisorHistories);
-        this.advisorHistories = advisorHistories;
-        this.filteredAdvisorHistories = [...advisorHistories];
+    this.advisorApiService.getAll().subscribe(advisors => {
+      this.advisors = advisors.filter(advisor => {
+        let advisorAppointments = this.getAppointmentsByAdvisor(advisor.id);
+        return advisorAppointments.filter(appointment => appointment.breeder_id === this.breederId);
       });
+      this.filteredAdvisors = [...this.advisors];
+
+      this.filteredAdvisors.forEach(advisor => {
+        this.userApiService.getOne(advisor.user_id).subscribe(user => {
+          this.advisorDetails[advisor.user_id] = {
+            fullname: user.fullname,
+            location: user.location
+          };
+        });
+      });
+      //Get all appointments for each advisor in an array
+      this.appointmentApiService.getAll().subscribe(appointments => {
+        this.filteredAdvisors.forEach(advisor => {
+          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisor_id === advisor.id
+          && appointment.breeder_id === this.breederId);
+        });
+      });
+
     });
   }
 
@@ -79,10 +96,11 @@ export class ViewMyAdvisorsComponent implements OnInit{
     this.searchValue = inputElement.value.replace(/[^a-zA-Z ]/g, '');
 
     if (this.searchValue === '') {
-      this.filteredAdvisorHistories = this.advisorHistories;
+      this.filteredAdvisors = this.advisors;
     } else {
-      this.filteredAdvisorHistories = this.advisorHistories.filter(advisorHistory =>
-        advisorHistory.advisor.users[0].fullname.toLowerCase().includes(this.searchValue.toLowerCase())
+        this.filteredAdvisors = this.advisors.filter(advisor => {
+          return this.advisorDetails[advisor.user_id]?.fullname.toLowerCase().includes(this.searchValue.toLowerCase());
+        }
       );
     }
   }

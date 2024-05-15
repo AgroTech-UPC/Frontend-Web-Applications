@@ -12,22 +12,22 @@ import {MyFarmResourceManagementComponent} from "./management/components/my-farm
 import {MyFarmExpensesManagementComponent} from "./management/components/my-farm-expenses-management/my-farm-expenses-management.component";
 
 import {NotificationsViewComponent} from "./appointment/components/notifications-view/notifications-view.component";
-import {CageListComponent} from "./management/components/cage-list/cage-list.component";
-import {CageEditorComponent} from "./management/components/cage-editor/cage-editor.component";
-import {AnimalListComponent} from "./management/components/animal-list/animal-list.component";
-import {AnimalInformationComponent} from "./management/components/animal-information/animal-information.component";
+import {CageListComponent} from "./management/pages/cage-list/cage-list.component";
+import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
+import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
+import {AnimalInformationComponent} from "./management/pages/animal-information/animal-information.component";
 import {ClientsComponent} from "./appointment/components/clients/clients.component";
-import {MyPublicationsComponent} from "./publication/components/my-publications/my-publications.component";
-import {NewPublicationComponent} from "./publication/components/new-publication/new-publication.component";
+import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
+import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
-import {PublicationDetailComponent} from "./publication/components/publication-detail/publication-detail.component";
+import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
 import {ReviewComponent} from "./appointment/components/review/review.component";
-import {LoginComponent} from "./user/components/login/login.component";
+import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
 export const routes: Routes = [
@@ -36,14 +36,11 @@ export const routes: Routes = [
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
-
-
   {path: 'criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
   {path: 'criador/mis-asesores', component: ViewMyAdvisorsComponent},
-  {path: 'criador/asesor-info/:id_asesor', component: ViewAdvisorAboutusComponent},
-  {path: 'criador/asesor-info/:id_asesor/reservar-cita', component: ViewReserveAppointmentComponent},
+  {path: 'criador/asesor-info/:id', component: ViewAdvisorAboutusComponent},
+  {path: 'criador/asesor-info/:id/reservar-cita', component: ViewReserveAppointmentComponent},
   {path: 'criador/mis-asesores/:id', component: ReviewComponent},
-
   {path: 'criador/mis-animales', component: CageListComponent},
   {path: 'criador/mis-animales/:id', component: AnimalListComponent},
   {path: 'criador/mis-animales/:cageid/informacion/:id', component: AnimalInformationComponent},

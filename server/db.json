@@ -44,17 +44,7 @@
       "experience": 5,
       "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRG1WxVcFjBUn9nB1zgLfr-tYL29QFd7F7tjlb38Uyg&s",
       "rating": 4,
-      "users": [
-        {
-          "id": 1,
-          "email": "doctorVet@gmail.com",
-          "password": "miCasa123#",
-          "fullname": "Marcus Smith",
-          "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
-          "birthdate": "1990-05-15",
-          "description": "Veterinario especializado en roedores."
-        }
-      ]
+      "user_id": 1
     },
     {
       "id": 2,
@@ -62,47 +52,17 @@
       "experience": 4,
       "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
       "rating": 5,
-      "users": [
-        {
-          "id": 2,
-          "email": "emily22garcia@gmail.com",
-          "password": "tuRinconcito123#",
-          "fullname": "Emily Garcia",
-          "location": "012, La Molina",
-          "birthdate": "1995-08-20",
-          "description": "Zootecnista egresada de la UNALM apasiada amante de los cuyes."
-        }
-      ]
+      "user_id": 2
     }
   ],
   "breeders": [
     {
       "id": 1,
-      "users": [
-        {
-          "id": 3,
-          "email": "luchito911@gmail.com",
-          "password": "almaCuyamor94",
-          "fullname": "Luis Lopez",
-          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-          "birthdate": "1998-02-17",
-          "description": "Principiante en la crianza de cuyes."
-        }
-      ]
+      "user_id": 3
     },
     {
       "id": 2,
-      "users": [
-        {
-          "id": 4,
-          "email": "mariajose1@yahoo.es",
-          "password": "cuyitos123#",
-          "fullname": "Maria Jose Perez",
-          "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
-          "birthdate": "1997-11-30",
-          "description": "Futura experta en criadora de cuyes!!"
-        }
-      ]
+      "user_id": 4
     }
   ],
   "resources": [
@@ -139,86 +99,20 @@
       "id": 1,
       "breeder_id": 1,
       "advisor_id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 2,
-          "name": "Desparasitante",
-          "type": "Medicina"
-        }
-      ],
-      "quantity": 30,
       "date": "2024-04-29T10:30:00Z",
-      "observations": "Stock de desparasitante para cuyes",
       "status": "Terminado"
     },
     {
       "id": 2,
       "breeder_id": 1,
       "advisor_id": 2,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "resources": [
-        {
-          "id": 3,
-          "name": "Perejil",
-          "type": "Alimento"
-        }
-      ],
-      "quantity": 14,
       "date": "2024-02-30T08:00:00Z",
-      "observations": "Stock de perejil para cuyes",
       "status": "Pendiente"
     },
     {
       "id": 3,
       "advisor_id": 1,
       "breeder_id": 2,
-      "breeders": [
-        {
-          "id": 2,
-          "users": [
-            {
-              "id": 4,
-              "email": "mariajose1@yahoo.es",
-              "password": "cuyitos123#",
-              "fullname": "Maria Jose Perez",
-              "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
-              "birthdate": "1997-11-30",
-              "description": "Futura experta en criadora de cuyes!!"
-            }
-          ]
-        }
-      ],
       "date": "2024-04-30T15:30:00.000Z",
       "status": "Pendiente"
     },
@@ -226,46 +120,7 @@
       "id": 4,
       "advisor_id": 1,
       "breeder_id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "date": "2024-04-30T15:30:00.000Z",
-      "status": "Pendiente"
-    },
-    {
-      "id": 5,
-      "advisor_id": 1,
-      "breeder_id": 1,
-      "breeders": [
-        {
-          "id": 1,
-          "users": [
-            {
-              "id": 3,
-              "email": "luchito911@gmail.com",
-              "password": "almaCuyamor94",
-              "fullname": "Luis Lopez",
-              "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-              "birthdate": "1998-02-17",
-              "description": "Principiante en la crianza de cuyes."
-            }
-          ]
-        }
-      ],
-      "date": "2024-04-30T15:30:00.000Z",
+      "date": "2024-05-01T15:30:00.000Z",
       "status": "Pendiente"
     }
   ],
@@ -293,68 +148,28 @@
       "type": "Cita",
       "text": "Tienes un asesoramiento programado con Marcus Smith",
       "date": "2024-05-03T17:00:00Z",
-      "users": [
-        {
-          "id": 3,
-          "email": "luchito911@gmail.com",
-          "password": "almaCuyamor94",
-          "fullname": "Luis Lopez",
-          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-          "birthdate": "1998-02-17",
-          "description": "Principiante en la crianza de cuyes."
-        }
-      ]
+      "user_id": 3
     },
     {
       "id": 2,
       "type": "Cita",
       "text": "Tienes un asesoramiento programado con Marcus Smith",
       "date": "2024-05-06T19:00:00Z",
-      "users": [
-        {
-          "id": 3,
-          "email": "luchito911@gmail.com",
-          "password": "almaCuyamor94",
-          "fullname": "Luis Lopez",
-          "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
-          "birthdate": "1998-02-17",
-          "description": "Principiante en la crianza de cuyes."
-        }
-      ]
+      "user_id": 3
     },
     {
       "id": 3,
       "type": "Cita",
       "text": "Tienes un asesoramiento programado a ofrecer para Luis Lopez",
       "date": "2024-05-06T19:00:00Z",
-      "users": [
-        {
-          "id": 1,
-          "email": "doctorVet@gmail.com",
-          "password": "miCasa123#",
-          "fullname": "Marcus Smith",
-          "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
-          "birthdate": "1990-05-15",
-          "description": "Veterinario especializado en roedores."
-        }
-      ]
+      "user_id": 1
     },
     {
       "id": 4,
       "type": "Cita",
       "text": "Tienes un asesoramiento programado a ofrecer para Maria Jose Perez",
       "date": "2024-05-06T19:00:00Z",
-      "users": [
-        {
-          "id": 1,
-          "email": "doctorVet@gmail.com",
-          "password": "miCasa123#",
-          "fullname": "Marcus Smith",
-          "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
-          "birthdate": "1990-05-15",
-          "description": "Veterinario especializado en roedores."
-        }
-      ]
+      "user_id": 1
     }
   ],
   "publications": [
@@ -425,7 +240,7 @@
       "id": 5,
       "name": "Chispa",
       "breed": "Inti",
-      "gender": "false",
+      "gender": false,
       "birthdate": "2023-04-11",
       "cage_id": 1,
       "weight": 100,
@@ -436,7 +251,7 @@
       "id": 6,
       "name": "Pepito",
       "breed": "Kuri",
-      "gender": "true",
+      "gender": true,
       "birthdate": "2024-04-02",
       "cage_id": 2,
       "weight": 2,
@@ -447,7 +262,7 @@
       "id": 7,
       "name": "pepito",
       "breed": "Inti",
-      "gender": "true",
+      "gender": true,
       "birthdate": "2024-05-01",
       "cage_id": 4,
       "weight": 0.6,
@@ -464,13 +279,13 @@
     },
     {
       "id": "2",
-      "name": "Jaula 3",
+      "name": "Jaula 2",
       "size": 3.6,
       "observations": "La jaula esta un poco oxidada"
     },
     {
       "id": 3,
-      "name": "Jaula 2",
+      "name": "Jaula 3",
       "size": "4",
       "observations": "Una observación"
     },
@@ -496,7 +311,7 @@
     },
     {
       "id": 3,
-      "appointment_id": 1,
+      "appointment_id": 3,
       "comment": "Muy bueno",
       "rating": 5
     }

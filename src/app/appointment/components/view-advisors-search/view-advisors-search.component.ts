@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 
 import {MatCardModule} from "@angular/material/card";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -8,8 +8,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {NgForOf} from "@angular/common";
 
-import {Advisor} from "../../models/advisor.model";
-import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service";
+import {Advisor} from "../../../user/models/advisor.model";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {UserApiService} from "../../../user/services/user-api.service";
 
 
 @Component({
@@ -22,16 +23,33 @@ import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service"
   templateUrl: './view-advisors-search.component.html',
   styleUrl: './view-advisors-search.component.css'
 })
-export class ViewAdvisorsSearchComponent {
+export class ViewAdvisorsSearchComponent implements OnInit{
   advisors: Advisor[] = [];
+  advisorDetails: any = {};
   constructor(
     private advisorApiService: AdvisorApiService,
-    private router: Router,
-    private route: ActivatedRoute
+    private userApiService: UserApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.getAdvisors();
+  }
+
+  getAdvisors(){
+    this.advisorApiService.getAll().subscribe(advisors => {
+      this.advisors = advisors;
+      //get fullname and location
+      this.advisors.forEach(advisor => {
+        this.userApiService.getOne(advisor.user_id).subscribe(user => {
+          this.advisorDetails[advisor.user_id] = {
+            fullname: user.fullname,
+            location: user.location
+          };
+        });
+      });
+
+    });
   }
 
   filter(event: Event){
@@ -41,9 +59,9 @@ export class ViewAdvisorsSearchComponent {
     if (filteredValue === '') {
       this.getAdvisors();
     } else {
-      this.advisorApiService.getAdvisors().subscribe(res => {
+      this.advisorApiService.getAll().subscribe(res => {
           this.advisors = res.filter(advisor =>
-            advisor.users[0].fullname.toLowerCase().startsWith(filteredValue.toLowerCase())
+            this.advisorDetails[advisor.user_id]?.fullname.toLowerCase().startsWith(filteredValue.toLowerCase())
           );
         },
         error => {
@@ -52,14 +70,6 @@ export class ViewAdvisorsSearchComponent {
     }
   }
 
-  getAdvisors(){
-    this.advisorApiService.getAdvisors().subscribe(res => {
-        this.advisors = res;
-        },
-      error => {
-        console.log(error);
-      });
-  }
 
   // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {

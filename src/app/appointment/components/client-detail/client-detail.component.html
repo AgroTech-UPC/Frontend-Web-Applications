@@ -2,14 +2,14 @@
   <div class="card">
     <mat-card aria-label="Información de cita con cliente">
       <mat-card-header>
-        <mat-card-title>Cliente {{client.id }}</mat-card-title>
+        <mat-card-title>Cliente {{ client.id }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <ul>
-          <li>Nombre: {{client.breeder_name}}</li>
-          <li>Estado de asesoría: {{client.status}}</li>
-          <li>Fecha programada de cita: {{client.date | date:'dd/MM/yyyy'}}</li>
-          <li>Hora programada de cita: {{client.date | date:'HH:mm'}}</li>
+          <li>Nombre: {{client.fullname}}</li>
+          <li>Estado de asesoría: {{client.appointment_status}}</li>
+          <li>Fecha programada de cita: {{appointment.date | date:'dd/MM/yyyy'}}</li>
+          <li>Hora programada de cita: {{appointment.date | date:'HH:mm'}}</li>
           <li>Ubicación: {{client.location}}</li>
         </ul>
       </mat-card-content>
