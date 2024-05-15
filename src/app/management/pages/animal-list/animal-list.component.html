@@ -3,13 +3,17 @@
   <h2>No se han encontrado animales</h2>
 </div>
 <div class="animals">
-    <animal-card *ngFor="let animal of animals" [animal]="animal"></animal-card>
+  <animal-card *ngFor="let animal of animals" [animal]="animal"></animal-card>
 </div>
 
-<div class="back">
-  <button mat-raised-button color="warn" aria-label="Boton de retroceso" (click)="goBack()" class="back-button">
+
+<div class="back" style="display: flex; justify-content: center; align-items: center;">
+  <button style="height: 50px; margin-right: 25px;" mat-raised-button color="warn" aria-label="Boton de retroceso" (click)="goBack()" class="back-button">
     <mat-icon aria-label="flecha de retroceso">arrow_back</mat-icon>
     Volver
   </button>
-</div>
 
+  <button mat-raised-button style="margin-bottom: -17px;height: 50px; font-size: 2em; background-color: #DD763D; color: white;" routerLink="/criador/registro/animal">
+    Nuevo cuy
+  </button>
+</div>

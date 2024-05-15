@@ -14,7 +14,7 @@ import {EmptyViewComponent} from "../../../public/components/empty-view/empty-vi
 import {HeaderComponent} from "../../../public/components/header/header.component";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 import {MatIcon} from "@angular/material/icon";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ResourceApiService} from "../../services/resource-api.service";
 
 @Component({
@@ -30,7 +30,8 @@ import {ResourceApiService} from "../../services/resource-api.service";
     EmptyViewComponent,
     HeaderComponent,
     SidenavComponent,
-    MatIcon
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './my-farm-resource-management.component.html',
   styleUrl: './my-farm-resource-management.component.css'

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {AnimalApiService} from "../../services/animal-api.service";
 import {Animal} from "../../models/animal.model";
 import {NgForOf, NgIf} from "@angular/common";
@@ -16,7 +16,8 @@ import {AnimalCardComponent} from "../../components/animal-card/animal-card.comp
     NgIf,
     MatButton,
     MatIcon,
-    AnimalCardComponent
+    AnimalCardComponent,
+    RouterLink
   ],
   templateUrl: './animal-list.component.html',
   styleUrl: './animal-list.component.css'

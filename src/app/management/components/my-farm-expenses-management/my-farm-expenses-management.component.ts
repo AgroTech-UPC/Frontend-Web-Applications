@@ -17,7 +17,7 @@ import { SidenavComponent } from "../../../public/components/sidenav/sidenav.com
 
 // Import the ResourceBreederApiService
 import { ExpenseApiService } from "../../services/expense-api.service";
-import { Router } from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-my-farm-expenses-management',
@@ -32,7 +32,8 @@ import { Router } from "@angular/router";
     EmptyViewComponent,
     HeaderComponent,
     SidenavComponent,
-    MatIconModule
+    MatIconModule,
+    RouterLink
   ],
   templateUrl: './my-farm-expenses-management.component.html',
   styleUrls: ['./my-farm-expenses-management.component.css']
