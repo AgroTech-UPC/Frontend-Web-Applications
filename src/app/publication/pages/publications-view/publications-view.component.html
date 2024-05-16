@@ -1,3 +1,7 @@
 <main>
-<p>publications-view works!</p>
+  <div class="publications">
+    <div class="card" *ngFor="let publication of publications" aria-label="Publicaciones registradas por asesor">
+      <publication-readonly-card [publication]="publication"></publication-readonly-card>
+    </div>
+  </div>
 </main>
