@@ -53,7 +53,7 @@ export class SidenavComponent {
   getSidebarButtons(): string[] {
     this.isBreeder = this.userApiService.getIsBreeder();
     if (this.isBreeder) {
-      return ["Mi granja", "Asesores", "Mis animales", "Registro", "Notificaciones"];
+      return ["Mi granja", "Asesores", "Mis animales", "Registro", "Publicaciones", "Notificaciones"];
     } else {
       return ["Clientes", "Mis notificaciones", "Mis publicaciones"];
     }
@@ -69,6 +69,8 @@ export class SidenavComponent {
         return "criador/mis-animales";
       case "Registro":
         return "criador/registro";
+      case "Publicaciones":
+        return "criador/publicaciones";
       case "Notificaciones":
         return "notificaciones";
       case "Clientes":

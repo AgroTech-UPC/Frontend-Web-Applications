@@ -21,6 +21,7 @@ import {MyPublicationsComponent} from "./publication/pages/my-publications/my-pu
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
+import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
@@ -50,6 +51,7 @@ export const routes: Routes = [
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
   {path: 'criador/registro/animal', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
+  {path: 'criador/publicaciones', component: PublicationsViewComponent},
   {path: 'notificaciones', component: NotificationsViewComponent},
   {path: 'asesor/clientes', component: ClientsComponent },
   {path: 'asesor/clientes/:id', component: ClientDetailComponent},
