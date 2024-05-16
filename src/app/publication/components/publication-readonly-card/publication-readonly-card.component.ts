@@ -3,6 +3,7 @@ import {Publication} from "../../models/publication.model";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'publication-readonly-card',
@@ -18,6 +19,9 @@ import {DatePipe} from "@angular/common";
 export class PublicationReadonlyCardComponent {
   @Input() publication !: Publication;
 
+  constructor(private router: Router) { }
 
-  constructor() { }
+  goToAdvisor() {
+    this.router.navigate(['/criador/asesor-info/' + this.publication.advisor_id]);
+  }
 }
