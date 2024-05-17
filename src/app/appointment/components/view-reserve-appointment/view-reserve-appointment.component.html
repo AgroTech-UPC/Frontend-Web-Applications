@@ -28,3 +28,14 @@
   <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
   <button mat-raised-button color="primary" class="custom-button" (click)="createAppointment()">Reservar</button>
 </div>
+
+<div class="overlay" *ngIf="showConfirmation">
+  <mat-card>
+    <div class="confirmation-card">
+      <h1><strong> Cita Reservada con Éxito</strong></h1>
+      <img src="/assets/images/cuy_confirmacion_appointment.png" alt="Imagen Deco" class="confirmation-image">
+      <h2>Su asesor se contactara con usted en breve</h2>
+      <button mat-raised-button style="background-color: #DD763D; color: white" (click)="goHome()">Volver al Inicio</button>
+    </div>
+  </mat-card>
+</div>
