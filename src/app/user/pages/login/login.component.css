@@ -1,10 +1,78 @@
-main {
-  margin-top: 100px;
+.container{
+  margin-top: 64px;
+  height: calc(100vh - 64px);
+
   display: flex;
   justify-content: center;
-
+  align-items: center;
 }
 
-button {
-  margin-left: 20px;
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 16px;
+  border-radius: 25px;
+}
+
+mat-card-title{
+  font-size: 32px;
+  margin: 36px 0;
+}
+
+.form-login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 400px;
+}
+
+.email, .password{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.password{
+  margin-bottom: 36px;
+}
+
+.password p{
+  width: 80%;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.password p:hover{
+  color: #DD763D;
+}
+
+mat-form-field{
+  width: 80%;
+  --mdc-outlined-text-field-focus-outline-color: #7ec306;
+  --mdc-outlined-text-field-focus-label-text-color: #7ec306;
+}
+
+button{
+  width: 60%;
+  height: 40px;
+  margin-bottom: 12px;
+}
+
+button:enabled{
+  background-color: #DC763C;
+  color: white;
+}
+
+.register{
+  cursor: pointer;
+}
+
+.register:hover{
+  color: #DC763C;
 }
