@@ -23,6 +23,7 @@
         <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Acceder</button>
         <p class="register">¿No tienes una cuenta? <u>Regístrate</u></p>
       </form>
+      <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
     </mat-card-content>
   </mat-card>
 </div>

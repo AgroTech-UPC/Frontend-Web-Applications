@@ -77,6 +77,11 @@ button:enabled{
   color: #DC763C;
 }
 
+.error-message{
+  color: red;
+  text-align: center;
+}
+
 @media screen and (max-width: 550px){
   .card{
     width: 100%;
@@ -92,10 +97,12 @@ button:enabled{
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding: 0;
   }
 
   mat-card-content{
     width: 100%;
+    padding: 0;
   }
 
   .form-login{
