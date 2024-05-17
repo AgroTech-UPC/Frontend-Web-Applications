@@ -54,10 +54,25 @@ button {
 }
 
 .review-card {
+  border: 2px solid;
+  border-image-source: linear-gradient(to right, orange, rgba(240, 218, 139, 94), orange);
+  border-image-slice: 1;
   width: 45%;
   margin: 20px auto;
   text-align: left;
   font-size: 20px;
+}
+
+.card-content {
+  display: flex;
+  align-items: center;
+}
+
+.card-image {
+  padding-left: 20px;
+  border-radius: 50%;
+  width: 70px;
+  height: 50px;
 }
 
 .card-icon {

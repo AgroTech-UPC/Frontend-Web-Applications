@@ -43,17 +43,22 @@
 
   <div class="reviews" *ngFor="let review of reviews">
     <mat-card class="review-card">
-      <mat-card-header>
-        <mat-card-title>
-          <h2 style="color: #DD763D; font-size: 50px;" class="rating">
-            <span *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
-          </h2>
-        </mat-card-title>
-      </mat-card-header>
+      <div class="card-content">
+        <img src="/assets/images/cuy-reseñas-asesor.jpg" alt="Imagen de la reseña" class="card-image">
+        <div class="info-container">
+          <mat-card-header>
+            <mat-card-title>
+              <h2 style="color: #DD763D; font-size: 50px;" class="rating">
+                <span *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+              </h2>
+            </mat-card-title>
+          </mat-card-header>
 
-      <mat-card-content>
-        <p>{{ review.comment }}</p>
-      </mat-card-content>
+          <mat-card-content>
+            <p>{{ review.comment }}</p>
+          </mat-card-content>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>
