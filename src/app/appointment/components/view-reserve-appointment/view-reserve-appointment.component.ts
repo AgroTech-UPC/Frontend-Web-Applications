@@ -41,11 +41,13 @@ import {NgForOf, DatePipe, NgIf} from "@angular/common";
   styleUrl: './view-reserve-appointment.component.css'
 })
 export class ViewReserveAppointmentComponent implements OnInit {
+  showMessage = false;
+  showConfirmation: boolean = false;
+
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
   breeder!: Breeder;
   breeder_id = 1; //hard coded
-  showConfirmation: boolean = false;
   selectedDateIndex!: number;
   appointmentId = 0;
   constructor(
