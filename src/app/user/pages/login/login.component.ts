@@ -74,12 +74,14 @@ export class LoginComponent implements OnInit {
           const breeder = data.find(breeder => breeder.user_id === user.id);
           if (breeder) {
             this.userApiService.setIsBreeder(true);
+            this.breederApiService.setBreederId(breeder.id);
             this.router.navigateByUrl('/criador/mi-granja');
           } else {
             this.advisorApiService.getAll().subscribe((data) => {
               const advisor = data.find(advisor => advisor.user_id === user.id);
               if (advisor) {
                 this.userApiService.setIsBreeder(false);
+                this.advisorApiService.setAdvisorId(advisor.id);
                 this.router.navigateByUrl('/asesor/clientes');
               }
             });

@@ -15,4 +15,18 @@ export class AdvisorApiService extends  BaseService<Advisor>{
     super(http);
     this.extraUrl = environment.advisorURL;
   }
+
+  setAdvisorId(advisor_id: number) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('advisor_id', advisor_id.toString());
+    }
+  }
+
+  getAdvisorId(): number {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const advisor_id = localStorage.getItem('advisor_id');
+      return advisor_id ? parseInt(advisor_id) : 0;
+    }
+    return 0;
+  }
 }

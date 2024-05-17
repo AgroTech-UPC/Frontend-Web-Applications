@@ -10,16 +10,12 @@ import {BaseService} from "../../shared/services/base.service";
   providedIn: 'root'
 })
 export class UserApiService extends  BaseService<User>{
-  isBreeder: boolean = false;
-  logged: boolean = false;
-
   constructor(http: HttpClient) {
     super(http);
     this.extraUrl = environment.userURL;
   }
 
   setLogged(isLogged: boolean){
-    this.logged = isLogged;
     // Check if the window object is defined (prevent error from server side rendering)
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.setItem('isLogged', String(isLogged));
@@ -35,7 +31,6 @@ export class UserApiService extends  BaseService<User>{
   }
 
   setIsBreeder(isBreeder: boolean) {
-    this.isBreeder = isBreeder;
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.setItem('isBreeder', String(isBreeder));
     }
