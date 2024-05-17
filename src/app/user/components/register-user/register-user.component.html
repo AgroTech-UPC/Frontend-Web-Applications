@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-card class="register-user" aria-label="Container for register user form">
+    <h1 class="title">Regístrate</h1>
+    <mat-card-content>
+      <p>Para empezar, ¿eres un criador o un asesor?</p>
+      <ul>
+        <li>Criador: Persona que necesita ayuda para gestionar su granja de cuyes.</li>
+        <li>Asesor: Persona que brinda asesoría a criadores de cuyes.</li>
+      </ul>
+      <div class="buttons">
+        <button mat-raised-button type="button" color="warn" (click)="registerBreeder()">Criador</button>
+        <button mat-raised-button type="button" color="primary" (click)="registerAdvisor()">Asesor</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
