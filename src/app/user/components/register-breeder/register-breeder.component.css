@@ -1,0 +1,13 @@
+
+.register-user {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-user mat-form-field {
+  width: 100%;
+}
+
+.register-user input {
+  width: 100%;
+}
