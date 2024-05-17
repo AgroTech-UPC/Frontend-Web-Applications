@@ -30,10 +30,16 @@ import {ViewReserveAppointmentComponent} from "./appointment/components/view-res
 import {ReviewComponent} from "./appointment/components/review/review.component";
 import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
+import {SignupComponent} from "./user/pages/signup/signup.component";
+import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
+import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: LoginComponent},
+  {path: 'registro', component: SignupComponent},
+  {path: 'registro/criador', component: SignupBreederComponent},
+  {path: 'registro/asesor', component: SignupAdvisorComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
