@@ -30,10 +30,14 @@ import {ViewReserveAppointmentComponent} from "./appointment/components/view-res
 import {ReviewComponent} from "./appointment/components/review/review.component";
 import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
+import {RecoveryComponent} from "./user/pages/recovery/recovery.component";
+import {ResetComponent} from "./user/pages/reset/reset.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'login/recuperacion', component: RecoveryComponent},
+  {path: 'login/recuperacion/:id', component: ResetComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},

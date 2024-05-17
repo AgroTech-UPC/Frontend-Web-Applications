@@ -18,10 +18,10 @@
             <input matInput type="password" formControlName="password">
             <mat-error>Introduce tu contraseña</mat-error>
           </mat-form-field>
-          <p>¿Olvidaste tu contraseña?</p>
+          <p><a routerLink="/login/recuperacion">¿Olvidaste tu contraseña?</a></p>
         </div>
         <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Acceder</button>
-        <p class="register">¿No tienes una cuenta? <u>Regístrate</u></p>
+        <p><a routerLink="/register">¿No tienes una cuenta? Regístrate</a></p>
       </form>
       <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
     </mat-card-content>
