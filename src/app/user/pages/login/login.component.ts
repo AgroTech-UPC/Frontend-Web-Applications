@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   user = new User();
   errorMessage: string | null = null;
+  loginAttempts: number = 0;
 
   constructor(private userApiService: UserApiService,
               private breederApiService: BreederApiService,
@@ -53,6 +54,13 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    if (this.loginAttempts > 3) {
+      this.errorMessage = "Has alcanzado el límite de intentos de inicio de sesión. Por favor, inténtalo más tarde.";
+      return;
+    }
+    
+    this.loginAttempts++;
+
     this.userApiService.getAll().subscribe((data) => {
       const user = data.find(user => user.email === this.loginForm.value.email);
       if (!user) {
