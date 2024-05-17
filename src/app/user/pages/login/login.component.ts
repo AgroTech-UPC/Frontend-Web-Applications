@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
       this.errorMessage = "Has alcanzado el límite de intentos de inicio de sesión. Por favor, inténtalo más tarde.";
       return;
     }
-    
+
     this.loginAttempts++;
 
     this.userApiService.getAll().subscribe((data) => {
