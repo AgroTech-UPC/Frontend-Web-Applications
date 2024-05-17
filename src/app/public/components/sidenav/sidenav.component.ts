@@ -6,6 +6,8 @@ import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {UserApiService} from "../../../user/services/user-api.service";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -46,7 +48,9 @@ export class SidenavComponent {
   @Input() isBreeder: boolean;
 
 
-  constructor(private userApiService: UserApiService) {
+  constructor(private userApiService: UserApiService,
+              private breederApiService: BreederApiService,
+              private advisorApiService: AdvisorApiService) {
     this.isBreeder = this.userApiService.getIsBreeder();
   }
 
@@ -86,6 +90,8 @@ export class SidenavComponent {
 
   logOut() {
     this.userApiService.setLogged(false);
+    this.breederApiService.setBreederId(0);
+    this.advisorApiService.setAdvisorId(0);
     this.onToggleSidenav(false);
   }
 }
