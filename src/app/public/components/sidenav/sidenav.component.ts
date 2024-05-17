@@ -83,4 +83,9 @@ export class SidenavComponent {
         return "/";
     }
   }
+
+  logOut() {
+    this.userApiService.setLogged(false);
+    this.onToggleSidenav(false);
+  }
 }
