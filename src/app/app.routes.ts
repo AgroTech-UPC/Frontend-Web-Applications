@@ -33,6 +33,9 @@ import {ClientDetailComponent} from "./appointment/components/client-detail/clie
 import {RecoveryComponent} from "./user/pages/recovery/recovery.component";
 import {ResetComponent} from "./user/pages/reset/reset.component";
 
+import {EditExpenseComponent} from "./management/components/edit-expense/edit-expense.component";
+import {EditResourceComponent} from "./management/components/edit-resource/edit-resource.component";
+
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -40,7 +43,9 @@ export const routes: Routes = [
   {path: 'login/recuperacion/:id', component: ResetComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
+  {path: 'criador/mi-granja/recursos/editar/:id', component: EditResourceComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
+  {path: 'criador/mi-granja/gastos/editar/:id', component: EditExpenseComponent},
   {path: 'criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
   {path: 'criador/mis-asesores', component: ViewMyAdvisorsComponent},
   {path: 'criador/asesor-info/:id', component: ViewAdvisorAboutusComponent},
