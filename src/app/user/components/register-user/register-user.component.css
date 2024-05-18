@@ -1,14 +1,32 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
 .register-user {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 20px;
+  width: 400px;
+  margin: 0 auto;
+  min-height: 100%;
+}
+
+.mat-card-footer {
+  margin-top: auto;
 }
 
 .title {
   text-align: center;
-  color: #0ba60b;
+  color: #7ec306;
   font-weight: bold;
+  font-size: xx-large;
 }
+
 
 .buttons {
   display: flex;
@@ -20,3 +38,16 @@ button {
   margin: 0 10px;
 }
 
+.login{
+  cursor: pointer;
+}
+
+.login:hover{
+  color: #DC763C;
+}
+
+@media (max-width: 425px) {
+  .register-user {
+    width: 300px;
+  }
+}
