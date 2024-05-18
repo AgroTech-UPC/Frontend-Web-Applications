@@ -96,7 +96,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     // Open a dialog to confirm the deletion
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: `¿Estás seguro de querer eliminar el recurso ${id}? Se eliminará la información que contiene.`
+        message: `¿Estás seguro de querer eliminar el gasto ${id}? Se eliminará la información que contiene.`
       }
     });
     // Return the result of the dialog
