@@ -33,6 +33,8 @@ import {Appointment} from "../../models/appointment.model";
   styleUrl: './view-advisor-aboutus.component.css'
 })
 export class ViewAdvisorAboutusComponent implements OnInit{
+
+
   advisor!: Advisor;
   appointments: Appointment[] = [];
   reviews: Review[] = [];

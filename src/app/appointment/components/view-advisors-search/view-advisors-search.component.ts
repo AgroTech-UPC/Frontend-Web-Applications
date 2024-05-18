@@ -39,7 +39,6 @@ export class ViewAdvisorsSearchComponent implements OnInit{
   getAdvisors(){
     this.advisorApiService.getAll().subscribe(advisors => {
       this.advisors = advisors;
-      //get fullname and location
       this.advisors.forEach(advisor => {
         this.userApiService.getOne(advisor.user_id).subscribe(user => {
           this.advisorDetails[advisor.user_id] = {
@@ -70,8 +69,6 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     }
   }
 
-
-  // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {
     this.router.navigate([`criador/buscar-asesor`]);
   }

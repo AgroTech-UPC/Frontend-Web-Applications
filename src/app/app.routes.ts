@@ -21,6 +21,7 @@ import {MyPublicationsComponent} from "./publication/pages/my-publications/my-pu
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
+import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
@@ -29,13 +30,17 @@ import {ViewReserveAppointmentComponent} from "./appointment/components/view-res
 import {ReviewComponent} from "./appointment/components/review/review.component";
 import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
+import {RecoveryComponent} from "./user/pages/recovery/recovery.component";
+import {ResetComponent} from "./user/pages/reset/reset.component";
 
 import {EditExpenseComponent} from "./management/components/edit-expense/edit-expense.component";
 import {EditResourceComponent} from "./management/components/edit-resource/edit-resource.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: LoginComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'login/recuperacion', component: RecoveryComponent},
+  {path: 'login/recuperacion/:id', component: ResetComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/recursos/editar/:id', component: EditResourceComponent},
@@ -55,6 +60,7 @@ export const routes: Routes = [
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
   {path: 'criador/registro/animal', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
+  {path: 'criador/publicaciones', component: PublicationsViewComponent},
   {path: 'notificaciones', component: NotificationsViewComponent},
   {path: 'asesor/clientes', component: ClientsComponent },
   {path: 'asesor/clientes/:id', component: ClientDetailComponent},

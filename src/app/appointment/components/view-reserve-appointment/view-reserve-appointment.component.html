@@ -1,26 +1,41 @@
 
-<div class="container" *ngIf="!showConfirmation">
+<div class="container">
+  <h1 class="title"><strong>Reservar Cita - Elegir Horario</strong></h1>
+  <div class="date-card-container">
+    <mat-radio-group (change)="setSelectedDateIndex($event.value)">
+      <mat-card class="date-card" *ngFor="let availableDate of advisor_availableDates ; let i = index">
+        <mat-card-content>
+          <div class="card-content">
+            <img src="/assets/images/cuy-appointment.png" alt="Imagen Deco" class="card-image">
+            <div class="info-container">
+              <h1><strong>Fecha:</strong> {{availableDate.day}}</h1>
+              <h1><strong>Hora Inicio:</strong> {{availableDate.start_time}}</h1>
+              <h1><strong>Hora Fin:</strong> {{availableDate.end_time}}</h1>
+              <h1><strong>Estado: </strong>{{getStatusText(availableDate.status)}}</h1>
+            </div>
+          </div>
+          <mat-radio-button [disabled]="availableDate.status === 0" [value]="i">
+            <strong>Reservar Horario</strong>
+          </mat-radio-button>
 
-  <mat-radio-group (change)="setSelectedDateIndex($event.value)">
-    <h1 class="title"><strong>Reservar Cita - Elegir Horario</strong></h1>
-    <mat-card class="date-card custom-card" *ngFor="let availableDate of advisor_availableDates ; let i = index">
-      <mat-card-content>
-        <h1><strong>Fecha:</strong> {{availableDate.day}}</h1>
-        <h1><strong>Hora Inicio:</strong> {{availableDate.start_time}}</h1>
-        <h1><strong>Hora Fin:</strong> {{availableDate.end_time}}</h1>
-        <h1><strong>Estado: </strong>{{getStatusText(availableDate.status)}}</h1>
-        <mat-radio-button [disabled]="availableDate.status === 0" [value]="i"><strong>Reservar Horario</strong></mat-radio-button>
-      </mat-card-content>
-    </mat-card>
-  </mat-radio-group>
-  <div class="button-container">
-    <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
-    <button mat-raised-button color="primary" class="custom-button" (click)="createAppointment()">Reservar</button>
+        </mat-card-content>
+      </mat-card>
+    </mat-radio-group>
   </div>
+
+</div>
+<div class="button-container">
+  <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
+  <button mat-raised-button color="primary" class="custom-button" (click)="createAppointment()">Reservar</button>
 </div>
 
-<div class="container" *ngIf="showConfirmation">
-  <h1 class="title_confirmation"><strong>Cita Reservada con Éxito! <br> Su asesor se contactara en breve</strong></h1>
-  <img src="assets/images/cuy_confirmacion_appointment.png" alt="success" class="success-image">
-  <button mat-raised-button color="primary" class="custom-button" (click)="goHome()">Volver al Inicio</button>
+<div class="overlay" *ngIf="showConfirmation">
+  <mat-card>
+    <div class="confirmation-card">
+      <h1><strong> Cita Reservada con Éxito</strong></h1>
+      <img src="/assets/images/cuy_confirmacion_appointment.png" alt="Imagen Deco" class="confirmation-image">
+      <h2>Su asesor se contactara con usted en breve</h2>
+      <button mat-raised-button style="background-color: #DD763D; color: white" (click)="goHome()">Volver al Inicio</button>
+    </div>
+  </mat-card>
 </div>
