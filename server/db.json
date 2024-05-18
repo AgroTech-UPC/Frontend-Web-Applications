@@ -131,7 +131,7 @@
       "type": "Alimento",
       "amount": 500,
       "date": "2024-05-02",
-      "details": "No seleccione"
+      "details": "Ninguno :)"
     },
     {
       "id": 2,
@@ -148,6 +148,14 @@
       "amount": 10,
       "date": "2024-05-08",
       "details": "se gastó en la comida del semillas de trigo, alfalfa y heno. Fuera de eso no se registró ningún gasto adicional en todo el día."
+    },
+    {
+      "id": 4,
+      "breeder_id": 1,
+      "type": "Salud",
+      "amount": 100,
+      "date": "2024-05-18",
+      "details": "Pastillas para dormir"
     }
   ],
   "notifications": [

@@ -9,7 +9,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCell, MatHeaderCell} from "@angular/material/table";
 
 // library lodash to clone objects
-import * as _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { FormsModule } from "@angular/forms";
@@ -21,9 +20,11 @@ import { SidenavComponent } from "../../../public/components/sidenav/sidenav.com
 import { ExpenseApiService } from "../../services/expense-api.service";
 import {Router, RouterLink} from "@angular/router";
 
+// Import the ConfirmationDialogComponent
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
+
 
 @Component({
   selector: 'app-my-farm-expenses-management',
@@ -87,11 +88,8 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     });
   }
 
-  goBack() {
-    window.history.back();
-  }
-
-  editItem() {
+  editItem(itemId: number): void {
+    this.router.navigate(['criador/mi-granja/gastos/editar', itemId]);
   }
 
   confirmDeletion(id: number): Observable<boolean> {

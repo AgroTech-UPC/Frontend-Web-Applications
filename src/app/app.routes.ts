@@ -30,12 +30,15 @@ import {ReviewComponent} from "./appointment/components/review/review.component"
 import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
+import {EditExpenseComponent} from "./management/components/edit-expense/edit-expense.component";
+
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: LoginComponent},
   {path: 'criador/mi-granja', component: MyFarmViewComponent},
   {path: 'criador/mi-granja/recursos', component: MyFarmResourceManagementComponent},
   {path: 'criador/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
+  {path: 'criador/mi-granja/gastos/editar/:id', component: EditExpenseComponent},
   {path: 'criador/buscar-asesor', component: ViewAdvisorsSearchComponent},
   {path: 'criador/mis-asesores', component: ViewMyAdvisorsComponent},
   {path: 'criador/asesor-info/:id', component: ViewAdvisorAboutusComponent},
