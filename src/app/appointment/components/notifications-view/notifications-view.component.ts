@@ -69,7 +69,7 @@ export class NotificationsViewComponent implements OnInit{
     });
   }
 
-  deleteNotification(id: string) {
+  deleteNotification(id: number) {
     this.notificationsApiService.delete(id).subscribe(() => {
       console.log("Notificación eliminada con éxito.");
       this.results = this.results.filter((notification: any) => notification.id !== id);

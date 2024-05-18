@@ -9,9 +9,9 @@
 .resource-container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 10%;
+  margin: 5% 0%;
   background: #F5EEDC;
 }
 
@@ -29,7 +29,13 @@
   text-align: center;
   margin: 20px 0px;
   width: 70%;
+  color: #4F2F00;
 }
+
+.selector-resource .mat-mdc-radio-button {
+  --mdc-form-field-label-text-color: #4F2F00;
+}
+
 
 .selector-resource p{
   margin: 0 20px 0 0;
@@ -50,8 +56,14 @@ button{
 
 .button-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 60%;
+}
+
+.button-container button {
+  flex: 0 0 auto;
+  min-width: 100px;
 }
 
 .button-container h1 {
@@ -59,45 +71,47 @@ button{
 }
 
 
-.arrow_back-icon {
-  display: flex;
-  color: #ffffff;
-  border: none;
-  align-items: center;
-  height: 50%;
-  margin-right: 10px;
-}
-
-.arrow_back-icon:hover {
-  background-color: #e19669;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-
 .mat-card{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 70%;
+  width: 60%;
   height: 100%;
-  background-color: #F0DA8B;
-  border-radius: 10px;
-  padding-left: 5%;
+  background-color: #f2e2a8;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
+.title {
+  display: flex;
+  flex-direction: column;
+  background-color: #e19669;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 20%;
+  height: 100%;
+  margin: 0 20px;
+  align-items: center;
+  justify-content: center;
+}
 .card-title{
   font-size: 1.5rem;
-  color: #000000;
+  color: #F4D97C;
   font-weight: bold;
-  margin-right: 2%;
-  width: 30%;
+}
+
+.image{
+  height: 150px;
+}
+.image img{
+  width: 150px;
+  height: 150px;
+  border-radius: 10px 0 0 10px;
 }
 
 .mat-card-content {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -106,23 +120,27 @@ button{
 
 .card-subtitle{
   font-size: 1.5rem;
-  color: #000000;
+  color: #4F2F00;
   font-weight: normal;
   margin: 20px 0;
 }
 
-.card-button-1{
-  background: #91654E;
+.card-button{
+  background: #DD763D;
   border-radius: 35px;
   padding: 20px;
   width: 200px;
   margin: 0 20px 0 0;
+  font-weight: 500;
+  font-size: 18px;
 }
 
 .math-card-content-column{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 50%;
+  text-align: justify;
 }
 
 .card-container{
@@ -132,4 +150,8 @@ button{
   align-items: center;
   width: 100%;
   margin: 20px 0;
+}
+
+mat-card-actions button{
+  margin: 0px 5px;
 }

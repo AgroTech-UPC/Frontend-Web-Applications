@@ -5,6 +5,8 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
+import {MatInputModule} from '@angular/material/input';
+import {MatCell, MatHeaderCell} from "@angular/material/table";
 
 // library lodash to clone objects
 import * as _ from 'lodash';
@@ -18,6 +20,10 @@ import { SidenavComponent } from "../../../public/components/sidenav/sidenav.com
 // Import the ResourceBreederApiService
 import { ExpenseApiService } from "../../services/expense-api.service";
 import {Router, RouterLink} from "@angular/router";
+
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-my-farm-expenses-management',
@@ -33,7 +39,10 @@ import {Router, RouterLink} from "@angular/router";
     HeaderComponent,
     SidenavComponent,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    MatInputModule,
+    MatCell,
+    MatHeaderCell
   ],
   templateUrl: './my-farm-expenses-management.component.html',
   styleUrls: ['./my-farm-expenses-management.component.css']
@@ -51,7 +60,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     '4': 'Mantenimiento de criadero'
   };
 
-  constructor(private expenseApiService: ExpenseApiService, private router: Router) {
+  constructor(private expenseApiService: ExpenseApiService, private router: Router, private dialog: MatDialog) {
     this.selectedResourceType = '1';
   }
 
@@ -80,6 +89,36 @@ export class MyFarmExpensesManagementComponent implements OnInit {
 
   goBack() {
     window.history.back();
+  }
+
+  editItem() {
+  }
+
+  confirmDeletion(id: number): Observable<boolean> {
+    // Open a dialog to confirm the deletion
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: `¿Estás seguro de querer eliminar el recurso ${id}? Se eliminará la información que contiene.`
+      }
+    });
+    // Return the result of the dialog
+    return dialogRef.afterClosed();
+  }
+
+  deleteItem(itemId: number) {
+    // First, confirm the deletion
+    this.confirmDeletion(itemId).subscribe(confirmado => {
+      if (confirmado) {
+        // If the deletion is confirmed, delete the item
+        this.expenseApiService.delete(itemId).subscribe(() => {
+          console.log("Gasto eliminado con éxito.");
+          // Reload the expenses
+          this.loadExpenses();
+        }, (error) => {
+          console.error("Error al eliminar el gasto:", error);
+        });
+      }
+    });
   }
 
 }

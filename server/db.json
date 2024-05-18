@@ -140,6 +140,14 @@
       "amount": 10,
       "date": "2024-05-01",
       "details": "se gastó en el almuerzo"
+    },
+    {
+      "id": 3,
+      "breeder_id": 1,
+      "type": "Alimento",
+      "amount": 10,
+      "date": "2024-05-08",
+      "details": "se gastó en la comida del semillas de trigo, alfalfa y heno. Fuera de eso no se registró ningún gasto adicional en todo el día."
     }
   ],
   "notifications": [
