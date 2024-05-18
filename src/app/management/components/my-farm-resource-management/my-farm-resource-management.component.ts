@@ -86,8 +86,8 @@ export class MyFarmResourceManagementComponent implements OnInit {
     window.history.back();
   }
 
-  editItem(id: number) {
-
+  editItem(itemId: number) {
+    this.router.navigate(['criador/mi-granja/recursos/editar', itemId]);
   }
 
   confirmDeletion(id: number): Observable<boolean> {
