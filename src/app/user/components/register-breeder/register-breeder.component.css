@@ -17,18 +17,25 @@
 .title {
   margin: 5px;
   text-align: center;
-  color: #7ec306;
+  color: #DD763D;
   font-weight: bold;
+  font-size: x-large;
 }
 
 .register-user mat-form-field{
   width: 100%;
+  --mdc-outlined-text-field-focus-outline-color: #7ec306;
+  --mdc-outlined-text-field-focus-label-text-color: #7ec306;
 }
 
 button{
   width: 60%;
   height: 40px;
   margin: 12px;
+}
+
+button:enabled{
+  color: white;
 }
 
 .register-user input {
