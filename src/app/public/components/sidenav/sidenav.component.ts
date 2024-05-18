@@ -59,7 +59,7 @@ export class SidenavComponent {
     if (this.isBreeder) {
       return ["Mi granja", "Asesores", "Mis animales", "Registro", "Publicaciones", "Notificaciones"];
     } else {
-      return ["Clientes", "Mis notificaciones", "Mis publicaciones"];
+      return ["Clientes", "Mis notificaciones", "Mis publicaciones", "Horarios"];
     }
   }
 
@@ -83,6 +83,8 @@ export class SidenavComponent {
         return "asesor/mis-publicaciones";
       case "Mis notificaciones":
         return "asesor/notificaciones";
+      case "Horarios":
+        return "asesor/lista-horarios-disponibles";
       default:
         return "/";
     }

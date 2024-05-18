@@ -364,6 +364,38 @@
       "start_time": "08:00",
       "end_time": "10:00",
       "status": 1
+    },
+    {
+      "id": 1716000613844,
+      "advisor_id": 2,
+      "advisor": {
+        "id": 2,
+        "occupation": "Zootechnician",
+        "experience": 4,
+        "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
+        "rating": 5,
+        "user_id": 2
+      },
+      "day": "2024-01-24",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "status": 1
+    },
+    {
+      "id": 1716000621593,
+      "advisor_id": 2,
+      "advisor": {
+        "id": 2,
+        "occupation": "Zootechnician",
+        "experience": 4,
+        "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
+        "rating": 5,
+        "user_id": 2
+      },
+      "day": "2024-01-24",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "status": 1
     }
   ]
 }

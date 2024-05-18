@@ -22,6 +22,8 @@ import {NewPublicationComponent} from "./publication/pages/new-publication/new-p
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
+import {EditAvailabilityScheduleComponent} from "./appointment/components/edit-availability-schedule/edit-availability-schedule.component";
+import {ListAvailabilityScheduleComponent} from "./appointment/components/list-availability-schedule/list-availability-schedule.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
@@ -62,6 +64,7 @@ export const routes: Routes = [
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent}
-
+  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent},
+  {path: 'asesor/editar-horarios-disponibles', component: EditAvailabilityScheduleComponent},
+  {path: 'asesor/lista-horarios-disponibles', component: ListAvailabilityScheduleComponent}
 ];

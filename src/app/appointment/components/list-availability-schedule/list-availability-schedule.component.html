@@ -1,0 +1,10 @@
+<main>
+  <h1>Horarios disponibles</h1>
+  <div class="container__box">
+    <div class="box" *ngFor="let date of advisor_availableDates">
+      <h5>{{date.day}}</h5>
+      <h4>{{date.start_time}} - {{date.end_time}}</h4>
+    </div>
+  </div>
+  <button routerLink="/asesor/editar-horarios-disponibles">Editar</button>
+</main>
