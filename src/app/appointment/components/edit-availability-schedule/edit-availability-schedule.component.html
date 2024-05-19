@@ -1,19 +1,24 @@
-<div class="container">
-  <h3>Agregar nuevo horario:</h3>
-  <form [formGroup]="form" (ngSubmit)="addAvailableDate()">
-    <label>
-      Día:
-      <input formControlName="day" type="date" required>
-    </label>
-    <label>
-      Hora de inicio:
-      <input formControlName="startTime" type="time" required>
-    </label>
-    <label>
-      Hora de fin:
-      <input formControlName="endTime" type="time" required>
-    </label>
-    <button type="submit">Agregar</button>
-    <button routerLink="/asesor/lista-horarios-disponibles">Cancelar</button>
-  </form>
-</div>
+<main>
+  <div class="container">
+    <h3>Agregar nuevo horario:</h3>
+    <form [formGroup]="form" (ngSubmit)="addAvailableDate()">
+      <label>
+        Día:
+        <input formControlName="day" type="date" required>
+      </label>
+      <label>
+        Hora de inicio:
+        <input formControlName="startTime" type="time" required>
+      </label>
+      <label>
+        Hora de fin:
+        <input formControlName="endTime" type="time" required>
+      </label>
+      <div class="container-btns">
+        <button type="submit">Agregar</button>
+        <button routerLink="/asesor/lista-horarios-disponibles">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</main>
+

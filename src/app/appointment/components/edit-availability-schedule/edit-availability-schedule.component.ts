@@ -14,6 +14,8 @@ import {AvailableDate} from "../../models/available_date.model";
 
 import {AvailableDateApiService} from "../../services/availabe-date-api.service";
 
+
+
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
 import {FormBuilder, ReactiveFormsModule, FormGroup, Validators} from "@angular/forms";
 import {RouterLink} from "@angular/router";
@@ -45,7 +47,8 @@ export class EditAvailabilityScheduleComponent implements OnInit {
   constructor(
     private advisorApiService: AdvisorApiService, // Inject AdvisorApiService
     private availableDateApiService: AvailableDateApiService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private datePipe: DatePipe
   ){
     this.form = this.fb.group({
       day: ['', Validators.required],
@@ -75,13 +78,18 @@ export class EditAvailabilityScheduleComponent implements OnInit {
     )
   }
 
+
   addAvailableDate(): void {
-    const { day, startTime, endTime } = this.form.value;
+    let { day, startTime, endTime } = this.form.value;
+    day = this.datePipe.transform(day, 'dd-MM-yyyy');
+
+    // Last ID of available dates
+    const lastId = this.advisor_availableDates.length > 0 ?
+      this.advisor_availableDates[this.advisor_availableDates.length - 1].id : 0;
 
     const newDate: AvailableDate = {
-      id: Date.now(), // generate a unique ID
+      id: lastId+1, // generate a unique ID
       advisor_id: this.advisor.id,
-      advisor: this.advisor, // add this line
       day: day,
       start_time: startTime,
       end_time: endTime,

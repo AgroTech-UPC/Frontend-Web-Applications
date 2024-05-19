@@ -320,7 +320,7 @@
     {
       "id": 1,
       "advisor_id": 1,
-      "day": "30/04/2024",
+      "day": "30-04-2024",
       "start_time": "10:30",
       "end_time": "12:30",
       "status": 1
@@ -328,7 +328,7 @@
     {
       "id": 2,
       "advisor_id": 2,
-      "day": "30/02/2024",
+      "day": "30-02-2024",
       "start_time": "08:00",
       "end_time": "10:00",
       "status": 0
@@ -336,7 +336,7 @@
     {
       "id": 3,
       "advisor_id": 1,
-      "day": "30/04/2024",
+      "day": "30-04-2024",
       "start_time": "10:30",
       "end_time": "12:30",
       "status": 0
@@ -344,7 +344,7 @@
     {
       "id": 4,
       "advisor_id": 2,
-      "day": "31/02/2024",
+      "day": "31-02-2024",
       "start_time": "08:00",
       "end_time": "10:00",
       "status": 1
@@ -352,7 +352,7 @@
     {
       "id": 5,
       "advisor_id": 1,
-      "day": "01/05/2024",
+      "day": "01-05-2024",
       "start_time": "10:30",
       "end_time": "12:30",
       "status": 0
@@ -360,41 +360,17 @@
     {
       "id": 6,
       "advisor_id": 2,
-      "day": "01/03/2024",
+      "day": "01-03-2024",
       "start_time": "08:00",
       "end_time": "10:00",
       "status": 1
     },
     {
-      "id": 1716000613844,
+      "id": 7,
       "advisor_id": 2,
-      "advisor": {
-        "id": 2,
-        "occupation": "Zootechnician",
-        "experience": 4,
-        "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
-        "rating": 5,
-        "user_id": 2
-      },
-      "day": "2024-01-24",
-      "start_time": "10:00",
-      "end_time": "11:00",
-      "status": 1
-    },
-    {
-      "id": 1716000621593,
-      "advisor_id": 2,
-      "advisor": {
-        "id": 2,
-        "occupation": "Zootechnician",
-        "experience": 4,
-        "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
-        "rating": 5,
-        "user_id": 2
-      },
-      "day": "2024-01-24",
-      "start_time": "10:00",
-      "end_time": "11:00",
+      "day": "15-05-2024",
+      "start_time": "16:00",
+      "end_time": "20:00",
       "status": 1
     }
   ]

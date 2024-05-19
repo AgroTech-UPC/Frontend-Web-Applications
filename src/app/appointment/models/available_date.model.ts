@@ -7,5 +7,5 @@ export interface AvailableDate {
   "end_time": any;
   "advisor_id": number;
   "status": any;
-  "advisor": Advisor;
+  "advisor"?: Advisor; //Optional field
 }
