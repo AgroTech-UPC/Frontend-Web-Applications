@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .container mat-card {
@@ -12,6 +13,7 @@
 .register-user {
   display: flex;
   flex-direction: column;
+  border-radius: 25px;
 }
 
 .register-user mat-form-field {

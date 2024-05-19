@@ -14,6 +14,7 @@
   width: 500px;
   margin: 0 auto;
   min-height: 100%;
+  border-radius: 25px;
 }
 
 .mat-card-footer {
@@ -51,7 +52,16 @@ h3 {
   cursor: pointer;
 }
 
-.login:hover{
+a{
+  cursor: pointer;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover{
   color: #DC763C;
 }
 

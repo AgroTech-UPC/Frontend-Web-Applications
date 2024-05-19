@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'register-user',
@@ -10,7 +10,8 @@ import {Router} from "@angular/router";
   imports: [
     MatCardModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.css'
