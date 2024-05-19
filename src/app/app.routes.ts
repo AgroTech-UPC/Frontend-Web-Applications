@@ -30,6 +30,8 @@ import {ReviewComponent} from "./appointment/components/review/review.component"
 import {LoginComponent} from "./user/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
+import {CalendarComponent} from "./appointment/components/calendar/calendar.component";
+
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: LoginComponent},
@@ -56,6 +58,7 @@ export const routes: Routes = [
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent}
-
+  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent},
+  {path: 'criador/calendario', component: CalendarComponent},
+  {path: 'asesor/calendario', component: CalendarComponent},
 ];

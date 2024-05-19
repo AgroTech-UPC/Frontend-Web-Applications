@@ -5,8 +5,8 @@
 }
 .mat-card {
   margin: auto;
-  margin-bottom: 20px; /* Ajusta este valor según tus necesidades */
-  width: 100%; /* Ajusta este valor según tus necesidades */
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 mat-form-field {
@@ -15,13 +15,13 @@ mat-form-field {
 }
 
 .photo {
-  width: 100px;  /* Ajusta el ancho de la imagen */
-  overflow: auto;  /* Mantiene la proporción de la imagen */
+  width: 100px;
+  overflow: auto;
 }
 
 .rating span {
-  font-size: 30px;  /* Ajusta el tamaño de la fuente */
-  color: #DD763D;  /* Cambia el color de las estrellas */
+  font-size: 30px;
+  color: #DD763D;
 }
 
 .card-actions{
@@ -39,8 +39,8 @@ mat-form-field {
 .buttons {
   display: flex;
   justify-content: space-between;
-  width: 70%; /* Ajusta este valor para acercar los botones al centro */
-  margin-top: 100px; /* Ajusta este valor para mover los botones más abajo */
+  width: 70%;
+  margin-top: 100px;
 }
 
 .button_only{
