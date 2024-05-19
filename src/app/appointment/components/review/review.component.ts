@@ -14,13 +14,14 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
 import {UserApiService} from "../../../user/services/user-api.service";
+import {MatCardModule} from "@angular/material/card";
 
 @Component({
   selector: 'app-review',
   standalone: true,
   imports: [
     FormsModule, MatButton, MatFormField, MatInput, MatLabel,
-    ReactiveFormsModule, MatIcon, NgForOf, NgIf,
+    ReactiveFormsModule, MatIcon, NgForOf, NgIf, MatCardModule,
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'

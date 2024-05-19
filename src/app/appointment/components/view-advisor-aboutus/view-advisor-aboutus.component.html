@@ -1,55 +1,64 @@
 <div class="container" *ngIf="advisor">
   <mat-card class="advisor-card">
     <div class="advisor-photo">
+
       <mat-card-header>
         <mat-card-subtitle>
           <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
         </mat-card-subtitle>
       </mat-card-header>
+
       <mat-card-actions>
         <button mat-raised-button color="primary" (click)="NavigateToReserveAppointment()">Reservar Cita</button>
       </mat-card-actions>
     </div>
 
-
     <div class="advisor-info">
       <mat-card-header>
         <mat-card-title>
-          <h1>
-            <strong>{{ advisorDetails.fullname }}</strong>
-          </h1>
+          <span style="font-size: 30px"><strong>{{ advisorDetails.fullname }}</strong></span>
         </mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
-        <h3><strong>Ubicación: </strong>{{ advisorDetails.location }}</h3>
-        <h3><strong>Experiencia: </strong>{{advisor.experience}} años</h3>
-        <h3><strong>Descripción: </strong><br>{{ advisorDetails.description }}</h3>
+        <h3>
+          <strong>Ubicación: </strong>{{ advisorDetails.location }}
+          <br>
+          <strong>Experiencia: </strong>{{advisor.experience}} años
+          <br>
+          <strong>Descripción: </strong><br>{{ advisorDetails.description }}
+        </h3>
 
-        <div class="rating">
+        <div class="stars">
           <h2>
-          <span *ngFor="let i of [].constructor(advisor.rating)">&#9733;</span>
+          <span *ngFor="let i of [].constructor(advisor.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
           </h2>
         </div>
       </mat-card-content>
     </div>
+    <img src="/assets/images/logo-circular.jpg" alt="Icono" class="card-icon" title="Asesor Certificado">
   </mat-card>
 
   <h2 class="title_review"><strong>Reseñas</strong></h2>
 
   <div class="reviews" *ngFor="let review of reviews">
     <mat-card class="review-card">
-      <mat-card-header>
-        <mat-card-title>
-          <h2 style="color: #DD763D; font-size: 50px;">
-            <span *ngFor="let i of [].constructor(review.rating)">&#9733;</span>
-          </h2>
-        </mat-card-title>
-      </mat-card-header>
+      <div class="card-content">
+        <img src="/assets/images/cuy-reseñas-asesor.jpg" alt="Imagen de la reseña" class="card-image">
+        <div class="info-container">
+          <mat-card-header>
+            <mat-card-title>
+              <h2 style="color: #DD763D; font-size: 50px;" class="rating">
+                <span *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+              </h2>
+            </mat-card-title>
+          </mat-card-header>
 
-      <mat-card-content>
-        <p>{{ review.comment }}</p>
-      </mat-card-content>
+          <mat-card-content>
+            <p>{{ review.comment }}</p>
+          </mat-card-content>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>

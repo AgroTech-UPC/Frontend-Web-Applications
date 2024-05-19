@@ -16,40 +16,40 @@
   border-radius: 25px;
 }
 
+mat-card-header{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
 mat-card-title{
   font-size: 32px;
   margin: 36px 0;
 }
 
-.form-login{
+mat-card-subtitle{
+  font-size: 20px;
+  margin: 24px auto 36px auto;
+  text-align: center;
+}
+
+form{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 500px;
-  height: 400px;
+  height: 300px;
 }
 
-.email, .password{
+.email {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   margin: 12px 0;
-}
-
-.password{
-  margin-bottom: 36px;
-}
-
-.password p{
-  width: 80%;
-  text-align: left;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.password p:hover{
-  color: #DD763D;
 }
 
 mat-form-field{
@@ -59,6 +59,7 @@ mat-form-field{
 }
 
 button{
+  margin-top: 24px;
   width: 60%;
   height: 40px;
   margin-bottom: 12px;
@@ -69,49 +70,7 @@ button:enabled{
   color: white;
 }
 
-a{
-  cursor: pointer;
-  color: black;
-}
-
-a:visited {
-  color: black;
-}
-
-a:hover{
-  color: #DC763C;
-}
-
 .error-message{
   color: red;
   text-align: center;
-}
-
-@media screen and (max-width: 550px){
-  .card{
-    width: 100%;
-    padding: 0;
-  }
-
-  mat-form-field{
-    width: 90%;
-  }
-
-  mat-card-header{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding: 0;
-  }
-
-  mat-card-content{
-    width: 100%;
-    padding: 0;
-  }
-
-  .form-login{
-    width: 100%;
-  }
-
 }

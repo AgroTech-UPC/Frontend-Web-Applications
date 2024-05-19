@@ -1,0 +1,26 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Reestablecer contraseña</mat-card-title>
+      <mat-card-subtitle>Ingresa tu nueva contraseña</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Nueva contraseña</mat-label>
+          <input matInput id="password" type="password" formControlName="password">
+          <mat-error>Ingresa una contraseña de mínimo 8 caracteres</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirma la nueva contraseña</mat-label>
+          <input matInput id="confirmPassword" type="password" formControlName="confirmPassword">
+          <mat-error>Repite la contraseña</mat-error>
+        </mat-form-field>
+
+        <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Reestablecer</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  </div>
