@@ -21,7 +21,7 @@
           <p><a routerLink="/login/recuperacion">¿Olvidaste tu contraseña?</a></p>
         </div>
         <button mat-flat-button color="primary" type="submit" [disabled]="!loginForm.valid">Acceder</button>
-        <p><a routerLink="/register">¿No tienes una cuenta? Regístrate</a></p>
+        <p><a routerLink="/registro">¿No tienes una cuenta? Regístrate</a></p>
       </form>
       <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
     </mat-card-content>
