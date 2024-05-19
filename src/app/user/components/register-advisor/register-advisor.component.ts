@@ -11,6 +11,15 @@ import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
+
+import {UserApiService} from "../../services/user-api.service";
+import {AdvisorApiService} from "../../services/advisor-api.service";
+
+import {User} from "../../models/user.model";
+import {Advisor} from "../../models/advisor.model";
+import {Breeder} from "../../models/breeder.model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'register-advisor',
@@ -51,8 +60,8 @@ export class RegisterAdvisorComponent {
       location: new FormControl('', [Validators.required]),
       birthDate: new FormControl(null, [Validators.required]),
       description: new FormControl('', [Validators.required]),
-      profession: new FormControl('', [Validators.required]),
-      experience: new FormControl('', [Validators.required]),
+      occupation: new FormControl('', [Validators.required]),
+      experience: new FormControl('', [Validators.required, Validators.min(1), Validators.max(70)]),
       photo: new FormControl('', [Validators.required])
     }
   );
@@ -60,7 +69,10 @@ export class RegisterAdvisorComponent {
   maxDate: Date;
 
   constructor(private dateAdapter: DateAdapter<Date>,
-              private router: Router) {
+              private router: Router,
+              private userApiService: UserApiService,
+              private advisorApiService: AdvisorApiService,
+              private snackBar: MatSnackBar) {
     this.dateAdapter.setLocale('es-PE');
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 90, 0, 1);
@@ -68,7 +80,55 @@ export class RegisterAdvisorComponent {
   }
 
   onSubmit() {
+    if (this.registerForm.valid) {
+      // Formatting date to ISO string (YYYY-MM-DD)
+      const birthDate: Date = this.registerForm.value.birthDate;
+      const birthDateString = birthDate.toISOString().split('T')[0];
+      let user: User = {
+        id: 0,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+        fullname: this.registerForm.value.name,
+        location: this.registerForm.value.location,
+        birthdate: birthDateString,
+        description: this.registerForm.value.description
+      };
 
+      this.userApiService.create(user).subscribe(
+        (response) => {
+          console.log(response);
+          let advisor: Advisor = {
+            id: 0,
+            occupation: this.registerForm.value.occupation,
+            experience: this.registerForm.value.experience,
+            photo: this.registerForm.value.photo,
+            rating: 0,
+            user_id: response.id
+          };
+          this.advisorApiService.create(advisor).subscribe(
+            (response) => {
+              console.log(response);
+              this.snackBar.open('Registro exitoso🤩 ¡Pasa a iniciar sesión!', 'Cerrar', {
+                duration: 5000,
+              });
+              this.router.navigate(['/']);
+            },
+            error => {
+              this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {
+                duration: 5000,
+              });
+              console.error(error);
+            }
+          );
+        },
+        error => {
+          this.snackBar.open('Error al registrar el usuario😥', 'Cerrar', {
+            duration: 5000,
+          });
+          console.error(error);
+        }
+      )
+    }
   }
 
   goBack() {
