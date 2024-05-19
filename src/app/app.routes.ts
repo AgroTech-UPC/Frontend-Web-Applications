@@ -41,6 +41,8 @@ import {SignupComponent} from "./user/pages/signup/signup.component";
 import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
 import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
 
+import {CalendarComponent} from "./appointment/components/calendar/calendar.component";
+
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
@@ -75,6 +77,7 @@ export const routes: Routes = [
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent}
-
+  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent},
+  {path: 'criador/calendario', component: CalendarComponent},
+  {path: 'asesor/calendario', component: CalendarComponent},
 ];
