@@ -49,20 +49,29 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Descripción (cuéntanos un poco sobre ti)</mat-label>
-          <textarea matInput placeholder="e.g.: ¡Me encanta la cría de cuyes!" formControlName="description"></textarea>
+          <textarea matInput placeholder="e.g.: Soy un asesor con experiencia de 6 años en cría de cuyes." formControlName="description"></textarea>
+          <mat-error *ngIf="registerForm.get('description')?.hasError('required')">
+            La descripción es requerida
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Profesión</mat-label>
-          <input matInput placeholder="e.g.: Veterinario" formControlName="profession">
-          <mat-error *ngIf="registerForm.get('profession')?.hasError('required')">
-            La profesión es requerida
+          <mat-label>Ocupación</mat-label>
+          <input matInput placeholder="e.g.: Veterinario" formControlName="occupation">
+          <mat-error *ngIf="registerForm.get('occupation')?.hasError('required')">
+            La ocupación es requerida
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Años de experiencia</mat-label>
-          <input matInput placeholder="e.g.: 5" formControlName="experience">
+          <input matInput type="number" placeholder="e.g.: 5" formControlName="experience">
           <mat-error *ngIf="registerForm.get('experience')?.hasError('required')">
             Los años de experiencia son requeridos
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('experience')?.hasError('min')">
+            Los años de experiencia deben ser mayores a 0
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('experience')?.hasError('max')">
+            Número no válido
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
