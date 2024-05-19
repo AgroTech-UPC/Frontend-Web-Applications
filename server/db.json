@@ -35,6 +35,24 @@
       "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
       "birthdate": "1997-11-30",
       "description": "Futura experta en criadora de cuyes!!"
+    },
+    {
+      "id": 5,
+      "email": "marco85@hotmail.com",
+      "password": "marco123",
+      "fullname": "Marco Pérez",
+      "location": "Av. Primavera 2390 - Santiago de Surco",
+      "birthdate": "1990-12-20",
+      "description": "¡Me encanta la cría de cuyes!"
+    },
+    {
+      "id": 6,
+      "email": "marimartinez019@gmail.com",
+      "password": "mariloba8901",
+      "fullname": "Maria Martinez",
+      "location": "Av. Los Incas 819, San Isidro",
+      "birthdate": "1989-06-01",
+      "description": "Soy una veterinaria experta en roedores"
     }
   ],
   "advisors": [
@@ -53,6 +71,14 @@
       "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
       "rating": 5,
       "user_id": 2
+    },
+    {
+      "id": 3,
+      "occupation": "Veterinaria",
+      "experience": 6,
+      "photo": "https://img.freepik.com/foto-gratis/veterinario-que-controla-salud-cachorro_23-2148728396.jpg",
+      "rating": 0,
+      "user_id": 6
     }
   ],
   "breeders": [
@@ -63,6 +89,10 @@
     {
       "id": 2,
       "user_id": 4
+    },
+    {
+      "id": 3,
+      "user_id": 5
     }
   ],
   "resources": [
