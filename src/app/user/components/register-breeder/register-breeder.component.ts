@@ -9,6 +9,13 @@ import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
+
+import { UserApiService } from "../../services/user-api.service";
+import { BreederApiService } from "../../services/breeder-api.service";
+
+import { User } from "../../models/user.model";
+import { Breeder } from "../../models/breeder.model";
 
 @Component({
   selector: 'register-breeder',
@@ -46,7 +53,7 @@ export class RegisterBreederComponent {
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       location: new FormControl('', [Validators.required]),
       birthDate: new FormControl(null, [Validators.required]),
-      description: new FormControl('', [Validators.required])
+      description: new FormControl('')
     }
   );
 
@@ -54,7 +61,10 @@ export class RegisterBreederComponent {
   maxDate: Date;
 
   constructor(private dateAdapter: DateAdapter<Date>,
-              private router: Router) {
+              private router: Router,
+              private userApiService: UserApiService,
+              private breederApiService: BreederApiService,
+              private snackBar: MatSnackBar) {
     this.dateAdapter.setLocale('es-PE');
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 90, 0, 1);
@@ -62,6 +72,52 @@ export class RegisterBreederComponent {
   }
 
   onSubmit() {
+    if (this.registerForm.valid) {
+      // Formatting date to ISO string (YYYY-MM-DD)
+      const birthDate: Date = this.registerForm.value.birthDate;
+      const birthDateString = birthDate.toISOString().split('T')[0];
+      let user: User = {
+        id: 0,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password,
+        fullname: this.registerForm.value.name,
+        location: this.registerForm.value.location,
+        birthdate: birthDateString,
+        description: this.registerForm.value.description
+      };
+
+      this.userApiService.create(user).subscribe(
+        (response) => {
+          console.log(response);
+          let breeder: Breeder = {
+            id: 0,
+            user_id: response.id
+          };
+          this.breederApiService.create(breeder).subscribe(
+            (response) => {
+              console.log(response);
+              this.snackBar.open('Registro exitoso🤩 ¡Pasa a iniciar sesión!', 'Cerrar', {
+                duration: 5000,
+              });
+              this.router.navigate(['/']);
+            },
+            error => {
+              this.snackBar.open('Error al registrar el criador😥', 'Cerrar', {
+                duration: 5000,
+              });
+              console.error(error);
+            }
+          );
+        },
+        error => {
+          this.snackBar.open('Error al registrar el usuario😥', 'Cerrar', {
+            duration: 5000,
+          });
+          console.error(error);
+        }
+      )
+
+    }
 
   }
 
