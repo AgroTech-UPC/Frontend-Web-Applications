@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import {CageApiService} from "../../services/cage-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 
@@ -41,7 +40,6 @@ export class RegisterCageComponent {
   constructor(public dialog: MatDialog,
               private cageService: CageApiService,
               private snackBar: MatSnackBar,
-              private router: Router,
               private breederService: BreederApiService) {
     this.cage.breeder_id = this.breederService.getBreederId();
   }
@@ -56,9 +54,9 @@ export class RegisterCageComponent {
     } else {
       this.registerCage();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }
