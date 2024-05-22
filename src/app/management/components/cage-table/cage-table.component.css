@@ -6,3 +6,35 @@ th{
   width: 80%;
   margin: 0 auto;
 }
+.paginator{
+  display: flex;
+  justify-content: center;
+}
+
+.mat-mdc-paginator{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+@media screen and (max-width: 1000px){
+  .tabla{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 850px){
+  .tabla{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px){
+  .tabla table{
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+
+

@@ -10,7 +10,6 @@ import { DialogComponent } from '../../../public/components/dialog/dialog.compon
 import { Animal } from '../../models/animal.model';
 import {AnimalApiService} from "../../services/animal-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
@@ -46,7 +45,7 @@ export class RegisterCuyComponent {
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalApiService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private animalService: AnimalApiService, private snackBar: MatSnackBar) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -60,9 +59,9 @@ export class RegisterCuyComponent {
       this.animal.gender = this.animal.gender === true; // required to convert the value to a boolean instead of a string
       this.registerCuy();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }

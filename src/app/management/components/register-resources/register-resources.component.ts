@@ -10,7 +10,6 @@ import { DialogComponent } from '../../../public/components/dialog/dialog.compon
 import { Resource } from '../../models/resource.model';
 import { ResourceApiService} from "../../services/resource-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import { MatSelect } from '@angular/material/select';
 
@@ -42,7 +41,7 @@ export class RegisterResourcesComponent {
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private resourceService: ResourceApiService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog, private resourceService: ResourceApiService, private snackBar: MatSnackBar) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -54,9 +53,9 @@ export class RegisterResourcesComponent {
     } else {
       this.registerResource();
       this.snackBar.open('Recurso registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }

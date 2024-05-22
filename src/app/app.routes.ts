@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { RegisterComponent} from "./management/components/register/register.component";
 import { RegisterCageComponent } from "./management/components/register-cage/register-cage.component";
 import { RegisterExpensesComponent } from "./management/components/register-expenses/register-expenses.component";
 import { RegisterCuyComponent } from "./management/components/register-cuy/register-cuy.component";
@@ -65,7 +64,6 @@ export const routes: Routes = [
   {path: 'criador/mis-animales/:id', component: AnimalListComponent},
   {path: 'criador/mis-animales/:cageid/informacion/:id', component: AnimalInformationComponent},
   {path: 'criador/mis-animales/editar/:id', component: CageEditorComponent},
-  {path: 'criador/registro', component: RegisterComponent},
   {path: 'criador/registro/jaula', component: RegisterCageComponent},
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
   {path: 'criador/registro/animal', component: RegisterCuyComponent},

@@ -239,7 +239,7 @@
   ],
   "animals": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Cuyino",
       "breed": "Kuri",
       "gender": true,
@@ -250,7 +250,7 @@
       "observations": "Cuy macho de color marrón claro"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Chispa",
       "breed": "Andina",
       "gender": false,
@@ -261,7 +261,7 @@
       "observations": "Cuy hembra de color blanco con manchas negras"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Pelusa",
       "breed": "Perú",
       "gender": true,
@@ -272,7 +272,7 @@
       "observations": "Cuy macho de color marrón claro"
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Canela",
       "breed": "Andina",
       "gender": false,
@@ -318,25 +318,29 @@
   ],
   "cages": [
     {
-      "id": "1",
+      "id": 1,
+      "breeder_id": 1,
       "name": "Jaula 1",
       "size": 6,
       "observations": "Sin observaciones"
     },
     {
-      "id": "2",
+      "id": 2,
+      "breeder_id": 1,
       "name": "Jaula 2",
       "size": 3.6,
       "observations": "La jaula esta un poco oxidada"
     },
     {
       "id": 3,
+      "breeder_id": 1,
       "name": "Jaula 3",
       "size": "4",
       "observations": "Una observación"
     },
     {
       "id": 4,
+      "breeder_id": 2,
       "name": "jaula M",
       "size": "3",
       "observations": "esta jaula tiene un hueco en la pared"

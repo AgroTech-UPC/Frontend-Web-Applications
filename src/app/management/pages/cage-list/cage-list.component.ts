@@ -3,13 +3,16 @@ import { MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule, MatTableDataSource} from "@angular/material/table";
 import {CageApiService} from "../../services/cage-api.service";
 import {AnimalApiService} from "../../services/animal-api.service";
-import {MatButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
 import {MatDialog } from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 import {CageTableComponent} from "../../components/cage-table/cage-table.component";
+import {Cage} from "../../models/cage.model";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 
 @Component({
@@ -17,10 +20,11 @@ import {CageTableComponent} from "../../components/cage-table/cage-table.compone
   standalone: true,
   imports: [
     MatTableModule,
-    MatButton,
+    MatButtonModule,
     NgIf,
     CageTableComponent,
     RouterLink,
+    MatIcon
   ],
   templateUrl: './cage-list.component.html',
   styleUrl: './cage-list.component.css'
@@ -28,9 +32,9 @@ import {CageTableComponent} from "../../components/cage-table/cage-table.compone
 export class CageListComponent implements OnInit {
   length: number = 0;
   dataSource!: MatTableDataSource<any>;
-  displayedColumns: string[] = ['id', 'name', 'size', 'observations', 'actions'];
   constructor(private cageService: CageApiService,
               private animalService: AnimalApiService,
+              private breederService: BreederApiService,
               private router: Router,
               private dialog: MatDialog,
               private snackBar: MatSnackBar
@@ -41,9 +45,11 @@ export class CageListComponent implements OnInit {
   }
 
   getCages(){
-    this.cageService.getAll().subscribe((data: any) => {
-      this.dataSource = new MatTableDataSource(data);
-      this.length = data.length;
+    this.cageService.getAll().subscribe((cages: Cage[]) => {
+      // Filter cages by breeder_id to show only the cages of the current breeder
+      cages = cages.filter(cage => cage.breeder_id === this.breederService.getBreederId());
+      this.dataSource = new MatTableDataSource(cages);
+      this.length = cages.length;
     });
   }
 
