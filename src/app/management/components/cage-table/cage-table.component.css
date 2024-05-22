@@ -6,6 +6,17 @@ th{
   width: 80%;
   margin: 0 auto;
 }
+.paginator{
+  display: flex;
+  justify-content: center;
+}
+
+.mat-mdc-paginator{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 
 @media screen and (max-width: 1000px){
   .tabla{
