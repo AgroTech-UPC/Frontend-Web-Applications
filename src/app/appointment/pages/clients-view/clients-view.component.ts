@@ -1,37 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-
-import { Router } from "@angular/router";
-
+import {Component, OnInit} from '@angular/core';
+import {ClientCardComponent} from "../../components/client-card/client-card.component";
 import {NgForOf} from "@angular/common";
-import {MatButton} from "@angular/material/button";
-import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {Appointment} from "../../models/appointment.model";
+import {Client} from "../../models/client.model";
+import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
-import {Appointment} from "../../models/appointment.model";
-import {UserApiService} from "../../../user/services/user-api.service";
-import {Client} from "../../models/client.model";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-clients',
+  selector: 'app-clients-view',
   standalone: true,
-  imports: [
-    MatCardModule,
-    NgForOf,
-    MatButton
-  ],
-  templateUrl: './clients.component.html',
-  styleUrl: './clients.component.css'
+    imports: [
+        ClientCardComponent,
+        NgForOf
+    ],
+  templateUrl: './clients-view.component.html',
+  styleUrl: './clients-view.component.css'
 })
-export class ClientsComponent implements OnInit {
+export class ClientsViewComponent implements OnInit {
   advisor_id = 1; //hard coded
   appointments: Appointment[] = [];
   clients: Client[] = [];
 
   constructor( private userService: UserApiService,
-              private breederService: BreederApiService,
-              private appointmentService: AppointmentApiService,
-              private router: Router) { }
+               private breederService: BreederApiService,
+               private appointmentService: AppointmentApiService,
+               private router: Router) { }
 
   ngOnInit() {
     this.getAppointments();
@@ -62,9 +57,5 @@ export class ClientsComponent implements OnInit {
 
       });
     });
-  }
-
-  goToAppointment(id: any) {
-    this.router.navigateByUrl(`/asesor/clientes/${id}`);
   }
 }

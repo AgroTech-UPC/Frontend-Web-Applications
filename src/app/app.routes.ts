@@ -15,7 +15,7 @@ import {CageListComponent} from "./management/pages/cage-list/cage-list.componen
 import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
 import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
 import {AnimalInformationComponent} from "./management/pages/animal-information/animal-information.component";
-import {ClientsComponent} from "./appointment/components/clients/clients.component";
+import {ClientsViewComponent} from "./appointment/pages/clients-view/clients-view.component";
 import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
@@ -70,7 +70,7 @@ export const routes: Routes = [
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'criador/publicaciones', component: PublicationsViewComponent},
   {path: 'notificaciones', component: NotificationsViewComponent},
-  {path: 'asesor/clientes', component: ClientsComponent },
+  {path: 'asesor/clientes', component: ClientsViewComponent },
   {path: 'asesor/clientes/:id', component: ClientDetailComponent},
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
