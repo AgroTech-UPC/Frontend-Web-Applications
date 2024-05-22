@@ -1,32 +1,44 @@
-<h1>MODIFICACIÓN DE INFORMACIÓN</h1>
-<h2>JAULA {{cageID}}</h2>
-<div class="form">
-  <form (submit)="onSubmit()" #cageForm = "ngForm" aria-label="formulario de modificación de datos de jaula">
-    <mat-form-field>
-      <mat-label>ID</mat-label>
-      <input matInput placeholder="Número de jaula" name="cageID" [(ngModel)]="cage.id" disabled>
-    </mat-form-field>
+<div class="container">
+  <h1>MODIFICACIÓN DE INFORMACIÓN</h1>
+  <h2>DE LA JAULA {{cageID}}</h2>
+  <div class="form">
+    <form (submit)="onSubmit()" #cageForm = "ngForm" aria-label="formulario de modificación de datos de jaula">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput placeholder="Número de jaula" name="cageID" [(ngModel)]="cage.id" disabled>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Nombre de la jaula</mat-label>
-      <input matInput placeholder="Nombre de la jaula" name="cageName" [(ngModel)]="cage.name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tamaño en m<sup>2</sup></mat-label>
-      <input matInput type="number" placeholder="Tamaño" name="cageSize" [(ngModel)]="cage.size" required>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Observaciones</mat-label>
-      <textarea matInput rows="5"
-                placeholder="Observaciones" name="cageObservations" [(ngModel)]="cage.observations">
+      <mat-form-field>
+        <mat-label>Nombre de la jaula</mat-label>
+        <input matInput placeholder="Nombre de la jaula" name="cageName" [(ngModel)]="cage.name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tamaño en m<sup>2</sup></mat-label>
+        <input matInput type="number" placeholder="Tamaño" name="cageSize" [(ngModel)]="cage.size" required>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput rows="5"
+                  placeholder="Observaciones" name="cageObservations" [(ngModel)]="cage.observations">
     </textarea>
-    </mat-form-field>
-    <div class="buttons">
-      <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">Descartar</button>
-      <button mat-raised-button color="primary" aria-label="guardar cambios" type="submit">Guardar</button>
-    </div>
-  </form>
+      </mat-form-field>
+      <div class="buttons">
+        <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">
+          <mat-icon>close</mat-icon>
+          Descartar
+        </button>
+        <button mat-raised-button aria-label="guardar cambios" type="submit" style="background-color: #7ec306; color: white;">
+          <mat-icon>save</mat-icon>
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="image">
+    <img src="../../../../assets/images/cuy-appointment.png" alt="Imagen de un cuy con gafas">
+  </div>
 </div>
+
 
 
 
