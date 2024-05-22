@@ -3,8 +3,9 @@ import { MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableModule, MatTableDataSource} from "@angular/material/table";
 import {CageApiService} from "../../services/cage-api.service";
 import {AnimalApiService} from "../../services/animal-api.service";
-import {MatButton} from "@angular/material/button";
+import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
 import {MatDialog } from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import {Observable} from "rxjs";
@@ -19,10 +20,11 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
   standalone: true,
   imports: [
     MatTableModule,
-    MatButton,
+    MatButtonModule,
     NgIf,
     CageTableComponent,
     RouterLink,
+    MatIcon
   ],
   templateUrl: './cage-list.component.html',
   styleUrl: './cage-list.component.css'
