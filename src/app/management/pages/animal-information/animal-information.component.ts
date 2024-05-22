@@ -107,33 +107,6 @@ export class AnimalInformationComponent implements OnInit{
     this.animal = {...this.originalAnimal};
   }
 
-  setDeceased(){
-    this.confirmMessage(this.animalID,
-      `¿Estas seguro de querer marcar como fallecido al cuy ${this.animalID}? Esta acción es irreversible.`)
-      .subscribe(result => {
-      if(result) {
-        this.animal.status = 'Fallecido';
-        this.animalService.update(this.animalID, this.animal)
-          .subscribe(
-            (data) => {
-              this.animal = data;
-              this.originalAnimal = {...this.animal};
-              this.isEditMode = false;
-              this.snackBar.open('Cuy marcado como fallecido 😥', '', {
-                duration: 5000
-              });
-            },
-            (error) => {
-              console.error(error);
-            }
-          )
-      }
-      else{
-        console.log(`Cancel set deceased animal ${this.animalID}`);
-      }
-    });
-  }
-
   editAnimal() {
     this.isEditMode = true;
   }

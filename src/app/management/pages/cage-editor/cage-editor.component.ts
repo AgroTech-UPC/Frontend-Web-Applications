@@ -7,17 +7,19 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {Cage} from "../../models/cage.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {CageApiService} from "../../services/cage-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-cage-editor',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatInput,
-    MatButton,
-    FormsModule,
-    MatLabel
-  ],
+    imports: [
+        MatFormField,
+        MatInput,
+        MatButton,
+        FormsModule,
+        MatLabel,
+        MatIcon
+    ],
   templateUrl: './cage-editor.component.html',
   styleUrl: './cage-editor.component.css'
 })
