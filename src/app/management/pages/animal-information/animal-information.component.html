@@ -72,13 +72,25 @@
         <div class="buttons">
           @if(isEditMode){
             <div class="edit-buttons">
-              <button mat-raised-button color="warn" type="button" aria-label="Descartar cambios" (click)="onCancel()">Descartar</button>
-              <button mat-raised-button color="primary" type="submit" aria-label="Guardar">Guardar</button>
+              <button mat-raised-button color="warn" type="button" aria-label="Descartar cambios" (click)="onCancel()">
+                <mat-icon>close</mat-icon>
+                Descartar
+              </button>
+              <button mat-raised-button style="background-color: #DD763D; color: white;" type="submit" aria-label="Guardar">
+                <mat-icon>save</mat-icon>
+                Guardar
+              </button>
             </div>
           }
           @else {
-            <button mat-raised-button color="primary" type="button" aria-label="Editar información" (click)="editAnimal()">Editar</button>
-            <button mat-raised-button color="warn" type="button" aria-label="Eliminar" (click)="deleteAnimal()">Eliminar</button>
+            <button mat-raised-button style="background-color: #DD763D; color: white;" type="button" aria-label="Editar información" (click)="editAnimal()">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </button>
+            <button mat-raised-button color="warn" type="button" aria-label="Eliminar" (click)="deleteAnimal()">
+              <mat-icon>delete</mat-icon>
+              Eliminar
+            </button>
           }
         </div>
       </form>

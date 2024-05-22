@@ -1,17 +1,24 @@
+.container{
+  margin-top: 100px;
+  min-height: calc(100vh - 100px);
+}
+
 h1{
   font-family: Inter, sans-serif;
-  margin: 30px;
+  margin: 20px;
   text-align: center;
   font-weight: bold;
   font-size: 36px;
+  color: #DD763D;
 }
 
 h2{
   font-family: Inter, sans-serif;
-  margin: 30px;
+  margin: 20px;
   text-align: center;
   font-weight: lighter;
   font-size: 24px;
+  color: #DD763D;
 }
 
 .animals{
@@ -29,6 +36,8 @@ h2{
 
   height: 50px;
   margin-right: 25px;
+
+  border-radius: 35px;
 }
 
 .back {
@@ -49,6 +58,8 @@ h2{
 
   height: 50px;
   margin-right: 25px;
+
+  border-radius: 35px;
 }
 
 .register {
