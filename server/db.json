@@ -344,13 +344,6 @@
       "name": "jaula M",
       "size": "3",
       "observations": "esta jaula tiene un hueco en la pared"
-    },
-    {
-      "id": 5,
-      "breeder_id": 1,
-      "name": "Jaula de Oro",
-      "size": "100",
-      "observations": "Jaula bañado en oro para cuys vip"
     }
   ],
   "reviews": [
