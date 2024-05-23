@@ -76,6 +76,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     this.availableDateApiService.getAll().subscribe(dates => {
         dates = dates.filter(date => date.advisor_id === this.advisor.id && date.status === 1);
         this.advisor_availableDates = dates;
+        console.log("Horarios: ",this.advisor_availableDates);
       }
     )
   }

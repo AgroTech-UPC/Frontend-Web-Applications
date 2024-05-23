@@ -1,8 +1,8 @@
 
 <div class="container">
   <h1 class="title"><strong>Reservar Cita - Elegir Horario</strong></h1>
-  <ng-container *ngFor="let availableDate of advisor_availableDates ; let i = index">
-    <div *ngIf="advisor_availableDates.length > 0">
+  <div *ngIf="advisor_availableDates.length > 0">
+    <ng-container *ngFor="let availableDate of advisor_availableDates ; let i = index">
       <div class="date-card-container">
         <mat-radio-group (change)="setSelectedDateIndex($event.value)">
           <mat-card class="date-card">
@@ -24,17 +24,18 @@
           </mat-card>
         </mat-radio-group>
       </div>
-      <div class="button-container">
-        <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
-        <button mat-raised-button style="color: white; background-color: #7ec346" class="custom-button" (click)="createAppointment()">Reservar</button>
-      </div>
+    </ng-container>
+    <div class="button-container">
+      <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
+      <button mat-raised-button style="color: white; background-color: #7ec346" class="custom-button" (click)="createAppointment()">Reservar</button>
     </div>
-    <div *ngIf="advisor_availableDates.length === 0" class="error-container">
-      <span class="error-title">El asesor no tiene horarios disponibles</span>
-      <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
-      <button mat-raised-button style="color: white; background-color: #DD763D" class="custom-button" (click)="cancel()">Volver al Inicio</button>
-    </div>
-  </ng-container>
+  </div>
+
+  <div *ngIf="advisor_availableDates.length === 0" class="error-container">
+    <span class="error-title">El asesor no tiene horarios disponibles</span>
+    <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+    <button mat-raised-button style="color: white; background-color: #DD763D" class="custom-button" (click)="cancel()">Volver al Inicio</button>
+  </div>
 </div>
 
 
