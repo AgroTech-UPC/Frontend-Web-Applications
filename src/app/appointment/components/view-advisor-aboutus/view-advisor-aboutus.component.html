@@ -46,23 +46,33 @@
 
   <h2 class="title_review"><strong>Reseñas</strong></h2>
 
-  <div class="reviews" *ngFor="let review of reviews">
-    <mat-card class="review-card">
-      <div class="card-content">
-        <img src="/assets/images/cuy-reseñas-asesor.jpg" alt="Imagen de la reseña" class="card-image">
-        <div class="info-container">
-          <mat-card-header>
-            <mat-card-title>
-              <span class="rating" style="color: #DD763D; font-size: 50px;" *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
-              <span style="color:gray; font-size: 50px" *ngFor="let i of [].constructor(5 - review.rating)">&#9733;</span>
-            </mat-card-title>
-          </mat-card-header>
+  <div class="reviews">
+    <div *ngIf="reviews.length > 0">
+      <ng-container *ngFor="let review of reviews">
+        <mat-card class="review-card">
+          <div class="card-content">
+            <img src="/assets/images/cuy-reseñas-asesor.jpg" alt="Imagen de la reseña" class="card-image">
+            <div class="info-container">
+              <mat-card-header>
+                <mat-card-title>
+                  <span class="rating" style="color: #DD763D; font-size: 50px;" *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+                  <span style="color:gray; font-size: 50px" *ngFor="let i of [].constructor(5 - review.rating)">&#9733;</span>
+                </mat-card-title>
+              </mat-card-header>
 
-          <mat-card-content>
-            <p>{{ review.comment }}</p>
-          </mat-card-content>
+              <mat-card-content>
+                <p>{{ review.comment }}</p>
+              </mat-card-content>
+            </div>
+          </div>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div *ngIf="reviews.length === 0">
+        <div class="error-container">
+          <span class="error-title">El asesor no tiene reseñas actualmente</span>
+          <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
         </div>
-      </div>
-    </mat-card>
+    </div>
   </div>
 </div>

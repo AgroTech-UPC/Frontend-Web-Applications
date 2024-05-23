@@ -102,3 +102,22 @@ button {
 .rating{
   animation: star-animation 1s infinite;
 }
+
+
+.error-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.error-title{
+  font-size: 2em;
+  font-weight: bold;
+}
+.error-image{
+  text-align: center;
+  width: 100px;
+  height: auto;
+}
