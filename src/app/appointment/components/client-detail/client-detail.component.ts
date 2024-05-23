@@ -9,6 +9,7 @@ import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
 import {UserApiService} from "../../../user/services/user-api.service";
+import {CageApiService} from "../../../management/services/cage-api.service";
 
 @Component({
   selector: 'app-client-detail',
@@ -36,13 +37,15 @@ export class ClientDetailComponent implements OnInit{
     appointment_id: 0,
     fullname: '',
     appointment_status: '',
-    location: ''
+    location: '',
+    cages: 0
   }
   appointment_id = 0;
 
   constructor(private breederService: BreederApiService,
               private userService: UserApiService,
               private appointmentService: AppointmentApiService,
+              private cageService: CageApiService,
               private activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
@@ -54,13 +57,16 @@ export class ClientDetailComponent implements OnInit{
     this.breederService.getOne(breeder_id).subscribe((breeder: Breeder) => {
       this.breeder = breeder;
       this.userService.getOne(breeder.user_id).subscribe(user => {
-        this.client = {
-          id: breeder_id,
-          appointment_id: this.appointment_id,
-          fullname: user.fullname,
-          appointment_status: this.appointment.status,
-          location: user.location
-        }
+        this.cageService.getAll().subscribe(cages => {
+          this.client = {
+            id: breeder_id,
+            appointment_id: this.appointment_id,
+            fullname: user.fullname,
+            appointment_status: this.appointment.status,
+            location: user.location,
+            cages: cages.filter(cage => cage.breeder_id === breeder_id).length
+          }
+        })
       });
     });
   }

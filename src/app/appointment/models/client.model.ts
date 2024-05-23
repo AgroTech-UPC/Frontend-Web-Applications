@@ -4,4 +4,5 @@ export interface Client {
   "appointment_status": string;
   "fullname": string;
   "location": string;
+  "cages": number;
 }

@@ -1,12 +1,14 @@
 <mat-card class="row" aria-label="Información de cliente pendiente de cita">
+  <div class="col">
+    <img mat-card-image src="../../../../assets/images/cuy-appointment.png" alt="Imagen de cuy cita">
+  </div>
   <mat-card-header class="col">
     <mat-card-title>
-      Cliente {{ client.id }}
+      Cita con {{ client.fullname }}
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="col">
-    <p>Nombre: {{ client.fullname }} </p>
     <p>Estado: {{client.appointment_status}}</p>
-    <button mat-raised-button (click)="goToAppointment(client.appointment_id)">Ver más</button>
+    <button mat-flat-button style="background-color: #7EC306; color: #FFFFFF" (click)="goToAppointment(client.appointment_id)">Ver más</button>
   </mat-card-content>
 </mat-card>

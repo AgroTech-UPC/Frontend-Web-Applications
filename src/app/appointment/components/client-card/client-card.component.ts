@@ -2,10 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import { Router } from "@angular/router";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
-import {AppointmentApiService} from "../../services/appointment-api.service";
-import {Appointment} from "../../models/appointment.model";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {Client} from "../../models/client.model";
 
 @Component({

@@ -2,19 +2,24 @@
   <div class="card">
     <mat-card aria-label="Información de cita con cliente">
       <mat-card-header>
-        <mat-card-title>Cliente {{ client.id }}</mat-card-title>
+        <mat-card-title>Detalles de cita</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <ul>
+          <p>Información de cliente</p>
           <li>Nombre: {{client.fullname}}</li>
-          <li>Estado de asesoría: {{client.appointment_status}}</li>
+          <li>Cantidad de jaulas: {{client.cages}}</li>
+          <li>Ubicación: {{client.location}}</li>
+        </ul>
+        <ul>
+          <p>Información de cita:</p>
+          <li>Estado: {{client.appointment_status}}</li>
           <li>Fecha programada de cita: {{appointment.date | date:'dd/MM/yyyy'}}</li>
           <li>Hora programada de cita: {{appointment.date | date:'HH:mm'}}</li>
-          <li>Ubicación: {{client.location}}</li>
         </ul>
       </mat-card-content>
     </mat-card>
   </div>
-  <button mat-raised-button class="boton" (click)="goBack()">Volver</button>
+  <button mat-flat-button style="background-color: #7EC306; color: #FFFFFF"  (click)="goBack()">Volver</button>
 </main>
 
