@@ -67,6 +67,10 @@ mat-card-subtitle{
   font-size: 40px;
   animation: star-animation 1s infinite;
 }
+.gray-stars {
+  font-size: 40px;
+  color: gray;
+}
 mat-card-header{
   background: rgba(240, 218, 139, 94) url("/assets/images/cuy-transparente.png") no-repeat right center;
   border-radius: 10px;

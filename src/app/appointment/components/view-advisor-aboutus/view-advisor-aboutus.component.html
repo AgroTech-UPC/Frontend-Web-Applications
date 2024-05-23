@@ -9,7 +9,7 @@
       </mat-card-header>
 
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="NavigateToReserveAppointment()">Reservar Cita</button>
+        <button mat-raised-button style="color: white; background-color: #DD763D" (click)="NavigateToReserveAppointment()">Reservar Cita</button>
       </mat-card-actions>
     </div>
 
@@ -29,9 +29,10 @@
           <strong>Descripción: </strong><br>{{ advisorDetails.description }}
         </h3>
 
-        <div class="stars">
+        <div class="container-stars">
           <h2>
-          <span *ngFor="let i of [].constructor(advisor.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+          <span class="stars" *ngFor="let i of [].constructor(advisor.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+            <span class="gray-stars" *ngFor="let i of [].constructor(5 - advisor.rating)">&#9733;</span>
           </h2>
         </div>
       </mat-card-content>
@@ -48,9 +49,8 @@
         <div class="info-container">
           <mat-card-header>
             <mat-card-title>
-              <h2 style="color: #DD763D; font-size: 50px;" class="rating">
-                <span *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
-              </h2>
+              <span class="rating" style="color: #DD763D; font-size: 50px;" *ngFor="let i of [].constructor(review.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+              <span style="color:gray; font-size: 50px" *ngFor="let i of [].constructor(5 - review.rating)">&#9733;</span>
             </mat-card-title>
           </mat-card-header>
 

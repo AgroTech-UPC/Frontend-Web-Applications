@@ -32,12 +32,16 @@ button {
 }
 
 
-.stars{
+.container-stars{
   padding-top: 15px;
 }
-.stars span {
+.stars{
   font-size: 70px;
   color: #DD763D;
+}
+.gray-stars {
+  font-size: 70px;
+  color: gray;
 }
 
 .title_review {

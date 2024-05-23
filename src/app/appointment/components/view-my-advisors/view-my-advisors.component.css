@@ -93,5 +93,8 @@ mat-card-header{
   bottom: 10px;
   right: 15px;
 }
-
+.button-terminated{
+  background-color: #7ec306;
+  color:white;
+}
 
