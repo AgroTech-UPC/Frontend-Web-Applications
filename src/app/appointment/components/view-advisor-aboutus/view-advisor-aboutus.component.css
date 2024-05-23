@@ -10,6 +10,7 @@
   margin: auto;
   margin-top: 110px;
   width: 70%;
+  box-sizing: border-box;
   background: rgba(240, 218, 139, 94) url("/assets/images/cuy-transparente.png") no-repeat right center;
 
   border: 4px solid;
@@ -70,10 +71,13 @@ button {
   margin: 20px auto;
   text-align: left;
   font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
-
 .card-content {
   display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -120,4 +124,26 @@ button {
   text-align: center;
   width: 100px;
   height: auto;
+}
+
+.back-button {
+  position: absolute;
+  margin-top: 110px;
+  z-index: 1;
+}
+
+@media (max-width: 600px) {
+  .advisor-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .review-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-content {
+    flex-direction: column;
+    align-items: center;
+  }
 }
