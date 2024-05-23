@@ -6,7 +6,6 @@ import {Client} from "../../models/client.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-clients-view',
@@ -19,16 +18,16 @@ import {Router} from "@angular/router";
   styleUrl: './clients-view.component.css'
 })
 export class ClientsViewComponent implements OnInit {
-  advisor_id = 1; //hard coded
+  advisor_id = 1; // hard coded
   appointments: Appointment[] = [];
   clients: Client[] = [];
 
   constructor( private userService: UserApiService,
                private breederService: BreederApiService,
-               private appointmentService: AppointmentApiService,
-               private router: Router) { }
+               private appointmentService: AppointmentApiService) { }
 
   ngOnInit() {
+    //this.advisor_id = Number(localStorage.getItem('advisor_id'));
     this.getAppointments();
   }
 
@@ -50,7 +49,8 @@ export class ClientsViewComponent implements OnInit {
             appointment_id: appointment.id,
             fullname: user.fullname,
             appointment_status: appointment.status,
-            location: user.location
+            location: user.location,
+            cages: 0
           }
           this.clients.push(client);
         });
