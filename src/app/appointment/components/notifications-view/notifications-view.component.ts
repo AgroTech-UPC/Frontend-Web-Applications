@@ -17,6 +17,7 @@ import {SidenavComponent} from "../../../public/components/sidenav/sidenav.compo
 import { Router } from "@angular/router";
 import {NotificationApiService} from "../../services/notification-api.service";
 import {Notification} from "../../models/notification.model";
+import {UserApiService} from "../../../user/services/user-api.service";
 
 @Component({
   selector: 'app-notifications-view-advisor-view',
@@ -38,19 +39,22 @@ import {Notification} from "../../models/notification.model";
 })
 export class NotificationsViewComponent implements OnInit{
   results: any[] = [];
+  user_id = 0;
 
-  constructor(private notificationsApiService: NotificationApiService) {
+  constructor(private notificationsApiService: NotificationApiService,
+              private userApiService: UserApiService) {
   }
 
   ngOnInit(): void {
+    this.user_id = this.userApiService.getUserId();
     this.getNotifications();
   }
 
   getNotifications() {
     this.notificationsApiService.getAll().subscribe((notifications: Notification[]) => {
       notifications.forEach((notification: Notification) => {
-        // Verify if the user id is 1 (Hard coded)
-        if (notification.user_id === 1) {
+        // Verify the user id
+        if (notification.user_id === this.user_id) {
           // Create a new date object
           const date = new Date(notification.date);
           // Apply the format to the date
