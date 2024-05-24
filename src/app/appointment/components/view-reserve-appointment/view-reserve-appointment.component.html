@@ -1,33 +1,43 @@
 
 <div class="container">
   <h1 class="title"><strong>Reservar Cita - Elegir Horario</strong></h1>
-  <div class="date-card-container">
-    <mat-radio-group (change)="setSelectedDateIndex($event.value)">
-      <mat-card class="date-card" *ngFor="let availableDate of advisor_availableDates ; let i = index">
-        <mat-card-content>
-          <div class="card-content">
-            <img src="/assets/images/cuy-appointment.png" alt="Imagen Deco" class="card-image">
-            <div class="info-container">
-              <h1><strong>Fecha:</strong> {{availableDate.day}}</h1>
-              <h1><strong>Hora Inicio:</strong> {{availableDate.start_time}}</h1>
-              <h1><strong>Hora Fin:</strong> {{availableDate.end_time}}</h1>
-              <h1><strong>Estado: </strong>{{getStatusText(availableDate.status)}}</h1>
-            </div>
-          </div>
-          <mat-radio-button [disabled]="availableDate.status === 0" [value]="i">
-            <strong>Reservar Horario</strong>
-          </mat-radio-button>
+  <div *ngIf="advisor_availableDates.length > 0">
+    <ng-container *ngFor="let availableDate of advisor_availableDates ; let i = index">
+      <div class="date-card-container">
+        <mat-radio-group (change)="setSelectedDateIndex($event.value)">
+          <mat-card class="date-card">
+            <mat-card-content>
+              <div class="card-content">
+                <img src="/assets/images/cuy-appointment.png" alt="Imagen Deco" class="card-image">
+                <div class="info-container">
+                  <h1><strong>Fecha:</strong> {{availableDate.day}}</h1>
+                  <h1><strong>Hora Inicio:</strong> {{availableDate.start_time}}</h1>
+                  <h1><strong>Hora Fin:</strong> {{availableDate.end_time}}</h1>
+                  <h1><strong>Estado: </strong>{{getStatusText(availableDate.status)}}</h1>
+                </div>
+              </div>
+              <mat-radio-button [disabled]="availableDate.status === 0" [value]="i">
+                <strong>Reservar Horario</strong>
+              </mat-radio-button>
 
-        </mat-card-content>
-      </mat-card>
-    </mat-radio-group>
+            </mat-card-content>
+          </mat-card>
+        </mat-radio-group>
+      </div>
+    </ng-container>
+    <div class="button-container">
+      <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
+      <button mat-raised-button style="color: white; background-color: #7ec346" class="custom-button" (click)="createAppointment()">Reservar</button>
+    </div>
   </div>
 
+  <div *ngIf="advisor_availableDates.length === 0" class="error-container">
+    <span class="error-title">El asesor no tiene horarios disponibles</span>
+    <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+    <button mat-raised-button style="color: white; background-color: #DD763D" class="custom-button" (click)="cancel()">Volver al Inicio</button>
+  </div>
 </div>
-<div class="button-container">
-  <button mat-raised-button color="warn" class="custom-button" (click)="cancel()">Cancelar</button>
-  <button mat-raised-button color="primary" class="custom-button" (click)="createAppointment()">Reservar</button>
-</div>
+
 
 <div class="overlay" *ngIf="showConfirmation">
   <mat-card>

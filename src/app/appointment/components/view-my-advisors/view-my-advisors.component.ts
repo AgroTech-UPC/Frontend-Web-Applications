@@ -4,10 +4,8 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {of} from 'rxjs';
+import {Router} from "@angular/router";
 
-import { forkJoin } from 'rxjs';
 import {
   MatCard,
   MatCardActions,
@@ -16,7 +14,7 @@ import {
   MatCardSubtitle,
   MatCardTitle
 } from "@angular/material/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
@@ -36,7 +34,8 @@ import {Appointment} from "../../models/appointment.model";
     MatCardHeader,
     MatCardSubtitle,
     MatCardTitle,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './view-my-advisors.component.html',
   styleUrl: './view-my-advisors.component.css'
