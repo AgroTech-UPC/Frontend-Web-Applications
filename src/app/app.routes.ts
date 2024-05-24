@@ -18,7 +18,6 @@ import {AnimalInformationComponent} from "./management/pages/animal-information/
 import {ClientsViewComponent} from "./appointment/pages/clients-view/clients-view.component";
 import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
-import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
@@ -69,13 +68,13 @@ export const routes: Routes = [
   {path: 'criador/registro/animal', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'criador/publicaciones', component: PublicationsViewComponent},
-  {path: 'notificaciones', component: NotificationsViewComponent},
+  {path: 'criador/notificaciones', component: NotificationsViewComponent},
   {path: 'asesor/clientes', component: ClientsViewComponent },
   {path: 'asesor/clientes/:id', component: ClientDetailComponent},
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent},
+  {path: 'asesor/notificaciones', component: NotificationsViewComponent},
   {path: 'criador/calendario', component: CalendarComponent},
   {path: 'asesor/calendario', component: CalendarComponent},
 ];
