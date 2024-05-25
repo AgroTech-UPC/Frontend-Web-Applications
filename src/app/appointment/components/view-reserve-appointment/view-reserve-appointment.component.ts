@@ -47,7 +47,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
   breeder!: Breeder;
-  breeder_id = 1; //hard coded
+  breeder_id = 0;
   selectedDateIndex!: number;
   appointmentId = 0;
   constructor(
@@ -60,6 +60,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
+    this.breeder_id = this.breederApiService.getBreederId();
     this.getAdvisor();
     this.getBreeder();
   }
@@ -95,7 +96,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     }
 
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
-    let appointmentDate = new Date(selectedDate.day.split("/").reverse().join("-") + 'T' + selectedDate.start_time + ':00');
+    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.start_time}:00`);
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisor_id: this.advisor.id,

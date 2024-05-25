@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {AvailableDate} from "../../models/available_date.model";
 import {MatCard, MatCardContent} from "@angular/material/card";
@@ -24,26 +24,25 @@ import { AvailableDateApiService } from "../../services/available-date-api.servi
   templateUrl: './list-availability-schedule.component.html',
   styleUrl: './list-availability-schedule.component.css'
 })
-export class ListAvailabilityScheduleComponent {
+export class ListAvailabilityScheduleComponent implements OnInit{
   availableDates: AvailableDate[] =  [];
 
   constructor
-  (private availableDateApiService: AvailableDateApiService,
-   private advisorApiService: AdvisorApiService,
-   private snackBar: MatSnackBar,
-    private router: Router
+  (
+    private availableDateApiService: AvailableDateApiService,
+    private advisorApiService: AdvisorApiService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.getMyAvailableDates();
-
   }
 
   getMyAvailableDates() {
     const advisorId = this.advisorApiService.getAdvisorId(); // Obtiene el id del advisor
 
     this.availableDateApiService.getAll().subscribe((availableDates) => {
-      this.availableDates = availableDates.filter(date => date.advisor_id === advisorId);
+      this.availableDates = availableDates.filter(date => date.advisor_id === advisorId && date.status === 1);
     });
   }
 

@@ -87,7 +87,7 @@ export class ReviewComponent implements OnInit {
     this.review.rating = this.rating;
     this.review.appointment_id = this.appointment.id;
     this.reviewService.create(this.review).subscribe();
-    this.appointment.status = "Terminado y Reseñado";
+    this.appointment.status = "Terminado";
     this.appointmentService.update(this.appointment.id, this.appointment).subscribe();
     this.isConfirmed = true;
   }
