@@ -6,14 +6,17 @@ import {HttpClient} from "@angular/common/http";
 //Import the BaseService
 import {BaseService} from "../../shared/services/base.service";
 import {AvailableDate} from "../models/available_date.model";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AvailabeDateApiService extends BaseService<AvailableDate>{
+export class AvailableDateApiService extends BaseService<AvailableDate>{
   constructor(http: HttpClient) {
     super(http);
     this.extraUrl = environment.availableDateURL;
   }
+
+
 
 }

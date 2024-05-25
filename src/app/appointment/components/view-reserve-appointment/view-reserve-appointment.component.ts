@@ -19,7 +19,7 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 
-import {AvailabeDateApiService} from "../../services/availabe-date-api.service";
+import {AvailableDateApiService} from "../../services/available-date-api.service";
 
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
 
@@ -56,7 +56,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     private advisorApiService: AdvisorApiService,
     private breederApiService: BreederApiService,
     private appointmentApiService: AppointmentApiService,
-    private availableDateApiService: AvailabeDateApiService
+    private availableDateApiService: AvailableDateApiService
   ){}
 
   ngOnInit(): void {

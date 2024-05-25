@@ -39,6 +39,9 @@ import {SignupComponent} from "./user/pages/signup/signup.component";
 import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
 import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
 
+import {ListAvailabilityScheduleComponent} from "./appointment/components/list-availability-schedule/list-availability-schedule.component";
+import {AddAvailabilityScheduleComponent} from "./appointment/components/add-availability-schedule/add-availability-schedule.component";
+
 import {CalendarComponent} from "./appointment/components/calendar/calendar.component";
 
 export const routes: Routes = [
@@ -77,4 +80,6 @@ export const routes: Routes = [
   {path: 'asesor/notificaciones', component: NotificationsViewComponent},
   {path: 'criador/calendario', component: CalendarComponent},
   {path: 'asesor/calendario', component: CalendarComponent},
+  {path: 'asesor/horarios', component: ListAvailabilityScheduleComponent},
+  {path: 'asesor/horarios/agregar', component: AddAvailabilityScheduleComponent}
 ];
