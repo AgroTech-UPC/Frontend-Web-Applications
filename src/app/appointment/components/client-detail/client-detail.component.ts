@@ -38,7 +38,8 @@ export class ClientDetailComponent implements OnInit{
     fullname: '',
     appointment_status: '',
     location: '',
-    cages: 0
+    cages: 0,
+    description: ''
   }
   appointment_id = 0;
 
@@ -64,7 +65,8 @@ export class ClientDetailComponent implements OnInit{
             fullname: user.fullname,
             appointment_status: this.appointment.status,
             location: user.location,
-            cages: cages.filter(cage => cage.breeder_id === breeder_id).length
+            cages: cages.filter(cage => cage.breeder_id === breeder_id).length,
+            description: user.description
           }
         })
       });

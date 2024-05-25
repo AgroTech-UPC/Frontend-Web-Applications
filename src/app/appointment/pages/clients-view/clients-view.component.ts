@@ -52,7 +52,8 @@ export class ClientsViewComponent implements OnInit {
             fullname: user.fullname,
             appointment_status: appointment.status,
             location: user.location,
-            cages: 0
+            cages: 0,
+            description: user.description
           }
           this.clients.push(client);
         });
