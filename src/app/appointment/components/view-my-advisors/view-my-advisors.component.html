@@ -10,41 +10,49 @@
   </mat-form-field>
 
   <div class="advisors-container">
-    <mat-card *ngFor="let advisor of filteredAdvisors" class="mat-card">
-      <mat-card-header>
-        <div class="header-content">
-          <mat-card-title>
-            <div class="img-box">
-              <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
+    <div *ngIf="filteredAdvisors.length > 0">
+      <ng-container *ngFor="let advisor of filteredAdvisors">
+        <mat-card *ngIf="getAppointmentsByAdvisor(advisor.id).length > 0" class="mat-card">
+          <mat-card-header>
+            <div class="header-content">
+              <mat-card-title>
+                <div class="img-box">
+                  <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
+                </div>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <span class="title">{{ advisorDetails[advisor.user_id]?.fullname }}</span>
+                <br>
+                <h2 style="color: black" class="appointments-amount">Cantidad de citas con el asesor: {{ getAppointmentsByAdvisor(advisor.id).length }}</h2>
+              </mat-card-subtitle>
+              <img src="assets/images/logo-circular.jpg" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
             </div>
-          </mat-card-title>
-          <mat-card-subtitle>
-            <span class="title">{{ advisorDetails[advisor.user_id]?.fullname }}</span>
-            <br>
-            <h2 style="color: black" class="appointments-amount">Cantidad de citas con el asesor: {{ getAppointmentsByAdvisor(advisor.id).length }}</h2>
-          </mat-card-subtitle>
-          <img src="assets/images/logo-circular.jpg" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
-        </div>
-      </mat-card-header>
+          </mat-card-header>
 
-      <div class="more-info">
-        <div *ngFor="let appointment of getAppointmentsByAdvisor(advisor.id); let i = index">
-          <h2>
-            <strong>Cita Reservada {{ i + 1 }}:</strong>
-          </h2>
-          <h3>
-            <strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}
-            <br>
-            <strong>Estado de la cita:</strong> {{ appointment.status }}
-          </h3>
-          <button mat-button style="color: white" class="{{appointment.status === 'Terminado' ? 'button-terminated' : 'button-other'}}" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
-        </div>
-        <h3 style="color: #DD763D" class="note-message"><strong>
-          Nota: Es necesario que la cita tenga el estado "Terminado" para dejar una reseña
-        </strong>
-        </h3>
-      </div>
-    </mat-card>
+          <div class="more-info">
+            <div *ngFor="let appointment of getAppointmentsByAdvisor(advisor.id); let i = index">
+              <h2>
+                <strong>Cita Reservada {{ i + 1 }}:</strong>
+              </h2>
+              <h3>
+                <strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}
+                <br>
+                <strong>Estado de la cita:</strong> {{ appointment.status }}
+              </h3>
+              <button mat-button style="color: white" class="{{appointment.status === 'Terminado' ? 'button-terminated' : 'button-other'}}" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
+            </div>
+            <h3 style="color: #DD763D" class="note-message"><strong>
+              Nota: Es necesario que la cita tenga el estado "Terminado" para dejar una reseña
+            </strong>
+            </h3>
+          </div>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div *ngIf="filteredAdvisors.length === 0" class="error-container">
+      <span class="error-title">Usted no reservo ninguna cita con ningun asesor</span>
+      <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+    </div>
   </div>
 
 </div>

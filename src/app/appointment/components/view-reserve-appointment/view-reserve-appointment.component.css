@@ -81,3 +81,36 @@
   height: auto;
   margin: auto;
 }
+
+.error-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.error-title{
+  font-size: 2em;
+  font-weight: bold;
+}
+.error-image{
+  text-align: center;
+  width: 100px;
+  height: auto;
+}
+
+/*Responsive*/
+@media (max-width: 600px) {
+  .error-title, .title {
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .error-title, .title {
+    text-align: center;
+    line-height: 1;
+  }
+}

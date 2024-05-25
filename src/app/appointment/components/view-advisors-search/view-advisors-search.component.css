@@ -25,6 +25,7 @@ mat-form-field {
   border-radius: 35px;
   padding: 20px;
   width: 200px;
+  margin-right: 5%;
 }
 
 .advisors-container {
@@ -67,6 +68,10 @@ mat-card-subtitle{
   font-size: 40px;
   animation: star-animation 1s infinite;
 }
+.gray-stars {
+  font-size: 40px;
+  color: gray;
+}
 mat-card-header{
   background: rgba(240, 218, 139, 94) url("/assets/images/cuy-transparente.png") no-repeat right center;
   border-radius: 10px;
@@ -101,4 +106,19 @@ mat-card-header{
   position: absolute;
   bottom: 10px;
   right: 15px;
+}
+
+/*Responsive*/
+@media (max-width: 600px) {
+  .title-page {
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .title-page {
+    text-align: center;
+    line-height: 1;
+  }
 }
