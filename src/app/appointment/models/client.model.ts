@@ -5,4 +5,5 @@ export interface Client {
   "fullname": string;
   "location": string;
   "cages": number;
+  "description": string;
 }
