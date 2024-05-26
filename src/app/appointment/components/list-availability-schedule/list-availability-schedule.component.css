@@ -6,6 +6,13 @@ main {
   height: 100%;
 }
 
+.title-page {
+  color: #DD763D;
+  font-size: 3em;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
 h1 {
   color: #9f3b08;
   font-size: 2rem;

@@ -1,8 +1,20 @@
+main {
+  margin-top: 100px;
+  display: grid;
+}
+
 button {
   border-radius: 5px;
   padding: 10px;
   display: block;
   margin: 0 auto;
+}
+
+.title-page {
+  color: #DD763D;
+  font-size: 3em;
+  text-align: center;
+  padding-bottom: 20px;
 }
 
 h1 {
