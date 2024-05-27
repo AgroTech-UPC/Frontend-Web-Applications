@@ -1,6 +1,6 @@
 <main>
-  <h1>Mis Publicaciones</h1>
-  <button mat-raised-button color="primary" (click)="goToCreatePublication()">Crear nueva publicación</button>
+  <span class="title-page"><strong>Mis Publicaciones</strong></span>
+  <button mat-flat-button style="background-color: #7EC306; color: #FFFFFF" (click)="goToCreatePublication()">Crear nueva publicación</button>
   <div id="cards">
     <div class="card" *ngFor="let publication of publications" aria-label="Publicaciones registradas por asesor">
       <publication-card [publication]="publication"></publication-card>
