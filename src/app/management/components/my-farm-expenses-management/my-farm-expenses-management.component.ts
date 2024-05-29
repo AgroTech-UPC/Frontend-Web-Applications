@@ -24,6 +24,7 @@ import {Router, RouterLink} from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 
 @Component({
@@ -49,7 +50,7 @@ import { Observable } from "rxjs";
   styleUrls: ['./my-farm-expenses-management.component.css']
 })
 export class MyFarmExpensesManagementComponent implements OnInit {
-
+  breeder_id = 0;
   expenses: any[] = [];
   filteredExpenses: any[] = [];
 
@@ -61,13 +62,16 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     '4': 'Mantenimiento de criadero'
   };
 
-  constructor(private expenseApiService: ExpenseApiService, private router: Router, private dialog: MatDialog) {
+  constructor(private expenseApiService: ExpenseApiService,
+              private breederApiService: BreederApiService,
+              private router: Router,
+              private dialog: MatDialog) {
     this.selectedResourceType = '1';
   }
 
   ngOnInit(): void {
+    this.breeder_id = this.breederApiService.getBreederId();
     this.loadExpenses();
-    this.filteredExpenses = cloneDeep(this.expenses);
   }
 
   filterResource(): void {
@@ -82,8 +86,8 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   }
 
   private loadExpenses() {
-    this.expenseApiService.getAll().subscribe((resources: any) => {
-      this.expenses = resources;
+    this.expenseApiService.getAll().subscribe((resources) => {
+      this.expenses = resources.filter((resource) => resource.breeder_id === this.breeder_id);
       this.filteredExpenses = cloneDeep(this.expenses);
     });
   }
@@ -117,6 +121,10 @@ export class MyFarmExpensesManagementComponent implements OnInit {
         });
       }
     });
+  }
+
+  goBack() {
+    window.history.back();
   }
 
 }
