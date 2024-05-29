@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { RegisterComponent} from "./management/components/register/register.component";
 import { RegisterCageComponent } from "./management/components/register-cage/register-cage.component";
 import { RegisterExpensesComponent } from "./management/components/register-expenses/register-expenses.component";
 import { RegisterCuyComponent } from "./management/components/register-cuy/register-cuy.component";
@@ -16,10 +15,9 @@ import {CageListComponent} from "./management/pages/cage-list/cage-list.componen
 import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
 import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
 import {AnimalInformationComponent} from "./management/pages/animal-information/animal-information.component";
-import {ClientsComponent} from "./appointment/components/clients/clients.component";
+import {ClientsViewComponent} from "./appointment/pages/clients-view/clients-view.component";
 import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
-import {NotificationsViewAdvisorComponent} from "./appointment/components/notifications-view-advisor/notifications-view-advisor.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
@@ -40,6 +38,11 @@ import {EditResourceComponent} from "./management/components/edit-resource/edit-
 import {SignupComponent} from "./user/pages/signup/signup.component";
 import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
 import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
+
+import {ListAvailabilityScheduleComponent} from "./appointment/components/list-availability-schedule/list-availability-schedule.component";
+import {AddAvailabilityScheduleComponent} from "./appointment/components/add-availability-schedule/add-availability-schedule.component";
+
+import {CalendarComponent} from "./appointment/components/calendar/calendar.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -63,18 +66,20 @@ export const routes: Routes = [
   {path: 'criador/mis-animales/:id', component: AnimalListComponent},
   {path: 'criador/mis-animales/:cageid/informacion/:id', component: AnimalInformationComponent},
   {path: 'criador/mis-animales/editar/:id', component: CageEditorComponent},
-  {path: 'criador/registro', component: RegisterComponent},
   {path: 'criador/registro/jaula', component: RegisterCageComponent},
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
   {path: 'criador/registro/animal', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'criador/publicaciones', component: PublicationsViewComponent},
-  {path: 'notificaciones', component: NotificationsViewComponent},
-  {path: 'asesor/clientes', component: ClientsComponent },
+  {path: 'criador/notificaciones', component: NotificationsViewComponent},
+  {path: 'asesor/clientes', component: ClientsViewComponent },
   {path: 'asesor/clientes/:id', component: ClientDetailComponent},
   {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
-  {path: 'asesor/notificaciones', component: NotificationsViewAdvisorComponent}
-
+  {path: 'asesor/notificaciones', component: NotificationsViewComponent},
+  {path: 'criador/calendario', component: CalendarComponent},
+  {path: 'asesor/calendario', component: CalendarComponent},
+  {path: 'asesor/horarios', component: ListAvailabilityScheduleComponent},
+  {path: 'asesor/horarios/agregar', component: AddAvailabilityScheduleComponent}
 ];

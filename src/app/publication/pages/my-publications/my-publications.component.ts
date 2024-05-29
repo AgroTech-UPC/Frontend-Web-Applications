@@ -6,6 +6,7 @@ import {PublicationsApiService} from "../../services/publications-api.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PublicationCardComponent} from "../../components/publication-card/publication-card.component";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 
 @Component({
   selector: 'app-my-publications',
@@ -19,26 +20,21 @@ import {PublicationCardComponent} from "../../components/publication-card/public
   styleUrl: './my-publications.component.css'
 })
 export class MyPublicationsComponent implements OnInit {
+  advisor_id = 0;
   publications: Publication[] = [];
 
   constructor(private publicationsService: PublicationsApiService,
+              private advisorService: AdvisorApiService,
               private router: Router) { }
 
   ngOnInit() {
+    this.advisor_id = this.advisorService.getAdvisorId();
     this.getPublications();
   }
 
   getPublications() {
     this.publicationsService.getAll().subscribe((res) => {
-      res.forEach((publication) => {
-        let publicationData = {} as Publication;
-        publicationData.id = publication.id;
-        publicationData.title = publication.title;
-        publicationData.description = publication.description;
-        publicationData.date = publication.date;
-        publicationData.image = publication.image;
-        this.publications.push(publicationData);
-      });
+      this.publications = res.filter((publication) => publication.advisor_id === this.advisor_id);
     });
   }
 

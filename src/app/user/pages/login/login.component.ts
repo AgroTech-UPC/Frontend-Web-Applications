@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
       } else if (user.password !== this.loginForm.value.password) {
         this.errorMessage="Error: el correo y la contraseña proporcionada no coinciden.";
       } else {
+        this.userApiService.setUserId(user.id);
         this.errorMessage = null;
         this.userApiService.setLogged(true);
         this.breederApiService.getAll().subscribe((data) => {

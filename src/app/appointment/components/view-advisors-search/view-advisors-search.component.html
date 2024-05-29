@@ -21,7 +21,10 @@
           <mat-card-subtitle>
             <span class="title">{{ advisorDetails[advisor.user_id]?.fullname }}</span>
             <br><br>
+            <!-- Estrellas de rating existente -->
             <span class="stars" *ngFor="let i of [].constructor(advisor.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
+            <!-- Estrellas grises para rating faltante -->
+            <span class="gray-stars" *ngFor="let i of [].constructor(5 - advisor.rating)">&#9733;</span>
           </mat-card-subtitle>
           <img src="assets/images/logo-circular.jpg" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
         </div>

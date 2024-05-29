@@ -1,0 +1,23 @@
+main {
+  display: grid;
+  margin-top: 100px;
+}
+
+.title-page {
+  color: #DD763D;
+  font-size: 3em;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}

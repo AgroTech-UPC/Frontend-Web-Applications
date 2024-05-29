@@ -72,52 +72,62 @@ export class RegisterBreederComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
-      // Formatting date to ISO string (YYYY-MM-DD)
-      const birthDate: Date = this.registerForm.value.birthDate;
-      const birthDateString = birthDate.toISOString().split('T')[0];
-      let user: User = {
-        id: 0,
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password,
-        fullname: this.registerForm.value.name,
-        location: this.registerForm.value.location,
-        birthdate: birthDateString,
-        description: this.registerForm.value.description
-      };
+    this.userApiService.getAll().subscribe((data) => {
+      // check if user already exists
+      const user = data.find(user => user.email === this.registerForm.value.email);
+      if (user) {
+        this.snackBar.open('El correo ya está registrado😥', 'Cerrar', {
+          duration: 5000,
+        });
+      }
+      else {
+        // Register breeder
+        // Formatting date to ISO string (YYYY-MM-DD)
+        const birthDate: Date = this.registerForm.value.birthDate;
+        const birthDateString = birthDate.toISOString().split('T')[0];
+        let user: User = {
+          id: 0,
+          email: this.registerForm.value.email,
+          password: this.registerForm.value.password,
+          fullname: this.registerForm.value.name,
+          location: this.registerForm.value.location,
+          birthdate: birthDateString,
+          description: this.registerForm.value.description
+        };
 
-      this.userApiService.create(user).subscribe(
-        (response) => {
-          console.log(response);
-          let breeder: Breeder = {
-            id: 0,
-            user_id: response.id
-          };
-          this.breederApiService.create(breeder).subscribe(
-            (response) => {
-              console.log(response);
-              this.snackBar.open('Registro exitoso🤩 ¡Pasa a iniciar sesión!', 'Cerrar', {
-                duration: 5000,
-              });
-              this.router.navigate(['/']);
-            },
-            error => {
-              this.snackBar.open('Error al registrar el criador😥', 'Cerrar', {
-                duration: 5000,
-              });
-              console.error(error);
-            }
-          );
-        },
-        error => {
-          this.snackBar.open('Error al registrar el usuario😥', 'Cerrar', {
-            duration: 5000,
-          });
-          console.error(error);
-        }
-      )
+        this.userApiService.create(user).subscribe(
+          (response) => {
+            console.log(response);
+            let breeder: Breeder = {
+              id: 0,
+              user_id: response.id
+            };
+            this.breederApiService.create(breeder).subscribe(
+              (response) => {
+                console.log(response);
+                this.snackBar.open('Registro exitoso🤩 ¡Pasa a iniciar sesión!', 'Cerrar', {
+                  duration: 5000,
+                });
+                this.router.navigate(['/']);
+              },
+              error => {
+                this.snackBar.open('Error al registrar el criador😥', 'Cerrar', {
+                  duration: 5000,
+                });
+                console.error(error);
+              }
+            );
+          },
+          error => {
+            this.snackBar.open('Error al registrar el usuario😥', 'Cerrar', {
+              duration: 5000,
+            });
+            console.error(error);
+          }
+        )
 
-    }
+      }
+    });
 
   }
 

@@ -23,6 +23,7 @@ mat-form-field {
   border-radius: 35px;
   padding: 20px;
   width: 200px;
+  margin-right: 5%;
 }
 
 .advisors-container {
@@ -93,5 +94,40 @@ mat-card-header{
   bottom: 10px;
   right: 15px;
 }
+.button-terminated{
+  background-color: #7ec306;
+  color:white;
+}
 
+.error-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.error-title{
+  font-size: 2em;
+  font-weight: bold;
+}
+.error-image{
+  text-align: center;
+  width: 100px;
+  height: auto;
+}
 
+/*Responsive*/
+@media (max-width: 600px) {
+  .title-page, .error-title{
+    text-align: center;
+    line-height: 1;
+  }
+}
+
+@media (max-width: 400px) {
+  .title-page, .error-title{
+    text-align: center;
+    line-height: 1;
+  }
+}

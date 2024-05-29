@@ -1,4 +1,4 @@
-<mat-card class="animal" [ngClass]="{'deceased': animal.status === 'Fallecido'}" (click)="getInformation(animal.id)">
+<mat-card class="animal" [ngClass]="{'sick': animal.status === 'Enfermo'}" (click)="getInformation(animal.id)">
   <img mat-card-image src="../assets/images/cuy.png" alt="cuy {{animal.id}}">
   <mat-card-content class="animal-info">
     <h2>ID: {{animal.id}}</h2>

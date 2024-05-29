@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AvailabeDateApiService } from './availabe-date-api.service';
+import { AvailableDateApiService } from "./available-date-api.service";
 
 describe('AvailabeDateApiService', () => {
-  let service: AvailabeDateApiService;
+  let service: AvailableDateApiService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AvailabeDateApiService);
+    service = TestBed.inject(AvailableDateApiService);
   });
 
   it('should be created', () => {
