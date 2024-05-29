@@ -28,7 +28,8 @@ import {forkJoin, map, Observable, switchMap} from "rxjs";
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit{
-  breeder_id = 1; advisor_id= 1;
+  breeder_id = 0;
+  advisor_id= 0;
   userType: string = '';
   fullnames: string[] = [];
 
@@ -57,6 +58,8 @@ export class CalendarComponent implements OnInit{
   ){}
 
   ngOnInit() {
+    this.breeder_id = this.breederApiService.getBreederId();
+    this.advisor_id = this.advisorApiService.getAdvisorId();
     this.determineUserType();
     this.fetchAppointments();
   }
