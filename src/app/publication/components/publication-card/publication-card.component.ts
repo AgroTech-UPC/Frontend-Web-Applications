@@ -25,16 +25,4 @@ export class PublicationCardComponent {
     this.router.navigateByUrl(`asesor/mis-publicaciones/${id}`);
   }
 
-  deletePublication(id: any) {
-    this.publicationService.delete(id).subscribe(() => {
-        this.snackBar.open('Publicación eliminada con éxito😎', 'Cerrar', {
-          duration: 2000,
-        });
-      }, error => {
-        this.snackBar.open('Error al eliminar la publicación', 'Cerrar', {
-          duration: 2000,
-        });
-      }
-    );
-  }
 }

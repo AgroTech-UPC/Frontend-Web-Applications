@@ -220,21 +220,28 @@
   ],
   "publications": [
     {
-      "id": "1",
+      "id": 1,
       "advisor_id": 1,
       "title": "Cuidados básicos para cuyes",
       "description": "Ofreciendo consejos esenciales para la crianza de cuyes. Desde la alimentación hasta la higiene, todo lo que necesitas saber para tener cuyes saludables. Verás que siguiendo mis consejos, lograrás maximizar la producción y rentabilidad de tu granja.",
       "date": "2024-04-30T11:10:52Z",
-      "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
-      "is_active": true
+      "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg"
     },
     {
+      "id": 2,
+      "advisor_id": 1,
       "title": "Cuida la salud de tu cuy",
       "description": "Estoy ofreciendo consejos útiles para identificar síntomas y tratar enfermedades de cuyes. Programa tu cita conmigo para poder apoyarte",
-      "image": "https://t1.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_600.jpg",
-      "id": "2",
-      "advisor_id": "1",
-      "date": "2024-05-03T07:13:24Z"
+      "date": "2024-05-03T07:13:24Z",
+      "image": "https://t1.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_600.jpg"
+    },
+    {
+      "id": 3,
+      "advisor_id": 2,
+      "title": "Un cuy feliz es un cuy bien alimentado",
+      "description": "Ofrezco consejos para una alimentación balanceada y saludable para cuyes. Conoce los alimentos que debes darle a tu cuy para que crezca sano y fuerte. ¡Contáctame!",
+      "date": "2024-05-29T00:32:32Z",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNRzv9RNLYjawtyba4mN9h8c98TNTqtWWCFQ&s"
     }
   ],
   "animals": [
