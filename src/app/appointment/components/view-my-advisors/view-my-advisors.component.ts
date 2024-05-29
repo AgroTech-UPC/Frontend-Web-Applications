@@ -4,10 +4,8 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {of} from 'rxjs';
+import {Router} from "@angular/router";
 
-import { forkJoin } from 'rxjs';
 import {
   MatCard,
   MatCardActions,
@@ -16,11 +14,12 @@ import {
   MatCardSubtitle,
   MatCardTitle
 } from "@angular/material/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -36,13 +35,14 @@ import {Appointment} from "../../models/appointment.model";
     MatCardHeader,
     MatCardSubtitle,
     MatCardTitle,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './view-my-advisors.component.html',
   styleUrl: './view-my-advisors.component.css'
 })
 export class ViewMyAdvisorsComponent implements OnInit{
-  breederId = 1;
+  breederId = 0;
   searchValue = '';
   advisors: Advisor[] = [];
   filteredAdvisors: Advisor[] = [];
@@ -50,6 +50,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
   advisorDetails: any = {};
 
   constructor(
+    private breederApiService: BreederApiService,
     private advisorApiService: AdvisorApiService,
     private appointmentApiService: AppointmentApiService,
     private userApiService: UserApiService,
@@ -57,6 +58,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
+    this.breederId = this.breederApiService.getBreederId();
     this.getMyAdvisors();
   }
 
@@ -66,28 +68,33 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
   getMyAdvisors(): void {
     this.advisorApiService.getAll().subscribe(advisors => {
-      this.advisors = advisors.filter(advisor => {
-        let advisorAppointments = this.getAppointmentsByAdvisor(advisor.id);
-        return advisorAppointments.filter(appointment => appointment.breeder_id === this.breederId);
-      });
-      this.filteredAdvisors = [...this.advisors];
-
-      this.filteredAdvisors.forEach(advisor => {
-        this.userApiService.getOne(advisor.user_id).subscribe(user => {
-          this.advisorDetails[advisor.user_id] = {
-            fullname: user.fullname,
-            location: user.location
-          };
-        });
-      });
-      //Get all appointments for each advisor in an array
+      this.advisors = advisors;
       this.appointmentApiService.getAll().subscribe(appointments => {
+        let advisorAppointments: Appointment[][] = []; // Initialize as array of arrays
+        this.advisors.forEach(advisor => {
+          // Push the filtered appointments into the corresponding sub-array
+          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisor_id === advisor.id &&
+            appointment.breeder_id === this.breederId);
+        });
+        //if advisorAppointments[advisor.id - 1] is empty, then the advisor has no appointments with the breeder
+        // and has to be removed from the list of advisors
+        this.advisors = this.advisors.filter(advisor => advisorAppointments[advisor.id - 1].length > 0);
+
+        this.filteredAdvisors = [...this.advisors];
+        this.filteredAdvisors.forEach(advisor => {
+          this.userApiService.getOne(advisor.user_id).subscribe(user => {
+            this.advisorDetails[advisor.user_id] = {
+              fullname: user.fullname,
+              location: user.location
+            };
+          });
+        });
+        //Get all appointments for each advisor in an array
         this.filteredAdvisors.forEach(advisor => {
           this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisor_id === advisor.id
-          && appointment.breeder_id === this.breederId);
+            && appointment.breeder_id === this.breederId);
         });
       });
-
     });
   }
 

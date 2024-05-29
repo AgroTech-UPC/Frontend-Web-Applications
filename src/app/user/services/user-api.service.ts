@@ -10,17 +10,51 @@ import {BaseService} from "../../shared/services/base.service";
   providedIn: 'root'
 })
 export class UserApiService extends  BaseService<User>{
-  isBreeder: boolean = false;
   constructor(http: HttpClient) {
     super(http);
     this.extraUrl = environment.userURL;
   }
 
+  setLogged(isLogged: boolean){
+    // Check if the window object is defined (prevent error from server side rendering)
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('isLogged', String(isLogged));
+    }
+  }
+
+  isLogged() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const logged = localStorage.getItem('isLogged');
+      return logged === 'true';
+    }
+    return false;
+  }
+
   setIsBreeder(isBreeder: boolean) {
-    this.isBreeder = isBreeder;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('isBreeder', String(isBreeder));
+    }
   }
 
   getIsBreeder(): boolean {
-    return this.isBreeder;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const isBreeder = localStorage.getItem('isBreeder');
+      return isBreeder === 'true';
+    }
+    return false;
+  }
+
+  setUserId(user_id: number) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('user_id', user_id.toString());
+    }
+  }
+
+  getUserId(): number {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const user_id = localStorage.getItem('user_id');
+      return user_id ? parseInt(user_id) : 0;
+    }
+    return 0;
   }
 }

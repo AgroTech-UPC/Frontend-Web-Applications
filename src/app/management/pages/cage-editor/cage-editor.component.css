@@ -1,12 +1,18 @@
+.container{
+  margin-top: 64px;
+  height: calc(100vh - 128px);
+}
+
 h1{
-  margin: 30px;
+  margin: 128px 0 0 0;
   text-align: center;
   font-weight: bold;
   font-size: 36px;
+  color: #DD763D;
 }
 
 h2{
-  margin: 30px;
+  margin: 20px;
   text-align: center;
   font-weight: bold;
   font-size: 36px;
@@ -30,15 +36,37 @@ form{
 }
 
 .buttons button{
-  width: 120px;
+  width: 150px;
   height: 50px;
   border: none;
   border-radius: 5px;
   font-size: 18px;
 }
 
+.image{
+  text-align: center;
+}
+
+.image img{
+  width: 400px;
+}
+
+@media screen and (max-width: 1000px)
+{
+  .form{
+    width: 90%;
+  }
+
+  .image img{
+    width: 40%;
+  }
+}
+
 @media screen and (max-width: 650px){
   .buttons button{
     font-size: 12px;
+  }
+  .buttons{
+    gap: 10%;
   }
 }

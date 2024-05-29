@@ -9,9 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import {Animal} from "../../models/animal.model";
 import {CageApiService} from "../../services/cage-api.service";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 
 @Component({
@@ -32,12 +31,19 @@ import {CageApiService} from "../../services/cage-api.service";
 export class RegisterCageComponent {
   cage: Cage = {
     id: 0,
+    breeder_id: 0,
     name: '',
     size: 0,
     observations: ''
   };
 
-  constructor(public dialog: MatDialog, private cageService: CageApiService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog,
+              private cageService: CageApiService,
+              private snackBar: MatSnackBar,
+              private breederService: BreederApiService) {
+    this.cage.breeder_id = this.breederService.getBreederId();
+  }
+
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
@@ -48,9 +54,9 @@ export class RegisterCageComponent {
     } else {
       this.registerCage();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }

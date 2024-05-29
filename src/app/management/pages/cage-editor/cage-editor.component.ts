@@ -7,24 +7,27 @@ import {FormsModule, NgForm} from "@angular/forms";
 import {Cage} from "../../models/cage.model";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import {CageApiService} from "../../services/cage-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-cage-editor',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatInput,
-    MatButton,
-    FormsModule,
-    MatLabel
-  ],
+    imports: [
+        MatFormField,
+        MatInput,
+        MatButton,
+        FormsModule,
+        MatLabel,
+        MatIcon
+    ],
   templateUrl: './cage-editor.component.html',
   styleUrl: './cage-editor.component.css'
 })
 export class CageEditorComponent implements OnInit {
-  cageID = -1;
+  cageID = 0;
   cage: Cage = {
-    id: -1,
+    id: 0,
+    breeder_id: 0,
     name: '',
     size: 0,
     observations: ''
@@ -46,6 +49,7 @@ export class CageEditorComponent implements OnInit {
     this.cageService.getOne(id).subscribe((data) => {
       this.cage = {
         id: data.id,
+        breeder_id: data.breeder_id,
         name: data.name,
         size: data.size,
         observations: data.observations

@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button mat-icon-button (click)="toggleDrawer()" class="display-sidebar">
+  <button mat-icon-button *ngIf="isLogged()" (click)="toggleDrawer()" class="display-sidebar">
     <mat-icon>menu</mat-icon>
   </button>
   <img src="./assets/images/logo-circular.jpg" alt="">

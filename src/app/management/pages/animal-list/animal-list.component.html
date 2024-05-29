@@ -1,19 +1,23 @@
-<h1>JAULA {{cageID}}</h1>
-<div class="no-animals" *ngIf="animals.length === 0">
-  <h2>No se han encontrado animales</h2>
-</div>
-<div class="animals">
-  <animal-card *ngFor="let animal of animals" [animal]="animal"></animal-card>
+<div class="container">
+  <h1>Listado de cuyes</h1>
+  <h1>de la Jaula {{cageID}}</h1>
+  <div class="no-animals" *ngIf="animals.length === 0">
+    <h2>No se han encontrado animales</h2>
+  </div>
+  <div class="animals">
+    <animal-card *ngFor="let animal of animals" [animal]="animal"></animal-card>
+  </div>
 </div>
 
-
-<div class="back" style="display: flex; justify-content: center; align-items: center;">
-  <button style="height: 50px; margin-right: 25px;" mat-raised-button color="warn" aria-label="Boton de retroceso" (click)="goBack()" class="back-button">
+<div class="back">
+  <button mat-raised-button class="back-button" color="warn" aria-label="Boton de retroceso" (click)="goBack()">
     <mat-icon aria-label="flecha de retroceso">arrow_back</mat-icon>
     Volver
   </button>
-
-  <button mat-raised-button style="margin-bottom: -17px;height: 50px; font-size: 2em; background-color: #DD763D; color: white;" routerLink="/criador/registro/animal">
+</div>
+<div class="register">
+  <button mat-raised-button class="register-button" style="background-color: #DD763D; color: white;" routerLink="/criador/registro/animal">
+    <mat-icon aria-label="simbolo de suma">add</mat-icon>
     Nuevo cuy
   </button>
 </div>

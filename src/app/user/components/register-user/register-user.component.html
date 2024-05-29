@@ -1,0 +1,19 @@
+<div class="container">
+  <mat-card class="register-user" aria-label="Container for register user form">
+    <h1 class="title">Registrarse</h1>
+    <mat-card-content>
+      <h2>¡Bienvenido a AgroConnect, nos pone muy contentos que estés aquí!</h2>
+      <img src="../../assets/images/welcome-cuy.png" width="150px"/>
+      <h3 style="font-weight: bold">Para empezar, ¿cuál es tu rol?</h3>
+      <h3 style="color: #F24336">Si eres una persona que necesita ayuda para gestionar tu granja de cuyes, tu rol es Criador.</h3>
+      <h3 style="color: #DD763D">Si eres una persona que desea brindar asesoría a criadores de cuyes, tu rol es Asesor.</h3>
+    </mat-card-content>
+    <mat-card-footer>
+      <div class="buttons">
+        <button mat-flat-button type="button" color="warn" (click)="registerBreeder()">Criador</button>
+        <button mat-flat-button type="button" style="background-color: #DD763D; color: #FFFFFF;" (click)="registerAdvisor()">Asesor</button>
+      </div>
+      <p class="login"><a routerLink="/login">¿Ya tienes una cuenta? Inicia sesión</a></p>
+    </mat-card-footer>
+  </mat-card>
+</div>

@@ -35,6 +35,24 @@
       "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
       "birthdate": "1997-11-30",
       "description": "Futura experta en criadora de cuyes!!"
+    },
+    {
+      "id": 5,
+      "email": "marco85@hotmail.com",
+      "password": "marco123",
+      "fullname": "Marco Pérez",
+      "location": "Av. Primavera 2390 - Santiago de Surco",
+      "birthdate": "1990-12-20",
+      "description": "¡Me encanta la cría de cuyes!"
+    },
+    {
+      "id": 6,
+      "email": "marimartinez019@gmail.com",
+      "password": "mariloba8901",
+      "fullname": "Maria Martinez",
+      "location": "Av. Los Incas 819, San Isidro",
+      "birthdate": "1989-06-01",
+      "description": "Soy una veterinaria experta en roedores"
     }
   ],
   "advisors": [
@@ -53,6 +71,14 @@
       "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
       "rating": 5,
       "user_id": 2
+    },
+    {
+      "id": 3,
+      "occupation": "Veterinaria",
+      "experience": 6,
+      "photo": "https://img.freepik.com/foto-gratis/veterinario-que-controla-salud-cachorro_23-2148728396.jpg",
+      "rating": 0,
+      "user_id": 6
     }
   ],
   "breeders": [
@@ -63,6 +89,10 @@
     {
       "id": 2,
       "user_id": 4
+    },
+    {
+      "id": 3,
+      "user_id": 5
     }
   ],
   "resources": [
@@ -71,7 +101,7 @@
       "name": "Alfalfa",
       "type": "Alimento",
       "breeder_id": 1,
-      "quantity": 2,
+      "quantity": 3,
       "date": "2021-05-20",
       "observations": "Suplemento vitaminico"
     },
@@ -99,28 +129,28 @@
       "id": 1,
       "breeder_id": 1,
       "advisor_id": 1,
-      "date": "2024-04-29T10:30:00Z",
+      "date": "2024-04-29T15:30:00Z",
       "status": "Terminado"
     },
     {
       "id": 2,
       "breeder_id": 1,
       "advisor_id": 2,
-      "date": "2024-02-30T08:00:00Z",
+      "date": "2024-05-30T18:00:00Z",
       "status": "Pendiente"
     },
     {
       "id": 3,
       "advisor_id": 1,
       "breeder_id": 2,
-      "date": "2024-04-30T15:30:00.000Z",
+      "date": "2024-05-30T20:30:00.000Z",
       "status": "Pendiente"
     },
     {
       "id": 4,
       "advisor_id": 1,
       "breeder_id": 1,
-      "date": "2024-05-01T15:30:00.000Z",
+      "date": "2024-06-01T15:30:00.000Z",
       "status": "Pendiente"
     }
   ],
@@ -131,7 +161,7 @@
       "type": "Alimento",
       "amount": 500,
       "date": "2024-05-02",
-      "details": "No seleccione"
+      "details": "Ninguno :)"
     },
     {
       "id": 2,
@@ -140,6 +170,22 @@
       "amount": 10,
       "date": "2024-05-01",
       "details": "se gastó en el almuerzo"
+    },
+    {
+      "id": 3,
+      "breeder_id": 1,
+      "type": "Alimento",
+      "amount": 10,
+      "date": "2024-05-08",
+      "details": "se gastó en la comida del semillas de trigo, alfalfa y heno. Fuera de eso no se registró ningún gasto adicional en todo el día."
+    },
+    {
+      "id": 4,
+      "breeder_id": 1,
+      "type": "Salud",
+      "amount": 100,
+      "date": "2024-05-18",
+      "details": "Pastillas para dormir"
     }
   ],
   "notifications": [
@@ -193,7 +239,7 @@
   ],
   "animals": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Cuyino",
       "breed": "Kuri",
       "gender": true,
@@ -204,18 +250,18 @@
       "observations": "Cuy macho de color marrón claro"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Chispa",
       "breed": "Andina",
       "gender": false,
       "birthdate": "2022-10-02",
       "cage_id": 1,
       "weight": 0.85,
-      "status": "Fallecido",
+      "status": "Enfermo",
       "observations": "Cuy hembra de color blanco con manchas negras"
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Pelusa",
       "breed": "Perú",
       "gender": true,
@@ -226,7 +272,7 @@
       "observations": "Cuy macho de color marrón claro"
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Canela",
       "breed": "Andina",
       "gender": false,
@@ -272,25 +318,29 @@
   ],
   "cages": [
     {
-      "id": "1",
+      "id": 1,
+      "breeder_id": 1,
       "name": "Jaula 1",
       "size": 6,
       "observations": "Sin observaciones"
     },
     {
-      "id": "2",
+      "id": 2,
+      "breeder_id": 1,
       "name": "Jaula 2",
       "size": 3.6,
       "observations": "La jaula esta un poco oxidada"
     },
     {
       "id": 3,
+      "breeder_id": 1,
       "name": "Jaula 3",
       "size": "4",
       "observations": "Una observación"
     },
     {
       "id": 4,
+      "breeder_id": 2,
       "name": "jaula M",
       "size": "3",
       "observations": "esta jaula tiene un hueco en la pared"
@@ -318,51 +368,51 @@
   ],
   "available_dates": [
     {
-      "id": 1,
-      "advisor_id": 1,
-      "day": "30/04/2024",
-      "start_time": "10:30",
-      "end_time": "12:30",
-      "status": 0
-    },
-    {
-      "id": 2,
       "advisor_id": 2,
-      "day": "30/02/2024",
+      "date": "2024-02-28",
       "start_time": "08:00",
       "end_time": "10:00",
-      "status": 0
+      "status": 0,
+      "id": 2
     },
     {
-      "id": 3,
       "advisor_id": 1,
-      "day": "30/04/2024",
+      "date": "2024-04-30",
       "start_time": "10:30",
       "end_time": "12:30",
-      "status": 0
+      "status": 0,
+      "id": 3
     },
     {
-      "id": 4,
       "advisor_id": 2,
-      "day": "31/02/2024",
+      "date": "2024-02-27",
       "start_time": "08:00",
       "end_time": "10:00",
-      "status": 1
-    },
-    {
-      "id": 5,
-      "advisor_id": 1,
-      "day": "01/05/2024",
-      "start_time": "10:30",
-      "end_time": "12:30",
-      "status": 1
+      "status": 0,
+      "id": 4
     },
     {
       "id": 6,
       "advisor_id": 2,
-      "day": "01/03/2024",
+      "date": "2024-05-27",
       "start_time": "08:00",
       "end_time": "10:00",
+      "status": 1
+    },
+    {
+      "id": 7,
+      "advisor_id": 1,
+      "date": "2024-05-26",
+      "start_time": "11:00",
+      "end_time": "13:00",
+      "status": 1
+    },
+    {
+      "id": 8,
+      "advisor_id": 2,
+      "date": "2024-09-25",
+      "start_time": "13:00",
+      "end_time": "13:30",
       "status": 1
     }
   ]

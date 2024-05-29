@@ -25,6 +25,10 @@
   margin: 0 auto;
 }
 
-.deceased {
-  background-color: gray;
+.sick {
+  background-color: #c16433;
+}
+
+.animal:hover{
+  background-color: #e19669;
 }

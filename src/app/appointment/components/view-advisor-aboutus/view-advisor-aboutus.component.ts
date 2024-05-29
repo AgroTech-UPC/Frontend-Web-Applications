@@ -33,6 +33,8 @@ import {Appointment} from "../../models/appointment.model";
   styleUrl: './view-advisor-aboutus.component.css'
 })
 export class ViewAdvisorAboutusComponent implements OnInit{
+
+
   advisor!: Advisor;
   appointments: Appointment[] = [];
   reviews: Review[] = [];
@@ -85,5 +87,8 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   NavigateToReserveAppointment(): void {
     let id = this.advisor.id;
     this.router.navigate([`/criador/asesor-info/${id}/reservar-cita`]);
+  }
+  goBack(): void {
+    this.router.navigate(['/criador/buscar-asesor']);
   }
 }

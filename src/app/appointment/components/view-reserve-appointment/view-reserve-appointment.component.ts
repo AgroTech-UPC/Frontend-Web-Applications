@@ -19,7 +19,7 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 
-import {AvailabeDateApiService} from "../../services/availabe-date-api.service";
+import {AvailableDateApiService} from "../../services/available-date-api.service";
 
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
 
@@ -41,11 +41,13 @@ import {NgForOf, DatePipe, NgIf} from "@angular/common";
   styleUrl: './view-reserve-appointment.component.css'
 })
 export class ViewReserveAppointmentComponent implements OnInit {
+  showMessage = false;
+  showConfirmation: boolean = false;
+
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
   breeder!: Breeder;
-  breeder_id = 1; //hard coded
-  showConfirmation: boolean = false;
+  breeder_id = 0;
   selectedDateIndex!: number;
   appointmentId = 0;
   constructor(
@@ -54,10 +56,11 @@ export class ViewReserveAppointmentComponent implements OnInit {
     private advisorApiService: AdvisorApiService,
     private breederApiService: BreederApiService,
     private appointmentApiService: AppointmentApiService,
-    private availableDateApiService: AvailabeDateApiService
+    private availableDateApiService: AvailableDateApiService
   ){}
 
   ngOnInit(): void {
+    this.breeder_id = this.breederApiService.getBreederId();
     this.getAdvisor();
     this.getBreeder();
   }
@@ -74,6 +77,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     this.availableDateApiService.getAll().subscribe(dates => {
         dates = dates.filter(date => date.advisor_id === this.advisor.id && date.status === 1);
         this.advisor_availableDates = dates;
+        console.log("Horarios: ",this.advisor_availableDates);
       }
     )
   }
@@ -92,7 +96,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     }
 
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
-    let appointmentDate = new Date(selectedDate.day.split("/").reverse().join("-") + 'T' + selectedDate.start_time + ':00');
+    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.start_time}:00`);
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisor_id: this.advisor.id,
