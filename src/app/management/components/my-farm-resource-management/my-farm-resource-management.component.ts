@@ -21,6 +21,7 @@ import {ResourceApiService} from "../../services/resource-api.service";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -42,7 +43,7 @@ import { Observable } from "rxjs";
   styleUrl: './my-farm-resource-management.component.css'
 })
 export class MyFarmResourceManagementComponent implements OnInit {
-
+  breederId: number = 0;
   resources: any[] = [];
   filteredResources: any[] = [];
 
@@ -54,13 +55,16 @@ export class MyFarmResourceManagementComponent implements OnInit {
     '4': 'Cultivo'
   };
 
-  constructor(private resourceApiService: ResourceApiService, private router: Router, private dialog: MatDialog) {
+  constructor(private resourceApiService: ResourceApiService,
+              private router: Router,
+              private dialog: MatDialog,
+              private breederService: BreederApiService) {
     this.selectedResourceType = '1';
   }
 
   ngOnInit(): void {
+    this.breederId = this.breederService.getBreederId();
     this.loadResources();
-    this.filteredResources = cloneDeep(this.resources);
   }
 
   filterResource(): void {
@@ -77,6 +81,7 @@ export class MyFarmResourceManagementComponent implements OnInit {
   private loadResources() {
     this.resourceApiService.getAll().subscribe((resources: any) => {
       this.resources = resources;
+      this.resources = this.resources.filter(resource => resource.breeder_id === this.breederId);
       this.filteredResources = cloneDeep(this.resources);
     });
   }
