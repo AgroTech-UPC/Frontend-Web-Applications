@@ -1,7 +1,7 @@
 import {Component, Input, ViewChild} from '@angular/core';
 import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav';
-import { trigger, transition, style, animate } from '@angular/animations';
-import {RouterLink} from "@angular/router";
+import {trigger, transition, style, animate} from '@angular/animations';
+import {RouterLink, RouterLinkActive} from "@angular/router";
 import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
@@ -15,20 +15,21 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
   imports: [
     MatSidenavModule,
     RouterLink,
+    RouterLinkActive,
     NgForOf,
     MatIcon,
     MatIconButton
   ],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.css',
+  styleUrls: ['./sidenav.component.css'],
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms ease-in-out', style({ opacity: 1 }))
+        style({opacity: 0}),
+        animate('300ms ease-in-out', style({opacity: 1}))
       ]),
       transition(':leave', [
-        animate('300ms ease-in-out', style({ opacity: 0 }))
+        animate('300ms ease-in-out', style({opacity: 0}))
       ])
     ])
   ]
@@ -46,7 +47,6 @@ export class SidenavComponent {
   }
 
   @Input() isBreeder: boolean;
-
 
   constructor(private userApiService: UserApiService,
               private breederApiService: BreederApiService,

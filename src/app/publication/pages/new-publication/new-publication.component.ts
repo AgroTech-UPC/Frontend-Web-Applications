@@ -8,16 +8,18 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-new-publication',
   standalone: true,
-  imports: [
-    MatFormFieldModule,
-    FormsModule,
-    MatInput,
-    MatButton
-  ],
+    imports: [
+        MatFormFieldModule,
+        FormsModule,
+        MatInput,
+        MatButton,
+        MatIcon
+    ],
   templateUrl: './new-publication.component.html',
   styleUrl: './new-publication.component.css'
 })
