@@ -16,6 +16,12 @@ main {
   grid-gap: 20px;
 }
 
+.empty-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .cards {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

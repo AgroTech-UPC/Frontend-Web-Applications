@@ -2,25 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {AvailableDate} from "../../models/available_date.model";
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 
 import { AdvisorApiService } from "../../../user/services/advisor-api.service";
 import { AvailableDateApiService } from "../../services/available-date-api.service";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 
 
 @Component({
   selector: 'app-list-availability-schedule',
   standalone: true,
-  imports: [
-    RouterLink,
-    MatCard,
-    MatCardContent,
-    NgForOf,
-    MatButton
-  ],
+    imports: [
+        RouterLink,
+        MatCard,
+        MatCardContent,
+        NgForOf,
+        MatButton,
+        EmptyViewComponent,
+        NgIf
+    ],
   templateUrl: './list-availability-schedule.component.html',
   styleUrl: './list-availability-schedule.component.css'
 })

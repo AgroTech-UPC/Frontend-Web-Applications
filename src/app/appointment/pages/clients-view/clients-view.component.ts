@@ -1,20 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {ClientCardComponent} from "../../components/client-card/client-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 
 @Component({
   selector: 'app-clients-view',
   standalone: true,
-    imports: [
-        ClientCardComponent,
-        NgForOf
-    ],
+  imports: [
+    ClientCardComponent,
+    NgForOf,
+    EmptyViewComponent,
+    NgIf
+  ],
   templateUrl: './clients-view.component.html',
   styleUrl: './clients-view.component.css'
 })
