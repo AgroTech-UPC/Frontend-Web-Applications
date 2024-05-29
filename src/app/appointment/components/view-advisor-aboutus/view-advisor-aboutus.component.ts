@@ -89,6 +89,6 @@ export class ViewAdvisorAboutusComponent implements OnInit{
     this.router.navigate([`/criador/asesor-info/${id}/reservar-cita`]);
   }
   goBack(): void {
-    this.router.navigate(['/criador/buscar-asesor']);
+    window.history.back();
   }
 }

@@ -2,8 +2,8 @@
   "users": [
     {
       "id": 1,
-      "email": "doctorVet@gmail.com",
-      "password": "miCasa123#",
+      "email": "asesor@example.com",
+      "password": "12345678",
       "fullname": "Marcus Smith",
       "location": "Prolongación Primavera 2390, Santiago de Surco 15023",
       "birthdate": "1990-05-15",
@@ -20,8 +20,8 @@
     },
     {
       "id": 3,
-      "email": "luchito911@gmail.com",
-      "password": "almaCuyamor94",
+      "email": "criador@example.com",
+      "password": "12345678",
       "fullname": "Luis Lopez",
       "location": "Avenida Circunvalación 125, Lurigancho-Chosica 15457",
       "birthdate": "1998-02-17",
@@ -34,7 +34,7 @@
       "fullname": "Maria Jose Perez",
       "location": "Jr. Los Pinos 123, San Juan de Lurigancho 15494",
       "birthdate": "1997-11-30",
-      "description": "Futura experta en criadora de cuyes!!"
+      "description": "Futura experta en la crianza de cuyes!!"
     },
     {
       "id": 5,
@@ -43,7 +43,7 @@
       "fullname": "Marco Pérez",
       "location": "Av. Primavera 2390 - Santiago de Surco",
       "birthdate": "1990-12-20",
-      "description": "¡Me encanta la cría de cuyes!"
+      "description": "¡Me encanta la crianza de cuyes!"
     },
     {
       "id": 6,
@@ -58,7 +58,7 @@
   "advisors": [
     {
       "id": 1,
-      "occupation": "Veterinarian",
+      "occupation": "Veterinaria",
       "experience": 5,
       "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVRG1WxVcFjBUn9nB1zgLfr-tYL29QFd7F7tjlb38Uyg&s",
       "rating": 4,
@@ -66,7 +66,7 @@
     },
     {
       "id": 2,
-      "occupation": "Zootechnician",
+      "occupation": "Zootecnista",
       "experience": 4,
       "photo": "https://ctivitae.concytec.gob.pe/appDirectorioCTI/UploadFotoPath.do?tipo=visualizar_archivo&id_investigador=168811&ruta=/documents/docInvestigadores/168811/imagenes/img1555098896331.jpg&content_type=image/jpeg",
       "rating": 5,
@@ -116,12 +116,12 @@
     },
     {
       "id": 3,
-      "name": "hierba medicinal",
+      "name": "Hierba medicinal",
       "type": "Medicina",
       "breeder_id": 1,
       "quantity": 5,
       "date": "2024-05-01",
-      "observations": "hierba medicinal para los cuyes"
+      "observations": "Hierba medicinal para los cuyes"
     }
   ],
   "appointments": [
@@ -161,7 +161,7 @@
       "type": "Alimento",
       "amount": 500,
       "date": "2024-05-02",
-      "details": "Ninguno :)"
+      "details": "Se gastó en la compra de alimento para cuyes de todo el mes"
     },
     {
       "id": 2,
@@ -169,7 +169,7 @@
       "type": "Alimento",
       "amount": 10,
       "date": "2024-05-01",
-      "details": "se gastó en el almuerzo"
+      "details": "Se gastó en el almuerzo"
     },
     {
       "id": 3,
@@ -177,7 +177,7 @@
       "type": "Alimento",
       "amount": 10,
       "date": "2024-05-08",
-      "details": "se gastó en la comida del semillas de trigo, alfalfa y heno. Fuera de eso no se registró ningún gasto adicional en todo el día."
+      "details": "Se gastó en algunas semillas de trigo, alfalfa y heno. Ningún gasto adicional en todo el día."
     },
     {
       "id": 4,
@@ -185,7 +185,7 @@
       "type": "Salud",
       "amount": 100,
       "date": "2024-05-18",
-      "details": "Pastillas para dormir"
+      "details": "Pastillas para dormir a los cuyes inquietos"
     }
   ],
   "notifications": [
@@ -220,21 +220,28 @@
   ],
   "publications": [
     {
-      "id": "1",
+      "id": 1,
       "advisor_id": 1,
       "title": "Cuidados básicos para cuyes",
       "description": "Ofreciendo consejos esenciales para la crianza de cuyes. Desde la alimentación hasta la higiene, todo lo que necesitas saber para tener cuyes saludables. Verás que siguiendo mis consejos, lograrás maximizar la producción y rentabilidad de tu granja.",
       "date": "2024-04-30T11:10:52Z",
-      "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg",
-      "is_active": true
+      "image": "https://portal.andina.pe/EDPfotografia3/Thumbnail/2018/04/18/000497648W.jpg"
     },
     {
+      "id": 2,
+      "advisor_id": 1,
       "title": "Cuida la salud de tu cuy",
       "description": "Estoy ofreciendo consejos útiles para identificar síntomas y tratar enfermedades de cuyes. Programa tu cita conmigo para poder apoyarte",
-      "image": "https://t1.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_600.jpg",
-      "id": "2",
-      "advisor_id": "1",
-      "date": "2024-05-03T07:13:24Z"
+      "date": "2024-05-03T07:13:24Z",
+      "image": "https://t1.ea.ltmcdn.com/es/posts/5/1/6/como_saber_si_mi_cobaya_esta_enferma_23615_600.jpg"
+    },
+    {
+      "id": 3,
+      "advisor_id": 2,
+      "title": "Un cuy feliz es un cuy bien alimentado",
+      "description": "Ofrezco consejos para una alimentación balanceada y saludable para cuyes. Conoce los alimentos que debes darle a tu cuy para que crezca sano y fuerte. ¡Contáctame!",
+      "date": "2024-05-29T00:32:32Z",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNRzv9RNLYjawtyba4mN9h8c98TNTqtWWCFQ&s"
     }
   ],
   "animals": [
