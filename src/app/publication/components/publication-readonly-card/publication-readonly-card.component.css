@@ -4,6 +4,15 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   align-items: center;
+  background-color: #f2e2a8;
+  color: #4F2F00;
+
+}
+mat-card-title{
+  color: #e19669;
+  font-size: 20px;
+  margin: 10px 0;
+  font-weight: bold;
 }
 
 img {
