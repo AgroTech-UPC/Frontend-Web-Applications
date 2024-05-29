@@ -23,11 +23,11 @@
     </textarea>
       </mat-form-field>
       <div class="buttons">
-        <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">
+        <button class="back-button" mat-raised-button style="padding: 20px; background-color: #e19669; color: white;" type="button"  aria-label="descartar cambios"  mat-button (click)="onCancel()">
           <mat-icon>close</mat-icon>
           Descartar
         </button>
-        <button mat-raised-button aria-label="guardar cambios" type="submit" style="background-color: #7ec306; color: white;">
+        <button class="register-button" mat-raised-button aria-label="guardar cambios" type="submit" style="background-color: #7ec306; color: white;">
           <mat-icon>save</mat-icon>
           Guardar
         </button>

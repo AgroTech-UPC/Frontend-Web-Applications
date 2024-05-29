@@ -11,6 +11,7 @@ import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {CageApiService} from "../../services/cage-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -22,7 +23,8 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatIcon
   ],
 
   templateUrl: './register-cage.component.html',
