@@ -4,15 +4,17 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {DatePipe} from "@angular/common";
 import {Router} from "@angular/router";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'publication-readonly-card',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatCardModule,
-    DatePipe
-  ],
+    imports: [
+        MatButtonModule,
+        MatCardModule,
+        DatePipe,
+        MatIcon
+    ],
   templateUrl: './publication-readonly-card.component.html',
   styleUrl: './publication-readonly-card.component.css'
 })

@@ -10,7 +10,10 @@
     <p>Publicado el {{publication.date | date: 'dd/MM/yy'}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-flat-button style="background-color: #7EC306; color: #FFFFFF" (click)="goToAdvisor()">Ver perfil de asesor</button>
+    <button mat-flat-button style="background-color: #7EC306; color: #FFFFFF" (click)="goToAdvisor()">
+      <mat-icon>person</mat-icon>
+      Ver perfil de asesor
+    </button>
   </mat-card-actions>
 </mat-card>
 

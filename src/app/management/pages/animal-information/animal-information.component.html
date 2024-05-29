@@ -3,7 +3,7 @@
   <div class="form-container">
     <div class="return">
       <img src="../../../../assets/images/cuy.png" alt="cuy {{animal.id}}">
-      <button mat-raised-button color="warn" (click)="goBack()" class="back-button" aria-label="Volver">
+      <button mat-raised-button class="back-button" style="background-color: #e19669; color: white;" aria-label="Boton de retroceso" (click)="goBack()">
         <mat-icon aria-label="flecha de retroceso">arrow_back</mat-icon>
         Volver
       </button>
@@ -72,18 +72,18 @@
         <div class="buttons">
           @if(isEditMode){
             <div class="edit-buttons">
-              <button mat-raised-button color="warn" type="button" aria-label="Descartar cambios" (click)="onCancel()">
+              <button mat-raised-button style="padding: 20px; background-color: #e19669; color: white;" type="button" aria-label="Descartar cambios" (click)="onCancel()">
                 <mat-icon>close</mat-icon>
                 Descartar
               </button>
-              <button mat-raised-button style="background-color: #DD763D; color: white;" type="submit" aria-label="Guardar">
+              <button mat-raised-button style="background-color: #7ec306; color: white;" type="submit" aria-label="Guardar">
                 <mat-icon>save</mat-icon>
                 Guardar
               </button>
             </div>
           }
           @else {
-            <button mat-raised-button style="background-color: #DD763D; color: white;" type="button" aria-label="Editar información" (click)="editAnimal()">
+            <button mat-raised-button style="padding: 20px; background-color: #7ec306; color: white;" type="button" aria-label="Editar información" (click)="editAnimal()">
               <mat-icon>edit</mat-icon>
               Editar
             </button>
