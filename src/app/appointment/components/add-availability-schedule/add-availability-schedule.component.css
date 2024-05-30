@@ -2,22 +2,24 @@ main {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   text-align: center;
+  justify-content: flex-start;
 }
 
 .container {
-  background-color: #FFA500; /* Fondo de color naranja */
-  color: #000000; /* Color de texto blanco */
+  background-color: #F0DA8B;
+  color: #000000;
   padding: 20px;
-  width: 80%;
+  margin: 100px 0;
+  width: 50%;
 }
 
 .container h3 {
   text-align: center;
   font-weight:bold;
   font-size: 25px;
+  color: #e19669;
 }
 
 form {
@@ -25,8 +27,8 @@ form {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: #FFA500; /* Fondo de color naranja */
-  color: #91644D; /* Color de texto blanco */
+  background-color: #F0DA8B
+  color: #91644D;
   padding: 20px;
   border-radius: 10px;
 }
@@ -60,11 +62,12 @@ input, select, textarea {
 }
 
 .container-btns :nth-child(1) {
-  background-color: #fff338;
+  background-color: #7ec306;
+  color: #FFFFFF;
 }
 
 .container-btns :nth-child(2) {
-  background-color: #d60000;
+  color: #FFFFFF;
 }
 
 @media (max-width: 600px) {
@@ -72,3 +75,4 @@ input, select, textarea {
     flex-direction: column;
   }
 }
+

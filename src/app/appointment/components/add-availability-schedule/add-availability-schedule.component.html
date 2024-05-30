@@ -1,6 +1,6 @@
 <main>
   <div class="container">
-    <h3>Agregar nuevo horario:</h3>
+    <h3>Agregar nuevo horario</h3>
     <form [formGroup]="form" (ngSubmit)="addAvailableDate()">
       <mat-form-field style="width: 100%"  appearance="fill">
         <mat-label>Dia</mat-label>
@@ -18,8 +18,14 @@
         Intervalo de tiempo no valido
       </div>
       <div class="container-btns">
-        <button mat-button color="warn" style="margin: 5px;" type="submit">Agregar</button>
-        <button mat-button style="margin: 5px; color: white;" routerLink="/asesor/horarios">Cancelar</button>
+        <button mat-button color="warn" style="margin: 5px;" type="submit">
+          <mat-icon>save</mat-icon>
+          Agregar
+        </button>
+        <button mat-button style="margin: 5px; color: white; background-color: #e19669" routerLink="/asesor/horarios">
+          <mat-icon>close</mat-icon>
+          Cancelar
+        </button>
       </div>
     </form>
   </div>

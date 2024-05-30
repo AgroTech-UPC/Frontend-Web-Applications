@@ -10,21 +10,23 @@ import { AvailableDate } from "../../models/available_date.model";
 import { AvailableDateApiService } from "../../services/available-date-api.service";
 import { AdvisorApiService } from "../../../user/services/advisor-api.service";
 import {NgIf} from "@angular/common";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
   selector: 'app-add-availability-schedule',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatButton,
-    MatLabel,
-    RouterLink,
-    MatInput,
-    ReactiveFormsModule,
-    MatError,
-    NgIf
-  ],
+    imports: [
+        MatFormField,
+        MatButton,
+        MatLabel,
+        RouterLink,
+        MatInput,
+        ReactiveFormsModule,
+        MatError,
+        NgIf,
+        MatIcon
+    ],
   templateUrl: './add-availability-schedule.component.html',
   styleUrl: './add-availability-schedule.component.css'
 })

@@ -11,6 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-publication-detail',
@@ -18,7 +19,8 @@ import { Observable } from "rxjs";
   imports: [
     MatCardModule,
     MatButton,
-    DatePipe
+    DatePipe,
+    MatIcon
   ],
   templateUrl: './publication-detail.component.html',
   styleUrl: './publication-detail.component.css'
