@@ -27,7 +27,13 @@
     </mat-form-field>
   </div>
   <div class="group-btns">
-    <button style="background-color: #DD763D; color: white;" mat-button (click)="goBack()">Descartar</button>
-    <button style="color: white;" mat-raised-button (click)="handleClick()">Registrar</button>
+    <button class="back-button" mat-raised-button style="padding: 20px; background-color: #e19669; color: white;" type="button"  aria-label="descartar cambios"  mat-button (click)="goBack()">
+      <mat-icon>close</mat-icon>
+      Descartar
+    </button>
+    <button class="register-button" mat-raised-button style="padding: 20px; background-color: #7ec306; color: white;" (click)="handleClick()">
+      <mat-icon>save</mat-icon>
+      Registrar
+    </button>
   </div>
 </div>

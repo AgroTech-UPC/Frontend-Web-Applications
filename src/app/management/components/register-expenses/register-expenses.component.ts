@@ -12,20 +12,22 @@ import { ExpenseApiService } from "../../services/expense-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-register-expenses',
   standalone: true,
-  imports: [
-    MatButton,
-    RouterLink,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    CommonModule,
-    MatRadioButton,
-    MatRadioGroup
-  ],
+    imports: [
+        MatButton,
+        RouterLink,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        CommonModule,
+        MatRadioButton,
+        MatRadioGroup,
+        MatIcon
+    ],
   templateUrl: './register-expenses.component.html',
   styleUrl: './register-expenses.component.css'
 })

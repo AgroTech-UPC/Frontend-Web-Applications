@@ -15,7 +15,7 @@ import {UserApiService} from "../../../user/services/user-api.service";
 import {User} from "../../../user/models/user.model";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Breeder} from "../../../user/models/breeder.model";
-import {forkJoin, map, Observable, switchMap} from "rxjs";
+import {forkJoin, map, Observable, switchMap, window} from "rxjs";
 
 @Component({
   selector: 'app-calendar',
@@ -39,13 +39,13 @@ export class CalendarComponent implements OnInit{
     locale: esLocale,
     events: [],
     eventContent: (arg) => {
-      let arrayOfDomNodes = [];
-      arrayOfDomNodes.push(document.createTextNode(arg.event.title));
-      arrayOfDomNodes.push(document.createElement('br'));
-      arrayOfDomNodes.push(document.createTextNode(arg.event.extendedProps.name));
-      arrayOfDomNodes.push(document.createElement('br'));
-      arrayOfDomNodes.push(document.createTextNode('Hora: ' + arg.event.extendedProps.time));
-      return { domNodes: arrayOfDomNodes };
+      return {
+        html: `
+            ${arg.event.title} <br>
+            ${arg.event.extendedProps.name} <br>
+            Hora: ${arg.event.extendedProps.time}
+        `
+      };
     }
   };
   constructor(
@@ -132,4 +132,5 @@ export class CalendarComponent implements OnInit{
     );
   }
 
+  protected readonly window = window;
 }

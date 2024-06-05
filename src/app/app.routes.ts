@@ -21,7 +21,7 @@ import {NewPublicationComponent} from "./publication/pages/new-publication/new-p
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
-import {ViewAdvisorsSearchComponent} from "./appointment/components/view-advisors-search/view-advisors-search.component";
+import {ViewAdvisorsSearchComponent} from "./appointment/pages/view-advisors-search/view-advisors-search.component";
 import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors/view-my-advisors.component";
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
@@ -39,10 +39,10 @@ import {SignupComponent} from "./user/pages/signup/signup.component";
 import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
 import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
 
-import {ListAvailabilityScheduleComponent} from "./appointment/components/list-availability-schedule/list-availability-schedule.component";
+import {ListAvailabilityScheduleComponent} from "./appointment/pages/list-availability-schedule/list-availability-schedule.component";
 import {AddAvailabilityScheduleComponent} from "./appointment/components/add-availability-schedule/add-availability-schedule.component";
 
-import {CalendarComponent} from "./appointment/components/calendar/calendar.component";
+import {CalendarComponent} from "./appointment/pages/calendar/calendar.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},

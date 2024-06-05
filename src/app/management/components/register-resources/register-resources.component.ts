@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import { MatSelect } from '@angular/material/select';
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-register-resources',
@@ -26,7 +27,8 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
     CommonModule,
     MatRadioButton,
     MatRadioGroup,
-    MatSelect
+    MatSelect,
+    MatIcon
   ],
   templateUrl: './register-resources.component.html',
   styleUrls: ['./register-resources.component.css']

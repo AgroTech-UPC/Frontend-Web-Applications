@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-register-cuy',
@@ -27,7 +28,8 @@ import {MatSelect} from "@angular/material/select";
     MatRadioGroup,
     MatRadioButton,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatIcon
   ],
   templateUrl: './register-cuy.component.html',
   styleUrl: './register-cuy.component.css'
