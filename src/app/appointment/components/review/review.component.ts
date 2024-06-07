@@ -74,7 +74,7 @@ export class ReviewComponent implements OnInit {
     const advisorId = this.appointment.advisor_id;
     this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
-      this.userApiService.getOne(advisor.user_id).subscribe(user => {
+      this.userApiService.getOne(advisor.userId).subscribe(user => {
         this.advisorDetails = {
           fullname: user.fullname,
           location: user.location

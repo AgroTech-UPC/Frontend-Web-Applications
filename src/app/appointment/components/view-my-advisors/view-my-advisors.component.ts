@@ -82,8 +82,8 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
         this.filteredAdvisors = [...this.advisors];
         this.filteredAdvisors.forEach(advisor => {
-          this.userApiService.getOne(advisor.user_id).subscribe(user => {
-            this.advisorDetails[advisor.user_id] = {
+          this.userApiService.getOne(advisor.userId).subscribe(user => {
+            this.advisorDetails[advisor.userId] = {
               fullname: user.fullname,
               location: user.location
             };
@@ -106,7 +106,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
       this.filteredAdvisors = this.advisors;
     } else {
         this.filteredAdvisors = this.advisors.filter(advisor => {
-          return this.advisorDetails[advisor.user_id]?.fullname.toLowerCase().includes(this.searchValue.toLowerCase());
+          return this.advisorDetails[advisor.userId]?.fullname.toLowerCase().includes(this.searchValue.toLowerCase());
         }
       );
     }

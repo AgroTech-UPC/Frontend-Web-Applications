@@ -40,8 +40,8 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     this.advisorApiService.getAll().subscribe(advisors => {
       this.advisors = advisors;
       this.advisors.forEach(advisor => {
-        this.userApiService.getOne(advisor.user_id).subscribe(user => {
-          this.advisorDetails[advisor.user_id] = {
+        this.userApiService.getOne(advisor.userId).subscribe(user => {
+          this.advisorDetails[advisor.userId] = {
             fullname: user.fullname,
             location: user.location
           };
@@ -60,7 +60,7 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     } else {
       this.advisorApiService.getAll().subscribe(res => {
           this.advisors = res.filter(advisor =>
-            this.advisorDetails[advisor.user_id]?.fullname.toLowerCase().startsWith(filteredValue.toLowerCase())
+            this.advisorDetails[advisor.userId]?.fullname.toLowerCase().startsWith(filteredValue.toLowerCase())
           );
         },
         error => {

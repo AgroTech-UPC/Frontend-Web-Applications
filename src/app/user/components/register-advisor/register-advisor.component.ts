@@ -112,7 +112,7 @@ export class RegisterAdvisorComponent {
               experience: this.registerForm.value.experience,
               photo: this.registerForm.value.photo,
               rating: 0,
-              user_id: response.id
+              userId: response.id
             };
             this.advisorApiService.create(advisor).subscribe(
               (response) => {

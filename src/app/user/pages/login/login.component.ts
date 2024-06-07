@@ -72,14 +72,14 @@ export class LoginComponent implements OnInit {
         this.errorMessage = null;
         this.userApiService.setLogged(true);
         this.breederApiService.getAll().subscribe((data) => {
-          const breeder = data.find(breeder => breeder.user_id === user.id);
+          const breeder = data.find(breeder => breeder.userId === user.id);
           if (breeder) {
             this.userApiService.setIsBreeder(true);
             this.breederApiService.setBreederId(breeder.id);
             this.router.navigateByUrl('/criador/mi-granja');
           } else {
             this.advisorApiService.getAll().subscribe((data) => {
-              const advisor = data.find(advisor => advisor.user_id === user.id);
+              const advisor = data.find(advisor => advisor.userId === user.id);
               if (advisor) {
                 this.userApiService.setIsBreeder(false);
                 this.advisorApiService.setAdvisorId(advisor.id);

@@ -94,13 +94,14 @@ export class RegisterBreederComponent {
           birthdate: birthDateString,
           description: this.registerForm.value.description
         };
+        console.log(user);
 
         this.userApiService.create(user).subscribe(
           (response) => {
             console.log(response);
             let breeder: Breeder = {
               id: 0,
-              user_id: response.id
+              userId: response.id
             };
             this.breederApiService.create(breeder).subscribe(
               (response) => {

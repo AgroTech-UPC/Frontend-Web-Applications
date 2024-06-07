@@ -19,7 +19,7 @@
             </div>
           </mat-card-title>
           <mat-card-subtitle>
-            <span class="title">{{ advisorDetails[advisor.user_id]?.fullname }}</span>
+            <span class="title">{{ advisorDetails[advisor.userId]?.fullname }}</span>
             <br><br>
             <!-- Estrellas de rating existente -->
             <span class="stars" *ngFor="let i of [].constructor(advisor.rating); let idx = index" [style.animation-delay]="idx * 0.2 + 's'">&#9733;</span>
@@ -31,7 +31,7 @@
       </mat-card-header>
       <div class="more-info">
         <h3>
-          <strong>Ubicación:</strong> {{ advisorDetails[advisor.user_id]?.location }}
+          <strong>Ubicación:</strong> {{ advisorDetails[advisor.userId]?.location }}
           <br>
           <strong>Experiencia:</strong> {{advisor.experience}} años
         </h3>

@@ -62,7 +62,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   getAdvisor(): void {
     this.advisorApiService.getOne(this.id).subscribe(advisor => {
       this.advisor = advisor
-      this.userApiService.getOne(advisor.user_id).subscribe(user => {
+      this.userApiService.getOne(advisor.userId).subscribe(user => {
         this.advisorDetails = {
           fullname: user.fullname,
           location: user.location,

@@ -93,9 +93,9 @@ export class CalendarComponent implements OnInit{
   getFullnameFromAdvisorOrBreederId(id: number, userType: string): Observable<string> {
     let userId$: Observable<number>;
     if (userType === 'advisor') {
-      userId$ = this.advisorApiService.getOne(id).pipe(map((advisor: Advisor) => advisor.user_id));
+      userId$ = this.advisorApiService.getOne(id).pipe(map((advisor: Advisor) => advisor.userId));
     } else {
-      userId$ = this.breederApiService.getOne(id).pipe(map((breeder: Breeder) => breeder.user_id));
+      userId$ = this.breederApiService.getOne(id).pipe(map((breeder: Breeder) => breeder.userId));
     }
     return userId$.pipe(
       switchMap(userId => this.userApiService.getOne(userId)),
