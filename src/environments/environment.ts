@@ -15,5 +15,5 @@ export const environment = {
     animalURL: '/animals',
     cageURL: '/cages',
     reviewURL: '/reviews',
-    availableDateURL: '/available_dates'
+    availableDateURL: '/available-dates'
 }
