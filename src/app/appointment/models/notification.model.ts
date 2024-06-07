@@ -3,5 +3,5 @@ export interface Notification {
   type: string;
   text: string;
   date: string;
-  user_id: number;
+  userId: number;
 }

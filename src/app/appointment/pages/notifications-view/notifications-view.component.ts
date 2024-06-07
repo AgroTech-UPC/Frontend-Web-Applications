@@ -19,6 +19,7 @@ import {NotificationApiService} from "../../services/notification-api.service";
 import {Notification} from "../../models/notification.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 
+
 @Component({
   selector: 'app-notifications-view-advisor-view',
   standalone: true,
@@ -51,22 +52,19 @@ export class NotificationsViewComponent implements OnInit{
   }
 
   getNotifications() {
-    this.notificationsApiService.getAll().subscribe((notifications: Notification[]) => {
+    this.userApiService.getNotificationsByUserId(this.user_id).subscribe((notifications: Notification[]) => {
       notifications.forEach((notification: Notification) => {
-        // Verify the user id
-        if (notification.user_id === this.user_id) {
-          // Create a new date object
-          const date = new Date(notification.date);
-          // Apply the format to the date
-          const formattedDate = date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
+        // Create a new date object
+        const date = new Date(notification.date);
+        // Apply the format to the date
+        const formattedDate = date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
 
-          this.results.push({
-            id: notification.id,
-            type: notification.type,
-            text: notification.text,
-            date: formattedDate
-          });
-        }
+        this.results.push({
+          id: notification.id,
+          type: notification.type,
+          text: notification.text,
+          date: formattedDate
+        });
       });
     }, (error) => {
       console.error(error);

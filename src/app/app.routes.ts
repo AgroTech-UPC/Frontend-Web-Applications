@@ -10,7 +10,7 @@ import {MyFarmViewComponent} from "./management/components/my-farm-view/my-farm-
 import {MyFarmResourceManagementComponent} from "./management/components/my-farm-resource-management/my-farm-resource-management.component"
 import {MyFarmExpensesManagementComponent} from "./management/components/my-farm-expenses-management/my-farm-expenses-management.component";
 
-import {NotificationsViewComponent} from "./appointment/components/notifications-view/notifications-view.component";
+import {NotificationsViewComponent} from "./appointment/pages/notifications-view/notifications-view.component";
 import {CageListComponent} from "./management/pages/cage-list/cage-list.component";
 import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
 import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
