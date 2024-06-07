@@ -5,6 +5,8 @@ import {HttpClient} from "@angular/common/http";
 //Import the user model
 import {User} from "../models/user.model";
 import {BaseService} from "../../shared/services/base.service";
+import {Notification} from "../../appointment/models/notification.model";
+import {catchError, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -57,4 +59,9 @@ export class UserApiService extends  BaseService<User>{
     }
     return 0;
   }
+
+  getNotificationsByUserId(user_id: number) {
+    return this.http.get<Notification[]>(this.buildPath() + '/' + user_id + '/notifications').pipe(catchError(this.handleError));
+  }
+
 }
