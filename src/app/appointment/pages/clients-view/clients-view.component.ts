@@ -48,7 +48,7 @@ export class ClientsViewComponent implements OnInit {
   getClients(){
     this.appointments.forEach(appointment => {
       this.breederService.getOne(appointment.breeder_id).subscribe(breeder => {
-        this.userService.getOne(breeder.user_id).subscribe(user => {
+        this.userService.getOne(breeder.userId).subscribe(user => {
           let client = {
             id: breeder.id,
             appointment_id: appointment.id,
