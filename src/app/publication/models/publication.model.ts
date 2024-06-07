@@ -1,7 +1,7 @@
 
 export interface Publication {
   id: number;
-  advisor_id: number;
+  advisorId: number;
   title: string;
   description: string;
   date: string;

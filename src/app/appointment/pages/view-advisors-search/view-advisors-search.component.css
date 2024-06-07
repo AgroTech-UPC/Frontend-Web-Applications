@@ -73,7 +73,7 @@ mat-card-subtitle{
   color: gray;
 }
 mat-card-header{
-  background: rgba(240, 218, 139, 94) url("/src/assets/images/cuy-transparente.png") no-repeat right center;
+  background: rgba(240, 218, 139, 94) url("/assets/images/cuy-transparente.png") no-repeat right center;
   border-radius: 10px;
 }
 

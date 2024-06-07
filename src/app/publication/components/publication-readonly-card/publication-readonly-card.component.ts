@@ -24,6 +24,6 @@ export class PublicationReadonlyCardComponent {
   constructor(private router: Router) { }
 
   goToAdvisor() {
-    this.router.navigate(['/criador/asesor-info/' + this.publication.advisor_id]);
+    this.router.navigate(['/criador/asesor-info/' + this.publication.advisorId]);
   }
 }
