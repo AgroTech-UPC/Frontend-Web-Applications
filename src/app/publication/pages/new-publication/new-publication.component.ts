@@ -30,7 +30,7 @@ export class NewPublicationComponent implements OnInit {
   // datos de publicación para el formulario
   publicationData!: Publication;
 
-  advisor_id = 0;
+  advisorId = 0;
 
   constructor(private publicationsService: PublicationsApiService,
               private advisorService: AdvisorApiService,
@@ -40,7 +40,7 @@ export class NewPublicationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.advisor_id = this.advisorService.getAdvisorId();
+    this.advisorId = this.advisorService.getAdvisorId();
   }
 
   addPublication() {
@@ -52,7 +52,7 @@ export class NewPublicationComponent implements OnInit {
 
     let newPublication: Publication = {
       id: 0,
-      advisor_id: this.advisor_id,
+      advisorId: this.advisorId,
       title: this.publicationData.title,
       description: this.publicationData.description,
       date: formattedDate,

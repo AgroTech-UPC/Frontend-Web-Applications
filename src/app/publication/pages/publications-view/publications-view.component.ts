@@ -38,7 +38,7 @@ export class PublicationsViewComponent implements OnInit {
         publicationData.description = publication.description;
         publicationData.date = publication.date;
         publicationData.image = publication.image;
-        publicationData.advisor_id = publication.advisor_id;
+        publicationData.advisorId = publication.advisorId;
         this.publications.push(publicationData);
       });
     });

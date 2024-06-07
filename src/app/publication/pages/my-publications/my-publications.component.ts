@@ -23,7 +23,7 @@ import {EmptyViewComponent} from "../../../public/components/empty-view/empty-vi
   styleUrl: './my-publications.component.css'
 })
 export class MyPublicationsComponent implements OnInit {
-  advisor_id = 0;
+  advisorId = 0;
   publications: Publication[] = [];
 
   constructor(private publicationsService: PublicationsApiService,
@@ -31,13 +31,13 @@ export class MyPublicationsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.advisor_id = this.advisorService.getAdvisorId();
+    this.advisorId = this.advisorService.getAdvisorId();
     this.getPublications();
   }
 
   getPublications() {
-    this.publicationsService.getAll().subscribe((res) => {
-      this.publications = res.filter((publication) => publication.advisor_id === this.advisor_id);
+    this.advisorService.getPublicationsByAdvisorId(this.advisorId).subscribe((publications) => {
+      this.publications = publications;
     });
   }
 
