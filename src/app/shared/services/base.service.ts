@@ -12,7 +12,8 @@ export class BaseService<T> {
 
   httpOptions = {
     headers: new HttpHeaders(
-      { 'Content-Type': 'application/json' }
+      { 'Content-Type': 'application/json'
+      }
     ),
   };
   constructor(private http: HttpClient) {}
@@ -35,7 +36,7 @@ export class BaseService<T> {
   }
 
   getOne(id: any) {
-    return this.http.get<T>(this.buildPath() + id).pipe(catchError(this.handleError));
+    return this.http.get<T>(this.buildPath() + "/" + id).pipe(catchError(this.handleError));
   }
 
   create(item: T) {
@@ -43,12 +44,10 @@ export class BaseService<T> {
   }
 
   update(id: any, item: T) {
-    return this.http.put<T>(this.buildPath() + id, item, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.put<T>(this.buildPath() + "/" + id, item, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   delete(id: any) {
-    console.log(this.buildPath()  + id)
-    console.log(id)
-    return this.http.delete<T>(this.buildPath() + id, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.delete<T>(this.buildPath() + "/" + id, this.httpOptions).pipe(catchError(this.handleError));
   }
 }
