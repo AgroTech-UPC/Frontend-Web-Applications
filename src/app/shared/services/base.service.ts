@@ -16,9 +16,9 @@ export class BaseService<T> {
       }
     ),
   };
-  constructor(private http: HttpClient) {}
+  constructor(protected http: HttpClient) {}
 
-  private buildPath() {
+  protected buildPath() {
     return this.baseUrl + this.extraUrl;
   }
 
