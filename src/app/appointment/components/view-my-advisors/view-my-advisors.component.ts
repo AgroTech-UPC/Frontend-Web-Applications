@@ -20,6 +20,7 @@ import {UserApiService} from "../../../user/services/user-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {ReviewApiService} from "../../services/review-api.service";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -45,6 +46,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
   breederId = 0;
   searchValue = '';
   advisors: Advisor[] = [];
+  allReviews: any[] = [];
   filteredAdvisors: Advisor[] = [];
   appointmentsPerAdvisor: Appointment[][] = []; //contains all the appointments of each advisor
   advisorDetails: any = {};
@@ -54,16 +56,22 @@ export class ViewMyAdvisorsComponent implements OnInit{
     private advisorApiService: AdvisorApiService,
     private appointmentApiService: AppointmentApiService,
     private userApiService: UserApiService,
+    private reviewApiService: ReviewApiService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.breederId = this.breederApiService.getBreederId();
+    this.allReviews = (await this.reviewApiService.getAll().toPromise()) ?? [];
     this.getMyAdvisors();
   }
 
   getAppointmentsByAdvisor(advisor_id: number): Appointment[] {
-    return this.appointmentsPerAdvisor[advisor_id] || [];
+    const appointments = this.appointmentsPerAdvisor[advisor_id] || [];
+    return appointments.filter(appointment => {
+      const review = this.allReviews.find(review => review.appointmentId === appointment.id);
+      return !review; // Solo incluye las citas que no tienen una revisión
+    });
   }
 
   getMyAdvisors(): void {
