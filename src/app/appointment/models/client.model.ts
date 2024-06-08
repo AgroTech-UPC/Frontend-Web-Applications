@@ -1,9 +1,9 @@
 export interface Client {
-  "id": number;
-  "appointment_id": number;
-  "appointment_status": string;
-  "fullname": string;
-  "location": string;
-  "cages": number;
-  "description": string;
+  id: number;
+  appointmentId: number;
+  appointmentStatus: string;
+  fullname: string;
+  location: string;
+  cages: number;
+  description: string;
 }
