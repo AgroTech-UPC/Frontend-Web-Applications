@@ -45,9 +45,7 @@ export class CageListComponent implements OnInit {
   }
 
   getCages(){
-    this.cageService.getAll().subscribe((cages: Cage[]) => {
-      // Filter cages by breeder_id to show only the cages of the current breeder
-      cages = cages.filter(cage => cage.breeder_id === this.breederService.getBreederId());
+    this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe((cages: Cage[]) => {
       this.dataSource = new MatTableDataSource(cages);
       this.length = cages.length;
     });
@@ -62,7 +60,7 @@ export class CageListComponent implements OnInit {
       if(result) {
         this.animalService.getAll().subscribe((data) => {
           data.forEach((animal: any) => {
-            if(animal.cage_id === id){
+            if(animal.cageId === id){
               this.animalService.delete(animal.id).subscribe(
                 () => {
                   console.log(`Animal ${animal.id} deleted`);

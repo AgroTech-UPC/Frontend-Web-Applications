@@ -46,7 +46,7 @@
 
         <mat-form-field>
           <mat-label>ID de la jaula</mat-label>
-          <input matInput type="number" placeholder="ID de la jaula" name="animalCageId" [disabled]="!isEditMode" [(ngModel)]="animal.cage_id" required>
+          <input matInput type="number" placeholder="ID de la jaula" name="animalCageId" [disabled]="!isEditMode" [(ngModel)]="animal.cageId" required>
         </mat-form-field>
 
         <mat-form-field>
@@ -56,9 +56,9 @@
 
         <mat-form-field>
           <mat-label>Estado</mat-label>
-          <mat-select name="animalStatus" aria-label="seleccionador de estado" [disabled]="!isEditMode" [(ngModel)]="animal.status" required>
-            <mat-option value="Saludable">Saludable</mat-option>
-            <mat-option value="Enfermo">Enfermo</mat-option>
+          <mat-select name="animalStatus" aria-label="seleccionador de estado" [disabled]="!isEditMode" [(ngModel)]="isSick" required>
+            <mat-option value="false">Saludable</mat-option>
+            <mat-option value="true">Enfermo</mat-option>
           </mat-select>
         </mat-form-field>
 

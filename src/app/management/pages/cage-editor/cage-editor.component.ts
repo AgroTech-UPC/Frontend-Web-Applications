@@ -27,7 +27,7 @@ export class CageEditorComponent implements OnInit {
   cageID = 0;
   cage: Cage = {
     id: 0,
-    breeder_id: 0,
+    breederId: 0,
     name: '',
     size: 0,
     observations: ''
@@ -49,7 +49,7 @@ export class CageEditorComponent implements OnInit {
     this.cageService.getOne(id).subscribe((data) => {
       this.cage = {
         id: data.id,
-        breeder_id: data.breeder_id,
+        breederId: data.breederId,
         name: data.name,
         size: data.size,
         observations: data.observations

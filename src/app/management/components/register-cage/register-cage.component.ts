@@ -33,7 +33,7 @@ import {MatIcon} from "@angular/material/icon";
 export class RegisterCageComponent {
   cage: Cage = {
     id: 0,
-    breeder_id: 0,
+    breederId: 0,
     name: '',
     size: 0,
     observations: ''
@@ -43,7 +43,7 @@ export class RegisterCageComponent {
               private cageService: CageApiService,
               private snackBar: MatSnackBar,
               private breederService: BreederApiService) {
-    this.cage.breeder_id = this.breederService.getBreederId();
+    this.cage.breederId = this.breederService.getBreederId();
   }
 
   openDialog(): void {

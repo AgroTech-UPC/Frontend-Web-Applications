@@ -7,6 +7,7 @@ import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {forEach} from "lodash";
 import {AnimalCardComponent} from "../../components/animal-card/animal-card.component";
+import {CageApiService} from "../../services/cage-api.service";
 
 @Component({
   selector: 'app-animal-list',
@@ -28,7 +29,7 @@ export class AnimalListComponent implements OnInit{
   cageID = -1;
   constructor(private router: Router,
               private route: ActivatedRoute,
-              private animalService: AnimalApiService,) {
+              private cageService: CageApiService) {
   }
 
   ngOnInit() {
@@ -37,8 +38,8 @@ export class AnimalListComponent implements OnInit{
   }
 
   getAnimals(){
-    this.animalService.getAll().subscribe((data: any) => {
-      this.animals = data.filter((animal: Animal) => animal.cage_id === this.cageID);
+    this.cageService.getAnimalsByCageId(this.cageID).subscribe((data: any) => {
+      this.animals = data;
     });
   }
 
