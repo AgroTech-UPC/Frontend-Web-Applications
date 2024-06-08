@@ -70,7 +70,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
         };
       });
       this.appointmentApiService.getAll().subscribe(appointments => {
-        this.appointments = appointments.filter(appointment => appointment.advisor_id === advisor.id);
+        this.appointments = appointments.filter(appointment => appointment.advisorId === advisor.id);
         this.getAdvisorReviews();
       });
     });
@@ -79,7 +79,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   getAdvisorReviews(): void {
     this.reviewApiService.getAll().subscribe(reviews => {
       this.reviews = reviews.filter(review => {
-        return this.appointments.find(appointment => appointment.id === review.appointment_id);
+        return this.appointments.find(appointment => appointment.id === review.appointmentId);
       });
     });
   }

@@ -22,7 +22,7 @@ import {EmptyViewComponent} from "../../../public/components/empty-view/empty-vi
   styleUrl: './clients-view.component.css'
 })
 export class ClientsViewComponent implements OnInit {
-  advisor_id = 0;
+  advisorId = 0;
   appointments: Appointment[] = [];
   clients: Client[] = [];
 
@@ -32,13 +32,13 @@ export class ClientsViewComponent implements OnInit {
                private appointmentService: AppointmentApiService) { }
 
   ngOnInit() {
-    this.advisor_id = this.advisorService.getAdvisorId();
+    this.advisorId = this.advisorService.getAdvisorId();
     this.getAppointments();
   }
 
   getAppointments() {
     this.appointmentService.getAll().subscribe(appointments => {
-      appointments.filter(appointment => appointment.advisor_id === this.advisor_id).forEach(appointment => {
+      appointments.filter(appointment => appointment.advisorId === this.advisorId).forEach(appointment => {
         this.appointments.push(appointment);
       });
       this.getClients();
@@ -47,19 +47,20 @@ export class ClientsViewComponent implements OnInit {
 
   getClients(){
     this.appointments.forEach(appointment => {
-      this.breederService.getOne(appointment.breeder_id).subscribe(breeder => {
+      this.breederService.getOne(appointment.breederId).subscribe(breeder => {
         this.userService.getOne(breeder.userId).subscribe(user => {
           let client = {
             id: breeder.id,
-            appointment_id: appointment.id,
+            appointmentId: appointment.id,
             fullname: user.fullname,
-            appointment_status: appointment.status,
+            appointmentStatus: appointment.status,
             location: user.location,
             cages: 0,
             description: user.description
           }
-          this.clients.push(client);
+          this.clients.push(  client);
         });
+
 
       });
     });

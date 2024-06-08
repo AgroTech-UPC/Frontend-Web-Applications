@@ -40,7 +40,7 @@ export class ReviewComponent implements OnInit {
 
   review: Review = {
     id: 0,
-    appointment_id: 0,
+    appointmentId: 0,
     comment: "",
     rating: 0
   }
@@ -56,7 +56,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.review.appointment_id = params['id'];
+      this.review.appointmentId = params['id'];
 
       const appointmentId = params['id'];
       this.getAppointment(appointmentId);
@@ -71,7 +71,7 @@ export class ReviewComponent implements OnInit {
   }
 
   getAdvisor(): void {
-    const advisorId = this.appointment.advisor_id;
+    const advisorId = this.appointment.advisorId;
     this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
       this.userApiService.getOne(advisor.userId).subscribe(user => {
@@ -85,7 +85,7 @@ export class ReviewComponent implements OnInit {
   }
   onSubmit() {
     this.review.rating = this.rating;
-    this.review.appointment_id = this.appointment.id;
+    this.review.appointmentId = this.appointment.id;
     this.reviewService.create(this.review).subscribe();
     this.appointment.status = "Terminado";
     this.appointmentService.update(this.appointment.id, this.appointment).subscribe();

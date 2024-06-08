@@ -73,8 +73,8 @@ export class ViewMyAdvisorsComponent implements OnInit{
         let advisorAppointments: Appointment[][] = []; // Initialize as array of arrays
         this.advisors.forEach(advisor => {
           // Push the filtered appointments into the corresponding sub-array
-          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisor_id === advisor.id &&
-            appointment.breeder_id === this.breederId);
+          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisorId === advisor.id &&
+            appointment.breederId === this.breederId);
         });
         //if advisorAppointments[advisor.id - 1] is empty, then the advisor has no appointments with the breeder
         // and has to be removed from the list of advisors
@@ -91,8 +91,8 @@ export class ViewMyAdvisorsComponent implements OnInit{
         });
         //Get all appointments for each advisor in an array
         this.filteredAdvisors.forEach(advisor => {
-          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisor_id === advisor.id
-            && appointment.breeder_id === this.breederId);
+          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisorId === advisor.id
+            && appointment.breederId === this.breederId);
         });
       });
     });

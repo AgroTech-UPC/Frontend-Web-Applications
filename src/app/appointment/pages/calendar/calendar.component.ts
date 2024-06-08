@@ -105,14 +105,14 @@ export class CalendarComponent implements OnInit{
 
   filterAppointments(appointments: Appointment[]): Appointment[] {
     return appointments.filter(appointment =>
-      (this.userType === 'advisor' ? appointment.advisor_id === this.advisor_id : appointment.breeder_id === this.breeder_id) && appointment.status === 'Pendiente'
+      (this.userType === 'advisor' ? appointment.advisorId === this.advisor_id : appointment.breederId === this.breeder_id) && appointment.status === 'PENDIENTE'
     );
   }
 
   // Crea el evento osea lo que marca en el calendario
   createEventFromAppointment(appointment: Appointment): Observable<any> {
     return this.getFullnameFromAdvisorOrBreederId(
-      this.userType === 'advisor' ? appointment.breeder_id : appointment.advisor_id,
+      this.userType === 'advisor' ? appointment.breederId : appointment.advisorId,
       this.userType === 'advisor' ? 'breeder' : 'advisor'
     ).pipe(
       map(fullname => {

@@ -99,8 +99,8 @@ export class ViewReserveAppointmentComponent implements OnInit {
     let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.startTime}:00`);
     let newAppointment: Appointment = {
       id: this.appointmentId,
-      advisor_id: this.advisor.id,
-      breeder_id: this.breeder.id,
+      advisorId: this.advisor.id,
+      breederId: this.breeder.id,
       date: appointmentDate,
       status: "Pendiente"
     };

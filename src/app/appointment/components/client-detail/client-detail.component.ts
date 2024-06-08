@@ -26,22 +26,22 @@ export class ClientDetailComponent implements OnInit{
   breeder!: Breeder;
   appointment: Appointment = {
     id: 0,
-    advisor_id: 0,
-    breeder_id: 0,
+    advisorId: 0,
+    breederId: 0,
     date: '',
     status: '',
   }
 
   client: Client = {
     id: 0,
-    appointment_id: 0,
+    appointmentId: 0,
+    appointmentStatus: '',
     fullname: '',
-    appointment_status: '',
     location: '',
     cages: 0,
     description: ''
   }
-  appointment_id = 0;
+  appointmentId = 0;
 
   constructor(private breederService: BreederApiService,
               private userService: UserApiService,
@@ -50,22 +50,22 @@ export class ClientDetailComponent implements OnInit{
               private activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
-    this.appointment_id = this.activatedRouter.snapshot.params['id'];
+    this.appointmentId = this.activatedRouter.snapshot.params['id'];
     this.getAppointment();
   }
 
-  getClient(breeder_id: number) {
-    this.breederService.getOne(breeder_id).subscribe((breeder: Breeder) => {
+  getClient(breederId: number) {
+    this.breederService.getOne(breederId).subscribe((breeder: Breeder) => {
       this.breeder = breeder;
       this.userService.getOne(breeder.userId).subscribe(user => {
         this.cageService.getAll().subscribe(cages => {
           this.client = {
-            id: breeder_id,
-            appointment_id: this.appointment_id,
+            id: breederId,
+            appointmentId: this.appointmentId,
+            appointmentStatus: this.appointment.status,
             fullname: user.fullname,
-            appointment_status: this.appointment.status,
             location: user.location,
-            cages: cages.filter(cage => cage.breederId === breeder_id).length,
+            cages: cages.filter(cage => cage.breederId === breederId).length,
             description: user.description
           }
         })
@@ -74,9 +74,9 @@ export class ClientDetailComponent implements OnInit{
   }
 
   getAppointment() {
-    this.appointmentService.getOne(this.appointment_id).subscribe((appointment: Appointment) => {
+    this.appointmentService.getOne(this.appointmentId).subscribe((appointment: Appointment) => {
       this.appointment = appointment;
-      this.getClient(appointment.breeder_id);
+      this.getClient(appointment.breederId);
     });
   }
 
