@@ -5,6 +5,7 @@ import {HttpClient} from "@angular/common/http";
 //Import the breeder model
 import {Breeder} from "../models/breeder.model";
 import {BaseService} from "../../shared/services/base.service";
+import {catchError, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,10 @@ export class BreederApiService extends  BaseService<Breeder>{
       return breeder_id ? parseInt(breeder_id) : 0;
     }
     return 0;
+  }
+
+  getExpenses(breederId: number): Observable<any[]> {
+    const url = `${this.baseUrl}${this.extraUrl}/${breederId}/expenses`;
+    return this.http.get<any[]>(url).pipe(catchError(this.handleError));
   }
 }
