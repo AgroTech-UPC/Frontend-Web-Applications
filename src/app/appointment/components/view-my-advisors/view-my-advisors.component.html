@@ -3,38 +3,56 @@
     <button mat-button style="color: #ffffff" class="button_only" (click)="navigateToAdvisorsSearch()">Explorar Asesores</button>
     <button mat-button style="color: #ffffff" class="button_only" (click)="navigateToMyAdvisors()">Mis Asesores</button>
   </div>
-
+  <h1 class="title-page"><strong>Bienvenid&#64; a Mis Asesores</strong></h1>
   <mat-form-field appearance="fill">
     <mat-label>Buscar</mat-label>
     <input matInput (input)="filter($event)">
   </mat-form-field>
 
   <div class="advisors-container">
-    <mat-card *ngFor="let myadvisor of filteredAdvisorHistories" class="mat-card">
-      <mat-card-header>
-        <mat-card-title style="color: #DD763D">
-          <h1>
-            <strong>{{ myadvisor.advisor.users[0].fullname }}</strong>
-          </h1>
-        </mat-card-title>
-        <mat-card-subtitle>
-          <img [src]="myadvisor.advisor.photo" alt="Foto del asesor" class="photo">
-        </mat-card-subtitle>
-      </mat-card-header>
+    <div *ngIf="filteredAdvisors.length > 0">
+      <ng-container *ngFor="let advisor of filteredAdvisors">
+        <mat-card *ngIf="getAppointmentsByAdvisor(advisor.id).length > 0" class="mat-card">
+          <mat-card-header>
+            <div class="header-content">
+              <mat-card-title>
+                <div class="img-box">
+                  <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
+                </div>
+              </mat-card-title>
+              <mat-card-subtitle>
+                <span class="title">{{ advisorDetails[advisor.userId]?.fullname }}</span>
+                <br>
+                <h2 style="color: black" class="appointments-amount">Cantidad de citas con el asesor: {{ getAppointmentsByAdvisor(advisor.id).length }}</h2>
+              </mat-card-subtitle>
+              <img src="assets/images/logo-circular.jpg" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
+            </div>
+          </mat-card-header>
 
-      <div *ngFor="let appointment of myadvisor.appointments">
-      <mat-card-content>
-        <h3><strong>Ubicación:</strong> {{ myadvisor.advisor.users[0].location }}</h3>
-        <h3><strong>Experiencia:</strong> {{myadvisor.advisor.experience}} años</h3>
-          <h3><strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}</h3>
-          <h3><strong>Estado de la cita:</strong> {{ appointment.status }}</h3>
-      </mat-card-content>
-
-        <mat-card-actions class="card-actions">
-          <button mat-button style="color: #ffffff" class="card-button" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
-        </mat-card-actions>
-      </div>
-    </mat-card>
+          <div class="more-info">
+            <div *ngFor="let appointment of getAppointmentsByAdvisor(advisor.id); let i = index">
+              <h2>
+                <strong>Cita Reservada {{ i + 1 }}:</strong>
+              </h2>
+              <h3>
+                <strong>Fecha de la cita:</strong> {{ formatDateTime(appointment.date) }}
+                <br>
+                <strong>Estado de la cita:</strong> {{ appointment.status }}
+              </h3>
+              <button mat-button style="color: white" class="{{appointment.status === 'TERMINADO' ? 'button-terminated' : 'button-other'}}" [disabled]="appointment.status !== 'TERMINADO'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
+            </div>
+            <span style="color: #DD763D; font-size: 13px" class="note-message"><strong>
+              Nota: La cita debe estar TERMINADO para poder dejar una reseña.
+            </strong>
+            </span>
+          </div>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div *ngIf="filteredAdvisors.length === 0" class="error-container">
+      <span class="error-title">Usted no reservo ninguna cita con ningun asesor</span>
+      <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+    </div>
   </div>
 
 </div>

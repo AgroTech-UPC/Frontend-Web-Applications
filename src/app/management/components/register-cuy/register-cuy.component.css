@@ -3,13 +3,13 @@
   font-size: 36px;
   display: flex;
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .container {
   margin-top: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
 }
@@ -25,11 +25,14 @@
   font-size: 25px;
   background-color: #DD763D;
   padding: 30px 40px;
+  width: 60%;
+  margin: 0 auto;
 }
 
 .group-btns {
-  display: flex;
-  gap: 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 .container-confirmation-register {
@@ -40,26 +43,30 @@
   height: 100vh;
 }
 
-@media (max-width: 600px) {
-  @media (max-width: 600px) {
-    .group-inputs, .group-btns {
-      flex-direction: column;
-      align-items: center;
-    }
+.image{
+  text-align: center;
+}
 
-    .group-btns {
-      gap: 20px;
-    }
-  }
+.image img{
+  width: 400px;
+}
 
-  @media (min-width: 601px) {
-    .group-inputs, .group-btns {
-      flex-direction: row;
-      align-items: flex-start;
-    }
-
-    .group-btns {
-      gap: 100px;
-    }
+@media screen and (max-width: 1400px)
+{
+  .image img{
+    width: 40%;
   }
 }
+
+@media (max-width: 600px) {
+  .group-inputs, .group-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .group-btns button {
+    width: 100%;
+  }
+
+}
+

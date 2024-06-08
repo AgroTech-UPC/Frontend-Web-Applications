@@ -1,40 +1,54 @@
-<div class="container" *ngIf="!isConfirmed">
-<h1><strong>RESEÑA</strong></h1>
-<div class="form">
-  <form (submit)="onSubmit()" #cageForm = "ngForm" aria-label="formulario para reseñar a un asesor">
-    <div class="form-content">
-      <div class="photo-section">
-        <img [src]="advisor.photo" alt="Foto del asesor">
-      </div>
-      <div class="info-input-section">
-        <h2>{{ advisor.users[0].fullname }}</h2>
-        <p>{{ advisor.users[0].description }}</p>
-        <mat-form-field>
+<div class="container">
+  <h1 class="title-page"><strong>Dejar Reseña al Asesor</strong></h1>
+
+  <mat-card class="review-card">
+    <div class="review-photo">
+      <mat-card-header>
+        <mat-card-subtitle>
+          <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
+        </mat-card-subtitle>
+      </mat-card-header>
+    </div>
+    <div class="review-content">
+      <mat-card-header>
+        <mat-card-title>
+          <span style="font-size: 30px"><strong>Reseña a {{ advisorDetails.fullname }}</strong></span>
+        </mat-card-title>
+      </mat-card-header>
+
+      <form (submit)="onSubmit()" #cageForm = "ngForm" aria-label="formulario para reseñar a un asesor" class="form">
+        <mat-form-field class="form-field" style="width: 300px">
           <mat-label>Comentario</mat-label>
-          <input matInput placeholder="Comentario" name="reviewComment" [(ngModel)]="review.comment">
+          <input matInput class="input" placeholder="Comentario" name="reviewComment" [(ngModel)]="review.comment">
         </mat-form-field>
 
-        <div>
-          <label>Estrellas</label>
+        <div class="rating-content">
+          <span style="padding-left: 5px;">Calificación en Estrellas</span>
           <div class="star-rating">
-            <button *ngFor="let star of stars; index as i" (click)="onStarClick(i)">
+            <button type="button" *ngFor="let star of stars; index as i" (click)="onStarClick(i)">
               <mat-icon [class.selected]="star">{{ star ? 'star' : 'star_border' }}</mat-icon>
             </button>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="buttons">
-      <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">Descartar</button>
-      <button mat-raised-button color="primary" aria-label="guardar cambios" type="submit">Guardar</button>
+        <div class="buttons">
+          <button mat-raised-button color="warn" aria-label="descartar cambios" type="button" (click)="onCancel()">Cancelar</button>
+          <button mat-raised-button style="background-color: #7ec306; color:white;" aria-label="guardar cambios" type="submit">Enviar Reseña</button>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
+  </mat-card>
+
+  <span class="title-frase"><strong>Tus reseñas ayudan a nuestros asesores a ofrecerte el mejor servicio posible</strong></span>
+  <img src="/assets/images/cuys-reseña.png" alt="Imagen Frase" class="photo-frase">
 </div>
 
-<div class="container center-content" *ngIf="isConfirmed">
-  <h1 class="title_confirmation"><strong>LA RESEÑA SE SUBIO CORRECTAMENTE</strong></h1>
-  <img src="assets/images/cuy_confirmacion_appointment.png" alt="success" class="success-image">
-  <button mat-raised-button color="primary" class="custom-button" (click)="goHome()">Volver al Inicio</button>
+<div class="overlay" *ngIf="isConfirmed">
+  <mat-card>
+    <div class="confirmation-card">
+      <h1><strong>Reseña Enviada con Éxito</strong></h1>
+      <img src="/assets/images/cuy_confirmacion_appointment.png" alt="Imagen Deco" class="confirmation-image">
+      <button mat-raised-button style="background-color: #DD763D; color: white" (click)="goHome()">Volver al Inicio</button>
+    </div>
+  </mat-card>
 </div>

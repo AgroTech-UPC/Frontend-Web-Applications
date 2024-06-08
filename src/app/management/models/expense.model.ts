@@ -1,8 +1,8 @@
 export interface Expense {
-  id: number;
-  breeder_id: number;
+  breederId: number;
+  name: string;
   type: string;
   amount: number;
-  date: Date;
-  details: string;
+  date: string;
+  observations: string;
 }

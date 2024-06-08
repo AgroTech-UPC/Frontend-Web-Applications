@@ -7,12 +7,15 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 
-import {Advisor} from "../../models/advisor.model";
-import {AdvisorApiService} from "../../services/advisor-api/advisor-api.service";
+import {Advisor} from "../../../user/models/advisor.model";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {NgForOf, NgIf} from "@angular/common";
 
-import {ReviewApiService} from "../../services/review-api/review-api.service";
+import {ReviewApiService} from "../../services/review-api.service";
 import {Review} from "../../models/review.model";
+import {UserApiService} from "../../../user/services/user-api.service";
+import {AppointmentApiService} from "../../services/appointment-api.service";
+import {Appointment} from "../../models/appointment.model";
 
 @Component({
   selector: 'app-view-advisor-aboutus',
@@ -29,35 +32,63 @@ import {Review} from "../../models/review.model";
   templateUrl: './view-advisor-aboutus.component.html',
   styleUrl: './view-advisor-aboutus.component.css'
 })
-export class ViewAdvisorAboutusComponent {
+export class ViewAdvisorAboutusComponent implements OnInit{
+
+
   advisor!: Advisor;
+  appointments: Appointment[] = [];
   reviews: Review[] = [];
+  advisorDetails = {
+    fullname: "",
+    location: "",
+    description: ""
+  };
+  id = 0;
   constructor(
-    private advisorApiService: AdvisorApiService,
     private router: Router,
-    private route: ActivatedRoute,
+    private activatedRouter: ActivatedRoute,
+    private advisorApiService: AdvisorApiService,
+    private appointmentApiService: AppointmentApiService,
+    private userApiService: UserApiService,
     private reviewApiService: ReviewApiService
-  ){}
+  )
+  {  }
 
   ngOnInit(): void {
+    this.id = +this.activatedRouter.snapshot.params['id'];
     this.getAdvisor();
-
-    this.getAdvisorReviews();
   }
 
   getAdvisor(): void {
-    const id = this.route.snapshot.paramMap.get('id_asesor');
-    this.advisorApiService.getAdvisor(id).subscribe(advisor => this.advisor = advisor);
+    this.advisorApiService.getOne(this.id).subscribe(advisor => {
+      this.advisor = advisor
+      this.userApiService.getOne(advisor.userId).subscribe(user => {
+        this.advisorDetails = {
+          fullname: user.fullname,
+          location: user.location,
+          description: user.description
+        };
+      });
+      this.appointmentApiService.getAll().subscribe(appointments => {
+        this.appointments = appointments.filter(appointment => appointment.advisorId === advisor.id);
+        this.getAdvisorReviews();
+      });
+    });
   }
 
   getAdvisorReviews(): void {
-    const id = this.route.snapshot.paramMap.get('id_asesor');
-    this.reviewApiService.getAdvisorReviews(id).subscribe(reviews => this.reviews = reviews);
+    this.reviewApiService.getAll().subscribe(reviews => {
+      this.reviews = reviews.filter(review => {
+        return this.appointments.find(appointment => appointment.id === review.appointmentId);
+      });
+    });
   }
 
   NavigateToReserveAppointment(): void {
-    const id_criador = this.route.snapshot.paramMap.get('id_criador');
-    const id_asesor = this.advisor.id;
-    this.router.navigate([`/criador/asesor-info/${id_asesor}/reservar-cita`]);
+    let id = this.advisor.id;
+    this.router.navigate([`/criador/asesor-info/${id}/reservar-cita`]);
+  }
+  goBack(): void {
+    window.history.back();
   }
 }

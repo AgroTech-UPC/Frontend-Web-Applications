@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatInputModule} from '@angular/material/input';
@@ -8,38 +8,47 @@ import {CommonModule} from "@angular/common";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Expense } from '../../models/expense.model';
-import { ExpenseService } from '../../services/expense-service/expense.service';
+import { ExpenseApiService } from "../../services/expense-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-register-expenses',
   standalone: true,
-  imports: [
-    MatButton,
-    RouterLink,
-    MatInputModule,
-    MatFormFieldModule,
-    FormsModule,
-    CommonModule,
-    MatRadioButton,
-    MatRadioGroup
-  ],
+    imports: [
+        MatButton,
+        RouterLink,
+        MatInputModule,
+        MatFormFieldModule,
+        FormsModule,
+        CommonModule,
+        MatRadioButton,
+        MatRadioGroup,
+        MatIcon
+    ],
   templateUrl: './register-expenses.component.html',
   styleUrl: './register-expenses.component.css'
 })
-export class RegisterExpensesComponent {
+export class RegisterExpensesComponent implements OnInit {
   expense: Expense = {
-    id: 0,
-    breeder_id: 1,
-    type: "",
+    name: "",
+    type: "ALIMENTO",
     amount: 0,
-    date: new Date(),
-    details: ""
+    date: "",
+    observations: "Ninguna",
+    breederId: 0
   };
 
-  constructor(public dialog: MatDialog, private expenseService: ExpenseService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog,
+              private expenseService: ExpenseApiService,
+              private breederService: BreederApiService,
+              private snackBar: MatSnackBar) {}
+
+  ngOnInit() {
+    this.expense.breederId = this.breederService.getBreederId();
+  }
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -51,18 +60,15 @@ export class RegisterExpensesComponent {
     } else {
       this.registerExpense();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }
 
   registerExpense(): void {
-    this.expenseService.getHighestId().subscribe(highestId => {
-      this.expense.id = highestId + 1;
-      this.expenseService.addExpense(this.expense).subscribe();
-    });
+    this.expenseService.create(this.expense).subscribe();
   }
 
   goBack() {

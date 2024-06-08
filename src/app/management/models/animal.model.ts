@@ -4,8 +4,8 @@ export interface Animal {
   breed: string;
   gender: boolean;
   birthdate: Date;
-  cage_id: number;
   weight: number;
-  status: string;
+  isSick: boolean;
   observations: string;
+  cageId: number;
 }

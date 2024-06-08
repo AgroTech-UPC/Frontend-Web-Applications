@@ -1,57 +1,49 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError, Observable, retry, throwError} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 //Import the breeder model
 import {Breeder} from "../models/breeder.model";
+import {BaseService} from "../../shared/services/base.service";
+import {catchError, Observable} from "rxjs";
+import {Expense} from "../../management/models/expense.model";
+import {Resource} from "../../management/models/resource.model";
+import {Cage} from "../../management/models/cage.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class BreederApiService {
-  baseUrl: string = environment.baseURL;
+export class BreederApiService extends  BaseService<Breeder>{
+  constructor(http: HttpClient) {
+    super(http);
+    this.extraUrl = environment.breederURL;
+  }
 
-  extraUrl: string = 'breeders/';
-
-
-  constructor(private http: HttpClient) { }
-
-  //Options for HTTP requests
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-    }),
-  };
-
-  handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      // Client-side errors or network issues.
-      console.log(
-        `An error occurred ${error.status}, body was: ${error.error}`
-      );
-    } else {
-      // Errors returned by the backend.
-      console.log(
-        `Backend returned code ${error.status}, body was: ${error.error}`
-      );
+  setBreederId(breeder_id: number) {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem('breeder_id', breeder_id.toString());
     }
-    // Return an Observable that emits an error message.
-    return throwError(
-      'Something happened with request, please try again later.'
-    );
   }
 
-
-  //Get all breeders
-  getList(): Observable<Breeder> {
-    return this.http
-      .get<Breeder>(this.baseUrl + this.extraUrl)
-      .pipe(retry(2), catchError(this.handleError));
+  getBreederId(): number {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const breeder_id = localStorage.getItem('breeder_id');
+      return breeder_id ? parseInt(breeder_id) : 0;
+    }
+    return 0;
   }
 
-  //Get breeder by index
-  getBreeder(index:any){
-    return this.http.get<Breeder>(this.baseUrl + this.extraUrl + index)
+  getCagesByBreederId(breederId: number){
+    return this.http.get<Cage[]>(this.buildPath() + '/' + breederId + '/cages').pipe(catchError(this.handleError));
+  }
+  
+  getExpenses(breederId: number): Observable<Expense[]> {
+    const url = `${this.baseUrl}${this.extraUrl}/${breederId}/expenses`;
+    return this.http.get<Expense[]>(url).pipe(catchError(this.handleError));
+  }
+
+  getResources(breederId: number): Observable<Resource[]> {
+    const url = `${this.baseUrl}${this.extraUrl}/${breederId}/resources`;
+    return this.http.get<Resource[]>(url).pipe(catchError(this.handleError));
   }
 }

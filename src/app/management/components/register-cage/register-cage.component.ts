@@ -9,9 +9,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../../public/components/dialog/dialog.component';
 import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import {Animal} from "../../models/animal.model";
-import {AnimalService} from "../../services/animal-service/animal.service";
+import {CageApiService} from "../../services/cage-api.service";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -23,7 +23,8 @@ import {AnimalService} from "../../services/animal-service/animal.service";
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatIcon
   ],
 
   templateUrl: './register-cage.component.html',
@@ -32,12 +33,19 @@ import {AnimalService} from "../../services/animal-service/animal.service";
 export class RegisterCageComponent {
   cage: Cage = {
     id: 0,
+    breederId: 0,
     name: '',
     size: 0,
     observations: ''
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalService, private snackBar: MatSnackBar, private router: Router) {}
+  constructor(public dialog: MatDialog,
+              private cageService: CageApiService,
+              private snackBar: MatSnackBar,
+              private breederService: BreederApiService) {
+    this.cage.breederId = this.breederService.getBreederId();
+  }
+
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
@@ -48,20 +56,16 @@ export class RegisterCageComponent {
     } else {
       this.registerCage();
       this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 3000,
+        duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/registro']);
+        window.history.back();
       });
     }
   }
 
   registerCage(): void {
-    this.animalService.getHighestCageId().subscribe(highestId => {
-      this.cage.id = highestId + 1;
-      this.animalService.addCage(this.cage).subscribe();
-    });
+    this.cageService.create(this.cage).subscribe();
   }
-
   goBack() {
     window.history.back();
   }

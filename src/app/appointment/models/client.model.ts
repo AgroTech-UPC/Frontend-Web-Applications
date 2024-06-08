@@ -1,14 +1,9 @@
-export class Client {
-  id: string;
-  date: string;
-  breeder_name: string;
-  status: string;
+export interface Client {
+  id: number;
+  appointmentId: number;
+  appointmentStatus: string;
+  fullname: string;
   location: string;
-  constructor(id='', date='', breeder_name='', name='', status='', location ='') {
-    this.id = id;
-    this.date = date;
-    this.breeder_name = breeder_name;
-    this.status = status;
-    this.location = location;
-  }
+  cages: number;
+  description: string;
 }

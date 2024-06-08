@@ -1,0 +1,30 @@
+<main>
+  <h1>Crear nueva publicación</h1>
+  <div class="form">
+    <form #publicationForm='ngForm' aria-label="Formulario para registrar nueva publicacion">
+      <mat-form-field>
+        <mat-label>Título</mat-label>
+        <input matInput placeholder="Nueva publicación" name="titulo" required [(ngModel)]="publicationData.title">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea matInput placeholder="Descripción" name="descripcion" required [(ngModel)]="publicationData.description">
+        </textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Subir imagen</mat-label>
+        <input matInput placeholder="URL de imagen" name="imagen" required [(ngModel)]="publicationData.image">
+      </mat-form-field>
+      <div class="row">
+        <button class="back-button" mat-flat-button color="warn" style="padding: 20px; background-color: #e19669; color: white;" (click)="goBack()">
+          <mat-icon>close</mat-icon>
+          Descartar
+        </button>
+        <button class="back-button" mat-flat-button style="padding: 20px; background-color: #7ec306; color: white;" (click)="addPublication()">
+          <mat-icon>save</mat-icon>
+          Crear publicación
+        </button>
+      </div>
+    </form>
+  </div>
+</main>

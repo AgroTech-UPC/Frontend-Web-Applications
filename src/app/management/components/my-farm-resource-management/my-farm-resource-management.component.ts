@@ -10,13 +10,18 @@ import * as _ from 'lodash';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { FormsModule } from "@angular/forms";
-//import { ResourceBreederApiService } from "../../services/resource-breeder-api.service";
 import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {HeaderComponent} from "../../../public/components/header/header.component";
 import {SidenavComponent} from "../../../public/components/sidenav/sidenav.component";
 import {MatIcon} from "@angular/material/icon";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {ResourceApiService} from "../../services/resource-api.service";
+
+// Import the ConfirmationDialogComponent
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
+import { Observable } from "rxjs";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -31,31 +36,35 @@ import {ResourceApiService} from "../../services/resource-api.service";
     EmptyViewComponent,
     HeaderComponent,
     SidenavComponent,
-    MatIcon
+    MatIcon,
+    RouterLink
   ],
   templateUrl: './my-farm-resource-management.component.html',
   styleUrl: './my-farm-resource-management.component.css'
 })
 export class MyFarmResourceManagementComponent implements OnInit {
-
+  breederId: number = 0;
   resources: any[] = [];
   filteredResources: any[] = [];
 
   selectedResourceType: string;
   resourceTypes: { [key: string]: string } = {
-    '1': 'Todos',
-    '2': 'Alimento',
-    '3': 'Medicina',
-    '4': 'Cultivo'
+    '1': 'OTROS',
+    '2': 'ALIMENTO',
+    '3': 'MEDICINA',
+    '4': 'CULTIVO'
   };
 
-  constructor(private resourceApiService: ResourceApiService, private router: Router) {
+  constructor(private resourceApiService: ResourceApiService,
+              private router: Router,
+              private dialog: MatDialog,
+              private breederService: BreederApiService) {
     this.selectedResourceType = '1';
   }
 
   ngOnInit(): void {
+    this.breederId = this.breederService.getBreederId();
     this.loadResources();
-    this.filteredResources = cloneDeep(this.resources);
   }
 
   filterResource(): void {
@@ -70,7 +79,7 @@ export class MyFarmResourceManagementComponent implements OnInit {
   }
 
   private loadResources() {
-    this.resourceApiService.getList().subscribe((resources: any) => {
+    this.breederService.getResources(this.breederId).subscribe((resources: any) => {
       this.resources = resources;
       this.filteredResources = cloneDeep(this.resources);
     });
@@ -78,6 +87,37 @@ export class MyFarmResourceManagementComponent implements OnInit {
 
 
   goBack() {
-    window.history.back();
+    this.router.navigate(['/criador/mi-granja']);
+  }
+
+  editItem(itemId: number) {
+    this.router.navigate(['criador/mi-granja/recursos/editar', itemId]);
+  }
+
+  confirmDeletion(id: number): Observable<boolean> {
+    // Open a dialog to confirm the deletion
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: `¿Estás seguro de querer eliminar el recurso ${id}? Se eliminará la información que contiene.`
+      }
+    });
+    // Return the result of the dialog
+    return dialogRef.afterClosed();
+  }
+
+  deleteItem(itemId: number) {
+    // First, confirm the deletion
+    this.confirmDeletion(itemId).subscribe(confirmado => {
+      if (confirmado) {
+        // If the deletion is confirmed, delete the item
+        this.resourceApiService.delete(itemId).subscribe(() => {
+          console.log("Recurso eliminado con éxito.");
+          // Reload the expenses
+          this.loadResources();
+        }, (error) => {
+          console.error("Error al eliminar el recurso:", error);
+        });
+      }
+    });
   }
 }
