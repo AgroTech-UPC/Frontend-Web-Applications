@@ -107,8 +107,28 @@ export class ViewReserveAppointmentComponent implements OnInit {
 
     this.appointmentApiService.create(newAppointment).subscribe(() => {
       this.showConfirmation = true;
-      selectedDate.status = 0;
-      this.availableDateApiService.update(selectedDate.id, selectedDate).subscribe(() => {
+      let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
+      let startTime = selectedDate.startTime.split(':').map(Number);
+      let endTime = selectedDate.endTime.split(':').map(Number);
+
+      let transformedSelectedDate = {
+        advisorId: selectedDate.advisorId,
+        date: selectedDate.date,
+        startTime: {
+          hour: startTime[0],
+          minute: startTime[1],
+          second: startTime[2],
+          nano: 0
+        },
+        endTime: {
+          hour: endTime[0],
+          minute: endTime[1],
+          second: endTime[2],
+          nano: 0
+        },
+        status: false
+      };
+      this.availableDateApiService.update(selectedDate.id, transformedSelectedDate).subscribe(() => {
         this.getAdvisorAvailableDates();
       });
     });
@@ -122,7 +142,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
   goHome(): void {
     this.router.navigate(['criador/buscar-asesor']);
   }
-  cancel(): void{
+  cancel(): void {
     this.router.navigate(['criador/buscar-asesor']);
   }
 }
