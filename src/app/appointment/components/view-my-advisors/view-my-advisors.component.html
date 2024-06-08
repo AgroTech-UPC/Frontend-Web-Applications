@@ -39,7 +39,7 @@
                 <br>
                 <strong>Estado de la cita:</strong> {{ appointment.status }}
               </h3>
-              <button mat-button style="color: white" class="{{appointment.status === 'Terminado' ? 'button-terminated' : 'button-other'}}" [disabled]="appointment.status !== 'Terminado'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
+              <button mat-button style="color: white" class="{{appointment.status === 'TERMINADO' ? 'button-terminated' : 'button-other'}}" [disabled]="appointment.status !== 'TERMINADO'" (click)="giveReview(appointment.id)">Dejar Reseña</button>
             </div>
             <h3 style="color: #DD763D" class="note-message"><strong>
               Nota: Es necesario que la cita tenga el estado "Terminado" para dejar una reseña
