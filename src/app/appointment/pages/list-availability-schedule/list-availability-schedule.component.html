@@ -1,14 +1,14 @@
 <main class="container">
   <span class="title-page"><strong>Horarios Disponibles</strong></span>
   <div class="card-container">
-    <mat-card style="margin: 15px auto;" *ngFor="let date of availableDates">
+    <mat-card style="margin: 15px auto;" *ngFor="let result of results">
       <mat-card-content>
-        <span class="card-description">Fecha: {{date.date}}</span>
-        <h2 class="card-title">Horario: {{date.start_time}} - {{date.end_time}}</h2>
-        <button mat-button color="warn" (click)="deleteDate(date.id)">Eliminar</button>
+        <span class="card-description">Fecha: {{result.date}}</span>
+        <h2 class="card-title">Horario: {{result.startTime}} - {{result.endTime}}</h2>
+        <button mat-button color="warn" (click)="deleteDate(result.id)">Eliminar</button>
       </mat-card-content>
     </mat-card>
   </div>
-  <app-empty-view *ngIf="availableDates.length === 0" [title]="'No tienes horarios para mostrar.'"></app-empty-view>
+  <app-empty-view *ngIf="results.length === 0" [title]="'No tienes horarios para mostrar.'"></app-empty-view>
   <button style="background-color: #dd763d; color: white; margin-top:10px;" mat-button class="button" routerLink="/asesor/horarios/agregar">Agregar</button>
 </main>

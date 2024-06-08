@@ -82,10 +82,10 @@ export class AddAvailabilityScheduleComponent implements OnInit{
 
       const newAvailableDate: AvailableDate = {
         id: 0,
-        advisor_id: availableDate.advisor_id,
+        advisorId: availableDate.advisorId,
         date: availableDate.date,
-        start_time: availableDate.start_time,
-        end_time: availableDate.end_time,
+        startTime: availableDate.startTime,
+        endTime: availableDate.endTime,
         status: availableDate.status
       };
 
