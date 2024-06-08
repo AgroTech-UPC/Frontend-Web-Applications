@@ -35,13 +35,12 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class RegisterResourcesComponent implements OnInit {
   resource: Resource = {
-    id: 0,
-    name: "",
-    type: "",
-    breeder_id: 0,
-    quantity: 0,
-    date: new Date(),
-    observations: ""
+    name: "alfalfa",
+    type: "OTROS",
+    quantity: 4,
+    date: "23-04-2024",
+    observations: "ninguna",
+    breederId: 1
   };
 
   constructor(public dialog: MatDialog,
@@ -50,7 +49,7 @@ export class RegisterResourcesComponent implements OnInit {
               private breederService: BreederApiService) {}
 
   ngOnInit() {
-    this.resource.breeder_id = this.breederService.getBreederId();
+    this.resource.breederId = this.breederService.getBreederId();
   }
 
   openDialog(): void {
@@ -58,7 +57,7 @@ export class RegisterResourcesComponent implements OnInit {
   }
 
   handleClick(): void {
-    if (!this.resource.name || !this.resource.type || !this.resource.breeder_id || !this.resource.quantity || !this.resource.date) {
+    if (!this.resource.name || !this.resource.type || !this.resource.breederId || !this.resource.quantity || !this.resource.date || !this.resource.observations) {
       this.openDialog();
     } else {
       this.registerResource();
