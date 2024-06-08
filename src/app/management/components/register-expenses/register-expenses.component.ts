@@ -33,12 +33,12 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class RegisterExpensesComponent implements OnInit {
   expense: Expense = {
-    id: 0,
-    breeder_id: 0,
-    type: "",
+    name: "alfalfa",
+    type: "OTROS",
     amount: 0,
-    date: new Date(),
-    details: ""
+    date: "23-04-2020",
+    observations: "ninguna",
+    breederId: 1
   };
 
   constructor(public dialog: MatDialog,
@@ -47,7 +47,7 @@ export class RegisterExpensesComponent implements OnInit {
               private snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.expense.breeder_id = this.breederService.getBreederId();
+    this.expense.breederId = this.breederService.getBreederId();
   }
 
   openDialog(): void {

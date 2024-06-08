@@ -4,21 +4,26 @@
   </div>
   <div class="group-inputs">
     <mat-form-field class="form-field">
+      <mat-label>Nombre del gasto</mat-label>
+      <input matInput [(ngModel)]="expense.name" name="name">
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
       <mat-label>Monto gastado S/.</mat-label>
       <input matInput type="number" [(ngModel)]="expense.amount" name="amount">
     </mat-form-field>
 
     <mat-radio-group aria-label="Select an option" [(ngModel)]="expense.type">
       <h2 style="font-weight: 400">Tipo de gasto</h2>
-      <mat-radio-button value="Salud">Salud</mat-radio-button>
-      <mat-radio-button value="Alimento">Alimento</mat-radio-button>
-      <mat-radio-button value="Mantenimiento de criadero">Mantenimiento de criadero</mat-radio-button>
-      <mat-radio-button value="Otro">Otro</mat-radio-button>
+      <mat-radio-button value="SALUD">Salud</mat-radio-button>
+      <mat-radio-button value="ALIMENTO">Alimento</mat-radio-button>
+      <mat-radio-button value="MANTENIMIENTO">Mantenimiento de criadero</mat-radio-button>
+      <mat-radio-button value="OTROS">Otro</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="form-field">
       <mat-label>Detalles (en caso haya seleccionado "otro")</mat-label>
-      <input matInput [(ngModel)]="expense.details" name="details">
+      <input matInput [(ngModel)]="expense.observations" name="details">
     </mat-form-field>
 
     <mat-form-field class="form-field">
