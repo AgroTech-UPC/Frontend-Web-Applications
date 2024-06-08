@@ -36,7 +36,7 @@ export class BreederApiService extends  BaseService<Breeder>{
   getCagesByBreederId(breederId: number){
     return this.http.get<Cage[]>(this.buildPath() + '/' + breederId + '/cages').pipe(catchError(this.handleError));
   }
-
+  
   getExpenses(breederId: number): Observable<Expense[]> {
     const url = `${this.baseUrl}${this.extraUrl}/${breederId}/expenses`;
     return this.http.get<Expense[]>(url).pipe(catchError(this.handleError));

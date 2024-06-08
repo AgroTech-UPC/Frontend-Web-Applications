@@ -16,6 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatIcon} from "@angular/material/icon";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 
 @Component({
@@ -46,11 +47,12 @@ export class AnimalInformationComponent implements OnInit{
     breed: '',
     gender: true,
     birthdate: new Date(),
-    cage_id: 0,
+    cageId: 0,
     weight: 0,
-    status: '',
+    isSick: false,
     observations: ''
   };
+  isSick!: string;
   gender!: string;
   originalAnimal!: Animal;
 
@@ -60,6 +62,7 @@ export class AnimalInformationComponent implements OnInit{
   constructor(private router: Router,
               private route: ActivatedRoute,
               private animalService: AnimalApiService,
+              private breederService: BreederApiService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) { }
 
@@ -74,6 +77,7 @@ export class AnimalInformationComponent implements OnInit{
         (data) => {
           this.animal = data;
           this.gender = this.animal.gender.toString();
+          this.isSick = this.animal.isSick.toString();
           this.originalAnimal = {...this.animal};
         },
         (error) => {
@@ -84,21 +88,31 @@ export class AnimalInformationComponent implements OnInit{
 
   onSubmit() {
     if (this.animalForm.valid) {
-      this.animal.gender = this.gender === 'true';
-      this.animalService.update(this.animalID, this.animal)
-        .subscribe(
-          (data) => {
-            this.animal = data;
-            this.originalAnimal = {...this.animal};
-            this.isEditMode = false;
-            this.snackBar.open('Información actualizada con éxito 🎉', '', {
-              duration: 5000
-            });
-          },
-          (error) => {
-            console.error(error);
-          }
-        )
+      this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe(cages => {
+        if (!cages.some(cage => cage.id === this.animal.cageId)) {
+          this.snackBar.open('El número de jaula no existe', 'Cerrar', {
+            duration: 2000,
+          });
+        }
+        else{
+          this.animal.gender = this.gender === 'true';
+          this.animal.isSick = this.isSick === 'true';
+          this.animalService.update(this.animalID, this.animal)
+            .subscribe(
+              (data) => {
+                this.animal = data;
+                this.originalAnimal = {...this.animal};
+                this.isEditMode = false;
+                this.snackBar.open('Información actualizada con éxito 🎉', '', {
+                  duration: 5000
+                });
+              },
+              (error) => {
+                console.error(error);
+              }
+            )
+        }
+      });
     }
   }
 
@@ -115,7 +129,7 @@ export class AnimalInformationComponent implements OnInit{
     this.confirmMessage(this.animalID, `¿Estas seguro de querer eliminar la información del cuy ${this.animalID}?`).subscribe(result => {
       if(result) {
         this.animalService.delete(this.animalID).subscribe(() => {
-          this.router.navigate([`/animales/${this.animal.cage_id}`]);
+          this.router.navigate([`/animales/${this.animal.cageId}`]);
           this.snackBar.open('Información eliminada con éxito 🎉', '', {
             duration: 5000
           });
