@@ -1,5 +1,5 @@
 export interface AvailableDate {
-  id: number;
+  id?: number;
   date: any;
   startTime: any;
   endTime: any;
