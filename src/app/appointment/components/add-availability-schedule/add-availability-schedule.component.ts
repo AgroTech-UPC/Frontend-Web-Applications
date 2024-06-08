@@ -49,7 +49,7 @@ export class AddAvailabilityScheduleComponent implements OnInit{
       date: ['', Validators.required], // Add this line
       startTime: ['', Validators.required],
       endTime: ['', Validators.required]
-    }, { validators: this.validTimeValidator });
+    }, { validators: [this.validTimeValidator, this.validDateValidator] });
   }
 
   addAvailableDate() {
@@ -101,6 +101,18 @@ export class AddAvailabilityScheduleComponent implements OnInit{
       const endTime = endTimeControl.value;
       if (startTime.replace(":", "") >= endTime.replace(":", "")) {
         return { invalidTime: true };
+      }
+    }
+    return null;
+  }
+  validDateValidator(formGroup: FormGroup) {
+    const dateControl = formGroup.get('date');
+    if (dateControl) {
+      const controlDate = new Date(dateControl.value);
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+      if (controlDate < currentDate) {
+        return { 'invalidDate': true };
       }
     }
     return null;

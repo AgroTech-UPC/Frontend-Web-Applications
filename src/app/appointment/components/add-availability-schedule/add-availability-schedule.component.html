@@ -14,6 +14,9 @@
         <mat-label>Hora de fin</mat-label>
         <input matInput formControlName="endTime" type="time" required>
       </mat-form-field>
+      <div *ngIf="form.errors?.['invalidDate'] && form.get('date')?.value" class="error-message">
+        La fecha debe ser mayor o igual a la fecha actual.
+      </div>
       <div *ngIf="form.errors?.['invalidTime'] && form.get('startTime')?.value && form.get('endTime')?.value" class="error-message">
         Intervalo de tiempo no valido
       </div>
