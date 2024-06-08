@@ -35,12 +35,12 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class RegisterResourcesComponent implements OnInit {
   resource: Resource = {
-    name: "alfalfa",
-    type: "OTROS",
-    quantity: 4,
-    date: "23-04-2024",
-    observations: "ninguna",
-    breederId: 1
+    name: "",
+    type: "ALIMENTO",
+    quantity: 0,
+    date: "",
+    observations: "Ninguna",
+    breederId: 0
   };
 
   constructor(public dialog: MatDialog,

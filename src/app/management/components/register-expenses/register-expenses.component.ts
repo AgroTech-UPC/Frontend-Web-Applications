@@ -33,12 +33,12 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class RegisterExpensesComponent implements OnInit {
   expense: Expense = {
-    name: "alfalfa",
-    type: "OTROS",
+    name: "",
+    type: "ALIMENTO",
     amount: 0,
-    date: "23-04-2020",
-    observations: "ninguna",
-    breederId: 1
+    date: "",
+    observations: "Ninguna",
+    breederId: 0
   };
 
   constructor(public dialog: MatDialog,
