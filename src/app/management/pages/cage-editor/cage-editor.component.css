@@ -68,7 +68,7 @@ form{
   border-radius: 35px;
 }
 
-@media screen and (max-width: 1000px)
+@media screen and (max-width: 1400px)
 {
   .form{
     width: 90%;
@@ -79,7 +79,7 @@ form{
   }
 }
 
-@media screen and (max-width: 650px){
+@media screen and (max-width: 950px){
   .buttons button{
     font-size: 12px;
   }

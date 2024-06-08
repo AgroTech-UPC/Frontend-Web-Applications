@@ -65,7 +65,7 @@ export class ClientDetailComponent implements OnInit{
             fullname: user.fullname,
             appointment_status: this.appointment.status,
             location: user.location,
-            cages: cages.filter(cage => cage.breeder_id === breeder_id).length,
+            cages: cages.filter(cage => cage.breederId === breeder_id).length,
             description: user.description
           }
         })
