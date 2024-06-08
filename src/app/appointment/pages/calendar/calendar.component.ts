@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router} from "@angular/router";
 
 import dayGridPlugin from '@fullcalendar/daygrid';
 import esLocale from '@fullcalendar/core/locales/es';

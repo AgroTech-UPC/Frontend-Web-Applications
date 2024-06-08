@@ -75,7 +75,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
   }
   getAdvisorAvailableDates(): void {
     this.availableDateApiService.getAll().subscribe(dates => {
-        dates = dates.filter(date => date.advisor_id === this.advisor.id && date.status === 1);
+        dates = dates.filter(date => date.advisorId === this.advisor.id && date.status === 1);
         this.advisor_availableDates = dates;
         console.log("Horarios: ",this.advisor_availableDates);
       }
@@ -96,7 +96,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     }
 
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
-    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.start_time}:00`);
+    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.startTime}:00`);
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisor_id: this.advisor.id,
