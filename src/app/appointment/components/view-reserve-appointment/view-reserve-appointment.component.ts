@@ -75,7 +75,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
   }
   getAdvisorAvailableDates(): void {
     this.availableDateApiService.getAll().subscribe(dates => {
-        dates = dates.filter(date => date.advisorId === this.advisor.id && date.status === 1);
+        dates = dates.filter(date => date.advisorId === this.advisor.id && date.status === true);
         this.advisor_availableDates = dates;
         console.log("Horarios: ",this.advisor_availableDates);
       }
@@ -102,8 +102,8 @@ export class ViewReserveAppointmentComponent implements OnInit {
       advisorId: this.advisor.id,
       breederId: this.breeder.id,
       date: appointmentDate,
-      status: "Pendiente"
-    };
+      status: "PENDIENTE" // TERMINADO, PENDIENTE
+  };
 
     this.appointmentApiService.create(newAppointment).subscribe(() => {
       this.showConfirmation = true;
@@ -115,8 +115,8 @@ export class ViewReserveAppointmentComponent implements OnInit {
   }
 
   // Status 1: Disponible, Status 0: No disponible
-  getStatusText(status: number): string {
-    return status === 1 ? 'Disponible' : 'No disponible';
+  getStatusText(status: boolean): string {
+    return status === true ? 'Disponible' : 'No disponible';
   }
 
   goHome(): void {
