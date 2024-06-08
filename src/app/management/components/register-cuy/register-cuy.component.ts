@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
+import {MatIcon} from "@angular/material/icon";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
 
 @Component({
   selector: 'app-register-cuy',
@@ -27,7 +29,8 @@ import {MatSelect} from "@angular/material/select";
     MatRadioGroup,
     MatRadioButton,
     MatOption,
-    MatSelect
+    MatSelect,
+    MatIcon
   ],
   templateUrl: './register-cuy.component.html',
   styleUrl: './register-cuy.component.css'
@@ -39,29 +42,41 @@ export class RegisterCuyComponent {
     breed: "",
     gender: false,
     birthdate: new Date(),
-    cage_id: 0,
+    cageId: 0,
     weight: 0,
-    status: "",
+    isSick: false,
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalApiService, private snackBar: MatSnackBar) {}
+  constructor(public dialog: MatDialog, private animalService: AnimalApiService,
+              private snackBar: MatSnackBar, private breederService: BreederApiService) {}
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
   }
 
   handleClick(): void {
-    if (!this.animal.name || !this.animal.breed  || !this.animal.cage_id ||
-      !this.animal.weight || !this.animal.birthdate || !this.animal.status) {
+    if (!this.animal.name || !this.animal.breed  || !this.animal.cageId ||
+      !this.animal.weight || !this.animal.birthdate || !this.animal.isSick) {
       this.openDialog();
     } else {
-      this.animal.gender = this.animal.gender === true; // required to convert the value to a boolean instead of a string
-      this.registerCuy();
-      this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 2000,
-      }).afterDismissed().subscribe(() => {
-        window.history.back();
+      // verify if cageId exists for this breeder
+      this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe(cages => {
+        if (!cages.some(cage => cage.id === this.animal.cageId)) {
+          this.snackBar.open('El número de jaula no existe', 'Cerrar', {
+            duration: 2000,
+          });
+        }
+        else{
+          this.animal.gender = this.animal.gender === true; // required to convert the value to a boolean instead of a string
+          this.animal.isSick = this.animal.isSick === true; // required to convert the value to a boolean instead of a string
+          this.registerCuy();
+          this.snackBar.open('Registrado con éxito', 'Cerrar', {
+            duration: 2000,
+          }).afterDismissed().subscribe(() => {
+            window.history.back();
+          });
+        }
       });
     }
   }

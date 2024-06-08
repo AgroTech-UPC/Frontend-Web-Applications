@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatInputModule} from '@angular/material/input';
@@ -12,6 +12,8 @@ import { ResourceApiService} from "../../services/resource-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import { MatSelect } from '@angular/material/select';
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-register-resources',
@@ -25,23 +27,31 @@ import { MatSelect } from '@angular/material/select';
     CommonModule,
     MatRadioButton,
     MatRadioGroup,
-    MatSelect
+    MatSelect,
+    MatIcon
   ],
   templateUrl: './register-resources.component.html',
   styleUrls: ['./register-resources.component.css']
 })
-export class RegisterResourcesComponent {
+export class RegisterResourcesComponent implements OnInit {
   resource: Resource = {
     id: 0,
     name: "",
     type: "",
-    breeder_id: 1,
+    breeder_id: 0,
     quantity: 0,
     date: new Date(),
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private resourceService: ResourceApiService, private snackBar: MatSnackBar) {}
+  constructor(public dialog: MatDialog,
+              private resourceService: ResourceApiService,
+              private snackBar: MatSnackBar,
+              private breederService: BreederApiService) {}
+
+  ngOnInit() {
+    this.resource.breeder_id = this.breederService.getBreederId();
+  }
 
   openDialog(): void {
     this.dialog.open(DialogComponent);

@@ -1,20 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {ClientCardComponent} from "../../components/client-card/client-card.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 
 @Component({
   selector: 'app-clients-view',
   standalone: true,
-    imports: [
-        ClientCardComponent,
-        NgForOf
-    ],
+  imports: [
+    ClientCardComponent,
+    NgForOf,
+    EmptyViewComponent,
+    NgIf
+  ],
   templateUrl: './clients-view.component.html',
   styleUrl: './clients-view.component.css'
 })
@@ -45,7 +48,7 @@ export class ClientsViewComponent implements OnInit {
   getClients(){
     this.appointments.forEach(appointment => {
       this.breederService.getOne(appointment.breeder_id).subscribe(breeder => {
-        this.userService.getOne(breeder.user_id).subscribe(user => {
+        this.userService.getOne(breeder.userId).subscribe(user => {
           let client = {
             id: breeder.id,
             appointment_id: appointment.id,

@@ -1,5 +1,5 @@
 mat-card {
-  background-color: #dd763d;
+  background-color: #e19669;
   color: white;
   margin: 15px;
   padding: 20px;
@@ -9,6 +9,11 @@ mat-card {
   justify-content: center;
   align-items: center;
   min-height: 180px;
+}
+
+mat-card-title{
+  color: #F0DA8B;
+  font-weight: bold;
 }
 
 button {

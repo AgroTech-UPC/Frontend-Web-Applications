@@ -6,5 +6,7 @@
       <publication-card [publication]="publication"></publication-card>
     </div>
   </div>
-
+  <div class="empty-view">
+    <app-empty-view *ngIf="publications.length === 0" [title]="'No tienes publicaciones para mostrar.'"></app-empty-view>
+  </div>
 </main>

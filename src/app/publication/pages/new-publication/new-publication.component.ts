@@ -7,16 +7,19 @@ import { Router } from '@angular/router';
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-new-publication',
   standalone: true,
-  imports: [
-    MatFormFieldModule,
-    FormsModule,
-    MatInput,
-    MatButton
-  ],
+    imports: [
+        MatFormFieldModule,
+        FormsModule,
+        MatInput,
+        MatButton,
+        MatIcon
+    ],
   templateUrl: './new-publication.component.html',
   styleUrl: './new-publication.component.css'
 })
@@ -27,42 +30,36 @@ export class NewPublicationComponent implements OnInit {
   // datos de publicación para el formulario
   publicationData!: Publication;
 
-  dataSource: any;
+  advisorId = 0;
 
   constructor(private publicationsService: PublicationsApiService,
+              private advisorService: AdvisorApiService,
               private router: Router,
               private snackBar: MatSnackBar) {
     this.publicationData = {} as Publication;
   }
 
   ngOnInit() {
-    this.getPublications();
-  }
-
-  getPublications(){
-    this.publicationsService.getAll().subscribe((response: any) => {
-      this.dataSource = response;
-    });
+    this.advisorId = this.advisorService.getAdvisorId();
   }
 
   addPublication() {
-    // obtener el id más alto de la lista de publicaciones
-    let maxID: number = 0;
-    maxID = this.dataSource.reduce((max: number, publication: any) =>
-      parseInt(publication.id) > max ? parseInt(publication.id) : max, 0);
-    this.publicationData.id = (Number(maxID)+1).toString();
-    this.publicationData.advisor_id= '1';
 
     // obtener fecha actual en formato 2024-04-30T11:10:52Z
     let currentDate = new Date();
     let formattedDate = currentDate.toISOString();
     formattedDate = formattedDate.slice(0, -5) + 'Z';
-    this.publicationData.date = formattedDate;
 
+    let newPublication: Publication = {
+      id: 0,
+      advisorId: this.advisorId,
+      title: this.publicationData.title,
+      description: this.publicationData.description,
+      date: formattedDate,
+      image: this.publicationData.image
+    }
 
-    console.log(this.publicationData);
-
-    this.publicationsService.create(this.publicationData).subscribe(() => {
+    this.publicationsService.create(newPublication).subscribe(() => {
       this.snackBar.open('Publicación creada con éxito🤩', 'Cerrar', {
         duration: 5000,
       });

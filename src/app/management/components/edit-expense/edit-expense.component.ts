@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { ExpenseApiService } from '../../services/expense-api.service';
 import { Location } from '@angular/common';
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-edit-expense',
@@ -23,7 +24,8 @@ import { Location } from '@angular/common';
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
-        RouterLink
+        RouterLink,
+        MatIcon
     ],
   templateUrl: './edit-expense.component.html',
   styleUrl: './edit-expense.component.css'

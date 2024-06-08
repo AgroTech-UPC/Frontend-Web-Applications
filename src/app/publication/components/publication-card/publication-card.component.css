@@ -1,15 +1,21 @@
 mat-card {
-  background-color: #dd763d;
+  background-color: #e19669;
   color: white;
   margin: 5%;
   padding: 10px;
   border-radius: 10px;
 }
 
+mat-card-title{
+  color: #F0DA8B;
+  margin-bottom: 5px;
+}
+
 img {
-  width: 50%;
-  display: block;
+  max-width: 75%;
+  max-height: 75%;
   margin: 0 auto;
+  display: block;
 }
 
 button {

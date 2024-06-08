@@ -5,26 +5,19 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
-import {MatInputModule} from '@angular/material/input';
-import {MatCell, MatHeaderCell} from "@angular/material/table";
-
-// library lodash to clone objects
+import { MatInputModule } from '@angular/material/input';
+import { MatCell, MatHeaderCell } from "@angular/material/table";
 import cloneDeep from 'lodash/cloneDeep';
-
 import { FormsModule } from "@angular/forms";
 import { EmptyViewComponent } from "../../../public/components/empty-view/empty-view.component";
 import { HeaderComponent } from "../../../public/components/header/header.component";
 import { SidenavComponent } from "../../../public/components/sidenav/sidenav.component";
-
-// Import the ResourceBreederApiService
-import { ExpenseApiService } from "../../services/expense-api.service";
-import {Router, RouterLink} from "@angular/router";
-
-// Import the ConfirmationDialogComponent
+import { Router, RouterLink } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
-
+import { BreederApiService } from "../../../user/services/breeder-api.service";
+import { ExpenseApiService } from "../../services/expense-api.service"; // Asumiendo que existe este servicio
 
 @Component({
   selector: 'app-my-farm-expenses-management',
@@ -49,25 +42,30 @@ import { Observable } from "rxjs";
   styleUrls: ['./my-farm-expenses-management.component.css']
 })
 export class MyFarmExpensesManagementComponent implements OnInit {
-
+  breeder_id = 0;
   expenses: any[] = [];
   filteredExpenses: any[] = [];
 
   selectedResourceType: string;
   resourceTypes: { [key: string]: string } = {
     '1': 'Todos',
-    '2': 'Salud',
-    '3': 'Alimento',
-    '4': 'Mantenimiento de criadero'
+    '2': 'SALUD',
+    '3': 'ALIMENTO',
+    '4': 'MANTENIMIENTO DE CRIADERO',
+    '5': 'OTROS'
   };
 
-  constructor(private expenseApiService: ExpenseApiService, private router: Router, private dialog: MatDialog) {
+  constructor(private breederApiService: BreederApiService,
+              private expenseApiService: ExpenseApiService,
+              private router: Router,
+              private dialog: MatDialog) {
     this.selectedResourceType = '1';
   }
 
   ngOnInit(): void {
+    this.breeder_id = this.breederApiService.getBreederId();
+    console.log("Breeder ID:", this.breeder_id);
     this.loadExpenses();
-    this.filteredExpenses = cloneDeep(this.expenses);
   }
 
   filterResource(): void {
@@ -77,14 +75,17 @@ export class MyFarmExpensesManagementComponent implements OnInit {
       this.filteredExpenses = [...this.expenses];
     } else {
       // De lo contrario, filtra los recursos por el tipo seleccionado
-      this.filteredExpenses = this.expenses.filter(resource => resource.type === this.resourceTypes[selectedType]);
+      const selectedResourceTypeValue = this.resourceTypes[selectedType];
+      this.filteredExpenses = this.expenses.filter(resource => resource.type === selectedResourceTypeValue);
     }
   }
 
   private loadExpenses() {
-    this.expenseApiService.getAll().subscribe((resources: any) => {
-      this.expenses = resources;
+    this.breederApiService.getExpenses(this.breeder_id).subscribe((resources) => {
+      console.log("Expenses fetched:", resources); // Añade esto para verificar los datos
+      this.expenses = resources.filter((resource) => resource.breederId === this.breeder_id);
       this.filteredExpenses = cloneDeep(this.expenses);
+      this.filterResource(); // Filtrar recursos después de cargarlos
     });
   }
 
@@ -119,4 +120,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigate(['/criador/mi-granja']);
+  }
 }

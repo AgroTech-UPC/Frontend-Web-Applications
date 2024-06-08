@@ -2,7 +2,9 @@
   color: #DD763D;
   font-size: 36px;
   display: flex;
+  margin-top: 30px;
   margin-bottom: 60px;
+  text-align: center;
 }
 
 .container {
@@ -10,6 +12,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 0 20%;
   height: 100vh;
 }
 
@@ -20,17 +23,6 @@
   gap: 20px;
 }
 
-.group-btns button {
-  font-size: 25px;
-  background-color: #DD763D;
-  padding: 30px 40px;
-}
-
-.group-btns {
-  display: flex;
-  gap: 100px;
-}
-
 .container-confirmation-register {
   display: flex;
   flex-direction: column;
@@ -39,26 +31,59 @@
   height: 100vh;
 }
 
-@media (max-width: 600px) {
-  @media (max-width: 600px) {
-    .group-inputs, .group-btns {
-      flex-direction: column;
-      align-items: center;
-    }
+.back-button {
+  margin-top: 20px;
+  padding: 25px 40px;
+  font-size: 24px;
+  height: 50px;
+  margin-right: 25px;
+  border-radius: 35px;
+}
 
-    .group-btns {
-      gap: 20px;
-    }
+.register-button {
+  margin-top: 20px;
+  padding: 25px 40px;
+  font-size: 24px;
+  height: 50px;
+  margin-right: 25px;
+  border-radius: 35px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  gap: 50%;
+}
+
+.buttons button{
+  width: 200px;
+  height: 50px;
+}
+
+.group-btns {
+  display: flex;
+  gap: 100px;
+}
+
+.group-btns button {
+  font-size: 25px;
+  background-color: #DD763D;
+  padding: 30px 40px;
+}
+
+@media (max-width: 600px) {
+  .container{
+    margin: 0 5px;
   }
 
-  @media (min-width: 601px) {
-    .group-inputs, .group-btns {
-      flex-direction: row;
-      align-items: flex-start;
-    }
+  .group-inputs, .group-btns {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .group-btns {
-      gap: 100px;
-    }
+  .group-btns {
+    gap: 20px;
   }
 }
+
+

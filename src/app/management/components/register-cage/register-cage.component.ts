@@ -11,6 +11,7 @@ import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {CageApiService} from "../../services/cage-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -22,7 +23,8 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatIcon
   ],
 
   templateUrl: './register-cage.component.html',
@@ -31,7 +33,7 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
 export class RegisterCageComponent {
   cage: Cage = {
     id: 0,
-    breeder_id: 0,
+    breederId: 0,
     name: '',
     size: 0,
     observations: ''
@@ -41,7 +43,7 @@ export class RegisterCageComponent {
               private cageService: CageApiService,
               private snackBar: MatSnackBar,
               private breederService: BreederApiService) {
-    this.cage.breeder_id = this.breederService.getBreederId();
+    this.cage.breederId = this.breederService.getBreederId();
   }
 
   openDialog(): void {

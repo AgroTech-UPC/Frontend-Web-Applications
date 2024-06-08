@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Publication} from "../../models/publication.model";
 import {PublicationsApiService} from "../../services/publications-api.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PublicationCardComponent} from "../../components/publication-card/publication-card.component";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 
 @Component({
   selector: 'app-my-publications',
@@ -13,32 +15,29 @@ import {PublicationCardComponent} from "../../components/publication-card/public
   imports: [
     MatButton,
     NgForOf,
-    PublicationCardComponent
+    PublicationCardComponent,
+    EmptyViewComponent,
+    NgIf
   ],
   templateUrl: './my-publications.component.html',
   styleUrl: './my-publications.component.css'
 })
 export class MyPublicationsComponent implements OnInit {
+  advisorId = 0;
   publications: Publication[] = [];
 
   constructor(private publicationsService: PublicationsApiService,
+              private advisorService: AdvisorApiService,
               private router: Router) { }
 
   ngOnInit() {
+    this.advisorId = this.advisorService.getAdvisorId();
     this.getPublications();
   }
 
   getPublications() {
-    this.publicationsService.getAll().subscribe((res) => {
-      res.forEach((publication) => {
-        let publicationData = {} as Publication;
-        publicationData.id = publication.id;
-        publicationData.title = publication.title;
-        publicationData.description = publication.description;
-        publicationData.date = publication.date;
-        publicationData.image = publication.image;
-        this.publications.push(publicationData);
-      });
+    this.advisorService.getPublicationsByAdvisorId(this.advisorId).subscribe((publications) => {
+      this.publications = publications;
     });
   }
 

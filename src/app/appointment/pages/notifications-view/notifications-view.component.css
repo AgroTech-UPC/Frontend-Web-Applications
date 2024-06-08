@@ -9,7 +9,7 @@
 
 .title-page {
   color: #DD763D;
-  font-size: 3em;
+  font-size: 2.5em;
   text-align: center;
   padding-bottom: 20px;
 }
@@ -30,15 +30,15 @@ button{
   margin: 0 0 20px 0;
 }
 
-.mat-card{
+.mat-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 70%;
-  height: 100%;
-  background-color: #DD763D;
-  border-radius: 10px;
+  width: 60%;
+  height: auto;
+  background-color: #e19669;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
 }
 
 .card-title{
@@ -50,12 +50,18 @@ button{
 
 .mat-card-content {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   height: 100%;
   width: 100%;
   text-align: center;
+}
+
+.card-text{
+  text-align: justify;
+  width: 100%;
+  margin: 20px;
 }
 
 .card-subtitle{
@@ -87,4 +93,23 @@ button{
   width: 100%;
   margin: 20px 0;
 }
+
+@media screen and (max-width: 1150px) {
+  .mat-card{
+    width: 80%;
+  }
+  .mat-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+  }
+
+  .card-text{
+    text-align: center;
+  }
+}
+
 

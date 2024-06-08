@@ -4,4 +4,5 @@
       <publication-readonly-card [publication]="publication"></publication-readonly-card>
     </div>
   </div>
+  <app-empty-view *ngIf="publications.length === 0" [title]="'No hay publicaciones para mostrar por el momento.'"></app-empty-view>
 </main>

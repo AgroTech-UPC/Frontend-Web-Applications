@@ -57,7 +57,7 @@ export class ClientDetailComponent implements OnInit{
   getClient(breeder_id: number) {
     this.breederService.getOne(breeder_id).subscribe((breeder: Breeder) => {
       this.breeder = breeder;
-      this.userService.getOne(breeder.user_id).subscribe(user => {
+      this.userService.getOne(breeder.userId).subscribe(user => {
         this.cageService.getAll().subscribe(cages => {
           this.client = {
             id: breeder_id,
@@ -65,7 +65,7 @@ export class ClientDetailComponent implements OnInit{
             fullname: user.fullname,
             appointment_status: this.appointment.status,
             location: user.location,
-            cages: cages.filter(cage => cage.breeder_id === breeder_id).length,
+            cages: cages.filter(cage => cage.breederId === breeder_id).length,
             description: user.description
           }
         })

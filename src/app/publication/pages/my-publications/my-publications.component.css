@@ -1,6 +1,7 @@
 main {
   margin-top: 100px;
   display: grid;
+  align-items: center;
 }
 
 button {
@@ -15,6 +16,7 @@ button {
   font-size: 3em;
   text-align: center;
   padding-bottom: 20px;
+  line-height: 1;
 }
 
 h1 {
@@ -35,8 +37,10 @@ h1 {
   flex-direction: row;
 }
 
-main{
-  margin-top: 100px;
+.empty-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 1000px) {

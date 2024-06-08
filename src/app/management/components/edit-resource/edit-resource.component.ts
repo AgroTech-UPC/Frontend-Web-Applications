@@ -7,22 +7,24 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {CommonModule, Location} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ResourceApiService} from "../../services/resource-api.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-edit-resource',
   standalone: true,
-  imports: [
-    MatButtonModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatRadioButton,
-    MatRadioGroup,
-    ReactiveFormsModule,
-    FormsModule,
-    CommonModule,
-    RouterLink
-  ],
+    imports: [
+        MatButtonModule,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        MatRadioButton,
+        MatRadioGroup,
+        ReactiveFormsModule,
+        FormsModule,
+        CommonModule,
+        RouterLink,
+        MatIcon
+    ],
   templateUrl: './edit-resource.component.html',
   styleUrl: './edit-resource.component.css'
 })

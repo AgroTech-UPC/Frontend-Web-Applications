@@ -5,6 +5,9 @@ import {HttpClient} from "@angular/common/http";
 //Import the breeder model
 import {Advisor} from "../models/advisor.model";
 import {BaseService} from "../../shared/services/base.service";
+import {catchError} from "rxjs";
+import {Publication} from "../../publication/models/publication.model";
+import {AvailableDate} from "../../appointment/models/available_date.model";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +31,13 @@ export class AdvisorApiService extends  BaseService<Advisor>{
       return advisor_id ? parseInt(advisor_id) : 0;
     }
     return 0;
+  }
+
+  getPublicationsByAdvisorId(advisor_id: number) {
+    return this.http.get<Publication[]>(this.buildPath() + '/' + advisor_id + '/publications').pipe(catchError(this.handleError));
+  }
+
+  getAvailableDatesByAdvisorId(advisor_id: number) {
+    return this.http.get<AvailableDate[]>(this.buildPath() + '/' + advisor_id + '/available-dates').pipe(catchError(this.handleError));
   }
 }
