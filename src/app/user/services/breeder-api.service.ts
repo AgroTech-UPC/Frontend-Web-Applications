@@ -8,6 +8,7 @@ import {BaseService} from "../../shared/services/base.service";
 import {catchError, Observable} from "rxjs";
 import {Expense} from "../../management/models/expense.model";
 import {Resource} from "../../management/models/resource.model";
+import {Cage} from "../../management/models/cage.model";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class BreederApiService extends  BaseService<Breeder>{
       return breeder_id ? parseInt(breeder_id) : 0;
     }
     return 0;
+  }
+
+  getCagesByBreederId(breederId: number){
+    return this.http.get<Cage[]>(this.buildPath() + '/' + breederId + '/cages').pipe(catchError(this.handleError));
   }
 
   getExpenses(breederId: number): Observable<Expense[]> {

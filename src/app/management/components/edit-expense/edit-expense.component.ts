@@ -32,9 +32,10 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class EditExpenseComponent implements OnInit{
   expense: any = {
+    name: '',
     amount: '',
     type: '',
-    details: '',
+    observations: '',
     date: ''
   };
 
