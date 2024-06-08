@@ -71,7 +71,7 @@ mat-card-header{
   overflow: hidden;
 }
 .mat-card:hover .more-info {
-  max-height: 500px;
+  max-height: none;
 }
 .button-terminated {
   border-radius: 10px;
