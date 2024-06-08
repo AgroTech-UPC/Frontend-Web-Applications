@@ -48,6 +48,6 @@ export class BaseService<T> {
   }
 
   delete(id: any) {
-    return this.http.delete<T>(this.buildPath() + "/" + id, this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.delete<T>(this.buildPath() + "/" + id, { ...this.httpOptions, responseType: 'text' as 'json' }).pipe(catchError(this.handleError));
   }
 }
