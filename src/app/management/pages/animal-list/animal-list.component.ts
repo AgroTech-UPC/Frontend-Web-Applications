@@ -46,4 +46,8 @@ export class AnimalListComponent implements OnInit{
   goBack() {
     window.history.back();
   }
+
+  get addNewAnimal() {
+    return `/criador/registro/animal/${this.cageID}`;
+  }
 }

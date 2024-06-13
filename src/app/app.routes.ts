@@ -68,7 +68,7 @@ export const routes: Routes = [
   {path: 'criador/mis-animales/editar/:id', component: CageEditorComponent},
   {path: 'criador/registro/jaula', component: RegisterCageComponent},
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
-  {path: 'criador/registro/animal', component: RegisterCuyComponent},
+  {path: 'criador/registro/animal/:id', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'criador/publicaciones', component: PublicationsViewComponent},
   {path: 'criador/notificaciones', component: NotificationsViewComponent},
