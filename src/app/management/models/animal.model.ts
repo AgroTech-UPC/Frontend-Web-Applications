@@ -7,5 +7,5 @@ export interface Animal {
   weight: number;
   isSick: boolean;
   observations: string;
-  cageId: number;
+  cageId?: number;
 }

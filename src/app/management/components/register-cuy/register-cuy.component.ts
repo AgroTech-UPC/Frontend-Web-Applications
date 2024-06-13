@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
@@ -15,6 +15,7 @@ import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatIcon} from "@angular/material/icon";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {CageApiService} from "../../services/cage-api.service";
 
 @Component({
   selector: 'app-register-cuy',
@@ -35,21 +36,26 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
   templateUrl: './register-cuy.component.html',
   styleUrl: './register-cuy.component.css'
 })
-export class RegisterCuyComponent {
+export class RegisterCuyComponent implements OnInit {
   animal: Animal = {
     id: 0,
     name: "",
     breed: "",
     gender: false,
     birthdate: new Date(),
-    cageId: 0,
+    cageId: 0, // Initialize as 0 or undefined
     weight: 0,
     isSick: false,
     observations: ""
   };
 
   constructor(public dialog: MatDialog, private animalService: AnimalApiService,
-              private snackBar: MatSnackBar, private breederService: BreederApiService) {}
+              private snackBar: MatSnackBar, private breederService: BreederApiService,
+              private cageService: CageApiService, private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.animal.cageId = +this.route.snapshot.paramMap.get('id')!;
+  }
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
