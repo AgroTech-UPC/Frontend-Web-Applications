@@ -8,16 +8,12 @@ import {BaseService} from "../../shared/services/base.service";
 import {Cage} from "../models/cage.model";
 import {catchError} from "rxjs";
 import {Animal} from "../models/animal.model";
-import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CageApiService extends BaseService<Cage>{
-  private cageIdSource = new BehaviorSubject<number>(0);
-  currentCageId = this.cageIdSource.asObservable();
-
 
   constructor(http: HttpClient) {
     super(http);
@@ -27,10 +23,5 @@ export class CageApiService extends BaseService<Cage>{
   getAnimalsByCageId(cageId: number){
     return this.http.get<Animal[]>(this.buildPath() + '/' + cageId + '/animals').pipe(catchError(this.handleError));
   }
-
-  getCageId(id: number) {
-    this.cageIdSource.next(id);
-  }
-
 
 }

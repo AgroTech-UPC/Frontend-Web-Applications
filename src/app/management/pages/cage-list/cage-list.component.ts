@@ -8,7 +8,7 @@ import {Router, RouterLink} from "@angular/router";
 import {MatIcon} from "@angular/material/icon";
 import {MatDialog } from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
-import {Observable} from "rxjs";
+import {forkJoin, Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 import {CageTableComponent} from "../../components/cage-table/cage-table.component";
 import {Cage} from "../../models/cage.model";
@@ -59,22 +59,18 @@ export class CageListComponent implements OnInit {
     this.confirmDeletion(id).subscribe(result => {
       if(result) {
         this.animalService.getAll().subscribe((data) => {
-          data.forEach((animal: any) => {
-            if(animal.cageId === id){
-              this.animalService.delete(animal.id).subscribe(
-                () => {
-                  console.log(`Animal ${animal.id} deleted`);
-                }
-              );
-            }
-          });
+          const animalsInCage = data.filter((animal: any) => animal.cageId === id);
+          const deleteAnimalsObservables = animalsInCage.map((animal: any) => this.animalService.delete(animal.id));
 
+          forkJoin(deleteAnimalsObservables).subscribe(() => {
+            console.log(`All animals in cage ${id} deleted`);
 
-        });
-        this.cageService.delete(id).subscribe(() => {
-          this.getCages();
-          this.snackBar.open('Jaula eliminada con exito 🎉', '', {
-            duration: 5000
+            this.cageService.delete(id).subscribe(() => {
+              this.getCages();
+              this.snackBar.open('Jaula y todos los animales dentro eliminados con exito 🎉', '', {
+                duration: 5000
+              });
+            });
           });
         });
       }
