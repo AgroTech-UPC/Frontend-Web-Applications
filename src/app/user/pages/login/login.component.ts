@@ -10,6 +10,7 @@ import {User} from "../../models/user.model";
 import {NgIf} from "@angular/common";
 import {BreederApiService} from "../../services/breeder-api.service";
 import {AdvisorApiService} from "../../services/advisor-api.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
               private breederApiService: BreederApiService,
               private advisorApiService: AdvisorApiService,
               private router: Router,
-              private formBuilder: FormBuilder) {}
+              private formBuilder: FormBuilder,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -64,14 +66,17 @@ export class LoginComponent implements OnInit {
     this.userApiService.signIn(this.loginForm.value.email, this.loginForm.value.password).subscribe(
       (response: any) => {
         let userId = response['id'];
-        this.userApiService.setLogged(true);
         this.userApiService.setUserId(userId);
+        this.userApiService.setLogged(true);
         this.breederApiService.getAll().subscribe((data) => {
           const breeder = data.find(breeder => breeder.userId === userId);
           if (breeder) {
             this.userApiService.setIsBreeder(true);
             this.breederApiService.setBreederId(breeder.id);
             this.router.navigateByUrl('/criador/mi-granja');
+            this.snackBar.open('Bievenido ' + breeder.fullname + ' 🤗', 'Cerrar', {
+              duration: 2000
+            });
           } else {
             this.advisorApiService.getAll().subscribe((data) => {
               const advisor = data.find(advisor => advisor.userId === userId);
@@ -79,10 +84,18 @@ export class LoginComponent implements OnInit {
                 this.userApiService.setIsBreeder(false);
                 this.advisorApiService.setAdvisorId(advisor.id);
                 this.router.navigateByUrl('/asesor/clientes');
+                this.snackBar.open('Bievenido ' + advisor.fullname + ' 🤗', 'Cerrar', {
+                  duration: 2000
+                });
               }
             });
           }
         });
-      });
+      }, error => {
+        this.snackBar.open('Error al iniciar sesión😥', 'Cerrar', {
+          duration: 3000
+        });
+      }
+      );
   }
 }

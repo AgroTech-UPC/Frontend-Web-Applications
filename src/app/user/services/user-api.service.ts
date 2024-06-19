@@ -83,7 +83,8 @@ export class UserApiService extends  BaseService<User>{
   }
 
   getNotificationsByUserId(user_id: number) {
-    return this.http.get<Notification[]>(this.buildPath() + '/' + user_id + '/notifications').pipe(catchError(this.handleError));
+    this.setToken();
+    return this.http.get<Notification[]>(this.buildPath() + '/' + user_id + '/notifications', this.httpOptions).pipe(catchError(this.handleError));
   }
 
 }

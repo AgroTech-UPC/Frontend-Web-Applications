@@ -80,47 +80,38 @@ export class RegisterAdvisorComponent {
   }
 
   onSubmit() {
-    this.userApiService.getAll().subscribe((data) => {
-      // check if user already exists
-      const user = data.find((user: User) => user.email === this.registerForm.value.email);
-      if (user) {
-        this.snackBar.open('El correo ya está registrado😥', 'Cerrar', {
-          duration: 5000,
-        });
-      }
-      else {
-        // Register advisor
-        // Formatting date to ISO string (YYYY-MM-DD)
-        const birthDate: Date = this.registerForm.value.birthDate;
-        const birthDateString = birthDate.toISOString().split('T')[0];
-        let user: User = {
-          id: 0,
-          email: this.registerForm.value.email,
-          password: this.registerForm.value.password,
-          fullname: this.registerForm.value.name,
-          location: this.registerForm.value.location,
-          birthdate: birthDateString,
-          description: this.registerForm.value.description
-        };
+    this.userApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
+      .subscribe((data: any) => {
+        // Iniciar sesión automáticamente para obtener el token del usuario
+        this.userApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
+          .subscribe((response: any) => {
+            let userId = response['id'];
+            this.userApiService.setUserId(userId);
+            this.userApiService.setLogged(true);
 
-        this.userApiService.create(user).subscribe(
-          (response) => {
-            console.log(response);
+            // Crear un nuevo asesor
+            const birthDate: Date = this.registerForm.value.birthDate;
+            const birthDateString = birthDate.toISOString().split('T')[0];
             let advisor: Advisor = {
               id: 0,
+              fullname: this.registerForm.value.name,
+              location: this.registerForm.value.location,
+              birthdate: birthDateString,
+              description: this.registerForm.value.description,
               occupation: this.registerForm.value.occupation,
               experience: this.registerForm.value.experience,
               photo: this.registerForm.value.photo,
               rating: 0,
-              userId: response.id
+              userId: userId
             };
             this.advisorApiService.create(advisor).subscribe(
               (response) => {
-                console.log(response);
-                this.snackBar.open('Registro exitoso🤩 ¡Pasa a iniciar sesión!', 'Cerrar', {
-                  duration: 5000,
+                this.userApiService.setIsBreeder(false);
+                this.advisorApiService.setAdvisorId(response.id);
+                this.router.navigateByUrl('/asesor/clientes');
+                this.snackBar.open('Bievenido ' + advisor.fullname + ' 🤗', 'Cerrar', {
+                  duration: 2000
                 });
-                this.router.navigate(['/']);
               },
               error => {
                 this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {
@@ -129,16 +120,12 @@ export class RegisterAdvisorComponent {
                 console.error(error);
               }
             );
-          },
-          error => {
-            this.snackBar.open('Error al registrar el usuario😥', 'Cerrar', {
-              duration: 5000,
+          }, error => {
+            this.snackBar.open('Error al iniciar sesión😥', 'Cerrar', {
+              duration: 3000
             });
-            console.error(error);
-          }
-        )
-      }
-    });
+          });
+      });
   }
 
   goBack() {

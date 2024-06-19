@@ -13,7 +13,6 @@ import {Appointment} from "../../models/appointment.model";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {MatCardModule} from "@angular/material/card";
 
 @Component({
@@ -48,7 +47,6 @@ export class ReviewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private advisorService: AdvisorApiService,
-    private userApiService: UserApiService,
     private appointmentService: AppointmentApiService,
     private reviewService: ReviewApiService,
     private router: Router
@@ -74,12 +72,10 @@ export class ReviewComponent implements OnInit {
     const advisorId = this.appointment.advisorId;
     this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
-      this.userApiService.getOne(advisor.userId).subscribe(user => {
-        this.advisorDetails = {
-          fullname: user.fullname,
-          location: user.location
-        };
-      });
+      this.advisorDetails = {
+        fullname: advisor.fullname,
+        location: advisor.location
+      };
     });
 
   }
@@ -87,7 +83,7 @@ export class ReviewComponent implements OnInit {
     this.review.rating = this.rating;
     this.review.appointmentId = this.appointment.id;
     this.reviewService.create(this.review).subscribe();
-    this.appointment.status = "Terminado";
+    this.appointment.status = "TERMINADO";
     this.appointmentService.update(this.appointment.id, this.appointment).subscribe();
     this.isConfirmed = true;
   }

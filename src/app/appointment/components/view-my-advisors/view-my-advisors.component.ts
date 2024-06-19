@@ -90,12 +90,10 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
         this.filteredAdvisors = [...this.advisors];
         this.filteredAdvisors.forEach(advisor => {
-          this.userApiService.getOne(advisor.userId).subscribe(user => {
-            this.advisorDetails[advisor.userId] = {
-              fullname: user.fullname,
-              location: user.location
-            };
-          });
+          this.advisorDetails[advisor.userId] = {
+            fullname: advisor.fullname,
+            location: advisor.location
+          };
         });
         //Get all appointments for each advisor in an array
         this.filteredAdvisors.forEach(advisor => {

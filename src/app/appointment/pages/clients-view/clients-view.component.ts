@@ -3,7 +3,6 @@ import {ClientCardComponent} from "../../components/client-card/client-card.comp
 import {NgForOf, NgIf} from "@angular/common";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
@@ -26,8 +25,7 @@ export class ClientsViewComponent implements OnInit {
   appointments: Appointment[] = [];
   clients: Client[] = [];
 
-  constructor( private userService: UserApiService,
-               private breederService: BreederApiService,
+  constructor (private breederService: BreederApiService,
                private advisorService: AdvisorApiService,
                private appointmentService: AppointmentApiService) { }
 
@@ -48,20 +46,16 @@ export class ClientsViewComponent implements OnInit {
   getClients(){
     this.appointments.forEach(appointment => {
       this.breederService.getOne(appointment.breederId).subscribe(breeder => {
-        this.userService.getOne(breeder.userId).subscribe(user => {
-          let client = {
-            id: breeder.id,
-            appointmentId: appointment.id,
-            fullname: user.fullname,
-            appointmentStatus: appointment.status,
-            location: user.location,
-            cages: 0,
-            description: user.description
-          }
-          this.clients.push(  client);
-        });
-
-
+        let client = {
+          id: breeder.id,
+          appointmentId: appointment.id,
+          fullname: breeder.fullname,
+          appointmentStatus: appointment.status,
+          location: breeder.location,
+          cages: 0,
+          description: breeder.description
+        };
+        this.clients.push(client);
       });
     });
   }
