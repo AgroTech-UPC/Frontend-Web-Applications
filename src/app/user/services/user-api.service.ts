@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../models/user.model";
 import {BaseService} from "../../shared/services/base.service";
 import {Notification} from "../../appointment/models/notification.model";
-import {catchError, Observable} from "rxjs";
+import {catchError, Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,28 @@ export class UserApiService extends  BaseService<User>{
   constructor(http: HttpClient) {
     super(http);
     this.extraUrl = environment.userURL;
+  }
+
+  signUp(username: string, password: string, role: string) {
+    const user = {
+      "username": username,
+      "password": password,
+      "roles": [role]
+    };
+    return this.http.post(this.baseUrl + environment.authenticationURL + '/sign-up', user, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  signIn(username: string, password: string) {
+    const user = {
+      "username": username,
+      "password": password
+    };
+    return this.http.post(this.baseUrl + environment.authenticationURL + '/sign-in', user, this.httpOptions)
+      .pipe(catchError(this.handleError))
+      .pipe(tap((response: any) => {
+        this.newToken(response["token"]);
+      }))
   }
 
   setLogged(isLogged: boolean){

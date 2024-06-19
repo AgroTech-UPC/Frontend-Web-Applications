@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(){
+  login() {
     if (this.loginAttempts > 3) {
       this.errorMessage = "Has alcanzado el límite de intentos de inicio de sesión. Por favor, inténtalo más tarde.";
       return;
@@ -61,25 +61,20 @@ export class LoginComponent implements OnInit {
 
     this.loginAttempts++;
 
-    this.userApiService.getAll().subscribe((data) => {
-      const user = data.find(user => user.email === this.loginForm.value.email);
-      if (!user) {
-        this.errorMessage="Error: el correo proporcionado no está registrado.";
-      } else if (user.password !== this.loginForm.value.password) {
-        this.errorMessage="Error: el correo y la contraseña proporcionada no coinciden.";
-      } else {
-        this.userApiService.setUserId(user.id);
-        this.errorMessage = null;
+    this.userApiService.signIn(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+      (response: any) => {
+        let userId = response['id'];
         this.userApiService.setLogged(true);
+        this.userApiService.setUserId(userId);
         this.breederApiService.getAll().subscribe((data) => {
-          const breeder = data.find(breeder => breeder.userId === user.id);
+          const breeder = data.find(breeder => breeder.userId === userId);
           if (breeder) {
             this.userApiService.setIsBreeder(true);
             this.breederApiService.setBreederId(breeder.id);
             this.router.navigateByUrl('/criador/mi-granja');
           } else {
             this.advisorApiService.getAll().subscribe((data) => {
-              const advisor = data.find(advisor => advisor.userId === user.id);
+              const advisor = data.find(advisor => advisor.userId === userId);
               if (advisor) {
                 this.userApiService.setIsBreeder(false);
                 this.advisorApiService.setAdvisorId(advisor.id);
@@ -88,8 +83,6 @@ export class LoginComponent implements OnInit {
             });
           }
         });
-      }
-    });
+      });
   }
-
 }

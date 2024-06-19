@@ -90,6 +90,8 @@ export class SidenavComponent {
 
   logOut() {
     this.userApiService.setLogged(false);
+    this.userApiService.setUserId(0);
+    this.userApiService.clearToken();
     this.breederApiService.setBreederId(0);
     this.advisorApiService.setAdvisorId(0);
     this.onToggleSidenav(false);
