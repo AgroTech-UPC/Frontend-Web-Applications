@@ -17,28 +17,6 @@ export class UserApiService extends  BaseService<User>{
     this.extraUrl = environment.userURL;
   }
 
-  signUp(username: string, password: string, role: string) {
-    const user = {
-      "username": username,
-      "password": password,
-      "roles": [role]
-    };
-    return this.http.post(this.baseUrl + environment.authenticationURL + '/sign-up', user, this.httpOptions)
-      .pipe(catchError(this.handleError));
-  }
-
-  signIn(username: string, password: string) {
-    const user = {
-      "username": username,
-      "password": password
-    };
-    return this.http.post(this.baseUrl + environment.authenticationURL + '/sign-in', user, this.httpOptions)
-      .pipe(catchError(this.handleError))
-      .pipe(tap((response: any) => {
-        this.newToken(response["token"]);
-      }))
-  }
-
   setLogged(isLogged: boolean){
     // Check if the window object is defined (prevent error from server side rendering)
     if (typeof window !== 'undefined' && window.localStorage) {

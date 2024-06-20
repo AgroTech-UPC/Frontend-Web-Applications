@@ -11,6 +11,7 @@ import {NgIf} from "@angular/common";
 import {BreederApiService} from "../../services/breeder-api.service";
 import {AdvisorApiService} from "../../services/advisor-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
   loginAttempts: number = 0;
 
   constructor(private userApiService: UserApiService,
+              private authenticationApiService: AuthenticationApiService,
               private breederApiService: BreederApiService,
               private advisorApiService: AdvisorApiService,
               private router: Router,
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit {
 
     this.loginAttempts++;
 
-    this.userApiService.signIn(this.loginForm.value.email, this.loginForm.value.password).subscribe(
+    this.authenticationApiService.signIn(this.loginForm.value.email, this.loginForm.value.password).subscribe(
       (response: any) => {
         let userId = response['id'];
         this.userApiService.setUserId(userId);

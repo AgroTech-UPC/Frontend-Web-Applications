@@ -16,6 +16,7 @@ import { BreederApiService } from "../../services/breeder-api.service";
 
 import { User } from "../../models/user.model";
 import { Breeder } from "../../models/breeder.model";
+import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
 
 @Component({
   selector: 'register-breeder',
@@ -62,6 +63,7 @@ export class RegisterBreederComponent {
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
+              private authenticationApiService: AuthenticationApiService,
               private userApiService: UserApiService,
               private breederApiService: BreederApiService,
               private snackBar: MatSnackBar) {
@@ -72,10 +74,10 @@ export class RegisterBreederComponent {
   }
 
   onSubmit() {
-    this.userApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
+    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
       .subscribe((data: any) => {
         // Iniciar sesión automáticamente para obtener el token del usuario
-        this.userApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
+        this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
           .subscribe((response: any) => {
             let userId = response['id'];
             this.userApiService.setUserId(userId);

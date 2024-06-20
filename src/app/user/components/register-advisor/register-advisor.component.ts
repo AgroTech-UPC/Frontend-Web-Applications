@@ -20,6 +20,7 @@ import {User} from "../../models/user.model";
 import {Advisor} from "../../models/advisor.model";
 import {Breeder} from "../../models/breeder.model";
 import {Observable} from "rxjs";
+import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
 
 @Component({
   selector: 'register-advisor',
@@ -70,6 +71,7 @@ export class RegisterAdvisorComponent {
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
+              private authenticationApiService: AuthenticationApiService,
               private userApiService: UserApiService,
               private advisorApiService: AdvisorApiService,
               private snackBar: MatSnackBar) {
@@ -80,10 +82,10 @@ export class RegisterAdvisorComponent {
   }
 
   onSubmit() {
-    this.userApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
+    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
       .subscribe((data: any) => {
         // Iniciar sesión automáticamente para obtener el token del usuario
-        this.userApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
+        this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
           .subscribe((response: any) => {
             let userId = response['id'];
             this.userApiService.setUserId(userId);
