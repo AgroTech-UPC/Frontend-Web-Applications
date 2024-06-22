@@ -9,6 +9,13 @@
   </mat-card-header>
   <mat-card-content class="col">
     <p>Estado: {{client.appointmentStatus}}</p>
-    <button mat-flat-button style="background-color: #91654E;; color: #FFFFFF" (click)="goToAppointment(client.appointmentId)">Ver más</button>
+    <button mat-flat-button style="background-color: #91654E;; color: #FFFFFF; margin-bottom:5px" (click)="goToAppointment(client.appointmentId)">Ver más</button>
+    <button mat-flat-button
+            [style.backgroundColor]="client.appointmentStatus === 'TERMINADO' ? '#FF0000' : '#7EC306'"
+            [disabled]="client.appointmentStatus === 'TERMINADO'"
+            style="color: #FFFFFF; text-align: center; line-height: 1;"
+            (click)="finishAppointment()">
+      Terminar Cita
+    </button>
   </mat-card-content>
 </mat-card>
