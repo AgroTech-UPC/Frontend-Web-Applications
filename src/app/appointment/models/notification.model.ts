@@ -1,7 +1,8 @@
 export interface Notification {
   id: number;
-  type: string;
-  text: string;
   date: string;
+  meetingUrl: string;
+  text: string;
+  type: string;
   userId: number;
 }

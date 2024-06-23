@@ -1,7 +1,7 @@
 
 export const environment = {
   production: false,
-    baseURL: 'http://localhost:8090/api/v1',
+    baseURL: 'https://web-services-18bk.onrender.com/api/v1',
 
     //urls for the different endpoints
     userURL: '/users',

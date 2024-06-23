@@ -11,7 +11,7 @@
     <p>Estado: {{client.appointmentStatus}}</p>
     <button mat-flat-button style="background-color: #91654E;; color: #FFFFFF; margin-bottom:5px" (click)="goToAppointment(client.appointmentId)">Ver más</button>
     <button mat-flat-button
-            [style.backgroundColor]="client.appointmentStatus === 'TERMINADO' ? '#FF0000' : '#7EC306'"
+            [style.backgroundColor]="client.appointmentStatus === 'TERMINADO' ? '#B1B1B1AA' : '#7EC306'"
             [disabled]="client.appointmentStatus === 'TERMINADO'"
             style="color: #FFFFFF; text-align: center; line-height: 1;"
             (click)="finishAppointment()">

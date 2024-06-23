@@ -26,10 +26,10 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
     trigger('fadeInOut', [
       transition(':enter', [
         style({opacity: 0}),
-        animate('300ms ease-in-out', style({opacity: 1}))
+        animate('100ms ease-in-out', style({opacity: 1}))
       ]),
       transition(':leave', [
-        animate('300ms ease-in-out', style({opacity: 0}))
+        animate('100ms ease-in-out', style({opacity: 0}))
       ])
     ])
   ]

@@ -11,12 +11,12 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
-import { UserApiService } from "../../services/user-api.service";
-import { BreederApiService } from "../../services/breeder-api.service";
+import { UserApiService } from "../../../user/services/user-api.service";
+import { BreederApiService } from "../../../user/services/breeder-api.service";
+import { AuthenticationApiService } from "../../services/authentication-api.service";
 
-import { User } from "../../models/user.model";
-import { Breeder } from "../../models/breeder.model";
-import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
+import { Breeder } from "../../../user/models/breeder.model";
+
 
 @Component({
   selector: 'register-breeder',

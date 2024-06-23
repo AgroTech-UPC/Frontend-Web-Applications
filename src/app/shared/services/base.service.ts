@@ -90,6 +90,7 @@ export class BaseService<T> {
 
   update(id: any, item: T) {
     this.setToken();
+    console.log(this.httpOptions.headers.get('Authorization'));
     return this.http.put<T>(this.buildPath() + "/" + id, item, this.httpOptions).pipe(catchError(this.handleError));
   }
 

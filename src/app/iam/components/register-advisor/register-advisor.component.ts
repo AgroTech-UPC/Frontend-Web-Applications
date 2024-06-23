@@ -13,38 +13,34 @@ import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
-import {UserApiService} from "../../services/user-api.service";
-import {AdvisorApiService} from "../../services/advisor-api.service";
-
-import {User} from "../../models/user.model";
-import {Advisor} from "../../models/advisor.model";
-import {Breeder} from "../../models/breeder.model";
-import {Observable} from "rxjs";
-import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
+import {UserApiService} from "../../../user/services/user-api.service";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
+import {Advisor} from "../../../user/models/advisor.model";
+import {AuthenticationApiService} from "../../services/authentication-api.service";
 
 @Component({
   selector: 'register-advisor',
   standalone: true,
     imports: [
-        MatButton,
-        MatCard,
-        MatCardContent,
-        MatCardHeader,
-        MatCardTitle,
-        MatDatepickerModule,
-        MatDatepickerInput,
-        MatDatepickerToggle,
-        MatError,
-        MatFormField,
-        MatHint,
-        MatNativeDateModule,
-        MatInput,
-        MatLabel,
-        MatOption,
-        MatSelect,
-        MatSuffix,
-        NgIf,
-        ReactiveFormsModule
+      MatButton,
+      MatCard,
+      MatCardContent,
+      MatCardHeader,
+      MatCardTitle,
+      MatDatepickerModule,
+      MatDatepickerInput,
+      MatDatepickerToggle,
+      MatError,
+      MatFormField,
+      MatHint,
+      MatNativeDateModule,
+      MatInput,
+      MatLabel,
+      MatOption,
+      MatSelect,
+      MatSuffix,
+      NgIf,
+      ReactiveFormsModule
     ],
   templateUrl: './register-advisor.component.html',
   styleUrl: './register-advisor.component.css',

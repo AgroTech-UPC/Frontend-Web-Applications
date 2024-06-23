@@ -5,6 +5,11 @@ import { Router } from "@angular/router";
 import {Client} from "../../models/client.model";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
+import {MatDialog} from "@angular/material/dialog";
+import {Observable} from "rxjs";
+import {
+  ConfirmationDialogComponent
+} from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'client-card',
@@ -22,19 +27,38 @@ import {Appointment} from "../../models/appointment.model";
 export class ClientCardComponent {
   @Input() client!: Client;
 
-  constructor(private router: Router, private appointmentService: AppointmentApiService) { }
+  constructor(private router: Router,
+              private appointmentService: AppointmentApiService,
+              private dialog: MatDialog) { }
 
   goToAppointment(id: any) {
     this.router.navigateByUrl(`/asesor/clientes/${id}`);
   }
-  finishAppointment() {
-    this.appointmentService.getOne(this.client.appointmentId).subscribe((appointment: Appointment) => {
-      appointment.status = "TERMINADO";
-      this.appointmentService.update(appointment.id, appointment).subscribe(() => {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate([decodeURI(this.router.url)]);
-        });
-      });
+
+  confirmFinished(): Observable<boolean> {
+    // Open a dialog to confirm the deletion
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: `¿Estás seguro de querer marcar esta cita como terminada?`
+      }
     });
+    // Return the result of the dialog
+    return dialogRef.afterClosed();
+  }
+
+  finishAppointment() {
+    this.confirmFinished().subscribe(confirmado => {
+      if(confirmado) {
+        this.appointmentService.getOne(this.client.appointmentId).subscribe((appointment: Appointment) => {
+          appointment.status = "TERMINADO";
+          this.appointmentService.update(appointment.id, appointment).subscribe(() => {
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([decodeURI(this.router.url)]);
+            });
+          });
+        });
+      }
+    });
+
   }
 }

@@ -8,6 +8,7 @@ import {CommonModule, Location} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {ResourceApiService} from "../../services/resource-api.service";
 import {MatIcon} from "@angular/material/icon";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-resource',
@@ -40,7 +41,8 @@ export class EditResourceComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private resourceApiService: ResourceApiService,
-    private location: Location
+    private location: Location,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -51,19 +53,25 @@ export class EditResourceComponent implements OnInit{
   }
 
   private loadResource(id: string) {
-    this.resourceApiService.getOne(id).subscribe((expense: any) => {
-      this.resource = expense;
+    this.resourceApiService.getOne(id).subscribe((resource: any) => {
+      this.resource = resource;
     }, error => {
       console.error('Error loading resource', error);
     });
   }
 
   handleClick(): void {
+    console.log(this.resource);
     this.resourceApiService.update(this.resource.id, this.resource).subscribe(() => {
-      console.log('Recurso actualizado con éxito');
-      this.router.navigate(['/criador/mi-granja/recursos']);
+      this.snackBar.open('Recurso actualizado con éxito😎', 'Cerrar', {
+        duration: 2000,
+      }).afterDismissed().subscribe(() => {
+        this.router.navigate(['/criador/mi-granja/recursos']);
+      })
     }, error => {
-      console.error('Error updating resource', error);
+      this.snackBar.open('Error al actualizar el recurso😥', 'Cerrar', {
+        duration: 2000,
+      });
     });
   }
 

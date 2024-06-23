@@ -1,34 +1,36 @@
-import {Component, OnInit} from '@angular/core';
-import {UserApiService} from "../../services/user-api.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {UserApiService} from "../../../user/services/user-api.service";
 import {Router, RouterLink} from "@angular/router";
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
-import {User} from "../../models/user.model";
+import {User} from "../../../user/models/user.model";
 import {NgIf} from "@angular/common";
-import {BreederApiService} from "../../services/breeder-api.service";
-import {AdvisorApiService} from "../../services/advisor-api.service";
+import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {AuthenticationApiService} from "../../../iam/services/authentication-api.service";
+import {AuthenticationApiService} from "../../services/authentication-api.service";
+import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatFormFieldModule,
-    MatInput,
-    ReactiveFormsModule,
-    MatButton,
-    RouterLink,
-    NgIf
-  ],
+    imports: [
+      MatCardModule,
+      MatFormFieldModule,
+      MatInput,
+      ReactiveFormsModule,
+      MatButton,
+      RouterLink,
+      NgIf
+    ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
   loginForm!: FormGroup;
   user = new User();
   errorMessage: string | null = null;
@@ -92,12 +94,14 @@ export class LoginComponent implements OnInit {
               }
             });
           }
+
         });
+
       }, error => {
-        this.snackBar.open('Error al iniciar sesión😥', 'Cerrar', {
+        this.snackBar.open('Error. Credenciales no encontradas😥', 'Cerrar', {
           duration: 3000
         });
       }
-      );
+    );
   }
 }
