@@ -74,13 +74,14 @@
             Número no válido
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>URL de la foto de perfil</mat-label>
-          <input matInput placeholder="e.g.: https://www.example.com/photo.jpg" formControlName="photo">
-          <mat-error *ngIf="registerForm.get('photo')?.hasError('required')">
-            La foto de perfil es requerida
-          </mat-error>
-        </mat-form-field>
+        <div>
+          <input id="uploadImage" hidden (change)="uploadImage($event)" type="file" accept=".png, .jpg, .jpeg">
+          <label id="imageButton" for="uploadImage">
+            <mat-icon>image</mat-icon>
+            Subir foto de perfil
+          </label>
+          <span *ngIf="selectedFileName" id="imageName">{{ selectedFileName }}</span>
+        </div>
         <div class="buttons">
           <button mat-flat-button style="background-color: #e19669; color: #FFFFFF" (click)="goBack()">Cancelar</button>
           <button mat-flat-button style="background-color: #7ec346; color: #FFFFFF" type="submit" [disabled]="!registerForm.valid">Registrar</button>

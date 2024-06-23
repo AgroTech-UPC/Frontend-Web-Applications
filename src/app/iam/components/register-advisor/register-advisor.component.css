@@ -50,6 +50,24 @@ button:enabled{
   width: 100%;
 }
 
+#imageName {
+  margin-left: 10px;
+}
+
+#imageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #DB6E36;
+  color: #FFFFFF;
+  padding: 15px;
+  border-radius: 35px;
+  text-align: center;
+  align-content: center;
+  width: 50%;
+  cursor: pointer;
+}
+
 
 @media (max-width: 850px) {
   .container mat-card {

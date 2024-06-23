@@ -17,31 +17,34 @@ import {UserApiService} from "../../../user/services/user-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
 import {AuthenticationApiService} from "../../services/authentication-api.service";
+import {StorageService} from "../../../shared/services/storage.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'register-advisor',
   standalone: true,
-    imports: [
-      MatButton,
-      MatCard,
-      MatCardContent,
-      MatCardHeader,
-      MatCardTitle,
-      MatDatepickerModule,
-      MatDatepickerInput,
-      MatDatepickerToggle,
-      MatError,
-      MatFormField,
-      MatHint,
-      MatNativeDateModule,
-      MatInput,
-      MatLabel,
-      MatOption,
-      MatSelect,
-      MatSuffix,
-      NgIf,
-      ReactiveFormsModule
-    ],
+  imports: [
+    MatButton,
+    MatCard,
+    MatCardContent,
+    MatCardHeader,
+    MatCardTitle,
+    MatDatepickerModule,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatError,
+    MatFormField,
+    MatHint,
+    MatNativeDateModule,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatSuffix,
+    NgIf,
+    ReactiveFormsModule,
+    MatIcon
+  ],
   templateUrl: './register-advisor.component.html',
   styleUrl: './register-advisor.component.css',
   providers: [
@@ -58,26 +61,58 @@ export class RegisterAdvisorComponent {
       birthDate: new FormControl(null, [Validators.required]),
       description: new FormControl('', [Validators.required]),
       occupation: new FormControl('', [Validators.required]),
-      experience: new FormControl('', [Validators.required, Validators.min(1), Validators.max(70)]),
-      photo: new FormControl('', [Validators.required])
+      experience: new FormControl('', [Validators.required, Validators.min(1), Validators.max(70)])
     }
   );
   minDate: Date;
   maxDate: Date;
+  photo: any;
+  selectedFileName = '';
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
               private authenticationApiService: AuthenticationApiService,
               private userApiService: UserApiService,
               private advisorApiService: AdvisorApiService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private storageService: StorageService) {
     this.dateAdapter.setLocale('es-PE');
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 90, 0, 1);
     this.maxDate = new Date(currentYear - 18, 11, 31);
   }
 
+  uploadImage(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.selectedFileName = file.name;
+      console.log(file);
+      let reader= new FileReader();
+      let name = "PROFILEPHOTO_IMAGE_" + Date.now();
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        console.log(reader.result);
+        this.storageService.uploadFile(name, reader.result).then((url) => {
+          console.log(url);
+          this.photo = url;
+        });
+      }
+    }
+  }
+
   onSubmit() {
+    if (this.selectedFileName === '') {
+      this.snackBar.open('Debe seleccionar una foto de perfil 📷', 'Cerrar', {
+        duration: 2000
+      });
+      return;
+    }
+    if (this.photo == null) {
+      this.snackBar.open('Error al subir la foto de perfil😓', 'Cerrar', {
+        duration: 2000
+      });
+      return;
+    }
     this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
       .subscribe((data: any) => {
         // Iniciar sesión automáticamente para obtener el token del usuario
@@ -98,7 +133,7 @@ export class RegisterAdvisorComponent {
               description: this.registerForm.value.description,
               occupation: this.registerForm.value.occupation,
               experience: this.registerForm.value.experience,
-              photo: this.registerForm.value.photo,
+              photo: this.photo,
               rating: 0,
               userId: userId
             };
