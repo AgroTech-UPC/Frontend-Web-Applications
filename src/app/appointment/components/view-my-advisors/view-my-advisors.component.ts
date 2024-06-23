@@ -118,6 +118,11 @@ export class ViewMyAdvisorsComponent implements OnInit{
     }
   }
 
+  // Excepcion para mostrar el mensaje de error si existen appointments pero todos estan reseñados
+  allAdvisorsAppointmentsReviewed(): boolean {
+    return this.filteredAdvisors.every(advisor => this.getAppointmentsByAdvisor(advisor.id).length === 0);
+  }
+
   // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {
     this.router.navigate([`/criador/buscar-asesor`]);

@@ -49,7 +49,7 @@
         </mat-card>
       </ng-container>
     </div>
-    <div *ngIf="filteredAdvisors.length === 0" class="error-container">
+    <div *ngIf="filteredAdvisors.length <= 0 || allAdvisorsAppointmentsReviewed()" class="error-container">
       <span class="error-title">Usted aún no ha reservado ninguna cita con ningún asesor</span>
       <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
     </div>
