@@ -2,77 +2,63 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  margin: 10px;
-  padding: 0;
+  height: 90vh;
 }
 
 .register-user {
-  display: flex;
-  flex-direction: column;
+  width: 400px;
   padding: 20px;
-  width: 500px;
-  margin: 0 auto;
-  min-height: 100%;
-  border-radius: 25px;
-}
-
-.mat-card-footer {
-  margin-top: auto;
+  text-align: center;
+  align-items: center;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  text-align: center;
   color: #DD763D;
-  font-weight: bold;
-  font-size: xx-large;
+  font-size: 2rem;
 }
 
+.mat-card-content {
+  margin-top: 20px;
+}
 
-.buttons {
+.roles {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.role {
+  text-align: center;
+}
+
+.role p{
   margin-top: 10px;
-  margin-bottom: 10px;
+  text-align: center;
 }
 
 button {
-  margin: 0 10px;
+  margin-top: 10px;
 }
 
-h2 {
-  color: #7EC306;
+.role-text {
+  font-size: 0.9rem;
+  color: #666;
 }
 
-h3 {
-  font-weight: bold;
+a {
+  color: #666;
+  text-decoration: none;
 }
 
-.login{
-  cursor: pointer;
+a:hover {
+  color: #DD763D;
 }
 
-a{
-  cursor: pointer;
-  color: black;
-}
-
-a:visited {
-  color: black;
-}
-
-a:hover{
-  color: #DC763C;
-}
-
-@media (max-width: 515px) {
-  .register-user {
-    width: 375px;
-  }
-}
-
-@media (max-width: 380px) {
-  .register-user {
-    width: 300px;
-  }
+.login {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  color: #000000;
 }
