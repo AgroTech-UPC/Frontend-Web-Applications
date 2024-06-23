@@ -74,7 +74,7 @@ export class RegisterBreederComponent {
   }
 
   onSubmit() {
-    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
+    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_BREEDER')
       .subscribe((data: any) => {
         // Iniciar sesión automáticamente para obtener el token del usuario
         this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
