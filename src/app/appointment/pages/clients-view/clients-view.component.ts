@@ -35,11 +35,11 @@ export class ClientsViewComponent implements OnInit {
   }
 
   getAppointments() {
-    this.appointmentService.getAll().subscribe(appointments => {
-      appointments.filter(appointment => appointment.advisorId === this.advisorId).forEach(appointment => {
-        this.appointments.push(appointment);
-      });
+    this.advisorService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
+      this.appointments = appointments;
       this.getClients();
+    }, error => {
+        console.log(error);
     });
   }
 
