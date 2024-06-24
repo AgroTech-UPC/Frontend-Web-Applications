@@ -8,7 +8,6 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {CageApiService} from "../../../management/services/cage-api.service";
 
 @Component({
@@ -44,7 +43,6 @@ export class ClientDetailComponent implements OnInit{
   appointmentId = 0;
 
   constructor(private breederService: BreederApiService,
-              private userService: UserApiService,
               private appointmentService: AppointmentApiService,
               private cageService: CageApiService,
               private activatedRouter: ActivatedRoute) {}
@@ -57,19 +55,17 @@ export class ClientDetailComponent implements OnInit{
   getClient(breederId: number) {
     this.breederService.getOne(breederId).subscribe((breeder: Breeder) => {
       this.breeder = breeder;
-      this.userService.getOne(breeder.userId).subscribe(user => {
         this.cageService.getAll().subscribe(cages => {
           this.client = {
             id: breederId,
             appointmentId: this.appointmentId,
             appointmentStatus: this.appointment.status,
-            fullname: user.fullname,
-            location: user.location,
+            fullname: breeder.fullname,
+            location: breeder.location,
             cages: cages.filter(cage => cage.breederId === breederId).length,
-            description: user.description
+            description: breeder.description
           }
-        })
-      });
+        });
     });
   }
 

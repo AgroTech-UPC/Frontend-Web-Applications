@@ -10,6 +10,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import { ExpenseApiService } from '../../services/expense-api.service';
 import { Location } from '@angular/common';
 import {MatIcon} from "@angular/material/icon";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-edit-expense',
@@ -43,7 +44,8 @@ export class EditExpenseComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private expenseApiService: ExpenseApiService,
-    private location: Location
+    private location: Location,
+    private snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -62,10 +64,16 @@ export class EditExpenseComponent implements OnInit{
 
   handleClick(): void {
     this.expenseApiService.update(this.expense.id, this.expense).subscribe(() => {
-      console.log('Gasto actualizado con éxito');
-      this.router.navigate(['/criador/mi-granja/gastos']);
+      this.snackBar.open('Gasto actualizado con éxito🤗', 'Cerrar', {
+        duration: 2000
+      }).afterDismissed().subscribe(() => {
+        this.router.navigate(['/criador/mi-granja/gastos']);
+      });
+
     }, error => {
-      console.error('Error updating expense', error);
+      this.snackBar.open('Error al actualizar el gasto😪', 'Cerrar', {
+        duration: 2000
+      });
     });
   }
 

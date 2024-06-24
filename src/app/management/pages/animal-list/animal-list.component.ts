@@ -43,6 +43,10 @@ export class AnimalListComponent implements OnInit{
     });
   }
 
+  createAnimal() {
+    this.router.navigate([`/criador/mis-animales/${this.cageID}/registro-animal`]);
+  }
+
   goBack() {
     window.history.back();
   }

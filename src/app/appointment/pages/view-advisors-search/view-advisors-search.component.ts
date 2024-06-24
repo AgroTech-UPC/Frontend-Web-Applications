@@ -40,14 +40,11 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     this.advisorApiService.getAll().subscribe(advisors => {
       this.advisors = advisors;
       this.advisors.forEach(advisor => {
-        this.userApiService.getOne(advisor.userId).subscribe(user => {
-          this.advisorDetails[advisor.userId] = {
-            fullname: user.fullname,
-            location: user.location
-          };
-        });
+        this.advisorDetails[advisor.userId] = {
+          fullname: advisor.fullname,
+          location: advisor.location
+        };
       });
-
     });
   }
 

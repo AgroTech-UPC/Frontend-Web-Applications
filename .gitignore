@@ -41,3 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 .firebase/hosting.ZGlzdFxmcm9udGVuZC13ZWItYXBwbGljYXRpb25zXGJyb3dzZXI.cache
+
+# Local Netlify folder
+.netlify

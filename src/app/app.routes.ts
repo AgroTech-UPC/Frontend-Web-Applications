@@ -26,18 +26,15 @@ import {ViewMyAdvisorsComponent} from "./appointment/components/view-my-advisors
 import {ViewAdvisorAboutusComponent} from "./appointment/components/view-advisor-aboutus/view-advisor-aboutus.component";
 import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
 import {ReviewComponent} from "./appointment/components/review/review.component";
-import {LoginComponent} from "./user/pages/login/login.component";
+import {LoginComponent} from "./iam/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
-
-import {RecoveryComponent} from "./user/pages/recovery/recovery.component";
-import {ResetComponent} from "./user/pages/reset/reset.component";
 
 import {EditExpenseComponent} from "./management/components/edit-expense/edit-expense.component";
 import {EditResourceComponent} from "./management/components/edit-resource/edit-resource.component";
 
-import {SignupComponent} from "./user/pages/signup/signup.component";
-import {SignupBreederComponent} from "./user/pages/signup-breeder/signup-breeder.component";
-import {SignupAdvisorComponent} from "./user/pages/signup-advisor/signup-advisor.component";
+import {SignupComponent} from "./iam/pages/signup/signup.component";
+import {SignupBreederComponent} from "./iam/pages/signup-breeder/signup-breeder.component";
+import {SignupAdvisorComponent} from "./iam/pages/signup-advisor/signup-advisor.component";
 
 import {ListAvailabilityScheduleComponent} from "./appointment/pages/list-availability-schedule/list-availability-schedule.component";
 import {AddAvailabilityScheduleComponent} from "./appointment/components/add-availability-schedule/add-availability-schedule.component";
@@ -47,8 +44,6 @@ import {CalendarComponent} from "./appointment/pages/calendar/calendar.component
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'login/recuperacion', component: RecoveryComponent},
-  {path: 'login/recuperacion/:id', component: ResetComponent},
   {path: 'registro', component: SignupComponent},
   {path: 'registro/criador', component: SignupBreederComponent},
   {path: 'registro/asesor', component: SignupAdvisorComponent},
@@ -68,7 +63,7 @@ export const routes: Routes = [
   {path: 'criador/mis-animales/editar/:id', component: CageEditorComponent},
   {path: 'criador/registro/jaula', component: RegisterCageComponent},
   {path: 'criador/registro/gasto', component: RegisterExpensesComponent},
-  {path: 'criador/registro/animal', component: RegisterCuyComponent},
+  {path: 'criador/mis-animales/:cageid/registro-animal', component: RegisterCuyComponent},
   {path: 'criador/registro/recurso', component: RegisterResourcesComponent},
   {path: 'criador/publicaciones', component: PublicationsViewComponent},
   {path: 'criador/notificaciones', component: NotificationsViewComponent},
