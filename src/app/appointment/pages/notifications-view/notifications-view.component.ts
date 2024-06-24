@@ -71,6 +71,12 @@ export class NotificationsViewComponent implements OnInit{
     });
   }
 
+  goToMeeting(id: number) {
+    this.notificationsApiService.getOne(id).subscribe((notification) => {
+      window.open(notification.meetingUrl, '_blank');
+    })
+  }
+
   deleteNotification(id: number) {
     this.notificationsApiService.delete(id).subscribe(() => {
       console.log("Notificación eliminada con éxito.");

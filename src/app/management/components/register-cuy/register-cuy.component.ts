@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MatButton} from "@angular/material/button";
-import {RouterLink} from "@angular/router";
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
@@ -48,8 +48,16 @@ export class RegisterCuyComponent {
     observations: ""
   };
 
-  constructor(public dialog: MatDialog, private animalService: AnimalApiService,
-              private snackBar: MatSnackBar, private breederService: BreederApiService) {}
+  gender = "";
+  isSick = "";
+
+  constructor(public dialog: MatDialog,
+              private animalService: AnimalApiService,
+              private snackBar: MatSnackBar,
+              private breederService: BreederApiService,
+              private route: ActivatedRoute) {
+    this.animal.cageId = +this.route.snapshot.paramMap.get('cageid')!;
+  }
 
   openDialog(): void {
     this.dialog.open(DialogComponent);
@@ -57,7 +65,7 @@ export class RegisterCuyComponent {
 
   handleClick(): void {
     if (!this.animal.name || !this.animal.breed  || !this.animal.cageId ||
-      !this.animal.weight || !this.animal.birthdate || !this.animal.isSick) {
+      !this.animal.weight || !this.animal.birthdate || !this.isSick || !this.gender) {
       this.openDialog();
     } else {
       // verify if cageId exists for this breeder
@@ -68,21 +76,26 @@ export class RegisterCuyComponent {
           });
         }
         else{
-          this.animal.gender = this.animal.gender === true; // required to convert the value to a boolean instead of a string
-          this.animal.isSick = this.animal.isSick === true; // required to convert the value to a boolean instead of a string
+          this.animal.gender = this.gender === "true"; // required to convert the value to a boolean instead of a string
+          this.animal.isSick = this.isSick === "true"; // required to convert the value to a boolean instead of a string
           this.registerCuy();
-          this.snackBar.open('Registrado con éxito', 'Cerrar', {
-            duration: 2000,
-          }).afterDismissed().subscribe(() => {
-            window.history.back();
-          });
         }
       });
     }
   }
 
   registerCuy(): void {
-    this.animalService.create(this.animal).subscribe();
+    this.animalService.create(this.animal).subscribe(() => {
+      this.snackBar.open('Cuy registrado con éxito🤠', 'Cerrar', {
+        duration: 2000,
+      }).afterDismissed().subscribe(() => {
+        window.history.back();
+      });
+    }, error => {
+      this.snackBar.open('Error al registrar cuy😥', 'Cerrar', {
+        duration: 2000
+      });
+    });
   }
 
   goBack() {

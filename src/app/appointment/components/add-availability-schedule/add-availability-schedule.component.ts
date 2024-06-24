@@ -77,12 +77,12 @@ export class AddAvailabilityScheduleComponent implements OnInit{
     }
 
     this.availableDateService.create(newAvailableDate).subscribe(() => {
-      this.snackBar.open('Horario disponible creado con éxito', 'Cerrar', {
+      this.snackBar.open('Horario disponible creado con éxito🎉', 'Cerrar', {
         duration: 5000,
       });
       this.goToAvailableDates();
     }, error => {
-      this.snackBar.open('Error al crear el horario disponible', 'Cerrar', {
+      this.snackBar.open('Error al crear el horario disponible😓', 'Cerrar', {
         duration: 5000,
       });
       console.error(error);

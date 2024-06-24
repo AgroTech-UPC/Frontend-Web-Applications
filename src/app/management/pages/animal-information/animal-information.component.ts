@@ -55,6 +55,7 @@ export class AnimalInformationComponent implements OnInit{
   isSick!: string;
   gender!: string;
   originalAnimal!: Animal;
+  breed!: string;
 
   @ViewChild('animalForm', {static: false})
   animalForm! : NgForm;
@@ -76,8 +77,8 @@ export class AnimalInformationComponent implements OnInit{
       .subscribe(
         (data) => {
           this.animal = data;
-          this.gender = this.animal.gender.toString();
-          this.isSick = this.animal.isSick.toString();
+          this.gender = (this.animal.gender ? 'true': 'false');
+          this.isSick = (this.animal.isSick ? 'true': 'false');
           this.originalAnimal = {...this.animal};
         },
         (error) => {

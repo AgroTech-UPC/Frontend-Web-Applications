@@ -17,6 +17,7 @@ export class CageApiService extends BaseService<Cage>{
   }
 
   getAnimalsByCageId(cageId: number){
-    return this.http.get<Animal[]>(this.buildPath() + '/' + cageId + '/animals').pipe(catchError(this.handleError));
+    this.setToken();
+    return this.http.get<Animal[]>(this.buildPath() + '/' + cageId + '/animals', this.httpOptions).pipe(catchError(this.handleError));
   }
 }
