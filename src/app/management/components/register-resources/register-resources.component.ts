@@ -61,16 +61,26 @@ export class RegisterResourcesComponent implements OnInit {
       this.openDialog();
     } else {
       this.registerResource();
-      this.snackBar.open('Recurso registrado con éxito', 'Cerrar', {
-        duration: 2000,
-      }).afterDismissed().subscribe(() => {
-        window.history.back();
-      });
     }
   }
 
   registerResource(): void {
-    this.resourceService.create(this.resource).subscribe();
+    this.resourceService.create(this.resource).subscribe(() => {
+        this.snackBar.open('Recurso registrado con éxito🤩', 'Cerrar', {
+          duration: 2000,
+        }).afterDismissed().subscribe(() => {
+          window.history.back();
+        });
+      },
+      error => {
+        console.error(error);
+        this.snackBar.open('Error al registrar el recurso😥', 'Cerrar', {
+          duration: 2000
+        });
+        this.snackBar.open('Recuerda que no puede haber recursos repetidos', 'Cerrar', {
+          duration: 2000
+        })
+      });
   }
 
   goBack() {

@@ -18,7 +18,6 @@ import {Router, RouterLink} from "@angular/router";
 })
 export class RegisterUserComponent {
 
-
   constructor(private router: Router) {
   }
 
@@ -29,6 +28,5 @@ export class RegisterUserComponent {
   registerAdvisor() {
     this.router.navigate(['/registro/asesor']);
   }
-
 
 }

@@ -1,5 +1,5 @@
 .container{
-  margin-top: 64px;
+  margin-top: 90px;
   height: calc(100vh - 64px);
 
   display: flex;
@@ -19,30 +19,38 @@
 mat-card-title{
   font-size: 32px;
   margin: 36px 0;
-  text-align: center;
+  color: #DD763D;
 }
 
-mat-card-subtitle{
-  width: 70%;
-  font-size: 20px;
-  margin: 24px auto 36px auto;
-  text-align: center;
-}
-
-form{
+.form-login{
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 300px;
+  width: 500px;
+  height: 400px;
 }
 
-.email {
+.email, .password{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   margin: 12px 0;
+}
+
+.password{
+  margin-bottom: 36px;
+}
+
+.password p{
+  width: 80%;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.password p:hover{
+  color: #DD763D;
 }
 
 mat-form-field{
@@ -52,7 +60,6 @@ mat-form-field{
 }
 
 button{
-  margin-top: 24px;
   width: 60%;
   height: 40px;
   margin-bottom: 12px;
@@ -79,4 +86,33 @@ a:hover{
 .error-message{
   color: red;
   text-align: center;
+}
+
+@media screen and (max-width: 550px){
+  .card{
+    width: 100%;
+    padding: 0;
+  }
+
+  mat-form-field{
+    width: 90%;
+  }
+
+  mat-card-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  mat-card-content{
+    width: 100%;
+    padding: 0;
+  }
+
+  .form-login{
+    width: 100%;
+  }
+
 }

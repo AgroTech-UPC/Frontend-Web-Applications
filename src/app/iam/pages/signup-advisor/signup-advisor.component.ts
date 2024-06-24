@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RegisterAdvisorComponent} from "../../components/register-advisor/register-advisor.component";
+import { RegisterAdvisorComponent } from "../../components/register-advisor/register-advisor.component";
 
 @Component({
   selector: 'app-signup-advisor',

@@ -11,18 +11,18 @@
     <mat-form-field>
       <mat-label>Raza</mat-label>
       <mat-select name="animalBreed" [(ngModel)]="animal.breed">
-        <mat-option value="Andina">Andina</mat-option>
-        <mat-option value="Inti">Inti</mat-option>
-        <mat-option value="Perú">Perú</mat-option>
-        <mat-option value="Kuri">Kuri</mat-option>
+        <mat-option value="ANDINA">Andina</mat-option>
+        <mat-option value="INTI">Inti</mat-option>
+        <mat-option value="PERU">Perú</mat-option>
+        <mat-option value="KURI">Kuri</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Género</mat-label>
-      <mat-select name="animalGender" aria-label="seleccionador de genero" [(ngModel)]="animal.gender">
-        <mat-option value=true>Macho</mat-option>
-        <mat-option value=false>Hembra</mat-option>
+      <mat-select name="animalGender" aria-label="seleccionador de genero" [(ngModel)]="gender">
+        <mat-option value="true">Macho</mat-option>
+        <mat-option value="false">Hembra</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -33,7 +33,7 @@
 
     <mat-form-field>
       <mat-label>ID de la jaula</mat-label>
-      <input matInput type="number" placeholder="ID de la jaula" name="animalCageId" [(ngModel)]="animal.cageId">
+      <input matInput type="number" placeholder="ID de la jaula" name="animalCageId" [(ngModel)]="animal.cageId" disabled>
     </mat-form-field>
 
     <mat-form-field>
@@ -43,7 +43,7 @@
 
     <mat-form-field>
       <mat-label>Estado</mat-label>
-      <mat-select name="animalStatus" aria-label="seleccionador de estado" [(ngModel)]="animal.isSick">
+      <mat-select name="animalStatus" aria-label="seleccionador de estado" [(ngModel)]="isSick">
         <mat-option value=false>Saludable</mat-option>
         <mat-option value=true>Enfermo</mat-option>
       </mat-select>

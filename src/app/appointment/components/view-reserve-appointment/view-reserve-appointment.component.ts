@@ -22,6 +22,7 @@ import {AppointmentApiService} from "../../services/appointment-api.service";
 import {AvailableDateApiService} from "../../services/available-date-api.service";
 
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-view-reserve-appointment',
@@ -41,8 +42,6 @@ import {NgForOf, DatePipe, NgIf} from "@angular/common";
   styleUrl: './view-reserve-appointment.component.css'
 })
 export class ViewReserveAppointmentComponent implements OnInit {
-  showMessage = false;
-  showConfirmation: boolean = false;
 
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
@@ -56,7 +55,8 @@ export class ViewReserveAppointmentComponent implements OnInit {
     private advisorApiService: AdvisorApiService,
     private breederApiService: BreederApiService,
     private appointmentApiService: AppointmentApiService,
-    private availableDateApiService: AvailableDateApiService
+    private availableDateApiService: AvailableDateApiService,
+    private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
@@ -106,7 +106,6 @@ export class ViewReserveAppointmentComponent implements OnInit {
   };
 
     this.appointmentApiService.create(newAppointment).subscribe(() => {
-      this.showConfirmation = true;
       let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
       let startTime = selectedDate.startTime.split(':').map(Number);
       let endTime = selectedDate.endTime.split(':').map(Number);
@@ -130,6 +129,15 @@ export class ViewReserveAppointmentComponent implements OnInit {
       };
       this.availableDateApiService.update(selectedDate.id, transformedSelectedDate).subscribe(() => {
         this.getAdvisorAvailableDates();
+        this.snackBar.open('Cita reservada exitosamente🤩', 'Cerrar', {
+          duration: 2000
+        }).afterDismissed().subscribe(() => {
+          this.router.navigate(['criador/buscar-asesor']);
+        });
+      });
+    }, error => {
+      this.snackBar.open('Error al reservar la cita😥', 'Cerrar', {
+        duration: 2000
       });
     });
   }
@@ -137,10 +145,6 @@ export class ViewReserveAppointmentComponent implements OnInit {
   // Status 1: Disponible, Status 0: No disponible
   getStatusText(status: boolean): string {
     return status === true ? 'Disponible' : 'No disponible';
-  }
-
-  goHome(): void {
-    this.router.navigate(['criador/buscar-asesor']);
   }
   cancel(): void {
     this.router.navigate(['criador/buscar-asesor']);

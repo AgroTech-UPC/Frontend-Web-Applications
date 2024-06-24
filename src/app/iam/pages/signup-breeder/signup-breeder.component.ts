@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RegisterBreederComponent} from "../../components/register-breeder/register-breeder.component";
+import { RegisterBreederComponent } from "../../components/register-breeder/register-breeder.component";
 
 @Component({
   selector: 'app-signup-breeder',
