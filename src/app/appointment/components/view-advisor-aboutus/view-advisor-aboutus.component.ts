@@ -41,6 +41,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   advisorDetails = {
     fullname: "",
     location: "",
+    occupation: "",
     description: ""
   };
   id = 0;
@@ -65,6 +66,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
       this.advisorDetails = {
         fullname: advisor.fullname,
         location: advisor.location,
+        occupation: advisor.occupation,
         description: advisor.description
       };
 

@@ -26,10 +26,10 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
     trigger('fadeInOut', [
       transition(':enter', [
         style({opacity: 0}),
-        animate('100ms ease-in-out', style({opacity: 1}))
+        animate('5ms ease-in-out', style({opacity: 1}))
       ]),
       transition(':leave', [
-        animate('100ms ease-in-out', style({opacity: 0}))
+        animate('5ms ease-in-out', style({opacity: 0}))
       ])
     ])
   ]
@@ -95,5 +95,6 @@ export class SidenavComponent {
     this.breederApiService.setBreederId(0);
     this.advisorApiService.setAdvisorId(0);
     this.onToggleSidenav(false);
+    this.isOpen = false;
   }
 }
