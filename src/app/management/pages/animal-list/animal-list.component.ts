@@ -27,6 +27,7 @@ export class AnimalListComponent implements OnInit{
   animals: Animal[] = [];
 
   cageID = -1;
+  cageName = '';
   constructor(private router: Router,
               private route: ActivatedRoute,
               private cageService: CageApiService) {
@@ -38,6 +39,9 @@ export class AnimalListComponent implements OnInit{
   }
 
   getAnimals(){
+    this.cageService.getOne(this.cageID).subscribe((res) => {
+      this.cageName = res.name;
+    });
     this.cageService.getAnimalsByCageId(this.cageID).subscribe((data: any) => {
       this.animals = data;
     });
