@@ -129,7 +129,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
       };
       this.availableDateApiService.update(selectedDate.id, transformedSelectedDate).subscribe(() => {
         this.getAdvisorAvailableDates();
-        this.snackBar.open('Cita reservada exitosamente🤩', 'Cerrar', {
+        this.snackBar.open('Cita reservada🤩 ¡Revisa tus notificaciones!', 'Cerrar', {
           duration: 2000
         }).afterDismissed().subscribe(() => {
           this.router.navigate(['criador/buscar-asesor']);

@@ -104,7 +104,7 @@ export class AnimalInformationComponent implements OnInit{
                 this.animal = data;
                 this.originalAnimal = {...this.animal};
                 this.isEditMode = false;
-                this.snackBar.open('Información actualizada con éxito 🎉', '', {
+                this.snackBar.open('Información actualizada con éxito 🎉', 'Cerrar', {
                   duration: 5000
                 });
               },
