@@ -25,7 +25,7 @@
                 <br>
                 <h2 style="color: black" class="appointments-amount">Cantidad de citas con el asesor: {{ getAppointmentsByAdvisor(advisor.id).length }}</h2>
               </mat-card-subtitle>
-              <img src="assets/images/logo-circular.jpg" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
+              <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Flogo-circular.jpg?alt=media&token=51652ea1-b903-404e-9ca5-08189a1bd07d" alt="Icono de información" class="info-symbol" title="Asesor Certificado">
             </div>
           </mat-card-header>
 
@@ -51,7 +51,7 @@
     </div>
     <div *ngIf="filteredAdvisors.length <= 0 || allAdvisorsAppointmentsReviewed()" class="error-container">
       <span class="error-title">Usted aún no ha reservado ninguna cita con ningún asesor</span>
-      <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+      <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fguinea-pig-not-found.png?alt=media&token=8006834d-9b88-4d02-9556-7f6be5cb4a59" alt="Error Image" class="error-image">
     </div>
   </div>
 
