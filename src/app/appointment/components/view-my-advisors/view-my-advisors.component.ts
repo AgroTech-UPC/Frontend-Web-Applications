@@ -20,6 +20,7 @@ import {UserApiService} from "../../../user/services/user-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {ReviewApiService} from "../../services/review-api.service";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -45,6 +46,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
   breederId = 0;
   searchValue = '';
   advisors: Advisor[] = [];
+  allReviews: any[] = [];
   filteredAdvisors: Advisor[] = [];
   appointmentsPerAdvisor: Appointment[][] = []; //contains all the appointments of each advisor
   advisorDetails: any = {};
@@ -54,16 +56,22 @@ export class ViewMyAdvisorsComponent implements OnInit{
     private advisorApiService: AdvisorApiService,
     private appointmentApiService: AppointmentApiService,
     private userApiService: UserApiService,
+    private reviewApiService: ReviewApiService,
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.breederId = this.breederApiService.getBreederId();
+    this.allReviews = (await this.reviewApiService.getAll().toPromise()) ?? [];
     this.getMyAdvisors();
   }
 
   getAppointmentsByAdvisor(advisor_id: number): Appointment[] {
-    return this.appointmentsPerAdvisor[advisor_id] || [];
+    const appointments = this.appointmentsPerAdvisor[advisor_id] || [];
+    return appointments.filter(appointment => {
+      const review = this.allReviews.find(review => review.appointmentId === appointment.id);
+      return !review; // Solo incluye las citas que no tienen una revisión
+    });
   }
 
   getMyAdvisors(): void {
@@ -73,8 +81,8 @@ export class ViewMyAdvisorsComponent implements OnInit{
         let advisorAppointments: Appointment[][] = []; // Initialize as array of arrays
         this.advisors.forEach(advisor => {
           // Push the filtered appointments into the corresponding sub-array
-          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisor_id === advisor.id &&
-            appointment.breeder_id === this.breederId);
+          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisorId === advisor.id &&
+            appointment.breederId === this.breederId);
         });
         //if advisorAppointments[advisor.id - 1] is empty, then the advisor has no appointments with the breeder
         // and has to be removed from the list of advisors
@@ -82,17 +90,15 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
         this.filteredAdvisors = [...this.advisors];
         this.filteredAdvisors.forEach(advisor => {
-          this.userApiService.getOne(advisor.userId).subscribe(user => {
-            this.advisorDetails[advisor.userId] = {
-              fullname: user.fullname,
-              location: user.location
-            };
-          });
+          this.advisorDetails[advisor.userId] = {
+            fullname: advisor.fullname,
+            location: advisor.location
+          };
         });
         //Get all appointments for each advisor in an array
         this.filteredAdvisors.forEach(advisor => {
-          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisor_id === advisor.id
-            && appointment.breeder_id === this.breederId);
+          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisorId === advisor.id
+            && appointment.breederId === this.breederId);
         });
       });
     });
@@ -110,6 +116,11 @@ export class ViewMyAdvisorsComponent implements OnInit{
         }
       );
     }
+  }
+
+  // Excepcion para mostrar el mensaje de error si existen appointments pero todos estan reseñados
+  allAdvisorsAppointmentsReviewed(): boolean {
+    return this.filteredAdvisors.every(advisor => this.getAppointmentsByAdvisor(advisor.id).length === 0);
   }
 
   // BOTONES REDIRECCIONAR:

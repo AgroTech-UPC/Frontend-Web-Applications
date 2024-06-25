@@ -3,7 +3,6 @@ import {ClientCardComponent} from "../../components/client-card/client-card.comp
 import {NgForOf, NgIf} from "@angular/common";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
@@ -22,45 +21,41 @@ import {EmptyViewComponent} from "../../../public/components/empty-view/empty-vi
   styleUrl: './clients-view.component.css'
 })
 export class ClientsViewComponent implements OnInit {
-  advisor_id = 0;
+  advisorId = 0;
   appointments: Appointment[] = [];
   clients: Client[] = [];
 
-  constructor( private userService: UserApiService,
-               private breederService: BreederApiService,
+  constructor (private breederService: BreederApiService,
                private advisorService: AdvisorApiService,
                private appointmentService: AppointmentApiService) { }
 
   ngOnInit() {
-    this.advisor_id = this.advisorService.getAdvisorId();
+    this.advisorId = this.advisorService.getAdvisorId();
     this.getAppointments();
   }
 
   getAppointments() {
-    this.appointmentService.getAll().subscribe(appointments => {
-      appointments.filter(appointment => appointment.advisor_id === this.advisor_id).forEach(appointment => {
-        this.appointments.push(appointment);
-      });
+    this.advisorService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
+      this.appointments = appointments;
       this.getClients();
+    }, error => {
+        console.log(error);
     });
   }
 
   getClients(){
     this.appointments.forEach(appointment => {
-      this.breederService.getOne(appointment.breeder_id).subscribe(breeder => {
-        this.userService.getOne(breeder.userId).subscribe(user => {
-          let client = {
-            id: breeder.id,
-            appointment_id: appointment.id,
-            fullname: user.fullname,
-            appointment_status: appointment.status,
-            location: user.location,
-            cages: 0,
-            description: user.description
-          }
-          this.clients.push(client);
-        });
-
+      this.breederService.getOne(appointment.breederId).subscribe(breeder => {
+        let client = {
+          id: breeder.id,
+          appointmentId: appointment.id,
+          fullname: breeder.fullname,
+          appointmentStatus: appointment.status,
+          location: breeder.location,
+          cages: 0,
+          description: breeder.description
+        };
+        this.clients.push(client);
       });
     });
   }

@@ -35,13 +35,12 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class RegisterResourcesComponent implements OnInit {
   resource: Resource = {
-    id: 0,
     name: "",
-    type: "",
-    breeder_id: 0,
+    type: "ALIMENTO",
     quantity: 0,
-    date: new Date(),
-    observations: ""
+    date: "",
+    observations: "Ninguna",
+    breederId: 0
   };
 
   constructor(public dialog: MatDialog,
@@ -50,7 +49,7 @@ export class RegisterResourcesComponent implements OnInit {
               private breederService: BreederApiService) {}
 
   ngOnInit() {
-    this.resource.breeder_id = this.breederService.getBreederId();
+    this.resource.breederId = this.breederService.getBreederId();
   }
 
   openDialog(): void {
@@ -58,20 +57,30 @@ export class RegisterResourcesComponent implements OnInit {
   }
 
   handleClick(): void {
-    if (!this.resource.name || !this.resource.type || !this.resource.breeder_id || !this.resource.quantity || !this.resource.date) {
+    if (!this.resource.name || !this.resource.type || !this.resource.breederId || !this.resource.quantity || !this.resource.date || !this.resource.observations) {
       this.openDialog();
     } else {
       this.registerResource();
-      this.snackBar.open('Recurso registrado con éxito', 'Cerrar', {
-        duration: 2000,
-      }).afterDismissed().subscribe(() => {
-        window.history.back();
-      });
     }
   }
 
   registerResource(): void {
-    this.resourceService.create(this.resource).subscribe();
+    this.resourceService.create(this.resource).subscribe(() => {
+        this.snackBar.open('Recurso registrado con éxito🤩', 'Cerrar', {
+          duration: 2000,
+        }).afterDismissed().subscribe(() => {
+          window.history.back();
+        });
+      },
+      error => {
+        console.error(error);
+        this.snackBar.open('Error al registrar el recurso😥', 'Cerrar', {
+          duration: 2000
+        });
+        this.snackBar.open('Recuerda que no puede haber recursos repetidos', 'Cerrar', {
+          duration: 2000
+        })
+      });
   }
 
   goBack() {

@@ -26,12 +26,13 @@
     <mat-card class="mat-card">
       <div class="mat-card-content">
         <div class="title">
-          <mat-card-title class="card-title">{{ result.name }}</mat-card-title>
+          <mat-card-title class="card-title">Recurso</mat-card-title>
           <div class="image">
-            <img src="assets/images/resources2.webp" alt="Resource icon" class="card-image">
+            <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fresources2.webp?alt=media&token=ba82d265-83a4-4248-bae7-26a539050739" alt="Resource icon" class="card-image">
           </div>
         </div>
         <div class="math-card-content-column">
+          <mat-card-subtitle class="card-subtitle">Nombre: {{ result.name }}</mat-card-subtitle>
           <mat-card-subtitle class="card-subtitle">Tipo: {{ result.type }}</mat-card-subtitle>
           <mat-card-subtitle class="card-subtitle">Fecha: {{ result.date }}</mat-card-subtitle>
           <mat-card-subtitle class="card-subtitle">Cantidad: {{ result.quantity + " Kg" }}</mat-card-subtitle>

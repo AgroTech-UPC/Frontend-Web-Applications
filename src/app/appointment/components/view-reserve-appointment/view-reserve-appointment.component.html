@@ -8,7 +8,7 @@
           <mat-card class="date-card">
             <mat-card-content>
               <div class="card-content">
-                <img src="/assets/images/cuy-appointment.png" alt="Imagen Deco" class="card-image">
+                <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fcuy-appointment.png?alt=media&token=96a10302-2750-4ef2-9212-c9ce3f16b2a2" alt="Imagen Deco" class="card-image">
                 <div class="info-container">
                   <h1><strong>Fecha:</strong> {{availableDate.date}}</h1>
                   <h1><strong>Hora Inicio:</strong> {{availableDate.startTime}}</h1>
@@ -33,19 +33,7 @@
 
   <div *ngIf="advisor_availableDates.length === 0" class="error-container">
     <span class="error-title">El asesor no tiene horarios disponibles</span>
-    <img src="/assets/images/guinea-pig-not-found.png" alt="Error Image" class="error-image">
+    <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fguinea-pig-not-found.png?alt=media&token=8006834d-9b88-4d02-9556-7f6be5cb4a59" alt="Error Image" class="error-image">
     <button mat-raised-button style="color: white; background-color: #DD763D" class="custom-button" (click)="cancel()">Volver al Inicio</button>
   </div>
-</div>
-
-
-<div class="overlay" *ngIf="showConfirmation">
-  <mat-card>
-    <div class="confirmation-card">
-      <h1><strong> Cita Reservada con Éxito</strong></h1>
-      <img src="/assets/images/cuy_confirmacion_appointment.png" alt="Imagen Deco" class="confirmation-image">
-      <h2>Su asesor se contactara con usted en breve</h2>
-      <button mat-raised-button style="background-color: #DD763D; color: white" (click)="goHome()">Volver al Inicio</button>
-    </div>
-  </mat-card>
 </div>

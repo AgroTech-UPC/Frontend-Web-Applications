@@ -8,6 +8,7 @@ import {BaseService} from "../../shared/services/base.service";
 import {catchError} from "rxjs";
 import {Publication} from "../../publication/models/publication.model";
 import {AvailableDate} from "../../appointment/models/available_date.model";
+import {Appointment} from "../../appointment/models/appointment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,18 @@ export class AdvisorApiService extends  BaseService<Advisor>{
     return 0;
   }
 
-  getPublicationsByAdvisorId(advisor_id: number) {
-    return this.http.get<Publication[]>(this.buildPath() + '/' + advisor_id + '/publications').pipe(catchError(this.handleError));
+  getAppointmentsByAdvisorId(advisorId: number) {
+    this.setToken();
+    return this.http.get<Appointment[]>(this.buildPath() + '/' + advisorId + '/appointments', this.httpOptions).pipe(catchError(this.handleError));
   }
 
-  getAvailableDatesByAdvisorId(advisor_id: number) {
-    return this.http.get<AvailableDate[]>(this.buildPath() + '/' + advisor_id + '/available-dates').pipe(catchError(this.handleError));
+  getPublicationsByAdvisorId(advisorId: number) {
+    this.setToken();
+    return this.http.get<Publication[]>(this.buildPath() + '/' + advisorId + '/publications', this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  getAvailableDatesByAdvisorId(advisorId: number) {
+    this.setToken();
+    return this.http.get<AvailableDate[]>(this.buildPath() + '/' + advisorId + '/available-dates', this.httpOptions).pipe(catchError(this.handleError));
   }
 }

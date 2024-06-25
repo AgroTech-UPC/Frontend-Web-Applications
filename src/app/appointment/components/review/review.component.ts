@@ -13,7 +13,6 @@ import {Appointment} from "../../models/appointment.model";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {MatCardModule} from "@angular/material/card";
 
 @Component({
@@ -40,7 +39,7 @@ export class ReviewComponent implements OnInit {
 
   review: Review = {
     id: 0,
-    appointment_id: 0,
+    appointmentId: 0,
     comment: "",
     rating: 0
   }
@@ -48,7 +47,6 @@ export class ReviewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private advisorService: AdvisorApiService,
-    private userApiService: UserApiService,
     private appointmentService: AppointmentApiService,
     private reviewService: ReviewApiService,
     private router: Router
@@ -56,7 +54,7 @@ export class ReviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.review.appointment_id = params['id'];
+      this.review.appointmentId = params['id'];
 
       const appointmentId = params['id'];
       this.getAppointment(appointmentId);
@@ -71,23 +69,21 @@ export class ReviewComponent implements OnInit {
   }
 
   getAdvisor(): void {
-    const advisorId = this.appointment.advisor_id;
+    const advisorId = this.appointment.advisorId;
     this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
-      this.userApiService.getOne(advisor.userId).subscribe(user => {
-        this.advisorDetails = {
-          fullname: user.fullname,
-          location: user.location
-        };
-      });
+      this.advisorDetails = {
+        fullname: advisor.fullname,
+        location: advisor.location
+      };
     });
 
   }
   onSubmit() {
     this.review.rating = this.rating;
-    this.review.appointment_id = this.appointment.id;
+    this.review.appointmentId = this.appointment.id;
     this.reviewService.create(this.review).subscribe();
-    this.appointment.status = "Terminado";
+    this.appointment.status = "TERMINADO";
     this.appointmentService.update(this.appointment.id, this.appointment).subscribe();
     this.isConfirmed = true;
   }

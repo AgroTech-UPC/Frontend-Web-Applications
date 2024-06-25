@@ -8,7 +8,6 @@ import {BreederApiService} from "../../../user/services/breeder-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
-import {UserApiService} from "../../../user/services/user-api.service";
 import {CageApiService} from "../../../management/services/cage-api.service";
 
 @Component({
@@ -26,57 +25,54 @@ export class ClientDetailComponent implements OnInit{
   breeder!: Breeder;
   appointment: Appointment = {
     id: 0,
-    advisor_id: 0,
-    breeder_id: 0,
+    advisorId: 0,
+    breederId: 0,
     date: '',
     status: '',
   }
 
   client: Client = {
     id: 0,
-    appointment_id: 0,
+    appointmentId: 0,
+    appointmentStatus: '',
     fullname: '',
-    appointment_status: '',
     location: '',
     cages: 0,
     description: ''
   }
-  appointment_id = 0;
+  appointmentId = 0;
 
   constructor(private breederService: BreederApiService,
-              private userService: UserApiService,
               private appointmentService: AppointmentApiService,
               private cageService: CageApiService,
               private activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
-    this.appointment_id = this.activatedRouter.snapshot.params['id'];
+    this.appointmentId = this.activatedRouter.snapshot.params['id'];
     this.getAppointment();
   }
 
-  getClient(breeder_id: number) {
-    this.breederService.getOne(breeder_id).subscribe((breeder: Breeder) => {
+  getClient(breederId: number) {
+    this.breederService.getOne(breederId).subscribe((breeder: Breeder) => {
       this.breeder = breeder;
-      this.userService.getOne(breeder.userId).subscribe(user => {
         this.cageService.getAll().subscribe(cages => {
           this.client = {
-            id: breeder_id,
-            appointment_id: this.appointment_id,
-            fullname: user.fullname,
-            appointment_status: this.appointment.status,
-            location: user.location,
-            cages: cages.filter(cage => cage.breederId === breeder_id).length,
-            description: user.description
+            id: breederId,
+            appointmentId: this.appointmentId,
+            appointmentStatus: this.appointment.status,
+            fullname: breeder.fullname,
+            location: breeder.location,
+            cages: cages.filter(cage => cage.breederId === breederId).length,
+            description: breeder.description
           }
-        })
-      });
+        });
     });
   }
 
   getAppointment() {
-    this.appointmentService.getOne(this.appointment_id).subscribe((appointment: Appointment) => {
+    this.appointmentService.getOne(this.appointmentId).subscribe((appointment: Appointment) => {
       this.appointment = appointment;
-      this.getClient(appointment.breeder_id);
+      this.getClient(appointment.breederId);
     });
   }
 

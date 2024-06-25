@@ -5,9 +5,11 @@ import {HttpClient} from "@angular/common/http";
 //Import the breeder model
 import {Breeder} from "../models/breeder.model";
 import {BaseService} from "../../shared/services/base.service";
-import {catchError} from "rxjs";
+import {catchError, Observable} from "rxjs";
+import {Expense} from "../../management/models/expense.model";
+import {Resource} from "../../management/models/resource.model";
 import {Cage} from "../../management/models/cage.model";
-
+import {Appointment} from "../../appointment/models/appointment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +34,25 @@ export class BreederApiService extends  BaseService<Breeder>{
     return 0;
   }
 
-  getCagesByBreederId(breederId: number){
-    return this.http.get<Cage[]>(this.buildPath() + '/' + breederId + '/cages').pipe(catchError(this.handleError));
+  getAppointmentsByBreederId(breederId: number) {
+    this.setToken();
+    return this.http.get<Appointment[]>(this.buildPath() + '/' + breederId + '/appointments', this.httpOptions).pipe(catchError(this.handleError));
   }
-    
-  getExpenses(breederId: number): Observable<any[]> {
+
+  getCagesByBreederId(breederId: number){
+    this.setToken();
+    return this.http.get<Cage[]>(this.buildPath() + '/' + breederId + '/cages', this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  getExpenses(breederId: number): Observable<Expense[]> {
+    this.setToken();
     const url = `${this.baseUrl}${this.extraUrl}/${breederId}/expenses`;
-    return this.http.get<any[]>(url).pipe(catchError(this.handleError));
+    return this.http.get<Expense[]>(url, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
+  getResources(breederId: number): Observable<Resource[]> {
+    this.setToken();
+    const url = `${this.baseUrl}${this.extraUrl}/${breederId}/resources`;
+    return this.http.get<Resource[]>(url, this.httpOptions).pipe(catchError(this.handleError));
   }
 }

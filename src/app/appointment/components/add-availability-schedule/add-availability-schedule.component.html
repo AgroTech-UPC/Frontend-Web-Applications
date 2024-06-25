@@ -14,11 +14,14 @@
         <mat-label>Hora de fin</mat-label>
         <input matInput formControlName="endTime" type="time" required>
       </mat-form-field>
-      <div *ngIf="form.errors?.['invalidTime'] && form.get('start_time')?.value && form.get('end_time')?.value" class="error-message">
+      <div *ngIf="form.errors?.['invalidDate'] && form.get('date')?.value" class="error-message">
+        La fecha debe ser mayor o igual a la fecha actual.
+      </div>
+      <div *ngIf="form.errors?.['invalidTime'] && form.get('startTime')?.value && form.get('endTime')?.value" class="error-message">
         Intervalo de tiempo no valido
       </div>
       <div class="container-btns">
-        <button mat-button color="warn" style="margin: 5px;" type="submit">
+        <button mat-button color="warn" style="margin: 5px;" type="submit" [disabled]="!form.valid">
           <mat-icon>save</mat-icon>
           Agregar
         </button>

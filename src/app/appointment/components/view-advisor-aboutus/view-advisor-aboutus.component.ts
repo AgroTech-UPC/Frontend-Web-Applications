@@ -62,15 +62,14 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   getAdvisor(): void {
     this.advisorApiService.getOne(this.id).subscribe(advisor => {
       this.advisor = advisor
-      this.userApiService.getOne(advisor.userId).subscribe(user => {
-        this.advisorDetails = {
-          fullname: user.fullname,
-          location: user.location,
-          description: user.description
-        };
-      });
+      this.advisorDetails = {
+        fullname: advisor.fullname,
+        location: advisor.location,
+        description: advisor.description
+      };
+
       this.appointmentApiService.getAll().subscribe(appointments => {
-        this.appointments = appointments.filter(appointment => appointment.advisor_id === advisor.id);
+        this.appointments = appointments.filter(appointment => appointment.advisorId === advisor.id);
         this.getAdvisorReviews();
       });
     });
@@ -79,7 +78,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   getAdvisorReviews(): void {
     this.reviewApiService.getAll().subscribe(reviews => {
       this.reviews = reviews.filter(review => {
-        return this.appointments.find(appointment => appointment.id === review.appointment_id);
+        return this.appointments.find(appointment => appointment.id === review.appointmentId);
       });
     });
   }

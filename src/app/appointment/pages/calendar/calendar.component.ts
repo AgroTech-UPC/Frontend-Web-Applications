@@ -11,8 +11,6 @@ import {Appointment} from "../../models/appointment.model";
 
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {BreederApiService} from "../../../user/services/breeder-api.service";
-import {UserApiService} from "../../../user/services/user-api.service";
-import {User} from "../../../user/models/user.model";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Breeder} from "../../../user/models/breeder.model";
 import {forkJoin, map, Observable, switchMap, window} from "rxjs";
@@ -53,8 +51,7 @@ export class CalendarComponent implements OnInit{
     private route: ActivatedRoute,
     private appointmentApiService: AppointmentApiService,
     private breederApiService: BreederApiService,
-    private advisorApiService: AdvisorApiService,
-    private userApiService: UserApiService
+    private advisorApiService: AdvisorApiService
   ){}
 
   ngOnInit() {
@@ -77,42 +74,50 @@ export class CalendarComponent implements OnInit{
 
   // Marca en el calendario las citas del asesor o del criador (solo muestra las citas con el status = "Pendiente")
   fetchAppointments() {
-    this.appointmentApiService.getAll()
-      .subscribe((appointments: Appointment[]) => {
-        const filteredAppointments = this.filterAppointments(appointments);
+    if (this.userType === 'advisor') {
+      this.advisorApiService.getAppointmentsByAdvisorId(this.advisor_id).subscribe(
+        (appointments) => {
+          forkJoin(
+            appointments.map(appointment => this.createEventFromAppointment(appointment))
+          ).subscribe(events => {
+            this.calendarOptions.events = events;
+          });
+        }
+      );
+    }
+    else {
+      this.breederApiService.getAppointmentsByBreederId(this.breeder_id).subscribe(
+        (appointments) => {
+          forkJoin(
+            appointments.map(appointment => this.createEventFromAppointment(appointment))
+          ).subscribe(events => {
+            this.calendarOptions.events = events;
+          });
+        }
+      );
+    }
 
-        forkJoin(
-          filteredAppointments.map(appointment => this.createEventFromAppointment(appointment))
-        ).subscribe(events => {
-          this.calendarOptions.events = events;
-        });
-      });
   }
 
 
   getFullnameFromAdvisorOrBreederId(id: number, userType: string): Observable<string> {
-    let userId$: Observable<number>;
+    let userFn$: Observable<string>;
     if (userType === 'advisor') {
-      userId$ = this.advisorApiService.getOne(id).pipe(map((advisor: Advisor) => advisor.userId));
+      userFn$ = this.advisorApiService.getOne(id).pipe(
+        map((advisor: Advisor) => advisor.fullname));
     } else {
-      userId$ = this.breederApiService.getOne(id).pipe(map((breeder: Breeder) => breeder.userId));
+      userFn$ = this.breederApiService.getOne(id).pipe(
+        map((breeder: Breeder) => breeder.fullname));
     }
-    return userId$.pipe(
-      switchMap(userId => this.userApiService.getOne(userId)),
-      map((user: User) => user.fullname)
-    );
-  }
+    return userFn$.pipe(
 
-  filterAppointments(appointments: Appointment[]): Appointment[] {
-    return appointments.filter(appointment =>
-      (this.userType === 'advisor' ? appointment.advisor_id === this.advisor_id : appointment.breeder_id === this.breeder_id) && appointment.status === 'Pendiente'
     );
   }
 
   // Crea el evento osea lo que marca en el calendario
   createEventFromAppointment(appointment: Appointment): Observable<any> {
     return this.getFullnameFromAdvisorOrBreederId(
-      this.userType === 'advisor' ? appointment.breeder_id : appointment.advisor_id,
+      this.userType === 'advisor' ? appointment.breederId : appointment.advisorId,
       this.userType === 'advisor' ? 'breeder' : 'advisor'
     ).pipe(
       map(fullname => {

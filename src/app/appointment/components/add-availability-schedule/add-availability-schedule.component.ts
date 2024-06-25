@@ -49,7 +49,7 @@ export class AddAvailabilityScheduleComponent implements OnInit{
       date: ['', Validators.required], // Add this line
       startTime: ['', Validators.required],
       endTime: ['', Validators.required]
-    }, { validators: this.validTimeValidator });
+    }, { validators: [this.validTimeValidator, this.validDateValidator] });
   }
 
   addAvailableDate() {
@@ -77,12 +77,12 @@ export class AddAvailabilityScheduleComponent implements OnInit{
     }
 
     this.availableDateService.create(newAvailableDate).subscribe(() => {
-      this.snackBar.open('Horario disponible creado con éxito', 'Cerrar', {
+      this.snackBar.open('Horario disponible creado con éxito🎉', 'Cerrar', {
         duration: 5000,
       });
       this.goToAvailableDates();
     }, error => {
-      this.snackBar.open('Error al crear el horario disponible', 'Cerrar', {
+      this.snackBar.open('Error al crear el horario disponible😓', 'Cerrar', {
         duration: 5000,
       });
       console.error(error);
@@ -94,13 +94,25 @@ export class AddAvailabilityScheduleComponent implements OnInit{
   }
 
   validTimeValidator(formGroup: FormGroup) {
-    const startTimeControl = formGroup.get('start_time');
-    const endTimeControl = formGroup.get('end_time');
+    const startTimeControl = formGroup.get('startTime');
+    const endTimeControl = formGroup.get('endTime');
     if (startTimeControl && endTimeControl) {
-      const start_time = startTimeControl.value;
-      const end_time = endTimeControl.value;
-      if (start_time.replace(":", "") >= end_time.replace(":", "")) {
+      const startTime = startTimeControl.value;
+      const endTime = endTimeControl.value;
+      if (startTime.replace(":", "") >= endTime.replace(":", "")) {
         return { invalidTime: true };
+      }
+    }
+    return null;
+  }
+  validDateValidator(formGroup: FormGroup) {
+    const dateControl = formGroup.get('date');
+    if (dateControl) {
+      const controlDate = new Date(dateControl.value);
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0); // Set time to 00:00:00.000
+      if (controlDate < currentDate) {
+        return { 'invalidDate': true };
       }
     }
     return null;

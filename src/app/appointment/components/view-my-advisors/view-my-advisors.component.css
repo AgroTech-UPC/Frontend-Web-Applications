@@ -57,7 +57,7 @@ mat-card-subtitle{
   color: black;
 }
 mat-card-header{
-  background: rgba(240, 218, 139, 94) url("/assets/images/cuy-transparente.png") no-repeat right center;
+  background: rgba(240, 218, 139, 94) url("https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fcuy-transparente.png?alt=media&token=71d711de-1745-4332-9330-956e0504aa8f") no-repeat right center;
   border-radius: 10px;
 }
 
@@ -71,7 +71,7 @@ mat-card-header{
   overflow: hidden;
 }
 .mat-card:hover .more-info {
-  max-height: 500px;
+  max-height: none;
 }
 .button-terminated {
   border-radius: 10px;
@@ -81,7 +81,7 @@ mat-card-header{
 
 .button-other {
   border-radius: 10px;
-  background-color: red;
+  background-color: #B1B1B1AA;
   margin-bottom: 10px;
 }
 

@@ -68,12 +68,15 @@ export class CageListComponent implements OnInit {
               );
             }
           });
-
-
         });
         this.cageService.delete(id).subscribe(() => {
           this.getCages();
           this.snackBar.open('Jaula eliminada con exito 🎉', '', {
+            duration: 5000
+          });
+        }, error => {
+          console.error('Error deleting cage', error);
+          this.snackBar.open('Error al eliminar la jaula😥', '', {
             duration: 5000
           });
         });

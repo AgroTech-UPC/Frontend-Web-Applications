@@ -55,16 +55,21 @@ export class RegisterCageComponent {
       this.openDialog();
     } else {
       this.registerCage();
-      this.snackBar.open('Registrado con éxito', 'Cerrar', {
-        duration: 2000,
-      }).afterDismissed().subscribe(() => {
-        window.history.back();
-      });
     }
   }
 
   registerCage(): void {
-    this.cageService.create(this.cage).subscribe();
+    this.cageService.create(this.cage).subscribe(() => {
+      this.snackBar.open('Jaula registrada con éxito☺', 'Cerrar', {
+        duration: 2000,
+      }).afterDismissed().subscribe(() => {
+        window.history.back();
+      });
+    }, error => {
+      this.snackBar.open('Error al registrar la jaula😔', 'Cerrar', {
+        duration: 2000
+      });
+    });
   }
   goBack() {
     window.history.back();

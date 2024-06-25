@@ -2,10 +2,15 @@
   <div class="subtitle">
     <h2>Editar Gasto</h2>
     <div class="image">
-      <img src="assets/images/expenses.png" alt="Expense icon">
+      <img src="https://firebasestorage.googleapis.com/v0/b/agroconnect-demo.appspot.com/o/images%2Fexpenses.png?alt=media&token=1f1e2234-78bc-4118-aeff-c99015bce58b" alt="Expense icon">
     </div>
   </div>
   <div class="group-inputs">
+    <mat-form-field class="form-field">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="expense.name" name="name">
+    </mat-form-field>
+
     <mat-form-field class="form-field">
       <mat-label>Monto gastado S/.</mat-label>
       <input matInput type="number" [(ngModel)]="expense.amount" name="amount">
@@ -13,15 +18,15 @@
 
     <mat-radio-group aria-label="Select an option" [(ngModel)]="expense.type">
       <h2 style="font-weight: 400">Tipo de gasto</h2>
-      <mat-radio-button value="Salud">Salud</mat-radio-button>
-      <mat-radio-button value="Alimento">Alimento</mat-radio-button>
-      <mat-radio-button value="Mantenimiento de criadero">Mantenimiento de criadero</mat-radio-button>
-      <mat-radio-button value="Otro">Otro</mat-radio-button>
+      <mat-radio-button value="SALUD">Salud</mat-radio-button>
+      <mat-radio-button value="ALIMENTO">Alimento</mat-radio-button>
+      <mat-radio-button value="MANTENIMIENTO">Mantenimiento de criadero</mat-radio-button>
+      <mat-radio-button value="OTROS">Otro</mat-radio-button>
     </mat-radio-group>
 
     <mat-form-field class="form-field">
       <mat-label>Detalles (en caso haya seleccionado "otro")</mat-label>
-      <input matInput [(ngModel)]="expense.details" name="details">
+      <input matInput [(ngModel)]="expense.observations" name="observations">
     </mat-form-field>
 
     <mat-form-field class="form-field">

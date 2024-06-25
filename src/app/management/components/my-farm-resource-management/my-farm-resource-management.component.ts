@@ -49,10 +49,10 @@ export class MyFarmResourceManagementComponent implements OnInit {
 
   selectedResourceType: string;
   resourceTypes: { [key: string]: string } = {
-    '1': 'Todos',
-    '2': 'Alimento',
-    '3': 'Medicina',
-    '4': 'Cultivo'
+    '1': 'OTROS',
+    '2': 'ALIMENTO',
+    '3': 'MEDICINA',
+    '4': 'CULTIVO'
   };
 
   constructor(private resourceApiService: ResourceApiService,
@@ -79,16 +79,15 @@ export class MyFarmResourceManagementComponent implements OnInit {
   }
 
   private loadResources() {
-    this.resourceApiService.getAll().subscribe((resources: any) => {
+    this.breederService.getResources(this.breederId).subscribe((resources: any) => {
       this.resources = resources;
-      this.resources = this.resources.filter(resource => resource.breeder_id === this.breederId);
       this.filteredResources = cloneDeep(this.resources);
     });
   }
 
 
   goBack() {
-    window.history.back();
+    this.router.navigate(['/criador/mi-granja']);
   }
 
   editItem(itemId: number) {
