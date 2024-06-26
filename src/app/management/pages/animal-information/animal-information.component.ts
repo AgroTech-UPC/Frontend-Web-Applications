@@ -130,7 +130,7 @@ export class AnimalInformationComponent implements OnInit{
     this.confirmMessage(this.animalID, `¿Estas seguro de querer eliminar la información del cuy ${this.animalID}?`).subscribe(result => {
       if(result) {
         this.animalService.delete(this.animalID).subscribe(() => {
-          this.router.navigate([`/animales/${this.animal.cageId}`]);
+          this.router.navigate([`criador/mis-animales/${this.animal.cageId}`]);
           this.snackBar.open('Información eliminada con éxito 🎉', '', {
             duration: 5000
           });

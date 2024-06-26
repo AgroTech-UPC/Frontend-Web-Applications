@@ -58,17 +58,6 @@ export class CageListComponent implements OnInit {
   deleteCage(id: number){
     this.confirmDeletion(id).subscribe(result => {
       if(result) {
-        this.animalService.getAll().subscribe((data) => {
-          data.forEach((animal: any) => {
-            if(animal.cageId === id){
-              this.animalService.delete(animal.id).subscribe(
-                () => {
-                  console.log(`Animal ${animal.id} deleted`);
-                }
-              );
-            }
-          });
-        });
         this.cageService.delete(id).subscribe(() => {
           this.getCages();
           this.snackBar.open('Jaula eliminada con exito 🎉', '', {
