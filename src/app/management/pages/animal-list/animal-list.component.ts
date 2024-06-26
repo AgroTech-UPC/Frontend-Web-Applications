@@ -52,6 +52,6 @@ export class AnimalListComponent implements OnInit{
   }
 
   goBack() {
-    window.history.back();
+    this.router.navigate([`/criador/mis-animales/`]);
   }
 }
