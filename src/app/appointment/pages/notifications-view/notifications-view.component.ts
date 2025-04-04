@@ -52,6 +52,7 @@ export class NotificationsViewComponent implements OnInit{
   }
 
   getNotifications() {
+    /*
     this.userApiService.getNotificationsByUserId(this.user_id).subscribe((notifications: Notification[]) => {
       notifications.forEach((notification: Notification) => {
         // Create a new date object
@@ -69,6 +70,8 @@ export class NotificationsViewComponent implements OnInit{
     }, (error) => {
       console.error(error);
     });
+
+     */
   }
 
   goToMeeting(id: number) {

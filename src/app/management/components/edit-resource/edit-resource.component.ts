@@ -66,7 +66,7 @@ export class EditResourceComponent implements OnInit{
       this.snackBar.open('Recurso actualizado con éxito😎', 'Cerrar', {
         duration: 2000,
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/mi-granja/recursos']);
+        this.router.navigate(['/granjero/mi-granja/recursos']);
       })
     }, error => {
       this.snackBar.open('Error al actualizar el recurso😥', 'Cerrar', {

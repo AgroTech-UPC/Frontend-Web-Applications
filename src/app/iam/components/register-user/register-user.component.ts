@@ -21,8 +21,8 @@ export class RegisterUserComponent {
   constructor(private router: Router) {
   }
 
-  registerBreeder() {
-    this.router.navigate(['/registro/criador']);
+  registerFarmer() {
+    this.router.navigate(['/registro/granjero']);
   }
 
   registerAdvisor() {

@@ -12,6 +12,6 @@ import {BaseService} from "../../shared/services/base.service";
 export class PublicationsApiService extends BaseService<Publication>{
   constructor(http: HttpClient) {
     super(http);
-    this.extraUrl = environment.publicationURL;
+    this.extraUrl = environment.postURL;
   }
 }

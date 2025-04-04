@@ -19,8 +19,9 @@ import {AppointmentApiService} from "../../services/appointment-api.service";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
+import {ProfileApiService} from "../../../user/services/profile-api.service";
 
 @Component({
   selector: 'app-view-my-advisors',
@@ -52,16 +53,17 @@ export class ViewMyAdvisorsComponent implements OnInit{
   advisorDetails: any = {};
 
   constructor(
-    private breederApiService: BreederApiService,
+    private breederApiService: FarmerApiService,
     private advisorApiService: AdvisorApiService,
     private appointmentApiService: AppointmentApiService,
     private userApiService: UserApiService,
+    private profileApiService: ProfileApiService,
     private reviewApiService: ReviewApiService,
     private router: Router
   ) { }
 
   async ngOnInit() {
-    this.breederId = this.breederApiService.getBreederId();
+    this.breederId = this.breederApiService.getFarmerId();
     this.allReviews = (await this.reviewApiService.getAll().toPromise()) ?? [];
     this.getMyAdvisors();
   }
@@ -82,7 +84,7 @@ export class ViewMyAdvisorsComponent implements OnInit{
         this.advisors.forEach(advisor => {
           // Push the filtered appointments into the corresponding sub-array
           advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisorId === advisor.id &&
-            appointment.breederId === this.breederId);
+            appointment.farmerId === this.breederId);
         });
         //if advisorAppointments[advisor.id - 1] is empty, then the advisor has no appointments with the breeder
         // and has to be removed from the list of advisors
@@ -90,15 +92,18 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
         this.filteredAdvisors = [...this.advisors];
         this.filteredAdvisors.forEach(advisor => {
-          this.advisorDetails[advisor.userId] = {
-            fullname: advisor.fullname,
-            location: advisor.location
-          };
+          this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
+            this.advisorDetails[advisor.userId] = {
+              fullname: `${profile.firstName} ${profile.lastName}`,
+              photo: profile.photo
+            };
+          })
+
         });
         //Get all appointments for each advisor in an array
         this.filteredAdvisors.forEach(advisor => {
           this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisorId === advisor.id
-            && appointment.breederId === this.breederId);
+            && appointment.farmerId === this.breederId);
         });
       });
     });
@@ -125,14 +130,14 @@ export class ViewMyAdvisorsComponent implements OnInit{
 
   // BOTONES REDIRECCIONAR:
   navigateToAdvisorsSearch() {
-    this.router.navigate([`/criador/buscar-asesor`]);
+    this.router.navigate([`/granjero/buscar-asesor`]);
   }
   navigateToMyAdvisors() {
-    this.router.navigate([`/criador/mis-asesores`]);
+    this.router.navigate([`/granjero/mis-asesores`]);
   }
 
   giveReview(id: number){
-    this.router.navigate([`/criador/mis-asesores/${id}`]);
+    this.router.navigate([`/granjero/mis-asesores/${id}`]);
   }
 
   formatDateTime(dateTime: string): string {

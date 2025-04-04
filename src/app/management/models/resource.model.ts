@@ -4,5 +4,5 @@ export interface Resource {
   quantity: number;
   date: string;
   observations: string;
-  breederId: number;
+  farmerId: number;
 }

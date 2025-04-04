@@ -9,18 +9,19 @@ export const environment = {
     messagingSenderId: "981172916098",
     appId: "1:981172916098:web:1b8a0e8e722615fe7a499b"
   },
-    baseURL: 'https://web-services-18bk.onrender.com/api/v1',
+    baseURL: 'http://localhost:8080/api/v1', //local base url for the backend
 
     //urls for the different endpoints
     userURL: '/users',
     authenticationURL: '/authentication',
     advisorURL: '/advisors',
-    breederURL: '/breeders',
+    farmerURL: '/farmers',
+    profileURL: '/profiles',
     resourceURL: '/resources',
     appointmentURL: '/appointments',
     expenseURL: '/expenses',
     notificationURL: '/notifications',
-    publicationURL: '/publications',
+    postURL: '/posts',
     animalURL: '/animals',
     cageURL: '/cages',
     reviewURL: '/reviews',

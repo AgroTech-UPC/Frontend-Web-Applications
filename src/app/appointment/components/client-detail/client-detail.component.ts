@@ -3,8 +3,8 @@ import { MatCardModule } from '@angular/material/card';
 import {ActivatedRoute} from "@angular/router";
 import {MatButton} from "@angular/material/button";
 import {DatePipe} from "@angular/common";
-import {Breeder} from "../../../user/models/breeder.model";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {Farmer} from "../../../user/models/farmer.model";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
@@ -22,11 +22,11 @@ import {CageApiService} from "../../../management/services/cage-api.service";
   styleUrl: './client-detail.component.css'
 })
 export class ClientDetailComponent implements OnInit{
-  breeder!: Breeder;
+  breeder!: Farmer;
   appointment: Appointment = {
     id: 0,
     advisorId: 0,
-    breederId: 0,
+    farmerId: 0,
     date: '',
     status: '',
   }
@@ -42,7 +42,7 @@ export class ClientDetailComponent implements OnInit{
   }
   appointmentId = 0;
 
-  constructor(private breederService: BreederApiService,
+  constructor(private breederService: FarmerApiService,
               private appointmentService: AppointmentApiService,
               private cageService: CageApiService,
               private activatedRouter: ActivatedRoute) {}
@@ -53,17 +53,17 @@ export class ClientDetailComponent implements OnInit{
   }
 
   getClient(breederId: number) {
-    this.breederService.getOne(breederId).subscribe((breeder: Breeder) => {
+    this.breederService.getOne(breederId).subscribe((breeder: Farmer) => {
       this.breeder = breeder;
         this.cageService.getAll().subscribe(cages => {
           this.client = {
             id: breederId,
             appointmentId: this.appointmentId,
             appointmentStatus: this.appointment.status,
-            fullname: breeder.fullname,
-            location: breeder.location,
-            cages: cages.filter(cage => cage.breederId === breederId).length,
-            description: breeder.description
+            fullname: 'breeder.fullname',
+            location: 'breeder.id',
+            cages: cages.filter(cage => cage.farmerId === breederId).length,
+            description: 'breeder.description'
           }
         });
     });
@@ -72,7 +72,7 @@ export class ClientDetailComponent implements OnInit{
   getAppointment() {
     this.appointmentService.getOne(this.appointmentId).subscribe((appointment: Appointment) => {
       this.appointment = appointment;
-      this.getClient(appointment.breederId);
+      this.getClient(appointment.farmerId);
     });
   }
 

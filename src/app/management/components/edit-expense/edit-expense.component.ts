@@ -67,7 +67,7 @@ export class EditExpenseComponent implements OnInit{
       this.snackBar.open('Gasto actualizado con éxito🤗', 'Cerrar', {
         duration: 2000
       }).afterDismissed().subscribe(() => {
-        this.router.navigate(['/criador/mi-granja/gastos']);
+        this.router.navigate(['/granjero/mi-granja/gastos']);
       });
 
     }, error => {

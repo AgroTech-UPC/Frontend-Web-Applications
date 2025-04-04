@@ -21,7 +21,7 @@ import {ResourceApiService} from "../../services/resource-api.service";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 
 @Component({
   selector: 'app-my-farm-resource-management',
@@ -58,12 +58,12 @@ export class MyFarmResourceManagementComponent implements OnInit {
   constructor(private resourceApiService: ResourceApiService,
               private router: Router,
               private dialog: MatDialog,
-              private breederService: BreederApiService) {
+              private breederService: FarmerApiService) {
     this.selectedResourceType = '1';
   }
 
   ngOnInit(): void {
-    this.breederId = this.breederService.getBreederId();
+    this.breederId = this.breederService.getFarmerId();
     this.loadResources();
   }
 
@@ -87,11 +87,11 @@ export class MyFarmResourceManagementComponent implements OnInit {
 
 
   goBack() {
-    this.router.navigate(['/criador/mi-granja']);
+    this.router.navigate(['/granjero/mi-granja']);
   }
 
   editItem(itemId: number) {
-    this.router.navigate(['criador/mi-granja/recursos/editar', itemId]);
+    this.router.navigate(['granjero/mi-granja/recursos/editar', itemId]);
   }
 
   confirmDeletion(id: number): Observable<boolean> {

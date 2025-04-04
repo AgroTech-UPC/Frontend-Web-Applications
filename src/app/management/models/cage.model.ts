@@ -3,5 +3,5 @@ export interface Cage {
   name: string;
   size: number;
   observations: string;
-  breederId: number;
+  farmerId: number;
 }

@@ -32,16 +32,16 @@ export class UserApiService extends  BaseService<User>{
     return false;
   }
 
-  setIsBreeder(isBreeder: boolean) {
+  setIsFarmer(isFarmer: boolean) {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem('isBreeder', String(isBreeder));
+      localStorage.setItem('isFarmer', String(isFarmer));
     }
   }
 
-  getIsBreeder(): boolean {
+  getIsFarmer(): boolean {
     if (typeof window !== 'undefined' && window.localStorage) {
-      const isBreeder = localStorage.getItem('isBreeder');
-      return isBreeder === 'true';
+      const isFarmer = localStorage.getItem('isFarmer');
+      return isFarmer === 'true';
     }
     return false;
   }
@@ -58,11 +58,6 @@ export class UserApiService extends  BaseService<User>{
       return user_id ? parseInt(user_id) : 0;
     }
     return 0;
-  }
-
-  getNotificationsByUserId(user_id: number) {
-    this.setToken();
-    return this.http.get<Notification[]>(this.buildPath() + '/' + user_id + '/notifications', this.httpOptions).pipe(catchError(this.handleError));
   }
 
 }

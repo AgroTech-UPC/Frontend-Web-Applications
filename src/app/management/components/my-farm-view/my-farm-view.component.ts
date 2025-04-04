@@ -21,10 +21,10 @@ export class MyFarmViewComponent {
 
   constructor(private router: Router) { }
   redirectToManagementResource() {
-    this.router.navigate(['criador/mi-granja/recursos']);
+    this.router.navigate(['granjero/mi-granja/recursos']);
   }
 
   redirectToExpensesResource() {
-    this.router.navigate(['criador/mi-granja/gastos']);
+    this.router.navigate(['granjero/mi-granja/gastos']);
   }
 }

@@ -27,7 +27,7 @@ export class CageEditorComponent implements OnInit {
   cageID = 0;
   cage: Cage = {
     id: 0,
-    breederId: 0,
+    farmerId: 0,
     name: '',
     size: 0,
     observations: ''
@@ -49,7 +49,7 @@ export class CageEditorComponent implements OnInit {
     this.cageService.getOne(id).subscribe((data) => {
       this.cage = {
         id: data.id,
-        breederId: data.breederId,
+        farmerId: data.farmerId,
         name: data.name,
         size: data.size,
         observations: data.observations
@@ -61,7 +61,7 @@ export class CageEditorComponent implements OnInit {
     if(this.cageForm.form.valid){
       this.cageService.update(this.cage.id, this.cage)
         .subscribe(() => {
-        this.router.navigate(['/criador/mis-animales']);
+        this.router.navigate(['/granjero/mis-animales']);
         this.snackBar.open('Jaula actualizada 🎉', '', { duration: 5000 });
       });
     }

@@ -8,7 +8,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {MatButton} from "@angular/material/button";
 import {User} from "../../../user/models/user.model";
 import {NgIf} from "@angular/common";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthenticationApiService} from "../../services/authentication-api.service";
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private userApiService: UserApiService,
               private authenticationApiService: AuthenticationApiService,
-              private breederApiService: BreederApiService,
+              private breederApiService: FarmerApiService,
               private advisorApiService: AdvisorApiService,
               private router: Router,
               private formBuilder: FormBuilder,
@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit {
     });
 
     if (this.userApiService.isLogged()) {
-      if (this.userApiService.getIsBreeder()) {
-        this.router.navigateByUrl('/criador/mi-granja');
+      if (this.userApiService.getIsFarmer()) {
+        this.router.navigateByUrl('/granjero/mi-granja');
       } else {
         this.router.navigateByUrl('/asesor/clientes');
       }
@@ -75,20 +75,20 @@ export class LoginComponent implements OnInit {
         this.breederApiService.getAll().subscribe((data) => {
           const breeder = data.find(breeder => breeder.userId === userId);
           if (breeder) {
-            this.userApiService.setIsBreeder(true);
-            this.breederApiService.setBreederId(breeder.id);
-            this.router.navigateByUrl('/criador/mi-granja');
-            this.snackBar.open('Bievenido ' + breeder.fullname + ' 🤗', 'Cerrar', {
+            this.userApiService.setIsFarmer(true);
+            this.breederApiService.setFarmerId(breeder.id);
+            this.router.navigateByUrl('/granjero/mi-granja');
+            this.snackBar.open('Bievenido ' + breeder.id + ' 🤗', 'Cerrar', {
               duration: 2000
             });
           } else {
             this.advisorApiService.getAll().subscribe((data) => {
               const advisor = data.find(advisor => advisor.userId === userId);
               if (advisor) {
-                this.userApiService.setIsBreeder(false);
+                this.userApiService.setIsFarmer(false);
                 this.advisorApiService.setAdvisorId(advisor.id);
                 this.router.navigateByUrl('/asesor/clientes');
-                this.snackBar.open('Bievenido ' + advisor.fullname + ' 🤗', 'Cerrar', {
+                this.snackBar.open('Bievenido ' + advisor.id + ' 🤗', 'Cerrar', {
                   duration: 2000
                 });
               }

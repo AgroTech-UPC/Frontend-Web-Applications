@@ -14,7 +14,7 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatOption} from "@angular/material/autocomplete";
 import {MatSelect} from "@angular/material/select";
 import {MatIcon} from "@angular/material/icon";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 
 @Component({
   selector: 'app-register-cuy',
@@ -54,7 +54,7 @@ export class RegisterCuyComponent {
   constructor(public dialog: MatDialog,
               private animalService: AnimalApiService,
               private snackBar: MatSnackBar,
-              private breederService: BreederApiService,
+              private breederService: FarmerApiService,
               private route: ActivatedRoute) {
     this.animal.cageId = +this.route.snapshot.paramMap.get('cageid')!;
   }
@@ -69,7 +69,7 @@ export class RegisterCuyComponent {
       this.openDialog();
     } else {
       // verify if cageId exists for this breeder
-      this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe(cages => {
+      this.breederService.getCagesByFarmerId(this.breederService.getFarmerId()).subscribe(cages => {
         if (!cages.some(cage => cage.id === this.animal.cageId)) {
           this.snackBar.open('El número de jaula no existe', 'Cerrar', {
             duration: 2000,

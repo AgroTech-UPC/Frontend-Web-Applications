@@ -49,7 +49,7 @@ export class PublicationDetailComponent {
     // Open a dialog to confirm the deletion
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: `¿Estás seguro de querer eliminar esta publicación? Los criadores ya no podrán visualizarla.`
+        message: `¿Estás seguro de querer eliminar esta publicación? Los granjeros ya no podrán visualizarla.`
       }
     });
     // Return the result of the dialog

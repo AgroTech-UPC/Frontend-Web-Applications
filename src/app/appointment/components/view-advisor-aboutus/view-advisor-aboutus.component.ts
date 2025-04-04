@@ -16,6 +16,7 @@ import {Review} from "../../models/review.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
+import {ProfileApiService} from "../../../user/services/profile-api.service";
 
 @Component({
   selector: 'app-view-advisor-aboutus',
@@ -42,7 +43,9 @@ export class ViewAdvisorAboutusComponent implements OnInit{
     fullname: "",
     location: "",
     occupation: "",
-    description: ""
+    description: "",
+    experience: 0,
+    photo: ""
   };
   id = 0;
   constructor(
@@ -51,6 +54,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
     private advisorApiService: AdvisorApiService,
     private appointmentApiService: AppointmentApiService,
     private userApiService: UserApiService,
+    private profileApiService: ProfileApiService,
     private reviewApiService: ReviewApiService
   )
   {  }
@@ -63,12 +67,14 @@ export class ViewAdvisorAboutusComponent implements OnInit{
   getAdvisor(): void {
     this.advisorApiService.getOne(this.id).subscribe(advisor => {
       this.advisor = advisor
-      this.advisorDetails = {
-        fullname: advisor.fullname,
-        location: advisor.location,
-        occupation: advisor.occupation,
-        description: advisor.description
-      };
+      this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
+        this.advisorDetails.fullname = `${profile.firstName} ${profile.lastName}`;
+        this.advisorDetails.location = `${profile.city}, ${profile.country}`;
+        this.advisorDetails.occupation = profile.occupation;
+        this.advisorDetails.description = profile.description;
+        this.advisorDetails.experience = profile.experience;
+        this.advisorDetails.photo = profile.photo;
+      })
 
       this.appointmentApiService.getAll().subscribe(appointments => {
         this.appointments = appointments.filter(appointment => appointment.advisorId === advisor.id);
@@ -87,7 +93,7 @@ export class ViewAdvisorAboutusComponent implements OnInit{
 
   NavigateToReserveAppointment(): void {
     let id = this.advisor.id;
-    this.router.navigate([`/criador/asesor-info/${id}/reservar-cita`]);
+    this.router.navigate([`/granjero/asesor-info/${id}/reservar-cita`]);
   }
   goBack(): void {
     window.history.back();

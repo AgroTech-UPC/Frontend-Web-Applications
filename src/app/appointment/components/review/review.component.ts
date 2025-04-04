@@ -14,6 +14,7 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
 import {MatCardModule} from "@angular/material/card";
+import {ProfileApiService} from "../../../user/services/profile-api.service";
 
 @Component({
   selector: 'app-review',
@@ -30,7 +31,8 @@ export class ReviewComponent implements OnInit {
   advisor!: Advisor;
   advisorDetails: any = {
     fullname: "",
-    location: ""
+    location: "",
+    photo: ""
   };
   appointment!: Appointment;
 
@@ -47,6 +49,7 @@ export class ReviewComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private advisorService: AdvisorApiService,
+    private profileService: ProfileApiService,
     private appointmentService: AppointmentApiService,
     private reviewService: ReviewApiService,
     private router: Router
@@ -72,10 +75,14 @@ export class ReviewComponent implements OnInit {
     const advisorId = this.appointment.advisorId;
     this.advisorService.getOne(advisorId).subscribe(advisor => {
       this.advisor = advisor;
-      this.advisorDetails = {
-        fullname: advisor.fullname,
-        location: advisor.location
-      };
+      this.profileService.getProfileByUserId(this.advisor.userId).subscribe(profile => {
+        this.advisorDetails = {
+          fullname: `${profile.firstName} ${profile.lastName}`,
+          location: `${profile.city}, ${profile.country}`,
+          photo: profile.photo
+        };
+      })
+
     });
 
   }
@@ -90,11 +97,11 @@ export class ReviewComponent implements OnInit {
 
   goHome(){
     this.isConfirmed = false;
-    this.router.navigate(['/criador/mis-asesores']);
+    this.router.navigate(['/granjero/mis-asesores']);
   }
   onCancel(){
     this.isConfirmed = false;
-    this.router.navigate(['/criador/mis-asesores']);
+    this.router.navigate(['/granjero/mis-asesores']);
 
   }
 

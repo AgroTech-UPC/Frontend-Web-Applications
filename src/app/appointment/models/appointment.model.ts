@@ -1,7 +1,7 @@
 export interface Appointment {
   id: number;
   advisorId: number;
-  breederId: number;
+  farmerId: number;
   date: any;
   status: any;
 }

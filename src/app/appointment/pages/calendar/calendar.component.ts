@@ -10,9 +10,9 @@ import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {Advisor} from "../../../user/models/advisor.model";
-import {Breeder} from "../../../user/models/breeder.model";
+import {Farmer} from "../../../user/models/farmer.model";
 import {forkJoin, map, Observable, switchMap, window} from "rxjs";
 
 @Component({
@@ -50,12 +50,12 @@ export class CalendarComponent implements OnInit{
     private router: Router,
     private route: ActivatedRoute,
     private appointmentApiService: AppointmentApiService,
-    private breederApiService: BreederApiService,
+    private breederApiService: FarmerApiService,
     private advisorApiService: AdvisorApiService
   ){}
 
   ngOnInit() {
-    this.breeder_id = this.breederApiService.getBreederId();
+    this.breeder_id = this.breederApiService.getFarmerId();
     this.advisor_id = this.advisorApiService.getAdvisorId();
     this.determineUserType();
     this.fetchAppointments();
@@ -64,7 +64,7 @@ export class CalendarComponent implements OnInit{
   // Método para determinar el tipo de usuario
   determineUserType() {
     this.route.url.subscribe(segments => {
-      if (segments.some(segment => segment.path === 'criador')) {
+      if (segments.some(segment => segment.path === 'granjero')) {
         this.userType = 'breeder';
       } else if (segments.some(segment => segment.path === 'asesor')) {
         this.userType = 'advisor';
@@ -72,7 +72,7 @@ export class CalendarComponent implements OnInit{
     });
   }
 
-  // Marca en el calendario las citas del asesor o del criador (solo muestra las citas con el status = "Pendiente")
+  // Marca en el calendario las citas del asesor o del granjero (solo muestra las citas con el status = "Pendiente")
   fetchAppointments() {
     if (this.userType === 'advisor') {
       this.advisorApiService.getAppointmentsByAdvisorId(this.advisor_id).subscribe(
@@ -86,7 +86,7 @@ export class CalendarComponent implements OnInit{
       );
     }
     else {
-      this.breederApiService.getAppointmentsByBreederId(this.breeder_id).subscribe(
+      this.breederApiService.getAppointmentsByFarmerId(this.breeder_id).subscribe(
         (appointments) => {
           forkJoin(
             appointments.map(appointment => this.createEventFromAppointment(appointment))
@@ -104,10 +104,10 @@ export class CalendarComponent implements OnInit{
     let userFn$: Observable<string>;
     if (userType === 'advisor') {
       userFn$ = this.advisorApiService.getOne(id).pipe(
-        map((advisor: Advisor) => advisor.fullname));
+        map((advisor: Advisor) => advisor.id.toString()));
     } else {
       userFn$ = this.breederApiService.getOne(id).pipe(
-        map((breeder: Breeder) => breeder.fullname));
+        map((breeder: Farmer) => breeder.id.toString()));
     }
     return userFn$.pipe(
 
@@ -117,7 +117,7 @@ export class CalendarComponent implements OnInit{
   // Crea el evento osea lo que marca en el calendario
   createEventFromAppointment(appointment: Appointment): Observable<any> {
     return this.getFullnameFromAdvisorOrBreederId(
-      this.userType === 'advisor' ? appointment.breederId : appointment.advisorId,
+      this.userType === 'advisor' ? appointment.farmerId : appointment.advisorId,
       this.userType === 'advisor' ? 'breeder' : 'advisor'
     ).pipe(
       map(fullname => {

@@ -13,8 +13,8 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 
 import {AvailableDate} from "../../models/available_date.model";
 
-import {Breeder} from "../../../user/models/breeder.model";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {Farmer} from "../../../user/models/farmer.model";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 
 import {Appointment} from "../../models/appointment.model";
 import {AppointmentApiService} from "../../services/appointment-api.service";
@@ -45,7 +45,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
 
   advisor!: Advisor;
   advisor_availableDates: AvailableDate[] = [];
-  breeder!: Breeder;
+  breeder!: Farmer;
   breeder_id = 0;
   selectedDateIndex!: number;
   appointmentId = 0;
@@ -53,14 +53,14 @@ export class ViewReserveAppointmentComponent implements OnInit {
     private router: Router,
     private activatedRouter: ActivatedRoute,
     private advisorApiService: AdvisorApiService,
-    private breederApiService: BreederApiService,
+    private breederApiService: FarmerApiService,
     private appointmentApiService: AppointmentApiService,
     private availableDateApiService: AvailableDateApiService,
     private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
-    this.breeder_id = this.breederApiService.getBreederId();
+    this.breeder_id = this.breederApiService.getFarmerId();
     this.getAdvisor();
     this.getBreeder();
   }
@@ -100,7 +100,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisorId: this.advisor.id,
-      breederId: this.breeder.id,
+      farmerId: this.breeder.id,
       date: appointmentDate,
       status: "PENDIENTE" // TERMINADO, PENDIENTE
   };
@@ -132,7 +132,7 @@ export class ViewReserveAppointmentComponent implements OnInit {
         this.snackBar.open('Cita reservada🤩 ¡Revisa tus notificaciones!', 'Cerrar', {
           duration: 2000
         }).afterDismissed().subscribe(() => {
-          this.router.navigate(['criador/buscar-asesor']);
+          this.router.navigate(['granjero/buscar-asesor']);
         });
       });
     }, error => {
@@ -147,6 +147,6 @@ export class ViewReserveAppointmentComponent implements OnInit {
     return status === true ? 'Disponible' : 'No disponible';
   }
   cancel(): void {
-    this.router.navigate(['criador/buscar-asesor']);
+    this.router.navigate(['granjero/buscar-asesor']);
   }
 }

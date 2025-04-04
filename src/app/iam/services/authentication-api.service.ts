@@ -18,7 +18,7 @@ export class AuthenticationApiService extends BaseService<User> {
     const user = {
       "username": username,
       "password": password,
-      "roles": [role]
+      "roles": ["ROLE_USER", role]
     };
     return this.http.post(this.buildPath() + '/sign-up', user, this.httpOptions)
       .pipe(catchError(this.handleError));

@@ -41,8 +41,8 @@ export class ViewAdvisorsSearchComponent implements OnInit{
       this.advisors = advisors;
       this.advisors.forEach(advisor => {
         this.advisorDetails[advisor.userId] = {
-          fullname: advisor.fullname,
-          location: advisor.location
+          fullname: 'advisor.fullname',
+          location: 'advisor.location'
         };
       });
     });
@@ -67,12 +67,12 @@ export class ViewAdvisorsSearchComponent implements OnInit{
   }
 
   navigateToAdvisorsSearch() {
-    this.router.navigate([`criador/buscar-asesor`]);
+    this.router.navigate([`granjero/buscar-asesor`]);
   }
   navigateToMyAdvisors() {
-    this.router.navigate([`criador/mis-asesores`]);
+    this.router.navigate([`granjero/mis-asesores`]);
   }
   navigateToAdvisorInfo(id_asesor: number) {
-    this.router.navigate([`criador/asesor-info/${id_asesor}`]);
+    this.router.navigate([`granjero/asesor-info/${id_asesor}`]);
   }
 }

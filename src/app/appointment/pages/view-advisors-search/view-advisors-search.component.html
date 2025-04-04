@@ -15,7 +15,7 @@
         <div class="header-content">
           <mat-card-title>
             <div class="img-box">
-              <img [src]="advisor.photo" alt="Foto del asesor" class="photo">
+              <!--img [src]="advisor.photo" alt="Foto del asesor" class="photo"-->
             </div>
           </mat-card-title>
           <mat-card-subtitle>
@@ -33,7 +33,7 @@
         <h3>
           <strong>Ubicación:</strong> {{ advisorDetails[advisor.userId]?.location }}
           <br>
-          <strong>Experiencia:</strong> {{advisor.experience}} años
+          <strong>Experiencia:</strong> {{'advisor.experience'}} años
         </h3>
         <button mat-button style="color: white" class="card-button" (click)="navigateToAdvisorInfo(advisor.id)">Más Información</button>
       </div>

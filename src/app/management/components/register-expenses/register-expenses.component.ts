@@ -11,7 +11,7 @@ import { Expense } from '../../models/expense.model';
 import { ExpenseApiService } from "../../services/expense-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -38,16 +38,16 @@ export class RegisterExpensesComponent implements OnInit {
     amount: 0,
     date: "",
     observations: "Ninguna",
-    breederId: 0
+    farmerId: 0
   };
 
   constructor(public dialog: MatDialog,
               private expenseService: ExpenseApiService,
-              private breederService: BreederApiService,
+              private breederService: FarmerApiService,
               private snackBar: MatSnackBar) {}
 
   ngOnInit() {
-    this.expense.breederId = this.breederService.getBreederId();
+    this.expense.farmerId = this.breederService.getFarmerId();
   }
 
   openDialog(): void {

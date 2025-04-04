@@ -10,7 +10,7 @@ import { DialogComponent } from '../../../public/components/dialog/dialog.compon
 import { Cage } from '../../models/cage.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {CageApiService} from "../../services/cage-api.service";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {MatIcon} from "@angular/material/icon";
 
 
@@ -33,7 +33,7 @@ import {MatIcon} from "@angular/material/icon";
 export class RegisterCageComponent {
   cage: Cage = {
     id: 0,
-    breederId: 0,
+    farmerId: 0,
     name: '',
     size: 0,
     observations: ''
@@ -42,8 +42,8 @@ export class RegisterCageComponent {
   constructor(public dialog: MatDialog,
               private cageService: CageApiService,
               private snackBar: MatSnackBar,
-              private breederService: BreederApiService) {
-    this.cage.breederId = this.breederService.getBreederId();
+              private breederService: FarmerApiService) {
+    this.cage.farmerId = this.breederService.getFarmerId();
   }
 
   openDialog(): void {

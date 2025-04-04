@@ -1,5 +1,5 @@
 export interface Expense {
-  breederId: number;
+  farmerId: number;
   name: string;
   type: string;
   amount: number;

@@ -12,7 +12,7 @@ import { ResourceApiService} from "../../services/resource-api.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import { MatSelect } from '@angular/material/select';
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {MatIcon} from "@angular/material/icon";
 
 @Component({
@@ -40,16 +40,16 @@ export class RegisterResourcesComponent implements OnInit {
     quantity: 0,
     date: "",
     observations: "Ninguna",
-    breederId: 0
+    farmerId: 0
   };
 
   constructor(public dialog: MatDialog,
               private resourceService: ResourceApiService,
               private snackBar: MatSnackBar,
-              private breederService: BreederApiService) {}
+              private breederService: FarmerApiService) {}
 
   ngOnInit() {
-    this.resource.breederId = this.breederService.getBreederId();
+    this.resource.farmerId = this.breederService.getFarmerId();
   }
 
   openDialog(): void {
@@ -57,7 +57,7 @@ export class RegisterResourcesComponent implements OnInit {
   }
 
   handleClick(): void {
-    if (!this.resource.name || !this.resource.type || !this.resource.breederId || !this.resource.quantity || !this.resource.date || !this.resource.observations) {
+    if (!this.resource.name || !this.resource.type || !this.resource.farmerId || !this.resource.quantity || !this.resource.date || !this.resource.observations) {
       this.openDialog();
     } else {
       this.registerResource();

@@ -48,7 +48,7 @@ export class AnimalListComponent implements OnInit{
   }
 
   createAnimal() {
-    this.router.navigate([`/criador/mis-animales/${this.cageID}/registro-animal`]);
+    this.router.navigate([`/granjero/mis-animales/${this.cageID}/registro-animal`]);
   }
 
   goBack() {

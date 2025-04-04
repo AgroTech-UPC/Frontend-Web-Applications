@@ -16,7 +16,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatIcon} from "@angular/material/icon";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 
 
 @Component({
@@ -63,7 +63,7 @@ export class AnimalInformationComponent implements OnInit{
   constructor(private router: Router,
               private route: ActivatedRoute,
               private animalService: AnimalApiService,
-              private breederService: BreederApiService,
+              private breederService: FarmerApiService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) { }
 
@@ -89,7 +89,7 @@ export class AnimalInformationComponent implements OnInit{
 
   onSubmit() {
     if (this.animalForm.valid) {
-      this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe(cages => {
+      this.breederService.getCagesByFarmerId(this.breederService.getFarmerId()).subscribe(cages => {
         if (!cages.some(cage => cage.id === this.animal.cageId)) {
           this.snackBar.open('El número de jaula no existe', 'Cerrar', {
             duration: 2000,

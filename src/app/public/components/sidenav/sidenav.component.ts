@@ -6,7 +6,7 @@ import {NgForOf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {UserApiService} from "../../../user/services/user-api.service";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 
 @Component({
@@ -46,17 +46,17 @@ export class SidenavComponent {
     this.isOpen = false;
   }
 
-  @Input() isBreeder: boolean;
+  @Input() isFarmer: boolean;
 
   constructor(private userApiService: UserApiService,
-              private breederApiService: BreederApiService,
+              private breederApiService: FarmerApiService,
               private advisorApiService: AdvisorApiService) {
-    this.isBreeder = this.userApiService.getIsBreeder();
+    this.isFarmer = this.userApiService.getIsFarmer();
   }
 
   getSidebarButtons(): string[] {
-    this.isBreeder = this.userApiService.getIsBreeder();
-    if (this.isBreeder) {
+    this.isFarmer = this.userApiService.getIsFarmer();
+    if (this.isFarmer) {
       return ["Mi granja", "Asesores", "Mis animales", "Publicaciones", "Notificaciones", "Calendario"];
     } else {
       return ["Clientes", "Notificaciones", "Mis publicaciones", "Horarios", "Calendario"];
@@ -66,21 +66,21 @@ export class SidenavComponent {
   getButtonRoute(button: string): string {
     switch (button) {
       case "Mi granja":
-        return "criador/mi-granja";
+        return "granjero/mi-granja";
       case "Asesores":
-        return "criador/buscar-asesor";
+        return "granjero/buscar-asesor";
       case "Mis animales":
-        return "criador/mis-animales";
+        return "granjero/mis-animales";
       case "Publicaciones":
-        return "criador/publicaciones";
+        return "granjero/publicaciones";
       case "Notificaciones":
-        return this.isBreeder ? "criador/notificaciones" : "asesor/notificaciones";
+        return this.isFarmer ? "granjero/notificaciones" : "asesor/notificaciones";
       case "Clientes":
         return "asesor/clientes";
       case "Mis publicaciones":
         return "asesor/mis-publicaciones";
       case "Calendario":
-        return this.isBreeder ? "criador/calendario" : "asesor/calendario";
+        return this.isFarmer ? "granjero/calendario" : "asesor/calendario";
       case "Horarios":
         return "asesor/horarios";
       default:
@@ -92,7 +92,7 @@ export class SidenavComponent {
     this.userApiService.setLogged(false);
     this.userApiService.setUserId(0);
     this.userApiService.clearToken();
-    this.breederApiService.setBreederId(0);
+    this.breederApiService.setFarmerId(0);
     this.advisorApiService.setAdvisorId(0);
     this.onToggleSidenav(false);
     this.isOpen = false;

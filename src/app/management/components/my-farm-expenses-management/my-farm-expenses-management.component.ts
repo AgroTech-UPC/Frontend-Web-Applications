@@ -16,7 +16,7 @@ import { Router, RouterLink } from "@angular/router";
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../../public/components/confirmation-dialog/confirmation-dialog.component";
 import { Observable } from "rxjs";
-import { BreederApiService } from "../../../user/services/breeder-api.service";
+import { FarmerApiService } from "../../../user/services/farmer-api.service";
 import { ExpenseApiService } from "../../services/expense-api.service"; // Asumiendo que existe este servicio
 
 @Component({
@@ -55,7 +55,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
     '5': 'OTROS'
   };
 
-  constructor(private breederApiService: BreederApiService,
+  constructor(private breederApiService: FarmerApiService,
               private expenseApiService: ExpenseApiService,
               private router: Router,
               private dialog: MatDialog) {
@@ -63,7 +63,7 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.breeder_id = this.breederApiService.getBreederId();
+    this.breeder_id = this.breederApiService.getFarmerId();
     console.log("Breeder ID:", this.breeder_id);
     this.loadExpenses();
   }
@@ -83,14 +83,14 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   private loadExpenses() {
     this.breederApiService.getExpenses(this.breeder_id).subscribe((resources) => {
       console.log("Expenses fetched:", resources); // Añade esto para verificar los datos
-      this.expenses = resources.filter((resource) => resource.breederId === this.breeder_id);
+      this.expenses = resources.filter((resource) => resource.farmerId === this.breeder_id);
       this.filteredExpenses = cloneDeep(this.expenses);
       this.filterResource(); // Filtrar recursos después de cargarlos
     });
   }
 
   editItem(itemId: number): void {
-    this.router.navigate(['criador/mi-granja/gastos/editar', itemId]);
+    this.router.navigate(['granjero/mi-granja/gastos/editar', itemId]);
   }
 
   confirmDeletion(id: number): Observable<boolean> {
@@ -121,6 +121,6 @@ export class MyFarmExpensesManagementComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['/criador/mi-granja']);
+    this.router.navigate(['/granjero/mi-granja']);
   }
 }

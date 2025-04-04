@@ -1,29 +1,28 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatDatepickerModule, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatError, MatFormField, MatHint, MatLabel, MatSuffix} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatOption} from "@angular/material/autocomplete";
-import {MatSelect} from "@angular/material/select";
+import {MatInput} from "@angular/material/input";
 import {NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {DateAdapter, MAT_DATE_LOCALE} from "@angular/material/core";
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
-import {UserApiService} from "../../../user/services/user-api.service";
-import {AdvisorApiService} from "../../../user/services/advisor-api.service";
-import {Advisor} from "../../../user/models/advisor.model";
-import {AuthenticationApiService} from "../../services/authentication-api.service";
-import {StorageService} from "../../../shared/services/storage.service";
-import {MatIcon} from "@angular/material/icon";
+import { UserApiService } from "../../../user/services/user-api.service";
+import { FarmerApiService } from "../../../user/services/farmer-api.service";
+import { AuthenticationApiService } from "../../services/authentication-api.service";
+
+import { Farmer } from "../../../user/models/farmer.model";
 import {ProfileModel} from "../../../user/models/profile.model";
 import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {StorageService} from "../../../shared/services/storage.service";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
-  selector: 'register-advisor',
+  selector: 'register-farmer',
   standalone: true,
   imports: [
     MatButton,
@@ -40,20 +39,19 @@ import {ProfileApiService} from "../../../user/services/profile-api.service";
     MatNativeDateModule,
     MatInput,
     MatLabel,
-    MatOption,
-    MatSelect,
     MatSuffix,
     NgIf,
     ReactiveFormsModule,
     MatIcon
   ],
-  templateUrl: './register-advisor.component.html',
-  styleUrl: './register-advisor.component.css',
+  templateUrl: './register-farmer.component.html',
+  styleUrl: './register-farmer.component.css',
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-PE'}
   ]
 })
-export class RegisterAdvisorComponent {
+export class RegisterFarmerComponent {
+
   registerForm: FormGroup = new FormGroup(
     {
       firstName: new FormControl('', [Validators.required]),
@@ -63,11 +61,10 @@ export class RegisterAdvisorComponent {
       city: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
       birthDate: new FormControl(null, [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      occupation: new FormControl('', [Validators.required]),
-      experience: new FormControl('', [Validators.required, Validators.min(1), Validators.max(70)])
+      description: new FormControl('')
     }
   );
+
   minDate: Date;
   maxDate: Date;
   photo: any;
@@ -77,7 +74,7 @@ export class RegisterAdvisorComponent {
               private router: Router,
               private authenticationApiService: AuthenticationApiService,
               private userApiService: UserApiService,
-              private advisorApiService: AdvisorApiService,
+              private farmerApiService: FarmerApiService,
               private profileApiService: ProfileApiService,
               private snackBar: MatSnackBar,
               private storageService: StorageService) {
@@ -118,7 +115,7 @@ export class RegisterAdvisorComponent {
       });
       return;
     }
-    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
+    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_FARMER')
       .subscribe((data: any) => {
         // Iniciar sesión automáticamente para obtener el token del usuario
         this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
@@ -127,45 +124,48 @@ export class RegisterAdvisorComponent {
             this.userApiService.setUserId(userId);
             this.userApiService.setLogged(true);
 
-            // Crear un nuevo asesor
+            // Crear un nuevo granjero
             const birthDate: Date = this.registerForm.value.birthDate;
             const birthDateString = birthDate.toISOString().split('T')[0];
-            let advisor: Advisor = {
+            let farmer: Farmer = {
               id: 0,
-              rating: 0,
               userId: userId
             };
-            this.advisorApiService.create(advisor).subscribe(
-              (response) => {
-
-                // Crear el perfil del asesor
-                let profile: ProfileModel = {
-                  id: 0,
-                  userId: userId,
-                  firstName: this.registerForm.value.firstName,
-                  lastName: this.registerForm.value.lastName,
-                  city: this.registerForm.value.city,
-                  country: this.registerForm.value.country,
-                  birthDate: birthDateString,
-                  description: this.registerForm.value.description,
-                  photo: this.photo,
-                  occupation: this.registerForm.value.occupation,
-                  experience: this.registerForm.value.experience
-                };
-
-                this.profileApiService.create(profile).subscribe(
-                  (response) => {
-                    this.userApiService.setIsFarmer(false);
-                    this.advisorApiService.setAdvisorId(response.id);
-                    this.router.navigateByUrl('/asesor/clientes');
-                    this.snackBar.open('Bievenido ' + profile.firstName + ' 🤗', 'Cerrar', {
-                      duration: 2000
-                    });
-                  }
-                )
-              },
+            this.farmerApiService.create(farmer).subscribe(
               error => {
                 this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {
+                  duration: 5000,
+                });
+                console.error(error);
+              }
+            );
+            // Crear el perfil del granjero
+            let profile: ProfileModel = {
+              id: 0,
+              userId: userId,
+              firstName: this.registerForm.value.firstName,
+              lastName: this.registerForm.value.lastName,
+              city: this.registerForm.value.city,
+              country: this.registerForm.value.country,
+              birthDate: birthDateString,
+              description: this.registerForm.value.description,
+              photo: this.photo,
+              occupation: '',
+              experience: 0
+            };
+            this.profileApiService.create(profile).subscribe(
+              (response) => {
+                this.userApiService.setIsFarmer(true);
+                this.farmerApiService.setFarmerId(response.id);
+                this.router.navigateByUrl('/granjero/mi-granja');
+                this.snackBar.open('Bievenido ' + profile.firstName + ' 🤗', 'Cerrar', {
+                  duration: 2000
+                });
+
+                console.log('Perfil creado con éxito:', response);
+              },
+              error => {
+                this.snackBar.open('Error al crear el perfil😥', 'Cerrar', {
                   duration: 5000,
                 });
                 console.error(error);
@@ -179,7 +179,9 @@ export class RegisterAdvisorComponent {
       });
   }
 
+
   goBack() {
     window.history.back();
   }
+
 }

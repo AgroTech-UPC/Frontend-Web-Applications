@@ -12,7 +12,7 @@ import {Observable} from "rxjs";
 import {NgIf} from "@angular/common";
 import {CageTableComponent} from "../../components/cage-table/cage-table.component";
 import {Cage} from "../../models/cage.model";
-import {BreederApiService} from "../../../user/services/breeder-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
 
 
 @Component({
@@ -34,7 +34,7 @@ export class CageListComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   constructor(private cageService: CageApiService,
               private animalService: AnimalApiService,
-              private breederService: BreederApiService,
+              private breederService: FarmerApiService,
               private router: Router,
               private dialog: MatDialog,
               private snackBar: MatSnackBar
@@ -45,14 +45,14 @@ export class CageListComponent implements OnInit {
   }
 
   getCages(){
-    this.breederService.getCagesByBreederId(this.breederService.getBreederId()).subscribe((cages: Cage[]) => {
+    this.breederService.getCagesByFarmerId(this.breederService.getFarmerId()).subscribe((cages: Cage[]) => {
       this.dataSource = new MatTableDataSource(cages);
       this.length = cages.length;
     });
   }
 
   editCage(id: number){
-    this.router.navigate([`/criador/mis-animales/editar/${id}`]);
+    this.router.navigate([`/granjero/mis-animales/editar/${id}`]);
   }
 
   deleteCage(id: number){
@@ -97,6 +97,6 @@ export class CageListComponent implements OnInit {
   }
 
   goToCage(id: number){
-    this.router.navigate([`criador/mis-animales/${id}`]);
+    this.router.navigate([`granjero/mis-animales/${id}`]);
   }
 }
