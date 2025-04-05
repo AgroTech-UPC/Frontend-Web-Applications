@@ -19,7 +19,7 @@ import {Advisor} from "../../../user/models/advisor.model";
 import {AuthenticationApiService} from "../../services/authentication-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
 import {MatIcon} from "@angular/material/icon";
-import {ProfileModel} from "../../../user/models/profile.model";
+import {Profile} from "../../../user/models/profile.model";
 import {ProfileApiService} from "../../../user/services/profile-api.service";
 
 @Component({
@@ -139,7 +139,7 @@ export class RegisterAdvisorComponent {
               (response) => {
 
                 // Crear el perfil del asesor
-                let profile: ProfileModel = {
+                let profile: Profile = {
                   id: 0,
                   userId: userId,
                   firstName: this.registerForm.value.firstName,

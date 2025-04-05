@@ -15,8 +15,7 @@ import { UserApiService } from "../../../user/services/user-api.service";
 import { FarmerApiService } from "../../../user/services/farmer-api.service";
 import { AuthenticationApiService } from "../../services/authentication-api.service";
 
-import { Farmer } from "../../../user/models/farmer.model";
-import {ProfileModel} from "../../../user/models/profile.model";
+import {Profile} from "../../../user/models/profile.model";
 import {ProfileApiService} from "../../../user/services/profile-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
 import {MatIcon} from "@angular/material/icon";
@@ -69,6 +68,7 @@ export class RegisterFarmerComponent {
   maxDate: Date;
   photo: any;
   selectedFileName = '';
+  uploaded = false;
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
@@ -97,12 +97,13 @@ export class RegisterFarmerComponent {
         this.storageService.uploadFile(name, reader.result).then((url) => {
           console.log(url);
           this.photo = url;
+          this.uploaded = true;
         });
       }
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.selectedFileName === '') {
       this.snackBar.open('Debe seleccionar una foto de perfil 📷', 'Cerrar', {
         duration: 2000
@@ -115,70 +116,49 @@ export class RegisterFarmerComponent {
       });
       return;
     }
-    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_FARMER')
-      .subscribe((data: any) => {
-        // Iniciar sesión automáticamente para obtener el token del usuario
-        this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
-          .subscribe((response: any) => {
-            let userId = response['id'];
-            this.userApiService.setUserId(userId);
-            this.userApiService.setLogged(true);
 
-            // Crear un nuevo granjero
-            const birthDate: Date = this.registerForm.value.birthDate;
-            const birthDateString = birthDate.toISOString().split('T')[0];
-            let farmer: Farmer = {
-              id: 0,
-              userId: userId
-            };
-            this.farmerApiService.create(farmer).subscribe(
-              error => {
-                this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {
-                  duration: 5000,
-                });
-                console.error(error);
-              }
-            );
-            // Crear el perfil del granjero
-            let profile: ProfileModel = {
-              id: 0,
-              userId: userId,
-              firstName: this.registerForm.value.firstName,
-              lastName: this.registerForm.value.lastName,
-              city: this.registerForm.value.city,
-              country: this.registerForm.value.country,
-              birthDate: birthDateString,
-              description: this.registerForm.value.description,
-              photo: this.photo,
-              occupation: '',
-              experience: 0
-            };
-            this.profileApiService.create(profile).subscribe(
-              (response) => {
-                this.userApiService.setIsFarmer(true);
-                this.farmerApiService.setFarmerId(response.id);
-                this.router.navigateByUrl('/granjero/mi-granja');
-                this.snackBar.open('Bievenido ' + profile.firstName + ' 🤗', 'Cerrar', {
-                  duration: 2000
-                });
+    try {
+      const signUpResponse = await this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_FARMER').toPromise();
+      const signInResponse = await this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password).toPromise();
+      const userId = signInResponse['id'];
+      this.userApiService.setUserId(userId);
+      this.userApiService.setLogged(true);
 
-                console.log('Perfil creado con éxito:', response);
-              },
-              error => {
-                this.snackBar.open('Error al crear el perfil😥', 'Cerrar', {
-                  duration: 5000,
-                });
-                console.error(error);
-              }
-            );
-          }, error => {
-            this.snackBar.open('Error al iniciar sesión😥', 'Cerrar', {
-              duration: 3000
-            });
-          });
-      });
+      await this.createProfile(userId);
+
+      this.router.navigateByUrl('/granjero/mi-granja');
+      this.snackBar.open('Bienvenido ' + this.registerForm.value.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
+    } catch (error) {
+      this.snackBar.open('Error al registrar el granjero😥', 'Cerrar', {duration: 5000});
+    }
+
   }
 
+  async createProfile(userId: number) {
+    const birthDate: Date = this.registerForm.value.birthDate;
+    const birthDateString = birthDate.toISOString().split('T')[0];
+    const profile: Profile = {
+      id: 0,
+      userId: userId,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      city: this.registerForm.value.city,
+      country: this.registerForm.value.country,
+      birthDate: birthDateString,
+      description: this.registerForm.value.description,
+      photo: this.photo,
+      occupation: '',
+      experience: 0
+    };
+    try {
+      const response = await this.profileApiService.create(profile).toPromise();
+      this.userApiService.setIsFarmer(true);
+      this.farmerApiService.setFarmerId(response?.id || 0);
+    } catch (error) {
+      this.snackBar.open('Error al crear el perfil😥', 'Cerrar', { duration: 5000 });
+      throw error;
+    }
+  }
 
   goBack() {
     window.history.back();

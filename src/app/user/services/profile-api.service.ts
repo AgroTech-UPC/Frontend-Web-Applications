@@ -3,13 +3,13 @@ import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
 import {BaseService} from "../../shared/services/base.service";
-import {ProfileModel} from "../models/profile.model";
+import {Profile} from "../models/profile.model";
 import {catchError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfileApiService extends BaseService<ProfileModel> {
+export class ProfileApiService extends BaseService<Profile> {
 
   constructor(http: HttpClient) {
     super(http);
@@ -18,11 +18,11 @@ export class ProfileApiService extends BaseService<ProfileModel> {
 
   getProfileByUserId(userId: number) {
     this.setToken();
-    return this.http.get<ProfileModel>(this.buildPath() + '/' + userId + '/user', this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Profile>(this.buildPath() + '/' + userId + '/user', this.httpOptions).pipe(catchError(this.handleError));
   }
 
   getAdvisors() {
     this.setToken();
-    return this.http.get<ProfileModel[]>(this.buildPath() + '/advisors', this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Profile[]>(this.buildPath() + '/advisors', this.httpOptions).pipe(catchError(this.handleError));
   }
 }
