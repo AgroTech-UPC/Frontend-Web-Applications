@@ -35,12 +35,7 @@ export class ClientsViewComponent implements OnInit {
   }
 
   getAppointments() {
-    this.advisorService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
-      this.appointments = appointments;
-      this.getClients();
-    }, error => {
-        console.log(error);
-    });
+    /** TO DO **/
   }
 
   getClients(){

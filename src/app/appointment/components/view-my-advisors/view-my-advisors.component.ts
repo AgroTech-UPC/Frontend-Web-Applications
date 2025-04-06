@@ -21,7 +21,7 @@ import {Advisor} from "../../../user/models/advisor.model";
 import {Appointment} from "../../models/appointment.model";
 import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
-import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 
 @Component({
   selector: 'app-view-my-advisors',

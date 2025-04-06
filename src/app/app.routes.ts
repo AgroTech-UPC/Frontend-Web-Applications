@@ -1,20 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { RegisterCageComponent } from "./management/components/register-cage/register-cage.component";
-import { RegisterExpensesComponent } from "./management/components/register-expenses/register-expenses.component";
-import { RegisterCuyComponent } from "./management/components/register-cuy/register-cuy.component";
-import { RegisterResourcesComponent} from "./management/components/register-resources/register-resources.component";
-
-
-import {MyFarmViewComponent} from "./management/components/my-farm-view/my-farm-view.component";
-import {MyFarmResourceManagementComponent} from "./management/components/my-farm-resource-management/my-farm-resource-management.component"
-import {MyFarmExpensesManagementComponent} from "./management/components/my-farm-expenses-management/my-farm-expenses-management.component";
-
 import {NotificationsViewComponent} from "./appointment/pages/notifications-view/notifications-view.component";
-import {CageListComponent} from "./management/pages/cage-list/cage-list.component";
-import {CageEditorComponent} from "./management/pages/cage-editor/cage-editor.component";
-import {AnimalListComponent} from "./management/pages/animal-list/animal-list.component";
-import {AnimalInformationComponent} from "./management/pages/animal-information/animal-information.component";
 import {ClientsViewComponent} from "./appointment/pages/clients-view/clients-view.component";
 import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
@@ -29,9 +15,6 @@ import {ReviewComponent} from "./appointment/components/review/review.component"
 import {LoginComponent} from "./iam/pages/login/login.component";
 import {ClientDetailComponent} from "./appointment/components/client-detail/client-detail.component";
 
-import {EditExpenseComponent} from "./management/components/edit-expense/edit-expense.component";
-import {EditResourceComponent} from "./management/components/edit-resource/edit-resource.component";
-
 import {SignupComponent} from "./iam/pages/signup/signup.component";
 import {SignupFarmerComponent} from "./iam/pages/signup-farmer/signup-farmer.component";
 import {SignupAdvisorComponent} from "./iam/pages/signup-advisor/signup-advisor.component";
@@ -39,32 +22,17 @@ import {SignupAdvisorComponent} from "./iam/pages/signup-advisor/signup-advisor.
 import {ListAvailabilityScheduleComponent} from "./appointment/pages/list-availability-schedule/list-availability-schedule.component";
 import {AddAvailabilityScheduleComponent} from "./appointment/components/add-availability-schedule/add-availability-schedule.component";
 
-import {CalendarComponent} from "./appointment/pages/calendar/calendar.component";
-
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: SignupComponent},
   {path: 'registro/granjero', component: SignupFarmerComponent},
   {path: 'registro/asesor', component: SignupAdvisorComponent},
-  {path: 'granjero/mi-granja', component: MyFarmViewComponent},
-  {path: 'granjero/mi-granja/recursos', component: MyFarmResourceManagementComponent},
-  {path: 'granjero/mi-granja/recursos/editar/:id', component: EditResourceComponent},
-  {path: 'granjero/mi-granja/gastos', component: MyFarmExpensesManagementComponent},
-  {path: 'granjero/mi-granja/gastos/editar/:id', component: EditExpenseComponent},
-  {path: 'granjero/buscar-asesor', component: ViewAdvisorsSearchComponent},
-  {path: 'granjero/mis-asesores', component: ViewMyAdvisorsComponent},
+  {path: 'granjero/asesores', component: ViewAdvisorsSearchComponent},
+  {path: 'granjero/citas', component: ViewMyAdvisorsComponent},
   {path: 'granjero/asesor-info/:id', component: ViewAdvisorAboutusComponent},
   {path: 'granjero/asesor-info/:id/reservar-cita', component: ViewReserveAppointmentComponent},
   {path: 'granjero/mis-asesores/:id', component: ReviewComponent},
-  {path: 'granjero/mis-animales', component: CageListComponent},
-  {path: 'granjero/mis-animales/:id', component: AnimalListComponent},
-  {path: 'granjero/mis-animales/:cageid/informacion/:id', component: AnimalInformationComponent},
-  {path: 'granjero/mis-animales/editar/:id', component: CageEditorComponent},
-  {path: 'granjero/registro/jaula', component: RegisterCageComponent},
-  {path: 'granjero/registro/gasto', component: RegisterExpensesComponent},
-  {path: 'granjero/mis-animales/:cageid/registro-animal', component: RegisterCuyComponent},
-  {path: 'granjero/registro/recurso', component: RegisterResourcesComponent},
   {path: 'granjero/publicaciones', component: PublicationsViewComponent},
   {path: 'granjero/notificaciones', component: NotificationsViewComponent},
   {path: 'asesor/clientes', component: ClientsViewComponent },
@@ -73,8 +41,6 @@ export const routes: Routes = [
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent},
   {path: 'asesor/notificaciones', component: NotificationsViewComponent},
-  {path: 'granjero/calendario', component: CalendarComponent},
-  {path: 'asesor/calendario', component: CalendarComponent},
   {path: 'asesor/horarios', component: ListAvailabilityScheduleComponent},
   {path: 'asesor/horarios/agregar', component: AddAvailabilityScheduleComponent}
 ];

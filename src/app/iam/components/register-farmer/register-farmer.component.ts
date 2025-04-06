@@ -15,10 +15,11 @@ import { UserApiService } from "../../../user/services/user-api.service";
 import { FarmerApiService } from "../../../user/services/farmer-api.service";
 import { AuthenticationApiService } from "../../services/authentication-api.service";
 
-import {Profile} from "../../../user/models/profile.model";
-import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {Profile} from "../../../profile/models/profile.model";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
 import {MatIcon} from "@angular/material/icon";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'register-farmer',
@@ -41,7 +42,8 @@ import {MatIcon} from "@angular/material/icon";
     MatSuffix,
     NgIf,
     ReactiveFormsModule,
-    MatIcon
+    MatIcon,
+    MatProgressSpinner
   ],
   templateUrl: './register-farmer.component.html',
   styleUrl: './register-farmer.component.css',
@@ -69,6 +71,7 @@ export class RegisterFarmerComponent {
   photo: any;
   selectedFileName = '';
   uploaded = false;
+  isUploading = false;
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
@@ -86,38 +89,36 @@ export class RegisterFarmerComponent {
 
   uploadImage(event: any) {
     if (event.target.files && event.target.files.length > 0) {
+      this.isUploading = true;
       const file = event.target.files[0];
       this.selectedFileName = file.name;
       console.log(file);
       let reader= new FileReader();
-      let name = "PROFILEPHOTO_IMAGE_" + Date.now();
+      let name = "FARMERPROFILEPHOTO_IMAGE_" + Date.now();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         console.log(reader.result);
         this.storageService.uploadFile(name, reader.result).then((url) => {
           console.log(url);
           this.photo = url;
+          this.isUploading = false;
           this.uploaded = true;
-        });
+        }).catch(() => {
+          this.isUploading = false;
+          this.snackBar.open('Error al subir la foto de perfil😓', 'Cerrar', {
+            duration: 2000
+          });
+          return;
+        })
       }
     }
   }
 
   async onSubmit() {
-    if (this.selectedFileName === '') {
-      this.snackBar.open('Debe seleccionar una foto de perfil 📷', 'Cerrar', {
-        duration: 2000
-      });
-      return;
-    }
-    if (this.photo == null) {
-      this.snackBar.open('Error al subir la foto de perfil😓', 'Cerrar', {
-        duration: 2000
-      });
-      return;
-    }
-
     try {
+      if (!this.registerForm.valid) {
+        return;
+      }
       const signUpResponse = await this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_FARMER').toPromise();
       const signInResponse = await this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password).toPromise();
       const userId = signInResponse['id'];
@@ -127,11 +128,10 @@ export class RegisterFarmerComponent {
       await this.createProfile(userId);
 
       this.router.navigateByUrl('/granjero/mi-granja');
-      this.snackBar.open('Bienvenido ' + this.registerForm.value.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
+      this.snackBar.open('Bienvenid@ ' + this.registerForm.value.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
     } catch (error) {
       this.snackBar.open('Error al registrar el granjero😥', 'Cerrar', {duration: 5000});
     }
-
   }
 
   async createProfile(userId: number) {
@@ -161,6 +161,7 @@ export class RegisterFarmerComponent {
   }
 
   goBack() {
+    this.registerForm.reset();
     window.history.back();
   }
 

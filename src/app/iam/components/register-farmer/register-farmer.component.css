@@ -67,6 +67,19 @@ button:enabled{
   cursor: pointer;
 }
 
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.submit-button:enabled {
+  background-color: #7ec346;
+  color: #FFFFFF
+}
+
+
 @media (max-width: 850px) {
   .container mat-card {
     width: 80%;

@@ -13,6 +13,7 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthenticationApiService} from "../../services/authentication-api.service";
 import {MatDrawer} from "@angular/material/sidenav";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 
 @Component({
   selector: 'app-login',
@@ -38,8 +39,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private userApiService: UserApiService,
               private authenticationApiService: AuthenticationApiService,
-              private breederApiService: FarmerApiService,
+              private farmerApiService: FarmerApiService,
               private advisorApiService: AdvisorApiService,
+              private profileApiService: ProfileApiService,
               private router: Router,
               private formBuilder: FormBuilder,
               private snackBar: MatSnackBar) {}
@@ -52,9 +54,9 @@ export class LoginComponent implements OnInit {
 
     if (this.userApiService.isLogged()) {
       if (this.userApiService.getIsFarmer()) {
-        this.router.navigateByUrl('/granjero/mi-granja');
+        this.router.navigateByUrl('/granjero/citas');
       } else {
-        this.router.navigateByUrl('/asesor/clientes');
+        this.router.navigateByUrl('/asesor/citas');
       }
     }
   }
@@ -72,30 +74,29 @@ export class LoginComponent implements OnInit {
         let userId = response['id'];
         this.userApiService.setUserId(userId);
         this.userApiService.setLogged(true);
-        this.breederApiService.getAll().subscribe((data) => {
-          const breeder = data.find(breeder => breeder.userId === userId);
-          if (breeder) {
-            this.userApiService.setIsFarmer(true);
-            this.breederApiService.setFarmerId(breeder.id);
-            this.router.navigateByUrl('/granjero/mi-granja');
-            this.snackBar.open('Bievenido ' + breeder.id + ' 🤗', 'Cerrar', {
-              duration: 2000
-            });
-          } else {
-            this.advisorApiService.getAll().subscribe((data) => {
-              const advisor = data.find(advisor => advisor.userId === userId);
-              if (advisor) {
-                this.userApiService.setIsFarmer(false);
-                this.advisorApiService.setAdvisorId(advisor.id);
-                this.router.navigateByUrl('/asesor/clientes');
-                this.snackBar.open('Bievenido ' + advisor.id + ' 🤗', 'Cerrar', {
-                  duration: 2000
-                });
-              }
-            });
-          }
 
-        });
+        this.profileApiService.getProfileByUserId(userId).subscribe((profile) => {
+          if (profile.experience === 0) {
+            this.userApiService.setIsFarmer(true);
+
+            this.farmerApiService.getFarmerByUserId(userId).subscribe((farmer) => {
+              this.farmerApiService.setFarmerId(farmer.id);
+            });
+
+            this.router.navigateByUrl('/granjero/citas');
+          }
+          else {
+            this.userApiService.setIsFarmer(false);
+
+            this.advisorApiService.getAdvisorByUserId(userId).subscribe((advisor) => {
+              this.advisorApiService.setAdvisorId(advisor.id);
+            });
+
+            this.router.navigateByUrl('/asesor/clientes');
+          }
+          this.snackBar.open('Bienvenid@ ' + profile.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
+
+        })
 
       }, error => {
         this.snackBar.open('Error. Credenciales no encontradas😥', 'Cerrar', {

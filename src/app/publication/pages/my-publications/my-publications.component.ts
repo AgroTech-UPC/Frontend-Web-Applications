@@ -36,9 +36,7 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   getPublications() {
-    this.advisorService.getPublicationsByAdvisorId(this.advisorId).subscribe((publications) => {
-      this.publications = publications;
-    });
+    /** TO DO **/
   }
 
   goToCreatePublication() {

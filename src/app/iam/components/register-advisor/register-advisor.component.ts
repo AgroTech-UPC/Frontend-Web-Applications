@@ -19,8 +19,9 @@ import {Advisor} from "../../../user/models/advisor.model";
 import {AuthenticationApiService} from "../../services/authentication-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
 import {MatIcon} from "@angular/material/icon";
-import {Profile} from "../../../user/models/profile.model";
-import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {Profile} from "../../../profile/models/profile.model";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @Component({
   selector: 'register-advisor',
@@ -45,7 +46,8 @@ import {ProfileApiService} from "../../../user/services/profile-api.service";
     MatSuffix,
     NgIf,
     ReactiveFormsModule,
-    MatIcon
+    MatIcon,
+    MatProgressSpinner
   ],
   templateUrl: './register-advisor.component.html',
   styleUrl: './register-advisor.component.css',
@@ -72,6 +74,8 @@ export class RegisterAdvisorComponent {
   maxDate: Date;
   photo: any;
   selectedFileName = '';
+  uploaded = false;
+  isUploading = false;
 
   constructor(private dateAdapter: DateAdapter<Date>,
               private router: Router,
@@ -89,97 +93,80 @@ export class RegisterAdvisorComponent {
 
   uploadImage(event: any) {
     if (event.target.files && event.target.files.length > 0) {
+      this.isUploading = true;
       const file = event.target.files[0];
       this.selectedFileName = file.name;
       console.log(file);
       let reader= new FileReader();
-      let name = "PROFILEPHOTO_IMAGE_" + Date.now();
+      let name = "ADVISORPROFILEPHOTO_IMAGE_" + Date.now();
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         console.log(reader.result);
         this.storageService.uploadFile(name, reader.result).then((url) => {
           console.log(url);
           this.photo = url;
-        });
+          this.isUploading = false;
+          this.uploaded = true;
+        }).catch(() => {
+          this.isUploading = false;
+          this.snackBar.open('Error al subir la foto de perfil😓', 'Cerrar', {
+            duration: 2000
+          });
+          return;
+        })
       }
     }
   }
 
-  onSubmit() {
-    if (this.selectedFileName === '') {
-      this.snackBar.open('Debe seleccionar una foto de perfil 📷', 'Cerrar', {
-        duration: 2000
-      });
-      return;
+  async onSubmit() {
+    try {
+      if (!this.registerForm.valid) {
+        return;
+      }
+      const signUpResponse = await this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR').toPromise();
+      const signInResponse = await this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password).toPromise();
+      const userId = signInResponse['id'];
+      this.userApiService.setUserId(userId);
+      this.userApiService.setLogged(true);
+
+      await this.createProfile(userId);
+
+      this.router.navigateByUrl('/asesor/clientes');
+      this.snackBar.open('Bienvenid@ ' + this.registerForm.value.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
+    } catch (error) {
+      this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {duration: 5000});
     }
-    if (this.photo == null) {
-      this.snackBar.open('Error al subir la foto de perfil😓', 'Cerrar', {
-        duration: 2000
-      });
-      return;
+  }
+
+
+  async createProfile(userId: number) {
+    const birthDate: Date = this.registerForm.value.birthDate;
+    const birthDateString = birthDate.toISOString().split('T')[0];
+    const profile: Profile = {
+      id: 0,
+      userId: userId,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      city: this.registerForm.value.city,
+      country: this.registerForm.value.country,
+      birthDate: birthDateString,
+      description: this.registerForm.value.description,
+      photo: this.photo,
+      occupation: this.registerForm.value.occupation,
+      experience: this.registerForm.value.experience
+    };
+    try {
+      const response = await this.profileApiService.create(profile).toPromise();
+      this.userApiService.setIsFarmer(false);
+      this.advisorApiService.setAdvisorId(response?.id || 0);
+    } catch (error) {
+      this.snackBar.open('Error al crear el perfil😥', 'Cerrar', { duration: 5000 });
+      throw error;
     }
-    this.authenticationApiService.signUp(this.registerForm.value.email, this.registerForm.value.password, 'ROLE_ADVISOR')
-      .subscribe((data: any) => {
-        // Iniciar sesión automáticamente para obtener el token del usuario
-        this.authenticationApiService.signIn(this.registerForm.value.email, this.registerForm.value.password)
-          .subscribe((response: any) => {
-            let userId = response['id'];
-            this.userApiService.setUserId(userId);
-            this.userApiService.setLogged(true);
-
-            // Crear un nuevo asesor
-            const birthDate: Date = this.registerForm.value.birthDate;
-            const birthDateString = birthDate.toISOString().split('T')[0];
-            let advisor: Advisor = {
-              id: 0,
-              rating: 0,
-              userId: userId
-            };
-            this.advisorApiService.create(advisor).subscribe(
-              (response) => {
-
-                // Crear el perfil del asesor
-                let profile: Profile = {
-                  id: 0,
-                  userId: userId,
-                  firstName: this.registerForm.value.firstName,
-                  lastName: this.registerForm.value.lastName,
-                  city: this.registerForm.value.city,
-                  country: this.registerForm.value.country,
-                  birthDate: birthDateString,
-                  description: this.registerForm.value.description,
-                  photo: this.photo,
-                  occupation: this.registerForm.value.occupation,
-                  experience: this.registerForm.value.experience
-                };
-
-                this.profileApiService.create(profile).subscribe(
-                  (response) => {
-                    this.userApiService.setIsFarmer(false);
-                    this.advisorApiService.setAdvisorId(response.id);
-                    this.router.navigateByUrl('/asesor/clientes');
-                    this.snackBar.open('Bievenido ' + profile.firstName + ' 🤗', 'Cerrar', {
-                      duration: 2000
-                    });
-                  }
-                )
-              },
-              error => {
-                this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {
-                  duration: 5000,
-                });
-                console.error(error);
-              }
-            );
-          }, error => {
-            this.snackBar.open('Error al iniciar sesión😥', 'Cerrar', {
-              duration: 3000
-            });
-          });
-      });
   }
 
   goBack() {
+    this.registerForm.reset();
     window.history.back();
   }
 }

@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 
-//Import the breeder model
 import {Advisor} from "../models/advisor.model";
 import {BaseService} from "../../shared/services/base.service";
 import {catchError} from "rxjs";
-import {Publication} from "../../publication/models/publication.model";
-import {AvailableDate} from "../../appointment/models/available_date.model";
-import {Appointment} from "../../appointment/models/appointment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -34,18 +30,11 @@ export class AdvisorApiService extends  BaseService<Advisor>{
     return 0;
   }
 
-  getAppointmentsByAdvisorId(advisorId: number) {
+  getAdvisorByUserId(userId: number) {
     this.setToken();
-    return this.http.get<Appointment[]>(this.buildPath() + '/' + advisorId + '/appointments', this.httpOptions).pipe(catchError(this.handleError));
+    return this.http.get<Advisor>(`${this.buildPath()}/${userId}/user`, this.httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getPublicationsByAdvisorId(advisorId: number) {
-    this.setToken();
-    return this.http.get<Publication[]>(this.buildPath() + '/' + advisorId + '/publications', this.httpOptions).pipe(catchError(this.handleError));
-  }
-
-  getAvailableDatesByAdvisorId(advisorId: number) {
-    this.setToken();
-    return this.http.get<AvailableDate[]>(this.buildPath() + '/' + advisorId + '/available-dates', this.httpOptions).pipe(catchError(this.handleError));
-  }
 }

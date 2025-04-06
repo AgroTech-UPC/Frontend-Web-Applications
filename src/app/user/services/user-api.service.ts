@@ -5,8 +5,6 @@ import {HttpClient} from "@angular/common/http";
 //Import the user model
 import {User} from "../models/user.model";
 import {BaseService} from "../../shared/services/base.service";
-import {Notification} from "../../appointment/models/notification.model";
-import {catchError, Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +28,12 @@ export class UserApiService extends  BaseService<User>{
       return logged === 'true';
     }
     return false;
+  }
+
+  logOut() {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.clear();
+    }
   }
 
   setIsFarmer(isFarmer: boolean) {

@@ -14,7 +14,7 @@ import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
 import {MatCardModule} from "@angular/material/card";
-import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 
 @Component({
   selector: 'app-review',

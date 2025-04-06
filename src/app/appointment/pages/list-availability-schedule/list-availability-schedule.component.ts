@@ -47,33 +47,7 @@ export class ListAvailabilityScheduleComponent implements OnInit{
 
 
   getAvailableDates() {
-    this.advisorApiService.getAvailableDatesByAdvisorId(this.advisor_id).subscribe((availableDates: AvailableDate[]) => {
-      availableDates.forEach((availableDate: AvailableDate) => {
-        if (availableDate.status) {
-          const dateParts = availableDate.date.split('-');
-          const formattedDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
-
-          // Split the time strings into [hours, minutes, seconds]
-          const startTimeParts = availableDate.startTime.split(':');
-          const endTimeParts = availableDate.endTime.split(':');
-
-          // Get the hours and minutes parts
-          const startTime = `${startTimeParts[0]}:${startTimeParts[1]}`;
-          const endTime = `${endTimeParts[0]}:${endTimeParts[1]}`;
-
-          this.results.push({
-            id: availableDate.id,
-            date: formattedDate,
-            startTime: startTime,
-            endTime: endTime,
-            advisorId: availableDate.advisorId,
-            status: availableDate.status
-          });
-        }
-      });
-    }, (error) => {
-      console.error(error);
-    });
+    /** TO DO **/
   }
 
   confirmDeletion(): Observable<boolean> {

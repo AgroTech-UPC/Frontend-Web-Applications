@@ -71,11 +71,14 @@
             <mat-icon>image</mat-icon>
             Subir foto de perfil
           </label>
+          <div *ngIf="isUploading" class="loading-spinner">
+            <mat-spinner></mat-spinner>
+          </div>
           <span *ngIf="selectedFileName" id="imageName">{{ selectedFileName }}</span>
         </div>
         <div class="buttons">
           <button mat-flat-button style="background-color: #e19669; color: #FFFFFF" (click)="goBack()">Cancelar</button>
-          <button mat-flat-button style="background-color: #7ec346; color: #FFFFFF" type="submit" [disabled]="!registerForm.valid && !uploaded">Registrar</button>
+          <button mat-flat-button class="submit-button" color="primary" type="submit" [disabled]="!registerForm.valid || isUploading || !uploaded">Registrar</button>
         </div>
       </form>
     </mat-card-content>

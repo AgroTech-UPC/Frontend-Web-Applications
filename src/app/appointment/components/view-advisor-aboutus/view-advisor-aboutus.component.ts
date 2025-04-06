@@ -16,7 +16,7 @@ import {Review} from "../../models/review.model";
 import {UserApiService} from "../../../user/services/user-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
-import {ProfileApiService} from "../../../user/services/profile-api.service";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 
 @Component({
   selector: 'app-view-advisor-aboutus',

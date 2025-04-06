@@ -8,7 +8,6 @@ import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {AppointmentApiService} from "../../services/appointment-api.service";
 import {Appointment} from "../../models/appointment.model";
 import {Client} from "../../models/client.model";
-import {CageApiService} from "../../../management/services/cage-api.service";
 
 @Component({
   selector: 'app-client-detail',
@@ -44,7 +43,6 @@ export class ClientDetailComponent implements OnInit{
 
   constructor(private breederService: FarmerApiService,
               private appointmentService: AppointmentApiService,
-              private cageService: CageApiService,
               private activatedRouter: ActivatedRoute) {}
 
   ngOnInit() {
@@ -55,17 +53,6 @@ export class ClientDetailComponent implements OnInit{
   getClient(breederId: number) {
     this.breederService.getOne(breederId).subscribe((breeder: Farmer) => {
       this.breeder = breeder;
-        this.cageService.getAll().subscribe(cages => {
-          this.client = {
-            id: breederId,
-            appointmentId: this.appointmentId,
-            appointmentStatus: this.appointment.status,
-            fullname: 'breeder.fullname',
-            location: 'breeder.id',
-            cages: cages.filter(cage => cage.farmerId === breederId).length,
-            description: 'breeder.description'
-          }
-        });
     });
   }
 

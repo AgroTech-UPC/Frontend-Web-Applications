@@ -40,7 +40,7 @@ button:enabled{
 .title {
   margin: 5px;
   text-align: center;
-  color: #DD763D;
+  color: #092C4C;
   font-weight: bold;
   font-size: x-large;
 }
@@ -58,7 +58,7 @@ button:enabled{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #DB6E36;
+  background-color: #092C4C;
   color: #FFFFFF;
   padding: 15px;
   border-radius: 35px;
@@ -68,6 +68,10 @@ button:enabled{
   cursor: pointer;
 }
 
+.submit-button:enabled {
+  background-color: #7ec346;
+  color: #FFFFFF
+}
 
 @media (max-width: 850px) {
   .container mat-card {
