@@ -65,7 +65,7 @@
           <mat-label>Descripción (cuéntanos un poco sobre ti)</mat-label>
           <textarea matInput placeholder="e.g.: ¡Me encantan los animales!" formControlName="description"></textarea>
         </mat-form-field>
-        <div>
+        <div class="image-section">
           <input id="uploadImage" hidden (change)="uploadImage($event)" type="file" accept=".png, .jpg, .jpeg">
           <label id="imageButton" for="uploadImage">
             <mat-icon>image</mat-icon>
@@ -74,7 +74,9 @@
           <div *ngIf="isUploading" class="loading-spinner">
             <mat-spinner></mat-spinner>
           </div>
-          <span *ngIf="selectedFileName" id="imageName">{{ selectedFileName }}</span>
+          <div *ngIf="photo && uploaded && !isUploading">
+            <img [src]="photo" alt="Imagen subida" class="profile-image">
+          </div>
         </div>
         <div class="buttons">
           <button mat-flat-button style="background-color: #e19669; color: #FFFFFF" (click)="goBack()">Cancelar</button>

@@ -40,7 +40,7 @@ button:enabled{
 .title {
   margin: 5px;
   text-align: center;
-  color: #092C4C;
+  color: #27AE60;
   font-weight: bold;
   font-size: x-large;
 }
@@ -58,7 +58,7 @@ button:enabled{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #092C4C;
+  background-color: #3E64FF;
   color: #FFFFFF;
   padding: 15px;
   border-radius: 35px;
@@ -66,10 +66,22 @@ button:enabled{
   align-content: center;
   width: 50%;
   cursor: pointer;
+  margin: 10px;
+}
+
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-image {
+  width: 100px;
+  height: auto;
 }
 
 .submit-button:enabled {
-  background-color: #7ec346;
+  background-color: #092C4C;
   color: #FFFFFF
 }
 

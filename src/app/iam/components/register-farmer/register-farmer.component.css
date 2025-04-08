@@ -57,7 +57,7 @@ button:enabled{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #DB6E36;
+  background-color: #3E64FF;
   color: #FFFFFF;
   padding: 15px;
   border-radius: 35px;
@@ -65,6 +65,13 @@ button:enabled{
   align-content: center;
   width: 50%;
   cursor: pointer;
+  margin: 10px;
+}
+
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loading-spinner {
@@ -75,10 +82,14 @@ button:enabled{
 }
 
 .submit-button:enabled {
-  background-color: #7ec346;
+  background-color: #092C4C;
   color: #FFFFFF
 }
 
+.profile-image {
+  width: 100px;
+  height: auto;
+}
 
 @media (max-width: 850px) {
   .container mat-card {
