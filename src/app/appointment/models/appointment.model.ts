@@ -2,6 +2,10 @@ export interface Appointment {
   id: number;
   advisorId: number;
   farmerId: number;
-  date: any;
-  status: any;
+  message: string;
+  status: string;
+  scheduledDate: string;
+  startTime: string;
+  endTime: string;
+  meetingUrl: string;
 }

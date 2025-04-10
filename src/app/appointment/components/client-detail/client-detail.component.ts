@@ -26,8 +26,12 @@ export class ClientDetailComponent implements OnInit{
     id: 0,
     advisorId: 0,
     farmerId: 0,
-    date: '',
+    scheduledDate: '',
     status: '',
+    startTime: '',
+    endTime: '',
+    meetingUrl: '',
+    message: ''
   }
 
   client: Client = {

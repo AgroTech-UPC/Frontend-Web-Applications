@@ -92,7 +92,7 @@ export class LoginComponent implements OnInit {
               this.advisorApiService.setAdvisorId(advisor.id);
             });
 
-            this.router.navigateByUrl('/asesor/clientes');
+            this.router.navigateByUrl('/asesor/citas');
           }
           this.snackBar.open('Bienvenid@ ' + profile.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
 

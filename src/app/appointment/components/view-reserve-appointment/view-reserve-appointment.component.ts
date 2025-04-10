@@ -96,13 +96,17 @@ export class ViewReserveAppointmentComponent implements OnInit {
     }
 
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
-    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.startTime}`);
+    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.startTime}`).toDateString();
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisorId: this.advisor.id,
       farmerId: this.breeder.id,
-      date: appointmentDate,
-      status: "PENDIENTE" // TERMINADO, PENDIENTE
+      scheduledDate: appointmentDate,
+      status: "PENDIENTE", // TERMINADO, PENDIENTE
+      message: '',
+      startTime: selectedDate.startTime,
+      endTime: selectedDate.endTime,
+      meetingUrl: ''
   };
 
     this.appointmentApiService.create(newAppointment).subscribe(() => {

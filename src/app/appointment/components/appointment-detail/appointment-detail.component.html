@@ -1,0 +1,33 @@
+<main>
+  <div class="buttons">
+    <button mat-icon-button  (click)="goBack()">
+      <mat-icon class="icon">arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="info-container">
+    <div class="advisor-info" style="text-align: center; justify-content: center; align-items: center;">
+      <img src="{{profileInfo.photo}}" alt="Foto de perfil" class="advisor-photo">
+      <h2>{{profileInfo.fullname}}</h2>
+      <h3>{{formatDate(appointment.scheduledDate)}} <br/> {{appointment.startTime}} - {{appointment.endTime}}</h3>
+    </div>
+    <div class="appointment-info">
+      <h2>Link de videoconferencia</h2>
+      <div class="container-border">
+        <a href="{{appointment.meetingUrl}}" target="_blank" class="link">{{appointment.meetingUrl}}</a>
+      </div>
+      <div *ngIf="isFarmer">
+        <h2>Comentario brindado por ti</h2>
+      </div>
+      <div *ngIf="!isFarmer">
+        <h2>Comentario brindado por el granjero</h2>
+      </div>
+      <div class="container-border">
+        <p>{{appointment.message}}</p>
+      </div>
+      <button mat-flat-button class="cancel-button" color="warn">Cancelar cita</button>
+    </div>
+  </div>
+
+</main>
+
+

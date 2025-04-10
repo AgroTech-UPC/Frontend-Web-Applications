@@ -131,7 +131,7 @@ export class RegisterAdvisorComponent {
 
       await this.createProfile(userId);
 
-      this.router.navigateByUrl('/asesor/clientes');
+      this.router.navigateByUrl('/asesor/citas');
       this.snackBar.open('Bienvenid@ ' + this.registerForm.value.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
     } catch (error) {
       this.snackBar.open('Error al registrar el asesor😥', 'Cerrar', {duration: 5000});
@@ -158,7 +158,9 @@ export class RegisterAdvisorComponent {
     try {
       const response = await this.profileApiService.create(profile).toPromise();
       this.userApiService.setIsFarmer(false);
-      this.advisorApiService.setAdvisorId(response?.id || 0);
+      this.advisorApiService.getAdvisorByUserId(response?.userId ?? 0).subscribe((advisor: Advisor) => {
+        this.advisorApiService.setAdvisorId(advisor.id);
+      });
     } catch (error) {
       this.snackBar.open('Error al crear el perfil😥', 'Cerrar', { duration: 5000 });
       throw error;

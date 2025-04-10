@@ -20,6 +20,7 @@ import {ProfileApiService} from "../../../profile/services/profile-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
 import {MatIcon} from "@angular/material/icon";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {Farmer} from "../../../user/models/farmer.model";
 
 @Component({
   selector: 'register-farmer',
@@ -153,7 +154,9 @@ export class RegisterFarmerComponent {
     try {
       const response = await this.profileApiService.create(profile).toPromise();
       this.userApiService.setIsFarmer(true);
-      this.farmerApiService.setFarmerId(response?.id || 0);
+      this.farmerApiService.getFarmerByUserId(response?.userId ?? 0).subscribe((farmer: Farmer) => {
+        this.farmerApiService.setFarmerId(farmer.id);
+      });
     } catch (error) {
       this.snackBar.open('Error al crear el perfil😥', 'Cerrar', { duration: 5000 });
       throw error;
