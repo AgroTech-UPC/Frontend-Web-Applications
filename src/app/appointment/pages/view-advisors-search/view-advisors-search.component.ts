@@ -6,11 +6,14 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
+import {MatIcon} from "@angular/material/icon";
 import {NgForOf} from "@angular/common";
 
 import {Advisor} from "../../../user/models/advisor.model";
+import {Profile} from "../../../profile/models/profile.model";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
-import {UserApiService} from "../../../user/services/user-api.service";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
+import {forEach} from "lodash";
 
 
 @Component({
@@ -18,17 +21,17 @@ import {UserApiService} from "../../../user/services/user-api.service";
   standalone: true,
   imports: [
     MatCardModule, MatToolbarModule, MatFormFieldModule,
-    MatButtonModule, MatInputModule, NgForOf
+    MatButtonModule, MatInputModule, NgForOf, MatIcon
   ],
   templateUrl: './view-advisors-search.component.html',
   styleUrl: './view-advisors-search.component.css'
 })
 export class ViewAdvisorsSearchComponent implements OnInit{
+  profiles: Profile[] = [];
   advisors: Advisor[] = [];
-  advisorDetails: any = {};
   constructor(
     private advisorApiService: AdvisorApiService,
-    private userApiService: UserApiService,
+    private profileApiService: ProfileApiService,
     private router: Router
   ) { }
 
@@ -37,13 +40,12 @@ export class ViewAdvisorsSearchComponent implements OnInit{
   }
 
   getAdvisors(){
-    this.advisorApiService.getAll().subscribe(advisors => {
-      this.advisors = advisors;
-      this.advisors.forEach(advisor => {
-        this.advisorDetails[advisor.userId] = {
-          fullname: 'advisor.fullname',
-          location: 'advisor.location'
-        };
+    this.profileApiService.getAdvisors().subscribe(profiles => {
+      this.profiles = profiles;
+      forEach(this.profiles, (profile: Profile) => {
+        this.advisorApiService.getAdvisorByUserId(profile.userId).subscribe(advisor => {
+          this.advisors[profile.userId] = advisor;
+        });
       });
     });
   }
@@ -55,9 +57,9 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     if (filteredValue === '') {
       this.getAdvisors();
     } else {
-      this.advisorApiService.getAll().subscribe(res => {
-          this.advisors = res.filter(advisor =>
-            this.advisorDetails[advisor.userId]?.fullname.toLowerCase().startsWith(filteredValue.toLowerCase())
+      this.profileApiService.getAdvisors().subscribe(res => {
+          this.profiles = res.filter(profile =>
+            (profile.firstName + ' ' + profile.lastName).toLowerCase().startsWith(filteredValue.toLowerCase())
           );
         },
         error => {
@@ -66,13 +68,7 @@ export class ViewAdvisorsSearchComponent implements OnInit{
     }
   }
 
-  navigateToAdvisorsSearch() {
-    this.router.navigate([`granjero/buscar-asesor`]);
-  }
-  navigateToMyAdvisors() {
-    this.router.navigate([`granjero/mis-asesores`]);
-  }
-  navigateToAdvisorInfo(id_asesor: number) {
-    this.router.navigate([`granjero/asesor-info/${id_asesor}`]);
+  navigateToAdvisorInfo(advisorId: number) {
+    this.router.navigate([`granjero/asesor-info/${advisorId}`]);
   }
 }

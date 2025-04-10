@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {Review} from "../../models/review.model";
@@ -15,104 +15,92 @@ import {AppointmentApiService} from "../../services/appointment-api.service";
 import {ReviewApiService} from "../../services/review-api.service";
 import {MatCardModule} from "@angular/material/card";
 import {ProfileApiService} from "../../../profile/services/profile-api.service";
+import {FarmerApiService} from "../../../user/services/farmer-api.service";
+import {UserApiService} from "../../../user/services/user-api.service";
 
 @Component({
   selector: 'app-review',
   standalone: true,
   imports: [
     FormsModule, MatButton, MatFormField, MatInput, MatLabel,
-    ReactiveFormsModule, MatIcon, NgForOf, NgIf, MatCardModule,
+    ReactiveFormsModule, MatIcon, NgForOf, NgIf, MatCardModule, MatIconButton,
   ],
   templateUrl: './review.component.html',
   styleUrl: './review.component.css'
 })
 export class ReviewComponent implements OnInit {
-  isConfirmed: boolean = false;
-  advisor!: Advisor;
-  advisorDetails: any = {
+  profileDetails: any = {
     fullname: "",
-    location: "",
     photo: ""
   };
-  appointment!: Appointment;
-
   rating: number = 0;
   stars: boolean[] = Array(5).fill(false);
-
+  isFarmer: boolean = false;
   review: Review = {
     id: 0,
-    appointmentId: 0,
+    farmerId: 0,
+    advisorId: 0,
     comment: "",
     rating: 0
   }
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private advisorService: AdvisorApiService,
-    private profileService: ProfileApiService,
-    private appointmentService: AppointmentApiService,
-    private reviewService: ReviewApiService,
+    private userApiService: UserApiService,
+    private farmerApiService: FarmerApiService,
+    private advisorApiService: AdvisorApiService,
+    private profileApiService: ProfileApiService,
+    private reviewApiService: ReviewApiService,
     private router: Router
-    ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.review.appointmentId = params['id'];
-
-      const appointmentId = params['id'];
-      this.getAppointment(appointmentId);
+      this.review.id = params['id'];
+      this.isFarmer = this.userApiService.getIsFarmer();
+      this.getReview();
     });
   }
 
-  getAppointment(appointmentId: string): void {
-    this.appointmentService.getOne(appointmentId).subscribe(appointment => {
-      this.appointment = appointment;
-      this.getAdvisor();
+  getReview() {
+    this.reviewApiService.getOne(this.review.id).subscribe(review => {
+      this.review = review;
+      if (this.isFarmer)
+        this.getAdvisor(review.advisorId);
+      else
+        this.getFarmer(review.farmerId);
+      for (let i = 0; i < review.rating; i++) {
+        this.stars[i] = true;
+      }
     });
   }
 
-  getAdvisor(): void {
-    const advisorId = this.appointment.advisorId;
-    this.advisorService.getOne(advisorId).subscribe(advisor => {
-      this.advisor = advisor;
-      this.profileService.getProfileByUserId(this.advisor.userId).subscribe(profile => {
-        this.advisorDetails = {
+  getAdvisor(advisorId: number): void {
+    this.advisorApiService.getOne(advisorId).subscribe(advisor => {
+      this.profileApiService.getOne(advisor.userId).subscribe(profile => {
+        this.profileDetails = {
           fullname: `${profile.firstName} ${profile.lastName}`,
-          location: `${profile.city}, ${profile.country}`,
           photo: profile.photo
         };
-      })
-
+      });
     });
-
-  }
-  onSubmit() {
-    this.review.rating = this.rating;
-    this.review.appointmentId = this.appointment.id;
-    this.reviewService.create(this.review).subscribe();
-    this.appointment.status = "TERMINADO";
-    this.appointmentService.update(this.appointment.id, this.appointment).subscribe();
-    this.isConfirmed = true;
   }
 
-  goHome(){
-    this.isConfirmed = false;
-    this.router.navigate(['/granjero/mis-asesores']);
+  getFarmer(farmerId: number): void {
+    this.farmerApiService.getOne(farmerId).subscribe(farmer => {
+      this.profileApiService.getOne(farmer.userId).subscribe(profile => {
+        this.profileDetails = {
+          fullname: `${profile.firstName} ${profile.lastName}`,
+          photo: profile.photo
+        };
+      });
+    });
   }
-  onCancel(){
-    this.isConfirmed = false;
-    this.router.navigate(['/granjero/mis-asesores']);
 
+  goBack() {
+    window.history.back();
   }
 
-  // CALIFICACION POR ESTRELLAS
-  onStarClick(index: number): void {
-    this.rating = index + 1;
-    this.updateStars();
-  }
-  updateStars(): void {
-    this.stars.fill(false);
-    this.stars.fill(true, 0, this.rating);
-  }
 
 }

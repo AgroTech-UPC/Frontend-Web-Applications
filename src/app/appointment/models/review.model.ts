@@ -1,6 +1,7 @@
 export interface Review {
   id: number;
-  appointmentId: number;
-  comment: any;
+  advisorId: number;
+  farmerId: number;
+  comment: string;
   rating: number;
 }

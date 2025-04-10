@@ -65,9 +65,9 @@ export class MyAppointmentsComponent implements OnInit {
     // Get all appointments for the farmer
     if (this.isFarmer) {
       this.appointmentApiService.getAppointmentsByFarmerId(this.farmerId).subscribe(appointments => {
-        this.appointments = appointments;
-        forEach(this.appointments, (appointment) => {
+        forEach(appointments, (appointment) => {
           if (appointment.status === 'PENDING') {
+            this.appointments.push(appointment);
             this.advisorApiService.getOne(appointment.advisorId).subscribe(advisor => {
               this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
                 this.profileDetails[advisor.id] = {
@@ -83,9 +83,9 @@ export class MyAppointmentsComponent implements OnInit {
     else {
       // Get all appointments for the advisor
       this.appointmentApiService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
-        this.appointments = appointments;
-        forEach(this.appointments, (appointment) => {
+        forEach(appointments, (appointment) => {
           if (appointment.status === 'PENDING') {
+            this.appointments.push(appointment);
             this.farmerApiService.getOne(appointment.farmerId).subscribe(farmer => {
               this.profileApiService.getProfileByUserId(farmer.userId).subscribe(profile => {
                 this.profileDetails[farmer.id] = {
@@ -118,6 +118,13 @@ export class MyAppointmentsComponent implements OnInit {
       this.router.navigate([`/granjero/citas/${appointmentId}`]);
     else
       this.router.navigate([`/asesor/citas/${appointmentId}`]);
+  }
+
+  goToAppointmentHistory(): void {
+    if (this.isFarmer)
+      this.router.navigate([`/granjero/historial-citas`]);
+    else
+      this.router.navigate([`/asesor/historial-citas`]);
   }
 
   /**
