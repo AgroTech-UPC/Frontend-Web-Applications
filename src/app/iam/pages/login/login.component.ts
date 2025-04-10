@@ -81,18 +81,15 @@ export class LoginComponent implements OnInit {
 
             this.farmerApiService.getFarmerByUserId(userId).subscribe((farmer) => {
               this.farmerApiService.setFarmerId(farmer.id);
+              this.router.navigateByUrl('/granjero/citas');
             });
-
-            this.router.navigateByUrl('/granjero/citas');
           }
           else {
             this.userApiService.setIsFarmer(false);
-
             this.advisorApiService.getAdvisorByUserId(userId).subscribe((advisor) => {
               this.advisorApiService.setAdvisorId(advisor.id);
+              this.router.navigateByUrl('/asesor/citas');
             });
-
-            this.router.navigateByUrl('/asesor/citas');
           }
           this.snackBar.open('Bienvenid@ ' + profile.firstName + ' 🤗', 'Cerrar', { duration: 2000 });
 
