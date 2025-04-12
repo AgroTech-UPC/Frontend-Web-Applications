@@ -19,16 +19,16 @@ import {FarmerApiService} from "../../../user/services/farmer-api.service";
 import {UserApiService} from "../../../user/services/user-api.service";
 
 @Component({
-  selector: 'app-review',
+  selector: 'app-view-review',
   standalone: true,
   imports: [
     FormsModule, MatButton, MatFormField, MatInput, MatLabel,
     ReactiveFormsModule, MatIcon, NgForOf, NgIf, MatCardModule, MatIconButton,
   ],
-  templateUrl: './review.component.html',
-  styleUrl: './review.component.css'
+  templateUrl: './view-review.component.html',
+  styleUrl: './view-review.component.css'
 })
-export class ReviewComponent implements OnInit {
+export class ViewReviewComponent implements OnInit {
   profileDetails: any = {
     fullname: "",
     photo: ""
@@ -66,6 +66,8 @@ export class ReviewComponent implements OnInit {
   getReview() {
     this.reviewApiService.getOne(this.review.id).subscribe(review => {
       this.review = review;
+      if (review.comment === "")
+        this.review.comment = "Sin comentarios";
       if (this.isFarmer)
         this.getAdvisor(review.advisorId);
       else
@@ -96,6 +98,10 @@ export class ReviewComponent implements OnInit {
         };
       });
     });
+  }
+
+  goToEditReview() {
+    this.router.navigate([`/granjero/editar-resena/${this.review.id}`]);
   }
 
   goBack() {

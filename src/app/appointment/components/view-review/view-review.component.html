@@ -25,6 +25,11 @@
       <div class="container-border">
         <p>{{review.comment}}</p>
       </div>
+
+      <button *ngIf="isFarmer" mat-flat-button class="edit-button" color="primary" aria-label="editar" (click)="goToEditReview()">
+        <mat-icon>edit</mat-icon>
+        Editar reseña
+      </button>
     </div>
   </div>
 

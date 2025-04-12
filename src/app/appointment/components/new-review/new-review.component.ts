@@ -13,9 +13,10 @@ import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {NgForOf, NgIf} from "@angular/common";
 import {FarmerApiService} from "../../../user/services/farmer-api.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
-  selector: 'app-new-review',
+  selector: 'app-new-view-review',
   standalone: true,
   imports: [
     FormsModule,
@@ -74,7 +75,8 @@ export class NewReviewComponent implements OnInit {
     private advisorApiService: AdvisorApiService,
     private profileApiService: ProfileApiService,
     private reviewApiService: ReviewApiService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -104,14 +106,21 @@ export class NewReviewComponent implements OnInit {
       rating: this.rating,
       comment: this.comment
     };
-    this.reviewApiService.create(this.review).subscribe();
+    this.reviewApiService.create(this.review).subscribe(
+      () => {
+        this.snackBar.open('Reseña guardada exitosamente 😎', 'Cerrar', { duration: 2000 });
+        this.router.navigate(['granjero/citas']);
+      },
+      (error) => {
+        this.snackBar.open('Error al guardar reseña 😓', 'Cerrar', { duration: 2000 });
+        console.error('Error creating view-review:', error);
+      }
+    );
   }
 
   goBack() {
     window.history.back();
   }
-
-
 
   // CALIFICACION POR ESTRELLAS
   onStarClick(index: number): void {
