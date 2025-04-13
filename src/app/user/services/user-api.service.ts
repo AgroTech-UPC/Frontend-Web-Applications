@@ -63,5 +63,4 @@ export class UserApiService extends  BaseService<User>{
     }
     return 0;
   }
-
 }

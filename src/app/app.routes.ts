@@ -28,6 +28,7 @@ import {BookAppointmentComponent} from "./appointment/components/book-appointmen
 import {AdvisorPostsComponent} from "./post/pages/advisor-posts/advisor-posts.component";
 import {CreatePostComponent} from "./post/pages/create-post/create-post.component";
 import {PostDetailComponent} from "./post/pages/post-detail/post-detail.component";
+import {FarmerPostsComponent} from "./post/pages/farmer-posts/farmer-posts.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -47,7 +48,7 @@ export const routes: Routes = [
   {path: 'granjero/asesor-info/:id', component: AdvisorDetailComponent },
   {path: 'granjero/asesor-info/:id/reservar-cita', component: BookAppointmentComponent },
   {path: 'granjero/asesor-resenas/:id', component: ReviewsListComponent },
-  {path: 'granjero/publicaciones', component: PublicationsViewComponent },
+  {path: 'granjero/publicaciones', component: FarmerPostsComponent },
   {path: 'granjero/notificaciones', component: NotificationsViewComponent },
   {path: 'asesor/citas', component: MyAppointmentsComponent },
   {path: 'asesor/citas/:id', component: AppointmentDetailComponent },
