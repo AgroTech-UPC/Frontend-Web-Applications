@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {FarmerApiService} from "../../../user/services/farmer-api.service";
@@ -11,7 +11,13 @@ import {Advisor} from "../../../user/models/advisor.model";
 import {AvailableDate} from "../../models/available_date.model";
 import {Farmer} from "../../../user/models/farmer.model";
 import {Appointment} from "../../models/appointment.model";
-import {NgIf} from "@angular/common";
+import {CommonModule, NgIf} from "@angular/common";
+import {MatError, MatFormField} from "@angular/material/form-field";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {ProfileApiService} from "../../../profile/services/profile-api.service";
 
 @Component({
   selector: 'app-book-appointment',
@@ -19,22 +25,41 @@ import {NgIf} from "@angular/common";
   imports: [
     MatIcon,
     MatIconButton,
-    NgIf
+    NgIf,
+    MatFormField,
+    MatSelect,
+    MatOption,
+    MatButton,
+    MatLabel,
+    CommonModule,
+    MatInput,
+    MatError,
+    ReactiveFormsModule,
+    FormsModule
   ],
   templateUrl: './book-appointment.component.html',
   styleUrl: './book-appointment.component.css'
 })
 export class BookAppointmentComponent implements OnInit {
+  appointmentForm: FormGroup = new FormGroup(
+    {
+      message: new FormControl('', [Validators.required])
+    }
+  );
   availableDates: AvailableDate[] = [];
-  farmer!: Farmer;
   farmerId = 0;
   advisorId = 0;
   selectedDateIndex!: number;
+  profileInfo = {
+    fullname: '',
+    photo: ''
+  };
 
   constructor(
     private router: Router,
     private activatedRouter: ActivatedRoute,
     private advisorApiService: AdvisorApiService,
+    private profileApiService: ProfileApiService,
     private farmerApiService: FarmerApiService,
     private appointmentApiService: AppointmentApiService,
     private availableDateApiService: AvailableDateApiService,
@@ -49,22 +74,34 @@ export class BookAppointmentComponent implements OnInit {
 
   getAdvisor(): void {
     this.advisorId = this.activatedRouter.snapshot.params['id'];
+    this.advisorApiService.getOne(this.advisorId).subscribe((advisor) => {
+      this.profileApiService.getProfileByUserId(advisor.userId).subscribe((profile) => {
+        this.profileInfo.fullname = profile.firstName + ' ' + profile.lastName;
+        this.profileInfo.photo = profile.photo;
+      });
+    });
     this.getAdvisorAvailableDates(this.advisorId); //called after getting advisor
   }
 
   getAdvisorAvailableDates(advisorId: number) {
-    this.availableDateApiService.getAvailableDatesByAdvisorId(advisorId).subscribe(dates => {
-      this.availableDates = dates;
-      }, error => {
+    this.availableDateApiService.getAvailableDatesByAdvisorId(advisorId).subscribe({
+      next: dates => {
+      this.availableDates = dates.sort((a, b) => {
+        const dateA = new Date(a.availableDate).getTime();
+        const dateB = new Date(b.availableDate).getTime();
+        if (dateA === dateB) {
+          const timeA = new Date(`1970-01-01T${a.startTime}`).getTime();
+          const timeB = new Date(`1970-01-01T${b.startTime}`).getTime();
+          return timeA - timeB; // Sort by startTime if dates are equal
+        }
+        return dateA - dateB; // Ascending order
+      });
+      }, error: error => {
         console.log('Error fetching available dates:', error);
-    });
+    }});
   }
 
   createAppointment(): void {
-    if (this.selectedDateIndex === undefined || this.selectedDateIndex < 0 || this.selectedDateIndex >= this.availableDates.length) {
-      console.log('Índice de fecha seleccionada no válido');
-      return;
-    }
 
     let selectedDate = this.availableDates[this.selectedDateIndex];
     let newAppointment: Appointment = {
@@ -72,32 +109,31 @@ export class BookAppointmentComponent implements OnInit {
       advisorId: this.advisorId,
       farmerId: this.farmerId,
       scheduledDate: selectedDate.availableDate,
-      status: "PENDING", // TERMINADO, PENDIENTE
-      message: '',
+      status: "PENDING",
+      message: this.appointmentForm.value.message,
       startTime: selectedDate.startTime,
-      endTime: selectedDate.endTime,
-      meetingUrl: ''
+      endTime: selectedDate.endTime
     };
 
-    this.appointmentApiService.create(newAppointment).subscribe(() => {
-      this.availableDateApiService.delete(selectedDate.id,).subscribe(() => {
-        this.snackBar.open('Cita reservada🤩', 'Cerrar', {
+    this.appointmentApiService.create(newAppointment).subscribe({
+      next:
+      () => {
+      this.availableDateApiService.delete(selectedDate.id,).subscribe({
+        next: () => {
+          this.snackBar.open('Cita reservada🤩', 'Cerrar', {
           duration: 2000
-        });
-        this.router.navigate(['/granjero/citas']);
-      }, error => {
-        console.log('Error deleting available date:', error);
+          });
+          this.router.navigate(['/granjero/citas']);
+        }, error: error => {
+          console.log('Error deleting available date:', error);
+        }
       });
-    }, error => {
+    }, error: error => {
       this.snackBar.open('Error al reservar la cita😥', 'Cerrar', {
         duration: 2000
       });
       console.log('Error creating appointment:', error);
-    });
-  }
-
-  setSelectedDateIndex(index: number): void {
-    this.selectedDateIndex = index;
+    }});
   }
 
   goBack() {

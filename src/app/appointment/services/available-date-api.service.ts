@@ -19,6 +19,6 @@ export class AvailableDateApiService extends BaseService<AvailableDate>{
 
   getAvailableDatesByAdvisorId(advisorId: number): Observable<AvailableDate[]> {
     this.setToken();
-    return this.http.get<AvailableDate[]>(`${this.baseUrl}?advisorId=${advisorId}`).pipe(catchError(this.handleError));
+    return this.http.get<AvailableDate[]>(`${this.buildPath()}?advisorId=${advisorId}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 }

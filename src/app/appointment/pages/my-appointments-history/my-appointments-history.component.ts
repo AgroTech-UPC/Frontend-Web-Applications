@@ -63,38 +63,52 @@ export class MyAppointmentsHistoryComponent implements OnInit {
   getMyAppointments() {
     // Get all appointments for the farmer
     if (this.isFarmer) {
-      this.appointmentApiService.getAppointmentsByFarmerId(this.farmerId).subscribe(appointments => {
-        forEach(appointments, (appointment) => {
-          if (appointment.status === 'COMPLETED' || appointment.status === 'REVIEWED') {
-            this.appointments.push(appointment);
-            this.advisorApiService.getOne(appointment.advisorId).subscribe(advisor => {
-              this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
-                this.profileDetails[advisor.id] = {
-                  fullname: `${profile.firstName} ${profile.lastName}`,
-                  photo: profile.photo
-                };
-              });
-            })
-          }
-        });
+      this.appointmentApiService.getAppointmentsByFarmerId(this.farmerId).subscribe({
+        next: appointments => {
+          forEach(appointments, (appointment) => {
+            if (appointment.status === 'COMPLETED' || appointment.status === 'REVIEWED') {
+              this.appointments.push(appointment);
+              this.advisorApiService.getOne(appointment.advisorId).subscribe(advisor => {
+                this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
+                  this.profileDetails[advisor.id] = {
+                    fullname: `${profile.firstName} ${profile.lastName}`,
+                    photo: profile.photo
+                  };
+                }, error => {
+                  console.error('Error fetching profile details:', error);
+                });
+              }, error => {
+                console.error('Error fetching advisor details:', error);
+              })
+            }
+          });
+          this.sortAppointmentsByDate();
+        }, error: error => {
+          console.error('Error fetching appointments:', error);
+        }
       });
     }
     else {
       // Get all appointments for the advisor
-      this.appointmentApiService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
-        forEach(appointments, (appointment) => {
-          if (appointment.status === 'COMPLETED' || appointment.status === 'REVIEWED') {
-            this.appointments.push(appointment);
-            this.farmerApiService.getOne(appointment.farmerId).subscribe(farmer => {
-              this.profileApiService.getProfileByUserId(farmer.userId).subscribe(profile => {
-                this.profileDetails[farmer.id] = {
-                  fullname: `${profile.firstName} ${profile.lastName}`,
-                  photo: profile.photo
-                };
-              });
-            })
-          }
-        });
+      this.appointmentApiService.getAppointmentsByAdvisorId(this.advisorId).subscribe({
+        next: appointments => {
+          forEach(appointments, (appointment) => {
+            if (appointment.status === 'COMPLETED' || appointment.status === 'REVIEWED') {
+              this.appointments.push(appointment);
+              this.farmerApiService.getOne(appointment.farmerId).subscribe(farmer => {
+                this.profileApiService.getProfileByUserId(farmer.userId).subscribe(profile => {
+                  this.profileDetails[farmer.id] = {
+                    fullname: `${profile.firstName} ${profile.lastName}`,
+                    photo: profile.photo
+                  };
+                });
+              })
+            }
+          });
+          this.sortAppointmentsByDate();
+        }, error: error => {
+          console.error('Error fetching appointments:', error);
+        }
       });
     }
 
@@ -132,5 +146,12 @@ export class MyAppointmentsHistoryComponent implements OnInit {
     window.history.back();
   }
 
+  sortAppointmentsByDate(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.scheduledDate).getTime();
+      const dateB = new Date(b.scheduledDate).getTime();
+      return dateA - dateB; // Ascending order
+    });
+  }
 
 }

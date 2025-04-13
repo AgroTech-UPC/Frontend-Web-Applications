@@ -7,5 +7,5 @@ export interface Appointment {
   scheduledDate: string;
   startTime: string;
   endTime: string;
-  meetingUrl: string;
+  meetingUrl?: string;
 }

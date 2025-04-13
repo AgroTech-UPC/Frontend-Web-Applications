@@ -64,38 +64,65 @@ export class MyAppointmentsComponent implements OnInit {
   getMyAppointments() {
     // Get all appointments for the farmer
     if (this.isFarmer) {
-      this.appointmentApiService.getAppointmentsByFarmerId(this.farmerId).subscribe(appointments => {
-        forEach(appointments, (appointment) => {
-          if (appointment.status === 'PENDING') {
-            this.appointments.push(appointment);
-            this.advisorApiService.getOne(appointment.advisorId).subscribe(advisor => {
-              this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
-                this.profileDetails[advisor.id] = {
-                  fullname: `${profile.firstName} ${profile.lastName}`,
-                  photo: profile.photo
-                };
-              });
-            })
-          }
-        });
+      this.appointmentApiService.getAppointmentsByFarmerId(this.farmerId).subscribe({
+        next:
+          appointments => {
+            forEach(appointments, (appointment) => {
+              if (appointment.status === 'PENDING') {
+                this.appointments.push(appointment);
+                this.advisorApiService.getOne(appointment.advisorId).subscribe({
+                  next: advisor => {
+                    this.profileApiService.getProfileByUserId(advisor.userId).subscribe({
+                      next: profile => {
+                        this.profileDetails[advisor.id] = {
+                          fullname: `${profile.firstName} ${profile.lastName}`,
+                          photo: profile.photo
+                        };
+                      }, error: error => {
+                        console.error('Error fetching profile:', error);
+                      }
+                    });
+                  }, error: error => {
+                    console.error('Error fetching advisor:', error);
+                  }
+                })
+              }
+            });
+            this.sortAppointmentsByDate();
+          }, error: error => {
+          console.error('Error fetching appointments:', error);
+        }
       });
     }
     else {
       // Get all appointments for the advisor
-      this.appointmentApiService.getAppointmentsByAdvisorId(this.advisorId).subscribe(appointments => {
-        forEach(appointments, (appointment) => {
-          if (appointment.status === 'PENDING') {
-            this.appointments.push(appointment);
-            this.farmerApiService.getOne(appointment.farmerId).subscribe(farmer => {
-              this.profileApiService.getProfileByUserId(farmer.userId).subscribe(profile => {
-                this.profileDetails[farmer.id] = {
-                  fullname: `${profile.firstName} ${profile.lastName}`,
-                  photo: profile.photo
-                };
-              });
-            })
-          }
-        });
+      this.appointmentApiService.getAppointmentsByAdvisorId(this.advisorId).subscribe({
+        next: appointments => {
+          forEach(appointments, (appointment) => {
+            if (appointment.status === 'PENDING') {
+              this.appointments.push(appointment);
+              this.farmerApiService.getOne(appointment.farmerId).subscribe({
+                next: farmer => {
+                  this.profileApiService.getProfileByUserId(farmer.userId).subscribe({
+                    next: profile => {
+                      this.profileDetails[farmer.id] = {
+                        fullname: `${profile.firstName} ${profile.lastName}`,
+                        photo: profile.photo
+                      };
+                    }, error: error => {
+                      console.error('Error fetching profile:', error);
+                    }
+                  });
+                }, error: error => {
+                  console.error('Error fetching farmer:', error);
+                }
+              })
+            }
+          });
+          this.sortAppointmentsByDate();
+        }, error: error => {
+          console.error('Error fetching appointments:', error);
+        }
       });
     }
 
@@ -127,79 +154,13 @@ export class MyAppointmentsComponent implements OnInit {
       this.router.navigate([`/asesor/historial-citas`]);
   }
 
-  /**
-  getMyAdvisors(): void {
-    this.profileApiService.getAdvisors().subscribe(profiles => {
-      this.profiles = profiles;
-      forEach(this.profiles, (profile) => {
-        this.advisorApiService.getAdvisorByUserId(profile.userId).subscribe(advisor => {
-          this.advisors.push(advisor);
-        })
-      })
-    });
-    this.advisorApiService.getAll().subscribe(advisors => {
-      this.advisors = advisors;
-      this.appointmentApiService.getAll().subscribe(appointments => {
-        let advisorAppointments: Appointment[][] = []; // Initialize as array of arrays
-        this.advisors.forEach(advisor => {
-          // Push the filtered appointments into the corresponding sub-array
-          advisorAppointments[advisor.id - 1] = appointments.filter(appointment => appointment.advisorId === advisor.id &&
-            appointment.farmerId === this.farmerId);
-        });
-        //if advisorAppointments[advisor.id - 1] is empty, then the advisor has no appointments with the breeder
-        // and has to be removed from the list of advisors
-        this.advisors = this.advisors.filter(advisor => advisorAppointments[advisor.id - 1].length > 0);
-
-        this.filteredAdvisors = [...this.advisors];
-        this.filteredAdvisors.forEach(advisor => {
-          this.profileApiService.getProfileByUserId(advisor.userId).subscribe(profile => {
-            this.advisorDetails[advisor.userId] = {
-              fullname: `${profile.firstName} ${profile.lastName}`,
-              photo: profile.photo
-            };
-          })
-
-        });
-        //Get all appointments for each advisor in an array
-        this.filteredAdvisors.forEach(advisor => {
-          this.appointmentsPerAdvisor[advisor.id] = appointments.filter(appointment => appointment.advisorId === advisor.id
-            && appointment.farmerId === this.farmerId);
-        });
-      });
+  sortAppointmentsByDate(): void {
+    this.appointments.sort((a, b) => {
+      const dateA = new Date(a.scheduledDate).getTime();
+      const dateB = new Date(b.scheduledDate).getTime();
+      return dateA - dateB; // Ascending order
     });
   }
-
-  filter(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchValue = inputElement.value.replace(/[^a-zA-Z ]/g, '');
-
-    if (this.searchValue === '') {
-      this.filteredAdvisors = this.advisors;
-    } else {
-      this.filteredAdvisors = this.advisors.filter(advisor => {
-          return this.advisorDetails[advisor.userId]?.fullname.toLowerCase().includes(this.searchValue.toLowerCase());
-        }
-      );
-    }
-  }
-
-  // Excepcion para mostrar el mensaje de error si existen appointments pero todos estan reseñados
-  allAdvisorsAppointmentsReviewed(): boolean {
-    return this.filteredAdvisors.every(advisor => this.getAppointmentsByAdvisor(advisor.id).length === 0);
-  }
-
-  // BOTONES REDIRECCIONAR:
-  navigateToAdvisorsSearch() {
-    this.router.navigate([`/granjero/buscar-asesor`]);
-  }
-  navigateToMyAdvisors() {
-    this.router.navigate([`/granjero/mis-asesores`]);
-  }
-
-  giveReview(id: number){
-    this.router.navigate([`/granjero/mis-asesores/${id}`]);
-  }
-   */
 
 
 }
