@@ -1,50 +1,50 @@
 import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
-import {FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import { FormControl } from '@angular/forms';
+import {MatInput} from "@angular/material/input";
+import {NgIf, NgOptimizedImage} from "@angular/common";
+import {Router, ActivatedRoute} from "@angular/router";
 import {PostApiService} from "../../services/post-api.service";
-import {Router} from "@angular/router";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {StorageService} from "../../../shared/services/storage.service";
-import {Post} from "../../models/post.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {NgIf} from "@angular/common";
+import {Post} from "../../models/post.model";
 
 @Component({
-  selector: 'create-post',
+  selector: 'post-detail',
   standalone: true,
   imports: [
+    FormsModule,
+    MatButton,
+    MatFormField,
     MatIcon,
     MatIconButton,
-    MatFormField,
-    MatButton,
     MatInput,
-    ReactiveFormsModule,
     MatLabel,
     NgIf,
+    ReactiveFormsModule,
+    NgOptimizedImage
   ],
-  templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.css'
+  templateUrl: './post-detail.component.html',
+  styleUrl: './post-detail.component.css'
 })
-export class CreatePostComponent implements OnInit {
+export class PostDetailComponent implements OnInit {
   constructor(private router: Router,
+              private ActivatedRoute: ActivatedRoute,
               private postApiService: PostApiService,
               private advisorApiService: AdvisorApiService,
               private storageService: StorageService,
               private snackBar: MatSnackBar) {
+    this.postId = this.ActivatedRoute.snapshot.params['id'];
   }
 
   image: string | null = null;
+  postId: number = 0;
   advisorId = 0;
   selectedFileName = '';
   isImageUploading = false;
-
-  ngOnInit() {
-    this.advisorId = this.advisorApiService.getAdvisorId();
-  }
 
   postForm: FormGroup = new FormGroup(
     {
@@ -53,13 +53,32 @@ export class CreatePostComponent implements OnInit {
     }
   );
 
+  ngOnInit() {
+    this.advisorId = this.advisorApiService.getAdvisorId();
+    if (this.postId !== 0) {
+      this.postApiService.getOne(this.postId).subscribe({
+        next: (post) => {
+          this.postForm.patchValue({
+            title: post.title,
+            description: post.description,
+          });
+          this.image = post.image;
+        },
+        error: (error) => {
+          console.error('Error fetching post:', error);
+        }
+      });
+    }
+  }
+
   onSubmit() {
-    if(this.selectedFileName === '') {
+    if(!this.image && this.selectedFileName === '') {
       this.snackBar.open('Debes seleccionar una imagen para la publicación😓', 'Cerrar', {
         duration: 5000,
       });
       return;
     }
+
     if(this.image === null) {
       this.snackBar.open('Error al subir la imagen de la publicación😥', 'Cerrar', {
         duration: 5000,
@@ -68,14 +87,14 @@ export class CreatePostComponent implements OnInit {
     }
 
     const post: Post = {
-      id: 0,
+      id: this.postId,
       advisorId: this.advisorId,
       title: this.postForm.get('title')?.value,
       description: this.postForm.get('description')?.value,
       image: this.image,
     };
 
-    this.postApiService.create(post).subscribe({
+    this.postApiService.update(post.id, post).subscribe({
       next: () => {
         this.snackBar.open('Publicación creada con éxito!🎉', 'Cerrar', {
           duration: 5000,

@@ -27,6 +27,7 @@ import {ReviewsListComponent} from "./appointment/pages/reviews-list/reviews-lis
 import {BookAppointmentComponent} from "./appointment/components/book-appointment/book-appointment.component";
 import {AdvisorPostsComponent} from "./post/pages/advisor-posts/advisor-posts.component";
 import {CreatePostComponent} from "./post/pages/create-post/create-post.component";
+import {PostDetailComponent} from "./post/pages/post-detail/post-detail.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -54,7 +55,7 @@ export const routes: Routes = [
   {path: 'asesor/resena/:id', component: ViewReviewComponent },
   {path: 'asesor/mis-publicaciones', component: AdvisorPostsComponent },
   {path: 'asesor/nueva-publicacion', component: CreatePostComponent },
-  {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent },
+  {path: 'asesor/mis-publicaciones/:id', component: PostDetailComponent },
   {path: 'asesor/notificaciones', component: NotificationsViewComponent },
   {path: 'asesor/horarios', component: ListAvailabilityScheduleComponent },
   {path: 'asesor/horarios/agregar', component: AddAvailabilityScheduleComponent }
