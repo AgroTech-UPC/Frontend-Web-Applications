@@ -35,53 +35,46 @@ import {UserApiService} from "../../../user/services/user-api.service";
   styleUrl: './notifications-view.component.css'
 })
 export class NotificationsViewComponent implements OnInit{
-  results: any[] = [];
-  user_id = 0;
+  notifications: Notification[] = [];
+  userId = 0;
 
   constructor(private notificationsApiService: NotificationApiService,
               private userApiService: UserApiService) {
   }
 
   ngOnInit(): void {
-    this.user_id = this.userApiService.getUserId();
+    this.userId = this.userApiService.getUserId();
     this.getNotifications();
   }
 
   getNotifications() {
-    /*
-    this.userApiService.getNotificationsByUserId(this.user_id).subscribe((notifications: Notification[]) => {
-      notifications.forEach((notification: Notification) => {
-        // Create a new date object
-        const date = new Date(notification.date);
-        // Apply the format to the date
-        const formattedDate = date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' });
-
-        this.results.push({
-          id: notification.id,
-          type: notification.type,
-          text: notification.text,
-          date: formattedDate
-        });
-      });
-    }, (error) => {
-      console.error(error);
-    });
-
-     */
-  }
-
-  goToMeeting(id: number) {
-    this.notificationsApiService.getOne(id).subscribe((notification) => {
-      window.open(notification.meetingUrl, '_blank');
+    this.notificationsApiService.getNotificationsByUserId(this.userId).subscribe({
+      next: (notifications) => {
+        this.notifications = notifications;
+      }, error: (error) => {
+        console.error("Error al obtener las notificaciones:", error);
+      }
     })
+
   }
 
   deleteNotification(id: number) {
     this.notificationsApiService.delete(id).subscribe(() => {
       console.log("Notificación eliminada con éxito.");
-      this.results = this.results.filter((notification: any) => notification.id !== id);
+      this.notifications = this.notifications.filter((notification: any) => notification.id !== id);
     }, (error) => {
       console.error("Error al eliminar la notificación:", error);
     });
+  }
+
+  formatDate(dateString: string): string {
+    const [datePart, timePart] = dateString.split('T');
+    const [year, month, day] = datePart.split('-');
+    const [hour, minute] = timePart.split(':');
+    const months = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ];
+    return `${day} de ${months[parseInt(month, 10) - 1]} de ${year}, ${hour}:${minute}`;
   }
 }
