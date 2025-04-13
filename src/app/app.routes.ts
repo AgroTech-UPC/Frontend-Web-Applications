@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import {NotificationsViewComponent} from "./appointment/pages/notifications-view/notifications-view.component";
-import {MyPublicationsComponent} from "./publication/pages/my-publications/my-publications.component";
 import {NewPublicationComponent} from "./publication/pages/new-publication/new-publication.component";
 import {PublicationDetailComponent} from "./publication/pages/publication-detail/publication-detail.component";
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
@@ -26,6 +25,7 @@ import {NewReviewComponent} from "./appointment/components/new-review/new-review
 import {EditReviewComponent} from "./appointment/components/edit-review/edit-review.component";
 import {ReviewsListComponent} from "./appointment/pages/reviews-list/reviews-list.component";
 import {BookAppointmentComponent} from "./appointment/components/book-appointment/book-appointment.component";
+import {AdvisorPostsComponent} from "./post/pages/advisor-posts/advisor-posts.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -51,7 +51,7 @@ export const routes: Routes = [
   {path: 'asesor/citas/:id', component: AppointmentDetailComponent },
   {path: 'asesor/historial-citas', component: MyAppointmentsHistoryComponent},
   {path: 'asesor/resena/:id', component: ViewReviewComponent },
-  {path: 'asesor/mis-publicaciones', component: MyPublicationsComponent },
+  {path: 'asesor/mis-publicaciones', component: AdvisorPostsComponent },
   {path: 'asesor/nueva-publicacion', component: NewPublicationComponent },
   {path: 'asesor/mis-publicaciones/:id', component: PublicationDetailComponent },
   {path: 'asesor/notificaciones', component: NotificationsViewComponent },
