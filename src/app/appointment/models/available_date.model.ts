@@ -1,8 +1,7 @@
 export interface AvailableDate {
-  id?: number;
-  date: any;
-  startTime: any;
-  endTime: any;
+  id: number;
   advisorId: number;
-  status: any;
+  availableDate: string;
+  startTime: string;
+  endTime: string;
 }

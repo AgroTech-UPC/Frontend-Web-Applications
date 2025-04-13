@@ -58,22 +58,16 @@ export class AddAvailabilityScheduleComponent implements OnInit{
     let startTimeParts = this.form.get('startTime')?.value.split(':');
     let endTimeParts = this.form.get('endTime')?.value.split(':');
 
+    // transform times into HH:mm
+    let startTime = startTimeParts[0] + ':' + startTimeParts[1];
+    let endTime = endTimeParts[0] + ':' + endTimeParts[1];
+
     let newAvailableDate = {
+      id: 0,
       advisorId: this.advisorId,
-      date: formattedDate,
-      startTime: {
-        hour: parseInt(startTimeParts[0]),
-        minute: parseInt(startTimeParts[1]),
-        second: 0,
-        nano: 0
-      },
-      endTime: {
-        hour: parseInt(endTimeParts[0]),
-        minute: parseInt(endTimeParts[1]),
-        second: 0,
-        nano: 0
-      },
-      status: true
+      availableDate: formattedDate,
+      startTime: startTime,
+      endTime: endTime
     }
 
     this.availableDateService.create(newAvailableDate).subscribe(() => {

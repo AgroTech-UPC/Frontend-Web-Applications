@@ -23,6 +23,7 @@ import {AvailableDateApiService} from "../../services/available-date-api.service
 
 import {NgForOf, DatePipe, NgIf} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-view-reserve-appointment',
@@ -36,7 +37,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatRadioModule,
     NgForOf,
     DatePipe,
-    NgIf
+    NgIf,
+    MatIcon
   ],
   templateUrl: './view-reserve-appointment.component.html',
   styleUrl: './view-reserve-appointment.component.css'
@@ -75,12 +77,13 @@ export class ViewReserveAppointmentComponent implements OnInit {
   }
   getAdvisorAvailableDates(): void {
     this.availableDateApiService.getAll().subscribe(dates => {
-        dates = dates.filter(date => date.advisorId === this.advisor.id && date.status === true);
+        dates = dates.filter(date => date.advisorId === this.advisor.id);
         this.advisor_availableDates = dates;
         console.log("Horarios: ",this.advisor_availableDates);
       }
     )
   }
+
   getBreeder(): void {
     this.breederApiService.getOne(this.breeder_id).subscribe(breeder => this.breeder = breeder);
   }
@@ -89,14 +92,14 @@ export class ViewReserveAppointmentComponent implements OnInit {
     this.selectedDateIndex = index;
   }
 
-  createAppointment(): void{
+  createAppointment(): void {
     if (this.selectedDateIndex === undefined || this.selectedDateIndex < 0 || this.selectedDateIndex >= this.advisor_availableDates.length) {
       console.error('Índice de fecha seleccionada no válido');
       return;
     }
 
     let selectedDate = this.advisor_availableDates[this.selectedDateIndex];
-    let appointmentDate = new Date(`${selectedDate.date}T${selectedDate.startTime}`).toDateString();
+    let appointmentDate = new Date(`${selectedDate.availableDate}T${selectedDate.startTime}`).toDateString();
     let newAppointment: Appointment = {
       id: this.appointmentId,
       advisorId: this.advisor.id,
@@ -114,31 +117,13 @@ export class ViewReserveAppointmentComponent implements OnInit {
       let startTime = selectedDate.startTime.split(':').map(Number);
       let endTime = selectedDate.endTime.split(':').map(Number);
 
-      let transformedSelectedDate = {
-        advisorId: selectedDate.advisorId,
-        date: selectedDate.date,
-        startTime: {
-          hour: startTime[0],
-          minute: startTime[1],
-          second: startTime[2],
-          nano: 0
-        },
-        endTime: {
-          hour: endTime[0],
-          minute: endTime[1],
-          second: endTime[2],
-          nano: 0
-        },
-        status: false
-      };
-      this.availableDateApiService.update(selectedDate.id, transformedSelectedDate).subscribe(() => {
         this.getAdvisorAvailableDates();
         this.snackBar.open('Cita reservada🤩 ¡Revisa tus notificaciones!', 'Cerrar', {
           duration: 2000
         }).afterDismissed().subscribe(() => {
           this.router.navigate(['granjero/buscar-asesor']);
         });
-      });
+
     }, error => {
       this.snackBar.open('Error al reservar la cita😥', 'Cerrar', {
         duration: 2000
@@ -152,5 +137,9 @@ export class ViewReserveAppointmentComponent implements OnInit {
   }
   cancel(): void {
     this.router.navigate(['granjero/buscar-asesor']);
+  }
+
+  goBack() {
+    window.history.back();
   }
 }

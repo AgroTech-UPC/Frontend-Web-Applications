@@ -23,4 +23,9 @@ export class ReviewApiService extends BaseService<Review>{
     return this.http.get<Review[]>(`${this.buildPath()}?advisorId=${advisorId}&farmerId=${farmerId}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
+  getReviewsByAdvisorId(advisorId: number) {
+    this.setToken();
+    return this.http.get<Review[]>(`${this.buildPath()}?advisorId=${advisorId}`, this.httpOptions).pipe(catchError(this.handleError));
+  }
+
 }

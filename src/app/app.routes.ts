@@ -7,7 +7,6 @@ import {PublicationDetailComponent} from "./publication/pages/publication-detail
 import {PublicationsViewComponent} from "./publication/pages/publications-view/publications-view.component";
 
 import {ViewAdvisorsSearchComponent} from "./appointment/pages/view-advisors-search/view-advisors-search.component";
-import {ViewReserveAppointmentComponent} from "./appointment/components/view-reserve-appointment/view-reserve-appointment.component";
 import {ViewReviewComponent} from "./appointment/components/view-review/view-review.component";
 import {LoginComponent} from "./iam/pages/login/login.component";
 
@@ -25,6 +24,8 @@ import {
 } from "./appointment/pages/my-appointments-history/my-appointments-history.component";
 import {NewReviewComponent} from "./appointment/components/new-review/new-review.component";
 import {EditReviewComponent} from "./appointment/components/edit-review/edit-review.component";
+import {ReviewsListComponent} from "./appointment/pages/reviews-list/reviews-list.component";
+import {BookAppointmentComponent} from "./appointment/components/book-appointment/book-appointment.component";
 
 export const routes: Routes = [
   {path: '', redirectTo: 'login', pathMatch: 'full'},
@@ -42,7 +43,8 @@ export const routes: Routes = [
   {path: 'granjero/resena-nueva/:id', component: NewReviewComponent },
   {path: 'granjero/editar-resena/:id', component: EditReviewComponent },
   {path: 'granjero/asesor-info/:id', component: AdvisorDetailComponent },
-  {path: 'granjero/asesor-info/:id/reservar-cita', component: ViewReserveAppointmentComponent },
+  {path: 'granjero/asesor-info/:id/reservar-cita', component: BookAppointmentComponent },
+  {path: 'granjero/asesor-resenas/:id', component: ReviewsListComponent },
   {path: 'granjero/publicaciones', component: PublicationsViewComponent },
   {path: 'granjero/notificaciones', component: NotificationsViewComponent },
   {path: 'asesor/citas', component: MyAppointmentsComponent },

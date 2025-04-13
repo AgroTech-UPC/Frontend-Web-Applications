@@ -64,6 +64,14 @@ export class AdvisorDetailComponent implements OnInit {
     });
   }
 
+  goToReviews() {
+    this.router.navigate([`/granjero/asesor-resenas/${this.profileInfo.advisorId}`]);
+  }
+
+  goToReserveAppointment() {
+    this.router.navigate([`/granjero/asesor-info/${this.profileInfo.advisorId}/reservar-cita`]);
+  }
+
   goBack() {
     window.history.back();
   }

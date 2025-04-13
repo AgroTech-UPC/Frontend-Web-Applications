@@ -1,0 +1,16 @@
+<main>
+  <div class="buttons">
+    <button mat-icon-button (click)="goBack()">
+      <mat-icon class="icon">arrow_back</mat-icon>
+    </button>
+  </div>
+
+  <h1 class="title-page"><strong>Reservar Cita</strong></h1>
+
+
+
+  <div *ngIf="availableDates.length === 0" class="error-container">
+    <span class="error-title">El asesor no tiene horarios disponibles</span>
+  </div>
+
+</main>
