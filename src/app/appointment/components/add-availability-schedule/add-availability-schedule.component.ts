@@ -11,7 +11,6 @@ import { AvailableDateApiService } from "../../services/available-date-api.servi
 import { AdvisorApiService } from "../../../user/services/advisor-api.service";
 import {NgIf} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
-import {Publication} from "../../../publication/models/publication.model";
 
 
 @Component({
