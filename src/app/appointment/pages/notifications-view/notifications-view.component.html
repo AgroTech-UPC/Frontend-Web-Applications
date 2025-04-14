@@ -21,6 +21,8 @@
       </mat-card>
     </div>
 
-    <app-empty-view *ngIf="notifications.length === 0" [title]="'No hay ninguna notificación por el momento'"></app-empty-view>
+    <div *ngIf="notifications.length === 0" class="error-container">
+      <span class="error-title">No hay ninguna notificación por el momento</span>
+    </div>
   </div>
 </div>

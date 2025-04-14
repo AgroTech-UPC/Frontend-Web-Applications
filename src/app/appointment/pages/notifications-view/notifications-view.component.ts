@@ -6,7 +6,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from "@angular/common/http";
 
-import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {FormsModule} from "@angular/forms";
 
 
@@ -28,7 +27,6 @@ import {UserApiService} from "../../../user/services/user-api.service";
     FormsModule,
     CommonModule,
     HttpClientModule,
-    EmptyViewComponent,
     MatIconModule
   ],
   templateUrl: './notifications-view.component.html',

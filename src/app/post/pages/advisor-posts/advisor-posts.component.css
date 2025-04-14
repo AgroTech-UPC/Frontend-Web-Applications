@@ -43,6 +43,20 @@
   padding: 0 20px;
 }
 
+.error-container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.error-title{
+  font-size: 20px;
+  font-weight: bold;
+}
+
 /*Responsive*/
 @media (max-width: 600px) {
   .header-row {

@@ -7,15 +7,15 @@ main {
 }
 
 .title-page {
-  color: #DD763D;
-  font-size: 3em;
+  color: #092C4C;
+  font-size: 35px;
   text-align: center;
   padding-bottom: 20px;
   line-height: 1;
 }
 
 h1 {
-  color: #9f3b08;
+  color: #092C4C;
   font-size: 2rem;
 }
 
@@ -25,6 +25,20 @@ h1 {
   justify-content: space-around;
   align-items: center;
   width: 80%;
+}
+
+.error-container {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.error-title{
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .card {

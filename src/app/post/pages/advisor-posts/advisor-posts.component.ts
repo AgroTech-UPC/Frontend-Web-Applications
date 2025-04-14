@@ -3,7 +3,7 @@ import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {AdvisorApiService} from "../../../user/services/advisor-api.service";
 import {Router} from "@angular/router";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {Post} from "../../models/post.model";
 import {PostCardComponent} from "../../components/post-card/post-card.component";
 import {PostApiService} from "../../services/post-api.service";
@@ -16,7 +16,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatButton,
     MatIcon,
     NgForOf,
-    PostCardComponent
+    PostCardComponent,
+    NgIf
   ],
   templateUrl: './advisor-posts.component.html',
   styleUrl: './advisor-posts.component.css'

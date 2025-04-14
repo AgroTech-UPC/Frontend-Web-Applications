@@ -13,4 +13,8 @@
       <post-card [post]="post" [onDeletePost]="deletePost.bind(this)"></post-card>
     </ng-container>
   </div>
+
+  <div *ngIf="posts.length === 0" class="error-container">
+    <span class="error-title">No tienes ninguna publicación por el momento</span>
+  </div>
 </div>

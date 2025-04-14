@@ -9,6 +9,8 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <app-empty-view *ngIf="results.length === 0" [title]="'No tienes horarios para mostrar.'"></app-empty-view>
+  <div *ngIf="results.length === 0" class="error-container">
+    <span class="error-title">No tienes horarios para mostrar</span>
+  </div>
   <button style="background-color: #dd763d; color: white; margin-top:10px;" mat-button class="button" routerLink="/asesor/horarios/agregar">Agregar</button>
 </main>

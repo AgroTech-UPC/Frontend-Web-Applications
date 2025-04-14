@@ -8,7 +8,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 import { AdvisorApiService } from "../../../user/services/advisor-api.service";
 import { AvailableDateApiService } from "../../services/available-date-api.service";
-import {EmptyViewComponent} from "../../../public/components/empty-view/empty-view.component";
 import {MatDialog} from "@angular/material/dialog";
 import {Observable} from "rxjs";
 import {
@@ -24,7 +23,6 @@ import {
         MatCardContent,
         NgForOf,
         MatButton,
-        EmptyViewComponent,
         NgIf
     ],
   templateUrl: './list-availability-schedule.component.html',

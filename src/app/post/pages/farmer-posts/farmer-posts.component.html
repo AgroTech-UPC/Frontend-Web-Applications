@@ -7,4 +7,9 @@
       <advisor-post [post]="post"></advisor-post>
     </ng-container>
   </div>
+
+  <div *ngIf="posts.length === 0" class="error-container">
+    <span class="error-title">No hay publicaciones a mostrar por el momento</span>
+  </div>
+
 </div>
